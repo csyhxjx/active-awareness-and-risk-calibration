@@ -11,9 +11,8 @@ Example:
 
 ```bash
 cd /root/gpufree-data
-PYOPENGL_PLATFORM=egl MUJOCO_GL=egl HF_HOME=/root/gpufree-data/hf-cache \
-  conda run -n project python guard/run_libero_eval_guard.py \
-  --pretrained_checkpoint moojink/openvla-7b-oft-finetuned-libero-spatial \
+guard/run_guard_eval.sh \
+  --pretrained_checkpoint /root/gpufree-data/hf-cache/openvla-libero-spatial \
   --task_suite_name libero_spatial \
   --num_trials_per_task 2 \
   --center_crop True \
@@ -21,6 +20,9 @@ PYOPENGL_PLATFORM=egl MUJOCO_GL=egl HF_HOME=/root/gpufree-data/hf-cache \
   --guard off \
   --parity_out /root/gpufree-data/guard_workspace/runs/official_actions.jsonl
 ```
+
+The wrapper points both `HF_HOME` and `HF_HUB_CACHE` at the local model cache,
+which is required when the cache uses the legacy `models--...` layout.
 
 Compare two recordings:
 

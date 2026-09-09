@@ -144,6 +144,15 @@ def validate_config(cfg: GenerateConfig) -> None:
     """Validate configuration parameters."""
     assert cfg.pretrained_checkpoint is not None, "pretrained_checkpoint must not be None!"
 
+    # draccus treats the CLI literals ``on`` and ``off`` as booleans even
+    # though this field is declared as a string. Normalize them at the
+    # boundary so both CLI forms preserve the runner's public contract.
+    guard_value = str(cfg.guard).strip().lower()
+    if guard_value in {"false", "off", "0"}:
+        cfg.guard = "off"
+    elif guard_value in {"true", "on", "1"}:
+        cfg.guard = "on"
+
     if "image_aug" in str(cfg.pretrained_checkpoint):
         assert cfg.center_crop, "Expecting `center_crop==True` because model was trained with image augmentations!"
 
