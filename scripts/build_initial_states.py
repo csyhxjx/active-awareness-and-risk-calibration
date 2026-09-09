@@ -5,6 +5,7 @@ import json
 import os
 import random
 import sys
+from pathlib import Path
 
 sys.path.insert(0, "/root/gpufree-data/third_party/openvla-oft")
 
@@ -37,9 +38,9 @@ for task_id in range(suite.n_tasks):
     assert start <= len(states), (task_id, len(states), start)
     manifest["tasks"].append(entry)
 
-output_dir = "/root/gpufree-data/guard_workspace/splits/pilot_v0"
+output_dir = Path(__file__).resolve().parents[1] / "data" / "pilot_v0"
 os.makedirs(output_dir, exist_ok=True)
-manifest_path = os.path.join(output_dir, "manifest.json")
+manifest_path = output_dir / "manifest.json"
 if os.path.exists(manifest_path):
     raise FileExistsError(f"refusing to regenerate frozen manifest: {manifest_path}")
 with open(manifest_path, "w", encoding="utf-8") as handle:

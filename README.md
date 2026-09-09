@@ -40,6 +40,12 @@ The monitor only reads the current MuJoCo state. It records margins for
 workspace, gripper/static contact, self-collision, object drop, and non-finite
 state constraints, with only false-to-true transitions recorded as onsets.
 
+Before freezing the sensor configuration, calibrate `gripper_env` on the
+training split. If its onsets are concentrated at normal table-contact
+grasping moments, exclude the table body from `static_geoms` or widen
+`gripper_penetration`, record the chosen rule and threshold, and rerun the
+monitored off/on parity check.
+
 Compare two recordings:
 
 ```bash
