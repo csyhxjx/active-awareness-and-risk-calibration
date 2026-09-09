@@ -1,0 +1,470 @@
+{
+  "seed": 7,
+  "alloc_per_task": {
+    "train": 5,
+    "calibration": 2,
+    "test": 2
+  },
+  "tasks": [
+    {
+      "task_id": 0,
+      "task_name": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 10,
+          "state_hash": "2c9d5d830213f379"
+        },
+        {
+          "init_index": 14,
+          "state_hash": "462b04ceba027a2f"
+        },
+        {
+          "init_index": 24,
+          "state_hash": "59febcef495bd6a8"
+        },
+        {
+          "init_index": 31,
+          "state_hash": "a9952b78039251ba"
+        },
+        {
+          "init_index": 35,
+          "state_hash": "334495165b88e48d"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 11,
+          "state_hash": "9d4a5c089c99d2ac"
+        },
+        {
+          "init_index": 48,
+          "state_hash": "f01e26990b4a6b80"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 16,
+          "state_hash": "93c3413524ec7308"
+        },
+        {
+          "init_index": 28,
+          "state_hash": "bd059f2d3c96e668"
+        }
+      ]
+    },
+    {
+      "task_id": 1,
+      "task_name": "pick_up_the_black_bowl_next_to_the_ramekin_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 8,
+          "state_hash": "c24f3dd84f8c7d68"
+        },
+        {
+          "init_index": 17,
+          "state_hash": "85830aa46805d83f"
+        },
+        {
+          "init_index": 30,
+          "state_hash": "a9a3adfeff796be8"
+        },
+        {
+          "init_index": 40,
+          "state_hash": "13dfce25022feaac"
+        },
+        {
+          "init_index": 42,
+          "state_hash": "4f8f236deaeb6cf2"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 37,
+          "state_hash": "6cb4e1be8c9e22b2"
+        },
+        {
+          "init_index": 46,
+          "state_hash": "1f9bfa197940e70d"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 0,
+          "state_hash": "126d6bc6d23de5f6"
+        },
+        {
+          "init_index": 1,
+          "state_hash": "591c244ee281327f"
+        }
+      ]
+    },
+    {
+      "task_id": 2,
+      "task_name": "pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 0,
+          "state_hash": "0b305bae6d46e540"
+        },
+        {
+          "init_index": 21,
+          "state_hash": "b0a7e227d91abeda"
+        },
+        {
+          "init_index": 23,
+          "state_hash": "1dfed183ea443b4b"
+        },
+        {
+          "init_index": 26,
+          "state_hash": "8998b78a2867c506"
+        },
+        {
+          "init_index": 47,
+          "state_hash": "d19e6579cb5103b3"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 11,
+          "state_hash": "65d053615c8219fc"
+        },
+        {
+          "init_index": 16,
+          "state_hash": "f1c2339a820417a6"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 10,
+          "state_hash": "a6bf2a02fca9df45"
+        },
+        {
+          "init_index": 32,
+          "state_hash": "7988fb49b4a8276b"
+        }
+      ]
+    },
+    {
+      "task_id": 3,
+      "task_name": "pick_up_the_black_bowl_on_the_cookie_box_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 13,
+          "state_hash": "d9845dd465db25d8"
+        },
+        {
+          "init_index": 29,
+          "state_hash": "4a9245893445fd82"
+        },
+        {
+          "init_index": 39,
+          "state_hash": "dff3b92750cb7c27"
+        },
+        {
+          "init_index": 41,
+          "state_hash": "f2175a96c3a17f18"
+        },
+        {
+          "init_index": 46,
+          "state_hash": "10bfbc20b039f0a6"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 4,
+          "state_hash": "8111d7c111b852a0"
+        },
+        {
+          "init_index": 32,
+          "state_hash": "f4c73e30f68dc445"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 10,
+          "state_hash": "05762c9d92ff2160"
+        },
+        {
+          "init_index": 38,
+          "state_hash": "39b28a95843a83bf"
+        }
+      ]
+    },
+    {
+      "task_id": 4,
+      "task_name": "pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 32,
+          "state_hash": "bace6e62df766016"
+        },
+        {
+          "init_index": 35,
+          "state_hash": "f1b05754095482fe"
+        },
+        {
+          "init_index": 37,
+          "state_hash": "230dace4e1d7a1a6"
+        },
+        {
+          "init_index": 45,
+          "state_hash": "15691b4786dbcead"
+        },
+        {
+          "init_index": 46,
+          "state_hash": "ab46bb9f36a9bcda"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 2,
+          "state_hash": "d1c3a7d7b41af49d"
+        },
+        {
+          "init_index": 17,
+          "state_hash": "ae45706afec59b55"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 26,
+          "state_hash": "b00f55cf0b08e502"
+        },
+        {
+          "init_index": 48,
+          "state_hash": "120671a6faee9e86"
+        }
+      ]
+    },
+    {
+      "task_id": 5,
+      "task_name": "pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 4,
+          "state_hash": "eb598cf73a847a81"
+        },
+        {
+          "init_index": 8,
+          "state_hash": "b5d226075c1182ca"
+        },
+        {
+          "init_index": 18,
+          "state_hash": "1b13b7c0145162a4"
+        },
+        {
+          "init_index": 34,
+          "state_hash": "f0cafed5c10bab5e"
+        },
+        {
+          "init_index": 44,
+          "state_hash": "4994cab02fc1ea10"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 5,
+          "state_hash": "1a02e9515b1b923c"
+        },
+        {
+          "init_index": 9,
+          "state_hash": "9b8371747ece1224"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 35,
+          "state_hash": "7f0e999008c1f9ec"
+        },
+        {
+          "init_index": 37,
+          "state_hash": "cd576f2d1251e89f"
+        }
+      ]
+    },
+    {
+      "task_id": 6,
+      "task_name": "pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 3,
+          "state_hash": "055c60e6f26455b9"
+        },
+        {
+          "init_index": 12,
+          "state_hash": "92c4ada39f7a1f90"
+        },
+        {
+          "init_index": 14,
+          "state_hash": "a2eaf9366e673b26"
+        },
+        {
+          "init_index": 17,
+          "state_hash": "feb614e2cebe2bd7"
+        },
+        {
+          "init_index": 33,
+          "state_hash": "6ee8545df2c0b82c"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 21,
+          "state_hash": "4de6ecb853699dd2"
+        },
+        {
+          "init_index": 28,
+          "state_hash": "b8d6d68b90e0da06"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 20,
+          "state_hash": "1e0165b6fa7b45a7"
+        },
+        {
+          "init_index": 36,
+          "state_hash": "f1636445f187822f"
+        }
+      ]
+    },
+    {
+      "task_id": 7,
+      "task_name": "pick_up_the_black_bowl_on_the_stove_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 5,
+          "state_hash": "e97b4b0f025ebfe9"
+        },
+        {
+          "init_index": 21,
+          "state_hash": "c5224739ab644d32"
+        },
+        {
+          "init_index": 22,
+          "state_hash": "bd398e52bbdeb759"
+        },
+        {
+          "init_index": 23,
+          "state_hash": "5484ee664d2b5059"
+        },
+        {
+          "init_index": 43,
+          "state_hash": "a28e519a4e21b69c"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 44,
+          "state_hash": "e76d590e04005e98"
+        },
+        {
+          "init_index": 49,
+          "state_hash": "67d60e846c57ef2f"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 4,
+          "state_hash": "634534c294bbeea8"
+        },
+        {
+          "init_index": 19,
+          "state_hash": "02e5177e01580665"
+        }
+      ]
+    },
+    {
+      "task_id": 8,
+      "task_name": "pick_up_the_black_bowl_next_to_the_plate_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 2,
+          "state_hash": "978679ba0dabbe70"
+        },
+        {
+          "init_index": 3,
+          "state_hash": "50d4a92fe3d361d0"
+        },
+        {
+          "init_index": 17,
+          "state_hash": "bc6be5ff908683be"
+        },
+        {
+          "init_index": 32,
+          "state_hash": "60a8ee2c2221bb06"
+        },
+        {
+          "init_index": 45,
+          "state_hash": "c31676f0a555b496"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 18,
+          "state_hash": "6fc321d1cacd716e"
+        },
+        {
+          "init_index": 33,
+          "state_hash": "dc5c29905fa9c1cf"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 36,
+          "state_hash": "5e221b8bee6656bb"
+        },
+        {
+          "init_index": 49,
+          "state_hash": "a89084f746027ffc"
+        }
+      ]
+    },
+    {
+      "task_id": 9,
+      "task_name": "pick_up_the_black_bowl_on_the_wooden_cabinet_and_place_it_on_the_plate",
+      "train": [
+        {
+          "init_index": 3,
+          "state_hash": "046f2cac89ae22bd"
+        },
+        {
+          "init_index": 10,
+          "state_hash": "f8945d603b5f57b1"
+        },
+        {
+          "init_index": 12,
+          "state_hash": "b3023ec7118fcfeb"
+        },
+        {
+          "init_index": 34,
+          "state_hash": "31930c75b05aedcf"
+        },
+        {
+          "init_index": 40,
+          "state_hash": "3732f4e7aeae3e95"
+        }
+      ],
+      "calibration": [
+        {
+          "init_index": 15,
+          "state_hash": "c379dc546f5542fb"
+        },
+        {
+          "init_index": 46,
+          "state_hash": "eb5b06385caa21d0"
+        }
+      ],
+      "test": [
+        {
+          "init_index": 18,
+          "state_hash": "7b04f52472f5a2db"
+        },
+        {
+          "init_index": 45,
+          "state_hash": "7379d0bc5c391b05"
+        }
+      ]
+    }
+  ]
+}

@@ -18,11 +18,27 @@ guard/run_guard_eval.sh \
   --center_crop True \
   --use_wandb False \
   --guard off \
-  --parity_out /root/gpufree-data/guard_workspace/runs/official_actions.jsonl
+  --parity_out /root/gpufree-data/guard_workspace/runs/official_actions.jsonl \
+  --monitor_out /root/gpufree-data/guard_workspace/runs/constraints_off.jsonl
 ```
 
 The wrapper points both `HF_HOME` and `HF_HUB_CACHE` at the local model cache,
 which is required when the cache uses the legacy `models--...` layout.
+
+Probe the ten LIBERO spatial scenes and freeze the pilot initial-state split:
+
+```bash
+mkdir -p /root/gpufree-data/guard_workspace/scene_probe
+for tid in 0 1 2 3 4 5 6 7 8 9; do
+  conda run --no-capture-output -n project python guard/scripts/probe_scene.py "$tid" \
+    > "/root/gpufree-data/guard_workspace/scene_probe/task_${tid}.json"
+done
+conda run --no-capture-output -n project python guard/scripts/build_initial_states.py
+```
+
+The monitor only reads the current MuJoCo state. It records margins for
+workspace, gripper/static contact, self-collision, object drop, and non-finite
+state constraints, with only false-to-true transitions recorded as onsets.
 
 Compare two recordings:
 

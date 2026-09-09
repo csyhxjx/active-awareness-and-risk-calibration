@@ -52,6 +52,7 @@ from experiments.robot.robot_utils import (
     set_seed_everywhere,
 )
 from prismatic.vla.constants import NUM_ACTIONS_CHUNK
+from guard.constraints.libero_constraints import LiberoConstraintMonitor
 from guard.parity.recording import ParityRecorder
 from guard.policy import decide
 
@@ -135,6 +136,7 @@ class GenerateConfig:
 
     # Guard/parity options. These only affect this wrapper, not third-party code.
     parity_out: Optional[str] = None
+    monitor_out: Optional[str] = None
     guard: str = "off"
 
     # fmt: on
@@ -310,6 +312,7 @@ def run_episode(
     recorder=None,
     task_id=None,
     trial=None,
+    monitor=None,
 ):
     """Run a single episode in the environment."""
     # Reset environment
@@ -320,6 +323,8 @@ def run_episode(
         obs = env.set_init_state(initial_state)
     else:
         obs = env.get_observation()
+    if monitor is not None:
+        monitor.episode_reset()
 
     # Initialize action queue
     if cfg.num_open_loop_steps != NUM_ACTIONS_CHUNK:
@@ -342,6 +347,8 @@ def run_episode(
             # Do nothing for the first few timesteps to let objects stabilize
             if t < cfg.num_steps_wait:
                 obs, reward, done, info = env.step(get_libero_dummy_action(cfg.model_family))
+                if monitor is not None:
+                    monitor.check(t)
                 t += 1
                 continue
 
@@ -391,6 +398,8 @@ def run_episode(
             if recorder is not None:
                 recorder.log_step(task_id, trial, inference_idx - 1, chunk_idx, action)
             obs, reward, done, info = env.step(action.tolist())
+            if monitor is not None:
+                monitor.check(t)
             chunk_idx += 1
             if done:
                 success = True
@@ -427,6 +436,7 @@ def run_task(
 
     # Initialize environment and get task description
     env, task_description = get_libero_env(task, cfg.model_family, resolution=cfg.env_img_res)
+    monitor = LiberoConstraintMonitor(env, out_path=cfg.monitor_out) if cfg.monitor_out else None
 
     # Start episodes
     task_episodes, task_successes = 0, 0
@@ -468,7 +478,11 @@ def run_task(
             recorder,
             task_id,
             episode_idx,
+            monitor,
         )
+
+        if monitor is not None:
+            monitor.finish_episode(task_id, episode_idx, success)
 
         if recorder is not None:
             recorder.log_episode(task_id, episode_idx, success, total_steps, num_inferences)
