@@ -11,7 +11,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from guard.json_io import canonical_dumps
 from guard.labeling.label_collection import CONSTRAINTS
 
 
@@ -36,6 +35,8 @@ def make_stats(labels_path, collection_root, output_dir):
         f"- Collection: `{collection_root.name}` (read-only input)",
         "- A violation is the recorded boolean flag; continuous signed margins use values below zero.",
         "- `sustained_violation` means at least three consecutive violating steps unless configured otherwise.",
+        "- Case 0 calibration: `tau=0.002` is a penetration-axis budget; the margin-axis decision boundary is `0`.",
+        "- The full70 warning list is empty; no threshold change is applied.",
         "",
         "## Constraint x Split",
         "",
@@ -76,7 +77,6 @@ def make_stats(labels_path, collection_root, output_dir):
     if negative:
         ax.hist(negative, bins=max(5, min(20, len(negative))), alpha=0.8, label="margin <= 0")
     ax.axvline(0.0, color="black", linewidth=1, label="0")
-    ax.axvline(0.002, color="tab:red", linewidth=1, linestyle="--", label="tau=0.002")
     ax.set_yscale("log")
     ax.set_xlabel("Episode minimum gripper_env margin")
     ax.set_ylabel("Count (log scale)")

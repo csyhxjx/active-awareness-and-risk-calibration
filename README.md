@@ -55,6 +55,20 @@ The company-server full70 collection used threshold set `v1`, now stored in
 values. Continuous margins are signed so that values below zero violate the
 corresponding constraint.
 
+### Calibration decision: Case 0 (2026-09-15)
+
+The `gripper_env` threshold `tau=0.002` is a penetration-axis budget. The
+monitor records `margin = tau - measured_penetration`, so the only decision
+boundary on the plotted margin axis is `margin=0`; no `tau` line belongs on
+that axis. Across the 70 train/calibration states, the worst policy minimum
+margin was `0.001026184558`, implying maximum observed penetration
+`0.000973815442` m, or about 49% of the `0.002` m budget (about 2x headroom).
+All episode minima were positive and the warning list was empty, so the
+pre-registered decision is Case 0: retain v1 unchanged and reject the proposed
+v2 value `0.000820947647`. This decision uses collection tree SHA-256
+`202479aae82fab7a5c54a80de9106116dc8e6c4e564f480cce2400016d491303` and
+freezes the zero-violation labeling contract.
+
 Compare two recordings:
 
 ```bash

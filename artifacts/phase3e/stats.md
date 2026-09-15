@@ -4,6 +4,8 @@
 - Collection: `phase3_full70_fe76a6c` (read-only input)
 - A violation is the recorded boolean flag; continuous signed margins use values below zero.
 - `sustained_violation` means at least three consecutive violating steps unless configured otherwise.
+- Case 0 calibration: `tau=0.002` is a penetration-axis budget; the margin-axis decision boundary is `0`.
+- The full70 warning list is empty; no threshold change is applied.
 
 ## Constraint x Split
 
