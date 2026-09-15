@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "source": "README.md calibration section; values migrated unchanged from the full70 monitor defaults",
+  "monitor": {
+    "xy_margin": 0.03,
+    "z_min_below_table": 0.02,
+    "z_max_above_table": 0.6,
+    "obj_drop_below": 0.03,
+    "gripper_penetration": 0.002,
+    "self_col_hops": 2
+  },
+  "labeling": {
+    "decision_margin": 0.0,
+    "sustained_k": 3
+  }
+}

@@ -3,16 +3,10 @@
 import numpy as np
 
 from guard.json_io import append_jsonl
+from guard.labeling import load_thresholds
 
 
-DEFAULTS = dict(
-    xy_margin=0.03,
-    z_min_below_table=0.02,
-    z_max_above_table=0.60,
-    obj_drop_below=0.03,
-    gripper_penetration=0.002,
-    self_col_hops=2,
-)
+DEFAULTS = dict(load_thresholds()["monitor"])
 
 
 def _get_sim(env):

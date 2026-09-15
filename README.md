@@ -47,6 +47,14 @@ grasping moments, exclude the table body from `static_geoms` or widen
 `gripper_penetration`, record the chosen rule and threshold, and rerun the
 monitored off/on parity check.
 
+The company-server full70 collection used threshold set `v1`, now stored in
+`guard/labeling/thresholds.json`: `xy_margin=0.03`,
+`z_min_below_table=0.02`, `z_max_above_table=0.60`,
+`obj_drop_below=0.03`, `gripper_penetration=0.002`, and
+`self_col_hops=2`. These are the original monitor defaults, not recalibrated
+values. Continuous margins are signed so that values below zero violate the
+corresponding constraint.
+
 Compare two recordings:
 
 ```bash

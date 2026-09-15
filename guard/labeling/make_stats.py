@@ -1,0 +1,122 @@
+"""Build markdown statistics and diagnostic figures from offline labels."""
+
+import argparse
+import json
+import math
+from collections import defaultdict
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+from guard.json_io import canonical_dumps
+from guard.labeling.label_collection import CONSTRAINTS
+
+
+def _read_labels(path):
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def make_stats(labels_path, collection_root, output_dir):
+    labels = _read_labels(labels_path)
+    if len(labels) != 350:
+        raise ValueError(f"expected 350 labels, got {len(labels)}")
+    output_dir = Path(output_dir)
+    collection_root = Path(collection_root)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    grouped = defaultdict(list)
+    for label in labels:
+        grouped[(label["split"], label["constraint"])].append(label)
+    lines = [
+        "# Phase 3E Offline Label Statistics",
+        "",
+        f"- Labels: `{Path(labels_path).name}` ({len(labels)} rows)",
+        f"- Collection: `{collection_root.name}` (read-only input)",
+        "- A violation is the recorded boolean flag; continuous signed margins use values below zero.",
+        "- `sustained_violation` means at least three consecutive violating steps unless configured otherwise.",
+        "",
+        "## Constraint x Split",
+        "",
+        "| Split | Constraint | States | Any violation | Sustained | Min margin median | Worst min margin | Flag/margin mismatches |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for split in ("train", "calibration"):
+        for constraint in CONSTRAINTS:
+            rows = grouped[(split, constraint)]
+            minima = [row["episode"]["min_margin"] for row in rows]
+            mismatches = sum(row["episode"]["margin_flag_mismatch_steps"] for row in rows)
+            lines.append(
+                f"| {split} | {constraint} | {len(rows)} | "
+                f"{sum(row['episode']['any_violation'] for row in rows)} | "
+                f"{sum(row['episode']['sustained_violation'] for row in rows)} | "
+                f"{_median(minima):.6g} | {min(minima):.6g} | {mismatches} |"
+            )
+
+    warnings = []
+    for label in labels:
+        episode = label["episode"]
+        if episode["margin_flag_mismatch_steps"]:
+            warnings.append(f"{label['state_id']} {label['constraint']}: {episode['margin_flag_mismatch_steps']} flag/margin mismatches")
+        if episode["sustained_violation"]:
+            warnings.append(f"{label['state_id']} {label['constraint']}: sustained violation at step {episode['sustained_onset_step']}")
+    lines.extend(["", "## Warning List", ""])
+    lines.extend(f"- {warning}" for warning in warnings) if warnings else lines.append("- None.")
+    lines.extend(["", "## Integrity", "", f"- Unique states: `{len({row['state_id'] for row in labels})}`", f"- Constraints per state: `{len(labels) // len({row['state_id'] for row in labels})}`", f"- Non-finite margins: `{sum(not math.isfinite(row['episode']['min_margin']) for row in labels)}`"])
+    (output_dir / "stats.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    gripper = [row["episode"]["min_margin"] for row in grouped[("train", "gripper_env")]]
+    gripper += [row["episode"]["min_margin"] for row in grouped[("calibration", "gripper_env")]]
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    positive = [value for value in gripper if value > 0]
+    negative = [value for value in gripper if value <= 0]
+    bins = 30 if len(set(gripper)) > 1 else 5
+    ax.hist(positive, bins=bins, alpha=0.8, label="margin > 0")
+    if negative:
+        ax.hist(negative, bins=max(5, min(20, len(negative))), alpha=0.8, label="margin <= 0")
+    ax.axvline(0.0, color="black", linewidth=1, label="0")
+    ax.axvline(0.002, color="tab:red", linewidth=1, linestyle="--", label="tau=0.002")
+    ax.set_yscale("log")
+    ax.set_xlabel("Episode minimum gripper_env margin")
+    ax.set_ylabel("Count (log scale)")
+    ax.set_title("Full70 gripper_env episode minima")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(output_dir / "gripper_env_min_margin_histogram.png", dpi=160)
+    plt.close(fig)
+
+    fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=False)
+    for axis, state_id in zip(axes, ("task_05_init_034", "task_07_init_043")):
+        records = [json.loads(line) for line in (collection_root / state_id / "constraints.jsonl").read_text(encoding="utf-8").splitlines()]
+        for constraint in CONSTRAINTS:
+            axis.plot([record["step_index"] for record in records], [record[constraint]["margin"] for record in records], linewidth=0.9, label=constraint)
+        axis.axhline(0.0, color="black", linewidth=0.8)
+        axis.axvline(10, color="tab:orange", linewidth=0.8, linestyle="--")
+        axis.set_title(f"{state_id} margin trajectories (orange: policy start)")
+        axis.set_ylabel("Signed margin")
+        axis.legend(ncol=3, fontsize=8)
+    axes[-1].set_xlabel("Constraint step")
+    fig.tight_layout()
+    fig.savefig(output_dir / "max_steps_margin_trajectories.png", dpi=160)
+    plt.close(fig)
+    return output_dir / "stats.md"
+
+
+def _median(values):
+    values = sorted(values)
+    middle = len(values) // 2
+    return values[middle] if len(values) % 2 else (values[middle - 1] + values[middle]) / 2
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("labels", type=Path)
+    parser.add_argument("collection_root", type=Path)
+    parser.add_argument("output_dir", type=Path)
+    args = parser.parse_args()
+    print(make_stats(args.labels, args.collection_root, args.output_dir))
+
+
+if __name__ == "__main__":
+    main()
