@@ -56,6 +56,22 @@ a877e3fece1feafb80f59f91585ce04379ee39e2bf9a25cb7b4acf237e896e60  model-00004-of
 
 ## Compatibility Evidence
 
-- Official LIBERO Spatial smoke evaluation: 20/20 success on this machine.
+- Official LIBERO Spatial smoke evaluation on physical GPU 3: 20/20 success.
 - Scene probe fixture: `data/scene_probe/company_server_20260915/`.
 - All 10 scenes contain `robot0_*`, `gripper0_*`, exactly one `gripper0_grip_site`, and 5 free joints.
+- No old-server probe fixture was available for a field-by-field diff.
+- Guard parity used physical GPU 4 for off and physical GPU 5 for on; both are RTX 3090 cards on this machine.
+- Guard off: 10/10 success. Guard on: 10/10 success.
+- Parity: 132/132 chunks and 1014/1014 steps allclose, no missing/extra records, no episode diffs.
+- Both constraint recordings contain 10 successful episodes and zero onsets.
+
+Runtime evidence SHA-256:
+
+```text
+5714ca7288b411fb53b21653eb4ba4f5a6823e18b674b3b6c13e90e27c18c8c8  runs/official_actions_monitored_srv2.jsonl
+5714ca7288b411fb53b21653eb4ba4f5a6823e18b674b3b6c13e90e27c18c8c8  runs/guard_actions_monitored_srv2.jsonl
+95cca87ecec143c555fd6b3c2926a146349907e0a8588dafa08af5776a07a209  runs/constraints_off_srv2.jsonl
+95cca87ecec143c555fd6b3c2926a146349907e0a8588dafa08af5776a07a209  runs/constraints_on_srv2.jsonl
+68347a39e0277415443d9283353b68f0929bcf7a87733207e7b170e01aee6f04  logs/EVAL-libero_spatial-openvla-2026_09_15-01_41_08--parity_off_srv2.txt
+68347a39e0277415443d9283353b68f0929bcf7a87733207e7b170e01aee6f04  logs/EVAL-libero_spatial-openvla-2026_09_15-01_41_08--parity_on_srv2.txt
+```
