@@ -103,3 +103,23 @@ e5fa9f1d6689210376953bd44f2d38bdaccc2bb1d8c2eab124b441a7e761bf5b  logs/EVAL-libe
 e5fa9f1d6689210376953bd44f2d38bdaccc2bb1d8c2eab124b441a7e761bf5b  logs/EVAL-libero_spatial-openvla-2026_09_15-02_16_27--phase3_parity_on_e28c510.txt
 f7350b5446bc2991ab5cda43693f05ff0117792761bc392ed79aa286fa0d3772  logs/EVAL-libero_spatial-openvla-2026_09_15-03_08_17--phase3_mini5_02f009a.txt
 ```
+
+## Full Train/Calibration Collection
+
+- Full collection commit: `fe76a6c85aa06471d11ee39cdabf931710a2bc76`.
+- Invocation selected `train,calibration` only: exactly 50 train and 20 calibration states. Test states were not selected and no test directory exists.
+- One continuous run used physical GPU 4, clean Guard HEAD, image window `[10,230)`, and frozen manifest SHA-256 `2e3ef3bc7723fb59f823778b6f7201baff94959bb362f392815f0d45c66a7ecc`.
+- All 70 state directories passed the integrity checker. There are 7,950 full-episode constraint steps and 7,250 action/image steps, with 14,500 full/wrist PNGs.
+- Result: 68/70 success (97.1%); 2/70 reached `max_steps`: `task_05_init_034` and `task_07_init_043`. Both have complete artifacts and 230 constraints plus 220 image steps.
+- Collection file content totals 780,745,781 bytes; filesystem allocation is 781,929,525 bytes. The largest episode is `task_05_init_034` at 24,393,671 bytes.
+- The success-length projection from mini was 1,074,656,394 bytes (`mean x 70 x 1.5`); the conservative all-timeout projection is about 2.5 GB. Both are far below the measured 8.38 TB free space.
+- A full collection scan found no `__numpy__` or base64 payloads in per-state constraints or the run-level constraint JSONL.
+- Full collection tree SHA-256 is `202479aae82fab7a5c54a80de9106116dc8e6c4e564f480cce2400016d491303`, computed over the sorted per-file SHA-256 listing.
+
+Full-run runtime evidence SHA-256:
+
+```text
+ae4a378ac73dd6de0c701c4b9111b4e5a0c6982ab45cf6eb1cbb3dc2e59566ea  runs/full70_actions_fe76a6c.jsonl
+0c53768171c655e8a60f956c40199f09870c3d976808ffab0fa4c8159426c943  runs/full70_constraints_fe76a6c.jsonl
+7dec1a3601bdae5d9911e05b1c9c8f3fe7137c2b5e7804c29ba6a3101c5f0641  logs/EVAL-libero_spatial-openvla-2026_09_15-03_33_30--phase3_full70_fe76a6c.txt
+```
