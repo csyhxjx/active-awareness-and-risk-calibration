@@ -52,6 +52,7 @@ from experiments.robot.robot_utils import (
     set_seed_everywhere,
 )
 from prismatic.vla.constants import NUM_ACTIONS_CHUNK
+from guard.collection import EpisodeCollector, guard_revision, initial_state_hash, load_selected_states
 from guard.constraints.libero_constraints import LiberoConstraintMonitor
 from guard.parity.recording import ParityRecorder
 from guard.policy import decide
@@ -140,6 +141,13 @@ class GenerateConfig:
     monitor_out: Optional[str] = None
     guard: str = "off"
 
+    # Per-state collection options. The image interval is half-open: [start, end).
+    manifest_path: str = str(Path(__file__).resolve().parent / "data" / "pilot_v0" / "manifest.json")
+    state_list: Optional[str] = None                 # Comma-separated state IDs and/or split names
+    collection_out: Optional[str] = None
+    image_t_start: int = 0
+    image_t_end: Optional[int] = None
+
     # fmt: on
 
 
@@ -164,6 +172,15 @@ def validate_config(cfg: GenerateConfig) -> None:
     # Validate task suite
     assert cfg.task_suite_name in [suite.value for suite in TaskSuite], f"Invalid task suite: {cfg.task_suite_name}"
     assert cfg.guard in ["off", "on"], "guard must be 'off' or 'on'"
+    assert cfg.image_t_start >= 0, "image_t_start must be non-negative"
+    assert cfg.image_t_end is None or cfg.image_t_end > cfg.image_t_start, (
+        "image_t_end must be greater than image_t_start"
+    )
+    assert not (cfg.state_list and cfg.task_id is not None), "state_list and task_id cannot be combined"
+    assert not (cfg.state_list and cfg.initial_states_path != "DEFAULT"), (
+        "state_list requires LIBERO default initial states"
+    )
+    assert not (cfg.collection_out and not cfg.state_list), "collection_out requires state_list"
 
 
 def initialize_model(cfg: GenerateConfig):
@@ -314,6 +331,7 @@ def run_episode(
     task_id=None,
     trial=None,
     monitor=None,
+    collector=None,
 ):
     """Run a single episode in the environment."""
     # Reset environment
@@ -349,13 +367,17 @@ def run_episode(
             if t < cfg.num_steps_wait:
                 obs, reward, done, info = env.step(get_libero_dummy_action(cfg.model_family))
                 if monitor is not None:
-                    monitor.check(t)
+                    constraint = monitor.check(t)
+                    if collector is not None:
+                        collector.log_constraint(constraint)
                 t += 1
                 continue
 
             # Prepare observation
             observation, img = prepare_observation(obs, resize_size)
             replay_images.append(img)
+            if collector is not None:
+                collector.save_images(t, observation["full_image"], observation["wrist_image"])
 
             # If action queue is empty, requery model
             if len(action_queue) == 0:
@@ -385,6 +407,8 @@ def run_episode(
                     actions = decision["action_chunk"]
                 if recorder is not None:
                     recorder.log_chunk(task_id, trial, inference_idx, actions)
+                if collector is not None:
+                    collector.log_chunk(inference_idx, t, actions)
                 chunk_idx = 0
                 action_queue.extend(actions)
                 inference_idx += 1
@@ -398,9 +422,13 @@ def run_episode(
             # Execute action in environment
             if recorder is not None:
                 recorder.log_step(task_id, trial, inference_idx - 1, chunk_idx, action)
+            if collector is not None:
+                collector.log_step(inference_idx - 1, chunk_idx, t, action)
             obs, reward, done, info = env.step(action.tolist())
             if monitor is not None:
-                monitor.check(t)
+                constraint = monitor.check(t)
+                if collector is not None:
+                    collector.log_constraint(constraint)
             chunk_idx += 1
             if done:
                 success = True
@@ -409,8 +437,11 @@ def run_episode(
 
     except Exception as e:
         log_message(f"Episode error: {e}", log_file)
+        if collector is not None:
+            raise
 
-    return success, replay_images, t, inference_idx
+    termination_reason = "success" if success else "max_steps"
+    return success, replay_images, t, inference_idx, termination_reason
 
 
 def run_task(
@@ -427,6 +458,10 @@ def run_task(
     total_successes=0,
     log_file=None,
     recorder=None,
+    selected_states=None,
+    manifest_sha256=None,
+    guard_head=None,
+    guard_dirty=None,
 ):
     """Run evaluation for a single task."""
     # Get task
@@ -437,15 +472,28 @@ def run_task(
 
     # Initialize environment and get task description
     env, task_description = get_libero_env(task, cfg.model_family, resolution=cfg.env_img_res)
-    monitor = LiberoConstraintMonitor(env, out_path=cfg.monitor_out) if cfg.monitor_out else None
+    monitor = LiberoConstraintMonitor(env, out_path=cfg.monitor_out) if cfg.monitor_out or cfg.collection_out else None
 
     # Start episodes
     task_episodes, task_successes = 0, 0
-    for episode_idx in tqdm.tqdm(range(cfg.num_trials_per_task)):
+    episode_specs = (
+        [(state["init_index"], state) for state in selected_states]
+        if selected_states is not None
+        else [(episode_idx, None) for episode_idx in range(cfg.num_trials_per_task)]
+    )
+    for episode_idx, selected_state in tqdm.tqdm(episode_specs):
         log_message(f"\nTask: {task_description}", log_file)
 
         # Handle initial state
-        if cfg.initial_states_path == "DEFAULT":
+        if selected_state is not None:
+            initial_state = initial_states[selected_state["init_index"]]
+            actual_hash = initial_state_hash(initial_state)
+            if actual_hash != selected_state["state_hash"]:
+                raise ValueError(
+                    f"state hash mismatch for {selected_state['state_id']}: "
+                    f"manifest={selected_state['state_hash']} actual={actual_hash}"
+                )
+        elif cfg.initial_states_path == "DEFAULT":
             # Use default initial state
             initial_state = initial_states[episode_idx]
         else:
@@ -463,8 +511,17 @@ def run_task(
 
         log_message(f"Starting episode {task_episodes + 1}...", log_file)
 
+        collector = None
+        if cfg.collection_out:
+            collector = EpisodeCollector(
+                cfg.collection_out,
+                selected_state,
+                cfg.image_t_start,
+                cfg.image_t_end,
+            )
+
         # Run episode
-        success, replay_images, total_steps, num_inferences = run_episode(
+        success, replay_images, total_steps, num_inferences, termination_reason = run_episode(
             cfg,
             env,
             task_description,
@@ -480,6 +537,7 @@ def run_task(
             task_id,
             episode_idx,
             monitor,
+            collector,
         )
 
         if monitor is not None:
@@ -487,6 +545,24 @@ def run_task(
 
         if recorder is not None:
             recorder.log_episode(task_id, episode_idx, success, total_steps, num_inferences)
+
+        if collector is not None:
+            cuda_visible_devices = os.environ.get("CUDA_VISIBLE_DEVICES")
+            collector.finish(
+                {
+                    "manifest_sha256": manifest_sha256,
+                    "guard_head": guard_head,
+                    "guard_dirty": guard_dirty,
+                    "cuda_visible_devices": cuda_visible_devices,
+                    "physical_gpu": cuda_visible_devices.split(",")[0] if cuda_visible_devices else None,
+                    "guard": cfg.guard,
+                    "task_description": task_description,
+                    "success": bool(success),
+                    "termination_reason": termination_reason,
+                    "runner_total_steps": total_steps,
+                    "num_inferences": num_inferences,
+                }
+            )
 
         # Update counters
         task_episodes += 1
@@ -543,6 +619,18 @@ def eval_libero(cfg: GenerateConfig) -> float:
     log_file, local_log_filepath, run_id = setup_logging(cfg)
     recorder = ParityRecorder(cfg.parity_out)
 
+    manifest_sha256 = None
+    selected_by_task = None
+    guard_head = None
+    guard_dirty = None
+    if cfg.state_list:
+        manifest_sha256, selected_states = load_selected_states(cfg.manifest_path, cfg.state_list)
+        selected_by_task = {}
+        for state in selected_states:
+            selected_by_task.setdefault(state["task_id"], []).append(state)
+        guard_head, guard_dirty = guard_revision(Path(__file__).resolve().parent)
+        log_message(f"Selected {len(selected_states)} manifest states ({manifest_sha256})", log_file)
+
     # Initialize LIBERO task suite
     benchmark_dict = benchmark.get_benchmark_dict()
     task_suite = benchmark_dict[cfg.task_suite_name]()
@@ -552,7 +640,9 @@ def eval_libero(cfg: GenerateConfig) -> float:
 
     # Start evaluation
     total_episodes, total_successes = 0, 0
-    task_ids = range(num_tasks) if cfg.task_id is None else [cfg.task_id]
+    task_ids = list(selected_by_task) if selected_by_task is not None else (
+        range(num_tasks) if cfg.task_id is None else [cfg.task_id]
+    )
     if cfg.task_id is not None:
         assert 0 <= cfg.task_id < num_tasks, f"task_id must be in [0, {num_tasks})"
     for task_id in tqdm.tqdm(task_ids):
@@ -570,6 +660,10 @@ def eval_libero(cfg: GenerateConfig) -> float:
             total_successes,
             log_file,
             recorder,
+            selected_by_task[task_id] if selected_by_task is not None else None,
+            manifest_sha256,
+            guard_head,
+            guard_dirty,
         )
 
     # Calculate final success rate

@@ -57,3 +57,30 @@ PYTHONPATH=/internsdata/yewenhao/guard:$PYTHONPATH \
   /internsdata/yewenhao/guard_workspace/runs/official_actions_srv2.jsonl \
   /internsdata/yewenhao/guard_workspace/runs/guard_actions_srv2.jsonl
 ```
+
+Collect manifest states with lossless model-visible full and wrist images:
+
+```bash
+cd /internsdata/yewenhao
+CUDA_VISIBLE_DEVICES=4 guard/run_guard_eval.sh \
+  --pretrained_checkpoint /internsdata/yewenhao/models/models/openvla-7b-oft-finetuned-libero-spatial \
+  --task_suite_name libero_spatial \
+  --center_crop True \
+  --use_wandb False \
+  --guard on \
+  --state_list task_00_init_010,task_01_init_008 \
+  --collection_out /internsdata/yewenhao/guard_workspace/collections/example \
+  --image_t_start 10 \
+  --image_t_end 220
+```
+
+`--state_list` accepts comma-separated state IDs or the split names `train`,
+`calibration`, and `test`. The image window is `[image_t_start, image_t_end)`;
+constraints are always recorded for the full episode. Existing state
+directories are never overwritten. Validate a collection with:
+
+```bash
+cd /internsdata/yewenhao/guard
+source ../env.sh
+python scripts/check_collection.py /internsdata/yewenhao/guard_workspace/collections/example
+```
