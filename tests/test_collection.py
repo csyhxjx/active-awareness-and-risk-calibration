@@ -1,14 +1,21 @@
 import json
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import numpy as np
 
-from guard.collection import EpisodeCollector, load_selected_states, validate_episode_dir
+from guard.collection import EpisodeCollector, initial_state_hash, load_selected_states, validate_episode_dir
 
 
 class CollectionTest(unittest.TestCase):
+    def test_state_hash_ignores_global_json_dumps_patch(self):
+        state = np.array([0.0, 1.25, -2.5])
+        expected = initial_state_hash(state)
+        with mock.patch.object(json, "dumps", return_value='{"__numpy__": "patched"}'):
+            self.assertEqual(initial_state_hash(state), expected)
+
     def test_manifest_selection_and_episode_integrity(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

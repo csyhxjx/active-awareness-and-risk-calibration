@@ -16,11 +16,10 @@ IMAGE_NAME = re.compile(r"step_(\d{5})\.png$")
 
 
 def initial_state_hash(state):
-    blob = json.dumps(
-        state,
+    blob = json.JSONEncoder(
         sort_keys=True,
         default=lambda value: value.tolist() if hasattr(value, "tolist") else str(value),
-    )
+    ).encode(state)
     return hashlib.sha256(blob.encode()).hexdigest()[:16]
 
 
