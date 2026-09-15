@@ -3,34 +3,44 @@
 import json
 import contextlib
 import io
+import os
 import sys
+from pathlib import Path
 
-sys.path.insert(0, "/root/gpufree-data/third_party/openvla-oft")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT / "code" / "openvla-oft"))
 
 task_id = int(sys.argv[1])
+output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else None
 with contextlib.redirect_stdout(io.StringIO()):
-    from experiments.robot.libero.libero_utils import get_libero_env
-    from libero.libero import benchmark
+    from libero.libero import benchmark, get_libero_path
+    from libero.libero.envs import OffScreenRenderEnv
 
     suite = benchmark.get_benchmark_dict()["libero_spatial"]()
     task = suite.get_task(task_id)
-    env, description = get_libero_env(task, "openvla")
+    task_bddl_file = os.path.join(get_libero_path("bddl_files"), task.problem_folder, task.bddl_file)
+    env = OffScreenRenderEnv(bddl_file_name=task_bddl_file, camera_heights=256, camera_widths=256)
+    env.seed(0)
+    description = task.language
     env.reset()
     sim = env.sim
     model = sim.model
 
-print(
-    json.dumps(
-        {
-            "task_id": task_id,
-            "task_name": task.name,
-            "task_description": description,
-            "body_names": [model.body_id2name(i) for i in range(model.nbody)],
-            "site_names": [model.site_id2name(i) for i in range(model.nsite)],
-            "free_joints": [
-                model.joint_id2name(j) for j in range(model.njnt) if model.jnt_type[j] == 0
-            ],
-        },
-        indent=2,
-    )
+payload = json.dumps(
+    {
+        "task_id": task_id,
+        "task_name": task.name,
+        "task_description": description,
+        "body_names": [model.body_id2name(i) for i in range(model.nbody)],
+        "site_names": [model.site_id2name(i) for i in range(model.nsite)],
+        "free_joints": [
+            model.joint_id2name(j) for j in range(model.njnt) if model.jnt_type[j] == 0
+        ],
+    },
+    indent=2,
 )
+if output_path:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(payload + "\n", encoding="utf-8")
+else:
+    print(payload)

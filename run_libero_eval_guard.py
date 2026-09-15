@@ -14,10 +14,10 @@ from enum import Enum
 from pathlib import Path
 from typing import Optional, Union
 
-# Keep the third-party checkout read-only and import it by absolute path.
+# Keep the OpenVLA-OFT checkout read-only and import it by absolute path.
 REPO_ROOT = Path(__file__).resolve().parents[1]
-THIRD_PARTY_ROOT = REPO_ROOT / "third_party" / "openvla-oft"
-sys.path.insert(0, str(THIRD_PARTY_ROOT))
+OPENVLA_ROOT = REPO_ROOT / "code" / "openvla-oft"
+sys.path.insert(0, str(OPENVLA_ROOT))
 
 import draccus
 import numpy as np
@@ -26,7 +26,7 @@ from libero.libero import benchmark
 
 import wandb
 
-# Import the official OpenVLA-OFT helpers from the read-only third-party checkout.
+# Import the official OpenVLA-OFT helpers from the read-only checkout.
 from experiments.robot.libero.libero_utils import (
     get_libero_dummy_action,
     get_libero_env,

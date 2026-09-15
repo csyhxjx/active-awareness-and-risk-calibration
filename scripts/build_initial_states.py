@@ -7,7 +7,8 @@ import random
 import sys
 from pathlib import Path
 
-sys.path.insert(0, "/root/gpufree-data/third_party/openvla-oft")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT / "code" / "openvla-oft"))
 
 from libero.libero import benchmark
 
