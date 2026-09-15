@@ -75,3 +75,31 @@ Runtime evidence SHA-256:
 68347a39e0277415443d9283353b68f0929bcf7a87733207e7b170e01aee6f04  logs/EVAL-libero_spatial-openvla-2026_09_15-01_41_08--parity_off_srv2.txt
 68347a39e0277415443d9283353b68f0929bcf7a87733207e7b170e01aee6f04  logs/EVAL-libero_spatial-openvla-2026_09_15-01_41_08--parity_on_srv2.txt
 ```
+
+## Phase 3 Collection-Shell Evidence
+
+- Collection shell commit: `e28c510`.
+- Stable state-hash fix: `02f009a`.
+- Post-change parity ran Guard off on physical GPU 4 and Guard on on physical GPU 5.
+- Both parity runs succeeded 10/10; 132/132 chunks and 1014/1014 steps match with no episode differences.
+- Post-change action recordings are byte-identical to each other and to the pre-change `cd4e5bc` recording.
+- Mini collection ran five frozen train states on physical GPU 6 with image window `[10,230)` and succeeded 5/5.
+- All 475 action/image steps align with full-episode constraints; 950 full/wrist PNGs passed integrity checks.
+- Replaying the official preprocessing path for step 10 of all five states reproduced both persisted images byte-for-byte as arrays.
+- Collected files total 51,174,114 bytes. Mean episode size is 10,234,822.8 bytes, so `mean x 70 x 1.5` is 1,074,656,394 bytes (1.001 GiB).
+- Available data-disk space at the gate was 8,381,061,267,456 bytes.
+- Mini collection tree SHA-256 is `0f91761f3910fb5df7ca7eb8fbcac2241aed7765eab53aedb895d2a7b033e309`, computed over the sorted per-file SHA-256 listing.
+
+Phase 3 runtime evidence SHA-256:
+
+```text
+5714ca7288b411fb53b21653eb4ba4f5a6823e18b674b3b6c13e90e27c18c8c8  runs/phase3_off_actions_e28c510.jsonl
+5714ca7288b411fb53b21653eb4ba4f5a6823e18b674b3b6c13e90e27c18c8c8  runs/phase3_on_actions_e28c510.jsonl
+95cca87ecec143c555fd6b3c2926a146349907e0a8588dafa08af5776a07a209  runs/phase3_off_constraints_e28c510.jsonl
+95cca87ecec143c555fd6b3c2926a146349907e0a8588dafa08af5776a07a209  runs/phase3_on_constraints_e28c510.jsonl
+f6c587d6fb5c5e16dbade33ef22a1d3ea7a07a1da34b51f40c19968f0fac5f9f  runs/mini5_actions_02f009a.jsonl
+29a61da47f47d6f6d153bee7c9573c473b666bc73cdd438603bcd7bb0de7fdb8  runs/mini5_constraints_02f009a.jsonl
+e5fa9f1d6689210376953bd44f2d38bdaccc2bb1d8c2eab124b441a7e761bf5b  logs/EVAL-libero_spatial-openvla-2026_09_15-02_16_27--phase3_parity_off_e28c510.txt
+e5fa9f1d6689210376953bd44f2d38bdaccc2bb1d8c2eab124b441a7e761bf5b  logs/EVAL-libero_spatial-openvla-2026_09_15-02_16_27--phase3_parity_on_e28c510.txt
+f7350b5446bc2991ab5cda43693f05ff0117792761bc392ed79aa286fa0d3772  logs/EVAL-libero_spatial-openvla-2026_09_15-03_08_17--phase3_mini5_02f009a.txt
+```
