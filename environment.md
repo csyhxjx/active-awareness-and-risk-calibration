@@ -86,7 +86,7 @@ Runtime evidence SHA-256:
 - Mini collection ran five frozen train states on physical GPU 6 with image window `[10,230)` and succeeded 5/5.
 - All 475 action/image steps align with full-episode constraints; 950 full/wrist PNGs passed integrity checks.
 - Replaying the official preprocessing path for step 10 of all five states reproduced both persisted images byte-for-byte as arrays.
-- Collected files total 51,174,114 bytes. Mean episode size is 10,234,822.8 bytes, so `mean x 70 x 1.5` is 1,074,656,394 bytes (1.001 GiB).
+- Collected files total 51,174,114 bytes. Mean episode size is 10,234,822.8 bytes, so `mean x 70 x 1.5` is 1,074,656,394 bytes (1.001 GiB). This estimate is based on five successful episodes averaging 95 persisted image steps. If all 70 episodes instead reach the 220-image-step timeout, the same estimate scales to about 2.5 GB; storage remains negligible.
 - Available data-disk space at the gate was 8,381,061,267,456 bytes.
 - Mini collection tree SHA-256 is `0f91761f3910fb5df7ca7eb8fbcac2241aed7765eab53aedb895d2a7b033e309`, computed over the sorted per-file SHA-256 listing.
 

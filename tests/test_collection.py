@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from guard.collection import EpisodeCollector, initial_state_hash, load_selected_states, validate_episode_dir
+from guard.json_io import canonical_dumps
 
 
 class CollectionTest(unittest.TestCase):
@@ -31,23 +32,25 @@ class CollectionTest(unittest.TestCase):
                 ]
             }
             manifest_path = root / "manifest.json"
-            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            manifest_path.write_text(canonical_dumps(manifest), encoding="utf-8")
             manifest_hash, states = load_selected_states(manifest_path, "train,task_00_init_004")
             self.assertEqual(len(manifest_hash), 64)
             self.assertEqual([state["init_index"] for state in states], [3, 4])
 
             collector = EpisodeCollector(root / "out", states[0], 2, 3)
             image = np.zeros((4, 4, 3), dtype=np.uint8)
-            for step in range(3):
-                collector.log_constraint({"t": step, "workspace": {"violated": False, "margin": 1.0}})
-                if step:
-                    collector.log_chunk(step - 1, step, [[0.0] * 7])
-                    collector.log_step(step - 1, 0, step, [0.0] * 7)
-                    collector.save_images(step, image, image)
-            collector.finish({"success": True, "termination_reason": "success"})
+            with mock.patch.object(json, "dumps", return_value='{"__numpy__": "patched"}'):
+                for step in range(3):
+                    collector.log_constraint({"t": step, "workspace": {"violated": False, "margin": 1.0}})
+                    if step:
+                        collector.log_chunk(step - 1, step, [[0.0] * 7])
+                        collector.log_step(step - 1, 0, step, [0.0] * 7)
+                        collector.save_images(step, image, image)
+                collector.finish({"success": True, "termination_reason": "success"})
             result = validate_episode_dir(collector.episode_dir)
             self.assertEqual(result["step_count"], 3)
             self.assertGreater(result["bytes"], 0)
+            self.assertNotIn("__numpy__", (collector.episode_dir / "constraints.jsonl").read_text())
 
 
 if __name__ == "__main__":

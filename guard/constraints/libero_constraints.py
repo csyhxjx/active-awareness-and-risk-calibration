@@ -1,9 +1,8 @@
 """Read-only LIBERO constraint monitoring with onset event recording."""
 
-import json
-import os
-
 import numpy as np
+
+from guard.json_io import append_jsonl
 
 
 DEFAULTS = dict(
@@ -197,7 +196,5 @@ class LiberoConstraintMonitor:
             "steps": self._steps,
         }
         if self.out_path:
-            os.makedirs(os.path.dirname(os.path.abspath(self.out_path)), exist_ok=True)
-            with open(self.out_path, "a", encoding="utf-8") as handle:
-                handle.write(json.dumps(summary) + "\n")
+            append_jsonl(self.out_path, summary)
         return summary

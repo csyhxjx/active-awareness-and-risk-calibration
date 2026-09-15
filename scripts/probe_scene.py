@@ -1,6 +1,5 @@
 """Export one LIBERO task's MuJoCo scene names and free joints."""
 
-import json
 import contextlib
 import io
 import os
@@ -8,7 +7,11 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+GUARD_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(GUARD_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "code" / "openvla-oft"))
+
+from guard.json_io import canonical_dumps, write_json
 
 task_id = int(sys.argv[1])
 output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else None
@@ -26,21 +29,17 @@ with contextlib.redirect_stdout(io.StringIO()):
     sim = env.sim
     model = sim.model
 
-payload = json.dumps(
-    {
-        "task_id": task_id,
-        "task_name": task.name,
-        "task_description": description,
-        "body_names": [model.body_id2name(i) for i in range(model.nbody)],
-        "site_names": [model.site_id2name(i) for i in range(model.nsite)],
-        "free_joints": [
-            model.joint_id2name(j) for j in range(model.njnt) if model.jnt_type[j] == 0
-        ],
-    },
-    indent=2,
-)
+payload = {
+    "task_id": task_id,
+    "task_name": task.name,
+    "task_description": description,
+    "body_names": [model.body_id2name(i) for i in range(model.nbody)],
+    "site_names": [model.site_id2name(i) for i in range(model.nsite)],
+    "free_joints": [
+        model.joint_id2name(j) for j in range(model.njnt) if model.jnt_type[j] == 0
+    ],
+}
 if output_path:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(payload + "\n", encoding="utf-8")
+    write_json(output_path, payload)
 else:
-    print(payload)
+    print(canonical_dumps(payload, indent=2))

@@ -10,16 +10,15 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+from guard.json_io import append_jsonl, canonical_dumps, write_json
+
 
 SPLITS = ("train", "calibration", "test")
 IMAGE_NAME = re.compile(r"step_(\d{5})\.png$")
 
 
 def initial_state_hash(state):
-    blob = json.JSONEncoder(
-        sort_keys=True,
-        default=lambda value: value.tolist() if hasattr(value, "tolist") else str(value),
-    ).encode(state)
+    blob = canonical_dumps(state, sort_keys=True)
     return hashlib.sha256(blob.encode()).hexdigest()[:16]
 
 
@@ -103,8 +102,7 @@ class EpisodeCollector:
 
     @staticmethod
     def _append(path, record):
-        with path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record) + "\n")
+        append_jsonl(path, record)
 
     def log_chunk(self, inference_idx, step_index, action_chunk):
         self._append(
@@ -169,7 +167,7 @@ class EpisodeCollector:
         }
         meta_path = self.episode_dir / "meta.json"
         temp_path = meta_path.with_suffix(".json.tmp")
-        temp_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        write_json(temp_path, payload)
         os.replace(temp_path, meta_path)
         return payload
 

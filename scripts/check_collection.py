@@ -1,13 +1,13 @@
 """Validate per-state collection artifacts and report measured disk use."""
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from guard.collection import validate_episode_dir
+from guard.json_io import canonical_dumps
 
 
 parser = argparse.ArgumentParser()
@@ -21,4 +21,4 @@ episode_dirs = [root / state_id for state_id in args.state_ids] if args.state_id
 )
 results = [validate_episode_dir(path) for path in episode_dirs]
 total_bytes = sum(result["bytes"] for result in results)
-print(json.dumps({"episodes": results, "total_bytes": total_bytes}, indent=2))
+print(canonical_dumps({"episodes": results, "total_bytes": total_bytes}, indent=2))

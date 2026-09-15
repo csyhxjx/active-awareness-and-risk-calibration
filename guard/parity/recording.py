@@ -1,9 +1,10 @@
 """Side-effect-free JSONL recorder for policy and environment actions."""
 
-import json
 import os
 
 import numpy as np
+
+from guard.json_io import append_jsonl
 
 
 class ParityRecorder:
@@ -14,8 +15,7 @@ class ParityRecorder:
             os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
 
     def _write(self, record):
-        with open(self.out_path, "a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record) + "\n")
+        append_jsonl(self.out_path, record)
 
     def log_chunk(self, task_id, trial, inference_idx, action_chunk):
         if self.enabled:
