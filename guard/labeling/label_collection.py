@@ -30,12 +30,12 @@ def _git_head(repo_root):
     ).stdout.strip()
 
 
-def _manifest_states(manifest_path):
+def _manifest_states(manifest_path, splits=("train", "calibration")):
     raw = Path(manifest_path).read_bytes()
     manifest = json.loads(raw)
     states = []
     for task in manifest["tasks"]:
-        for split in ("train", "calibration"):
+        for split in splits:
             for item in task[split]:
                 states.append(
                     {
@@ -183,6 +183,7 @@ def label_collection(
     collection_tree_sha256=DEFAULT_COLLECTION_SHA256,
     force=False,
     repo_root=None,
+    splits=("train", "calibration"),
 ):
     if sustained_k < 1:
         raise ValueError("sustained_k must be at least 1")
@@ -194,8 +195,8 @@ def label_collection(
     if output_path.exists() and not force:
         raise FileExistsError(f"refusing to overwrite labels: {output_path}")
 
-    manifest_sha256, states = _manifest_states(manifest_path)
-    split_counts = {split: sum(state["split"] == split for state in states) for split in ("train", "calibration")}
+    manifest_sha256, states = _manifest_states(manifest_path, splits)
+    split_counts = {split: sum(state["split"] == split for state in states) for split in splits}
     if expected_counts is not None and split_counts != expected_counts:
         raise ValueError(f"unexpected manifest split counts: {split_counts}")
     expected = {state["state_id"]: state for state in states}
@@ -208,8 +209,13 @@ def label_collection(
         sustained_k = thresholds["labeling"]["sustained_k"]
     threshold_sha256 = _sha256_bytes(canonical_dumps(thresholds, indent=2).encode("utf-8"))
     repo_root = Path(repo_root or Path(__file__).resolve().parents[2])
+    run_id = (
+        f"phase3_labels_{collection_root.name}_v1_k{sustained_k}"
+        if splits == ("train", "calibration")
+        else f"phase3_labels_{collection_root.name}_{'-'.join(splits)}_v1_k{sustained_k}"
+    )
     provenance = {
-        "run_id": f"phase3_labels_{collection_root.name}_v1_k{sustained_k}",
+        "run_id": run_id,
         "labeler_guard_head": _git_head(repo_root),
         "collection_guard_head": None,
         "manifest_sha256": manifest_sha256,
@@ -262,14 +268,18 @@ def main():
     parser.add_argument("--manifest", type=Path, default=repo_root / "data/pilot_v0/manifest.json")
     parser.add_argument("--sustained-k", type=int, default=load_thresholds()["labeling"]["sustained_k"])
     parser.add_argument("--collection-tree-sha256", default=DEFAULT_COLLECTION_SHA256)
+    parser.add_argument("--splits", default="train,calibration", help="Comma-separated manifest splits")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
+    splits = tuple(part.strip() for part in args.splits.split(",") if part.strip())
+    expected_by_split = {"train": 50, "calibration": 20, "test": 20}
     labels = label_collection(
         args.collection_root,
         args.manifest,
         args.output_path,
         sustained_k=args.sustained_k,
-        expected_counts={"train": 50, "calibration": 20},
+        expected_counts={split: expected_by_split[split] for split in splits},
+        splits=splits,
         collection_tree_sha256=args.collection_tree_sha256,
         force=args.force,
         repo_root=repo_root,

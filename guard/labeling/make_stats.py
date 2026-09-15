@@ -20,8 +20,10 @@ def _read_labels(path):
 
 def make_stats(labels_path, collection_root, output_dir):
     labels = _read_labels(labels_path)
-    if len(labels) != 350:
-        raise ValueError(f"expected 350 labels, got {len(labels)}")
+    state_count = len({label["state_id"] for label in labels})
+    expected_rows = state_count * len(CONSTRAINTS)
+    if len(labels) != expected_rows:
+        raise ValueError(f"expected {expected_rows} labels for {state_count} states, got {len(labels)}")
     output_dir = Path(output_dir)
     collection_root = Path(collection_root)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -29,7 +31,7 @@ def make_stats(labels_path, collection_root, output_dir):
     for label in labels:
         grouped[(label["split"], label["constraint"])].append(label)
     lines = [
-        "# Phase 3E Offline Label Statistics",
+        "# Offline Label Statistics",
         "",
         f"- Labels: `{Path(labels_path).name}` ({len(labels)} rows)",
         f"- Collection: `{collection_root.name}` (read-only input)",
@@ -43,7 +45,8 @@ def make_stats(labels_path, collection_root, output_dir):
         "| Split | Constraint | States | Any violation | Sustained | Min margin median | Worst min margin | Flag/margin mismatches |",
         "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
-    for split in ("train", "calibration"):
+    splits = tuple(dict.fromkeys(label["split"] for label in labels))
+    for split in splits:
         for constraint in CONSTRAINTS:
             rows = grouped[(split, constraint)]
             minima = [row["episode"]["min_margin"] for row in rows]
@@ -67,8 +70,7 @@ def make_stats(labels_path, collection_root, output_dir):
     lines.extend(["", "## Integrity", "", f"- Unique states: `{len({row['state_id'] for row in labels})}`", f"- Constraints per state: `{len(labels) // len({row['state_id'] for row in labels})}`", f"- Non-finite margins: `{sum(not math.isfinite(row['episode']['min_margin']) for row in labels)}`"])
     (output_dir / "stats.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    gripper = [row["episode"]["min_margin"] for row in grouped[("train", "gripper_env")]]
-    gripper += [row["episode"]["min_margin"] for row in grouped[("calibration", "gripper_env")]]
+    gripper = [row["episode"]["min_margin"] for split in splits for row in grouped[(split, "gripper_env")]]
     fig, ax = plt.subplots(figsize=(7, 4.5))
     positive = [value for value in gripper if value > 0]
     negative = [value for value in gripper if value <= 0]
@@ -80,14 +82,19 @@ def make_stats(labels_path, collection_root, output_dir):
     ax.set_yscale("log")
     ax.set_xlabel("Episode minimum gripper_env margin")
     ax.set_ylabel("Count (log scale)")
-    ax.set_title("Full70 gripper_env episode minima")
+    ax.set_title(f"{state_count}-state gripper_env episode minima")
     ax.legend()
     fig.tight_layout()
     fig.savefig(output_dir / "gripper_env_min_margin_histogram.png", dpi=160)
     plt.close(fig)
 
-    fig, axes = plt.subplots(2, 1, figsize=(10, 7), sharex=False)
-    for axis, state_id in zip(axes, ("task_05_init_034", "task_07_init_043")):
+    trajectory_states = [state_id for state_id in ("task_05_init_034", "task_07_init_043") if (collection_root / state_id / "constraints.jsonl").exists()]
+    if trajectory_states:
+        fig, axes = plt.subplots(len(trajectory_states), 1, figsize=(10, 3.5 * len(trajectory_states)), sharex=False, squeeze=False)
+        axes = axes[:, 0]
+    else:
+        axes = []
+    for axis, state_id in zip(axes, trajectory_states):
         records = [json.loads(line) for line in (collection_root / state_id / "constraints.jsonl").read_text(encoding="utf-8").splitlines()]
         for constraint in CONSTRAINTS:
             axis.plot([record["step_index"] for record in records], [record[constraint]["margin"] for record in records], linewidth=0.9, label=constraint)
@@ -96,10 +103,11 @@ def make_stats(labels_path, collection_root, output_dir):
         axis.set_title(f"{state_id} margin trajectories (orange: policy start)")
         axis.set_ylabel("Signed margin")
         axis.legend(ncol=3, fontsize=8)
-    axes[-1].set_xlabel("Constraint step")
-    fig.tight_layout()
-    fig.savefig(output_dir / "max_steps_margin_trajectories.png", dpi=160)
-    plt.close(fig)
+    if axes:
+        axes[-1].set_xlabel("Constraint step")
+        fig.tight_layout()
+        fig.savefig(output_dir / "max_steps_margin_trajectories.png", dpi=160)
+        plt.close(fig)
     return output_dir / "stats.md"
 
 
