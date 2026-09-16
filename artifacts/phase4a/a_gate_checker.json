@@ -1,0 +1,93 @@
+{
+  "states": [
+    {
+      "state_id": "task_01_init_042",
+      "branch_state_sha256": "5cc038f43b2466e75fd80e224d998c21d937ee8e234ff0a3a0d92ca9a86b271f",
+      "rng_snapshot_sha256": "0d420015174c592e110fb3bd9bfd5db93998ec5054c26936fa5bead7e213ebc4",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_04_init_032",
+      "branch_state_sha256": "ab88e6d4feb9f663308f2e6cd050367d61a3088e56a244060f7f0372527acac8",
+      "rng_snapshot_sha256": "888de2c5c390b8313961d87901bf7c78300971698bdac00de884e5459f0019ac",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_04_init_035",
+      "branch_state_sha256": "b1d1cb29985dae89c77ca5dc39341b4624c8c3763b21f1fba3c97c162f46e7c2",
+      "rng_snapshot_sha256": "38fdf02f639447b0f0c371e1b3f839dc9e274b5b5c04618de9798588bba043d1",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_05_init_034",
+      "branch_state_sha256": "7b7e55ea4a78db8ed442c03363f2777302dfe31df58ba6995252f67cd6c93a87",
+      "rng_snapshot_sha256": "13080cec128dc78404095d167dae78755c2b365491f3ae428092ebb40c0ac52a",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_07_init_021",
+      "branch_state_sha256": "e7514888d0402836b40ed4f319c80c9f117fe280cb4765ad3af4424e8c26bdfd",
+      "rng_snapshot_sha256": "b41b3a7f003b10f3c36afc539b9e234222cf4b1b1fb94bfe11f0f1cb82831be1",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_07_init_023",
+      "branch_state_sha256": "99dfb02e03e72ebce3c09e34b8ad21de006b57cc82370c67a832a23e97f42d9a",
+      "rng_snapshot_sha256": "13080cec128dc78404095d167dae78755c2b365491f3ae428092ebb40c0ac52a",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_07_init_043",
+      "branch_state_sha256": "9fd9d1886393e7889acc53c007be23c8719105174317e3bfd9b556d154137eae",
+      "rng_snapshot_sha256": "0d420015174c592e110fb3bd9bfd5db93998ec5054c26936fa5bead7e213ebc4",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_08_init_003",
+      "branch_state_sha256": "f6b4a289c119c1719723f6104ea302a2c4a2c3946cf32d48c1a600b0f3341a4e",
+      "rng_snapshot_sha256": "b41b3a7f003b10f3c36afc539b9e234222cf4b1b1fb94bfe11f0f1cb82831be1",
+      "arms": [
+        {
+          "arm_id": "A",
+          "steps": 30
+        }
+      ]
+    }
+  ],
+  "sha256": "96997f7e1a5980a81bfe6bb3e3768478c6b8a6d1d11fb7f777ffcc2839f9b23f"
+}

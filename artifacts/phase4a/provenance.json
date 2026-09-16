@@ -1,0 +1,15 @@
+{
+  "run_id": "phase4a_labels_phase4a_pilot_cdc46e8_v1_k3",
+  "pilot_input_sha256": "8c0e55e4b0460d6f3ab47d9b836c852174ca72434bfa07d65e6569baff7cd44f",
+  "checker_sha256": "3b25af69e5161d5cef8ae4735266a312ccdc90a431631fda9165c09024db473c",
+  "a_gate_checker_sha256": "96997f7e1a5980a81bfe6bb3e3768478c6b8a6d1d11fb7f777ffcc2839f9b23f",
+  "pilot_guard_head": "cdc46e83f1801b69144e064720ff028bd94580ba",
+  "labeler_guard_head": "d555a6063ea8b09c2238c5cf8e28aba190e8fe4e",
+  "protocol_sha256": "7020e74d59fa16e23b53938b340bae019e5f8bbf0b436e5c98fc3b59388bd566",
+  "threshold_version": "v1",
+  "decision_margin": 0.0,
+  "sustained_k": 3,
+  "repro_byte_equal": true,
+  "repro_reference_sha256": "005277ae9912a744922ac0fc70173fbf6d9c65f1e3352d9760fa89b08a850e6a",
+  "repro_constraints_sha256": "005277ae9912a744922ac0fc70173fbf6d9c65f1e3352d9760fa89b08a850e6a"
+}

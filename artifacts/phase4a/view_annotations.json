@@ -1,0 +1,72 @@
+[
+  {
+    "state_id": "task_01_init_042",
+    "arm_id": "C",
+    "constraint": "gripper_env",
+    "onset_step": 32,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the gripper in a near-table operating pose, but not penetration depth."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Shows close object and fingertip context; the contact interface is occluded."
+    }
+  },
+  {
+    "state_id": "task_05_init_034",
+    "arm_id": "C",
+    "constraint": "gripper_env",
+    "onset_step": 31,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the global gripper and tabletop geometry, but no sub-millimeter depth cue."
+    },
+    "wrist": {
+      "rating": "none",
+      "rationale": "The table dominates the frame and the violating contact location is out of view."
+    }
+  },
+  {
+    "state_id": "task_07_init_021",
+    "arm_id": "C",
+    "constraint": "gripper_env",
+    "onset_step": 48,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the gripper adjacent to the stove and table, without measurable penetration."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Provides close stove and object context, but the gripper contact is occluded."
+    }
+  },
+  {
+    "state_id": "task_07_init_023",
+    "arm_id": "C",
+    "constraint": "gripper_env",
+    "onset_step": 48,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the gripper at the stove edge, but cannot resolve the oracle violation."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Shows near-field stove and bowl geometry; penetration remains visually ambiguous."
+    }
+  },
+  {
+    "state_id": "task_07_init_043",
+    "arm_id": "C",
+    "constraint": "gripper_env",
+    "onset_step": 41,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows global proximity to the stove surface, not the penetration magnitude."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Shows local stove and object geometry, while the contact point remains occluded."
+    }
+  }
+]
