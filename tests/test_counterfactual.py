@@ -14,6 +14,7 @@ from guard.counterfactual.run_counterfactual import (
 from guard.counterfactual.make_pilot_stats import build_labels
 from guard.counterfactual.run_counterfactual_v2 import select_branches, v2_action
 from guard.counterfactual.make_smoke_stats_v2 import evaluate_smoke
+from guard.counterfactual.make_smoke_stats_v3 import evaluate_gates as evaluate_v3_gates
 from guard.counterfactual.run_counterfactual_v3 import (
     crossed_edge,
     edge_action,
@@ -198,6 +199,35 @@ class CounterfactualTest(unittest.TestCase):
             validate_f_append(root, ("task_04_init_035",))
             with self.assertRaisesRegex(ValueError, "next registered state"):
                 validate_f_append(root, ("task_07_init_021",))
+
+    def test_v3_gate_closes_without_target_drop_positive(self):
+        labels = []
+        arms = []
+        for state in ("task_07_init_023", "task_04_init_035", "task_07_init_021"):
+            for arm in ("A_edge", "F_edge"):
+                arms.append(
+                    {
+                        "meta": {
+                            "state_id": state,
+                            "arm_id": arm,
+                            "edge_crossed": arm == "F_edge",
+                            "release_triggered": arm == "F_edge",
+                            "target_min_drop_margin": 0.01,
+                        }
+                    }
+                )
+                for constraint in ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite"):
+                    labels.append(
+                        {
+                            "state_id": state,
+                            "arm_id": arm,
+                            "constraint": constraint,
+                            "split": "train",
+                            "branch": {"any_violation": arm == "F_edge" and constraint == "workspace"},
+                        }
+                    )
+        gates = evaluate_v3_gates(labels, arms, [], {"branch_provenance_match": True, "a_states": [1, 2, 3]})
+        self.assertEqual([passed for _, passed, _ in gates], [True, False, False, True, False])
 
 
 if __name__ == "__main__":
