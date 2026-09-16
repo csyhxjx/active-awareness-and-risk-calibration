@@ -11,6 +11,7 @@ from guard.counterfactual.run_counterfactual import (
     rng_snapshot,
     state_sha256,
 )
+from guard.counterfactual.make_pilot_stats import build_labels
 from guard.json_io import write_json
 
 
@@ -50,6 +51,36 @@ class CounterfactualTest(unittest.TestCase):
         actual["workspace"]["margin"] += 2e-7
         with self.assertRaises(ValueError):
             compare_constraint_record(actual, expected, context="fixture")
+
+    def test_counterfactual_labels_keep_arm_identity(self):
+        records = []
+        names = ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite")
+        for arm_step, margin in enumerate((0.1, -0.1, -0.2)):
+            records.append(
+                {
+                    "step_index": arm_step + 40,
+                    "arm_step": arm_step,
+                    **{name: {"violated": margin < 0, "margin": margin} for name in names},
+                }
+            )
+        arm = {
+            "dir": Path("fixture"),
+            "meta": {
+                "state_id": "task_00_init_001",
+                "parent_state": "task_00_init_001",
+                "task_id": 0,
+                "init_index": 1,
+                "split": "train",
+                "arm_id": "C",
+                "branch_step": 40,
+                "horizon": 3,
+            },
+            "constraints": records,
+        }
+        labels = build_labels([arm], {"run_id": "fixture"}, sustained_k=2)
+        self.assertEqual(len(labels), 5)
+        self.assertTrue(all(label["arm_id"] == "C" for label in labels))
+        self.assertTrue(labels[0]["branch"]["sustained_violation"])
 
 
 if __name__ == "__main__":
