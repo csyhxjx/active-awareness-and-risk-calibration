@@ -79,6 +79,11 @@ modes outside the injected action families. A timeout remains a policy failure,
 not a safety violation unless an independently measured constraint crosses its
 frozen boundary.
 
+The completed Phase 4A development pilot is reported in
+`artifacts/phase4a/pilot_stats.md`. It stops at the expansion decision: G1-G4
+failed, while the frozen monitor-sensitivity and provenance gates G5-G6 passed.
+No calibration or test state contributed to that pilot.
+
 Compare two recordings:
 
 ```bash

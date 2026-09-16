@@ -199,6 +199,7 @@ def render_report(labels, gates, annotations, provenance):
         "",
         f"- Accepted pilot input SHA-256: `{provenance['pilot_input_sha256']}`",
         f"- Checker SHA-256: `{provenance['checker_sha256']}`",
+        f"- A-only gate checker SHA-256: `{provenance['a_gate_checker_sha256']}`",
         f"- Runtime Guard HEAD: `{provenance['pilot_guard_head']}`",
         f"- Labeler Guard HEAD: `{provenance['labeler_guard_head']}`",
         f"- Threshold contract: `{provenance['threshold_version']}`, decision margin `0`, sustained `k={provenance['sustained_k']}`",
@@ -259,6 +260,7 @@ def main():
     parser.add_argument("pilot_root", type=Path)
     parser.add_argument("output_dir", type=Path)
     parser.add_argument("--checker", type=Path, required=True)
+    parser.add_argument("--a-gate-checker", type=Path, required=True)
     parser.add_argument("--repro-constraints", type=Path, required=True)
     parser.add_argument("--repro-reference", type=Path, required=True)
     parser.add_argument("--force", action="store_true")
@@ -279,6 +281,9 @@ def main():
     checker = json.loads(args.checker.read_text(encoding="utf-8"))
     if len(checker["states"]) != 8 or sum(len(state["arms"]) for state in checker["states"]) != 40:
         raise ValueError("checker does not cover 8 states x 5 arms")
+    a_gate_checker = json.loads(args.a_gate_checker.read_text(encoding="utf-8"))
+    if len(a_gate_checker["states"]) != 8 or any(len(state["arms"]) != 1 for state in a_gate_checker["states"]):
+        raise ValueError("A-only checker does not cover 8 states x 1 arm")
     arms = load_arms(args.pilot_root)
     guard_heads = {arm["meta"]["guard_head"] for arm in arms}
     protocol_hashes = {arm["meta"]["protocol_sha256"] for arm in arms}
@@ -288,6 +293,7 @@ def main():
         "run_id": f"phase4a_labels_{args.pilot_root.name}_v1_k3",
         "pilot_input_sha256": focused_input_sha256(args.pilot_root),
         "checker_sha256": checker["sha256"],
+        "a_gate_checker_sha256": a_gate_checker["sha256"],
         "pilot_guard_head": next(iter(guard_heads)),
         "labeler_guard_head": git_head(repo_root),
         "protocol_sha256": next(iter(protocol_hashes)),
@@ -296,6 +302,8 @@ def main():
         "sustained_k": thresholds["labeling"]["sustained_k"],
     }
     labels = build_labels(arms, provenance, provenance["sustained_k"])
+    shutil.copy2(args.checker, args.output_dir / "checker.json")
+    shutil.copy2(args.a_gate_checker, args.output_dir / "a_gate_checker.json")
     labels_path = args.output_dir / "labels_pilot.jsonl"
     if labels_path.exists():
         labels_path.unlink()
@@ -320,10 +328,17 @@ def main():
     (args.output_dir / "pilot_stats.md").write_text(
         render_report(labels, gates, annotations, provenance), encoding="utf-8"
     )
-    write_json(args.output_dir / "provenance.json", {**provenance, "repro_byte_equal": repro_equal})
+    write_json(
+        args.output_dir / "provenance.json",
+        {
+            **provenance,
+            "repro_byte_equal": repro_equal,
+            "repro_reference_sha256": sha256_file(args.repro_reference),
+            "repro_constraints_sha256": sha256_file(args.repro_constraints),
+        },
+    )
     print(canonical_dumps({"labels": len(labels), "violations": len(violations), "gates": gates}, indent=2))
 
 
 if __name__ == "__main__":
     main()
-
