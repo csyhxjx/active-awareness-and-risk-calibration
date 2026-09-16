@@ -13,6 +13,7 @@ from guard.counterfactual.run_counterfactual import (
 )
 from guard.counterfactual.make_pilot_stats import build_labels
 from guard.counterfactual.run_counterfactual_v2 import select_branches, v2_action
+from guard.counterfactual.make_smoke_stats_v2 import evaluate_smoke
 from guard.json_io import write_json
 
 
@@ -112,6 +113,23 @@ class CounterfactualTest(unittest.TestCase):
         self.assertEqual(branches["drop"]["step"], 35)
         self.assertEqual(branches["workspace"]["step"], 10)
         self.assertEqual(branches["workspace"]["direction"], 1)
+
+    def test_v2_smoke_gate_blocks_missing_drop_family(self):
+        labels = []
+        for state in ("task_07_init_023", "task_04_init_035", "task_08_init_003"):
+            for arm in ("A_grip", "A_drop", "A_work", "C04", "C06", "C08", "C10", "D_force", "E_push"):
+                for constraint in ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite"):
+                    violation = (arm in {"C06", "C08", "C10"} and state == "task_07_init_023" and constraint == "gripper_env") or (arm == "E_push" and constraint == "workspace")
+                    labels.append(
+                        {
+                            "state_id": state,
+                            "arm_id": arm,
+                            "constraint": constraint,
+                            "branch": {"any_violation": violation},
+                        }
+                    )
+        gates, _ = evaluate_smoke(labels, True, True)
+        self.assertEqual([passed for _, passed, _ in gates], [True, False, True, True, True])
 
 
 if __name__ == "__main__":
