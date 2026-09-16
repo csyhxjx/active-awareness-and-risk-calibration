@@ -45,9 +45,9 @@ class CounterfactualTest(unittest.TestCase):
         names = ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite")
         expected = {name: {"violated": False, "margin": 0.1} for name in names}
         actual = {name: dict(value) for name, value in expected.items()}
-        actual["workspace"]["margin"] += 5e-13
-        self.assertLess(compare_constraint_record(actual, expected, context="fixture"), 1e-12)
-        actual["workspace"]["margin"] += 2e-12
+        actual["workspace"]["margin"] += 5e-8
+        self.assertLess(compare_constraint_record(actual, expected, context="fixture"), 1e-7)
+        actual["workspace"]["margin"] += 2e-7
         with self.assertRaises(ValueError):
             compare_constraint_record(actual, expected, context="fixture")
 

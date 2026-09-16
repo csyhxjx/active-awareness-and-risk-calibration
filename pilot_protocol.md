@@ -69,7 +69,7 @@ Three hard gates run before the eight-state pilot:
 1. Arm A constraint margins and violation flags must equal the corresponding
    archived `constraints.jsonl` records at every branch step. Violation flags
    and the side of the zero decision boundary must match exactly. Margins use
-   `rtol=0, atol=1e-12`, with the observed maximum absolute error persisted. A
+   `rtol=0, atol=1e-7`, with the observed maximum absolute error persisted. A
    mismatch stops the run and preserves diagnostics only.
 2. Every arm records the manifest state hash, branch-state SHA-256, RNG snapshot
    SHA-256, protocol SHA-256, runtime Guard HEAD, parent collection hashes, and
@@ -91,19 +91,22 @@ recomputed `workspace` margin was `0.06346475558569631` versus archived
 Re-running through the official OpenVLA `get_libero_env` helper at the original
 256 render resolution reproduced the same difference. The original zero-
 tolerance wording was therefore operationally invalid for float64 MuJoCo
-reconstruction. The fixed `1e-12` absolute tolerance above is registered before
-any counterfactual branch executes; it is nine orders of magnitude below the
-millimeter-scale safety budgets and still requires exact violation decisions.
+reconstruction. The first amended tolerance passed the pre-branch segment but
+not the archived 30-step continuation.
 
-A second A-only smoke stopped after the branch because writing the already
-reconstructed flattened MuJoCo state back through `set_state/forward` caused a
-`2.3430552942294014e-08` margin drift on the next transition. This shows that
-the flattened state omits solver warm-start state needed for bit-stable future
-dynamics. No perturbed arm had run. Consequently, the branch mechanism is the
-seeded initial-state replay itself: every arm independently replays to the
-branch, proves equality with the recorded state/RNG hashes, and continues
-without a lossy second `set_state` call. The snapshots remain provenance and
-branch-equality evidence, not a standalone simulator checkpoint claim.
+The second and third A-only smokes stopped after the branch with
+`2.3430552942294014e-08` first-step drift. Isolation runs showed the same drift
+under uninterrupted replay, with and without state/RNG reads, with the same or
+a new monitor, on the original GPU 4, at the original 256 render resolution,
+and with seeds set before environment creation. Across the 30-step A segment,
+the maximum absolute margin difference was `2.8100134885633565e-08`; violation
+flags and decision-boundary sides remained exact. Because the archive contains
+actions but no complete resumable MuJoCo checkpoint, cross-process contact
+dynamics are numerically rather than bitwise reproducible. Before any B-E arm
+ran, the final A parity tolerance was fixed at `rtol=0, atol=1e-7`, about four
+orders of magnitude below the smallest legal policy margin. The branch
+mechanism remains seeded replay; snapshots are provenance and branch-equality
+evidence, not a standalone simulator checkpoint claim.
 
 ## P3. Pre-registered candidate actions
 

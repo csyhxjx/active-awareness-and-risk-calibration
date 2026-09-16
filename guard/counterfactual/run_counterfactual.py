@@ -21,7 +21,7 @@ from guard.json_io import append_jsonl, canonical_dumps, write_json
 
 ARMS = ("A", "B", "C", "D", "E")
 CONSTRAINTS = ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite")
-PARITY_ATOL = 1e-12
+PARITY_ATOL = 1e-7
 PILOT_BRANCH_STEPS = {
     "task_07_init_023": 48,
     "task_07_init_021": 45,
