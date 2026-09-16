@@ -45,7 +45,8 @@ environment-action path: `env.seed(0)`, reset, set the manifest initial state,
 execute the ten archived dummy stabilization actions, then replay archived
 `env_action` records through `t_branch - 1`. Immediately before the action at
 `t_branch`, capture the flattened MuJoCo state and Python/NumPy RNG snapshots.
-Each arm starts from an exact restoration of those snapshots.
+Each arm independently repeats this seeded reconstruction and must produce the
+same snapshots before it continues directly into the branch.
 
 The branch horizon is `H=30` transitions. Images and oracle labels use an
 explicit post-action convention: execute action at step `t`, obtain the new
@@ -93,6 +94,16 @@ tolerance wording was therefore operationally invalid for float64 MuJoCo
 reconstruction. The fixed `1e-12` absolute tolerance above is registered before
 any counterfactual branch executes; it is nine orders of magnitude below the
 millimeter-scale safety budgets and still requires exact violation decisions.
+
+A second A-only smoke stopped after the branch because writing the already
+reconstructed flattened MuJoCo state back through `set_state/forward` caused a
+`2.3430552942294014e-08` margin drift on the next transition. This shows that
+the flattened state omits solver warm-start state needed for bit-stable future
+dynamics. No perturbed arm had run. Consequently, the branch mechanism is the
+seeded initial-state replay itself: every arm independently replays to the
+branch, proves equality with the recorded state/RNG hashes, and continues
+without a lossy second `set_state` call. The snapshots remain provenance and
+branch-equality evidence, not a standalone simulator checkpoint claim.
 
 ## P3. Pre-registered candidate actions
 

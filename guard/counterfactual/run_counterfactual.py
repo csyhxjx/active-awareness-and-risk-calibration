@@ -276,10 +276,9 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
                     f"state_hash={branch_hash} rng_hash={snapshot_hash}"
                 )
 
-            # Replay reconstruction restores controller internals. Reapply the exact
-            # frozen simulator/RNG snapshot immediately before branching.
-            env.set_state(reference_state)
-            env.env.sim.forward()
+            # Continue directly from deterministic replay. MuJoCo's flattened
+            # state omits solver warm-start state, so set_state() is not a
+            # lossless branch restoration for future dynamics.
             restore_rng(reference_rng)
             monitor = LiberoConstraintMonitor(env)
             monitor.episode_reset()
