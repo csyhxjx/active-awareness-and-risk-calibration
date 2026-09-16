@@ -14,6 +14,11 @@ from guard.counterfactual.run_counterfactual import (
 from guard.counterfactual.make_pilot_stats import build_labels
 from guard.counterfactual.run_counterfactual_v2 import select_branches, v2_action
 from guard.counterfactual.make_smoke_stats_v2 import evaluate_smoke
+from guard.counterfactual.run_counterfactual_v3 import (
+    crossed_edge,
+    edge_action,
+    select_edge_branch,
+)
 from guard.json_io import write_json
 
 
@@ -130,6 +135,59 @@ class CounterfactualTest(unittest.TestCase):
                     )
         gates, _ = evaluate_smoke(labels, True, True)
         self.assertEqual([passed for _, passed, _ in gates], [True, False, True, True, True])
+
+    def test_v3_selects_post_action_carry_and_nearest_edge(self):
+        trace = []
+        for step in range(101):
+            trace.append(
+                {
+                    "step_index": step,
+                    "target_name": "akita_black_bowl_1",
+                    "target_x": 0.15,
+                    "target_y": 0.39,
+                    "target_z": 0.8 + (0.06 if step == 35 else 0.03 if step >= 25 else 0.0),
+                    "gripper": 1.0 if step >= 20 else -1.0,
+                    "table_xy": [-0.4, 0.4, -0.4, 0.4],
+                    "table_z": 0.8,
+                    "drop_line_z": 0.77,
+                }
+            )
+        branch = select_edge_branch(trace, horizon=60, max_action_step=100)
+        self.assertEqual(branch["observation_step"], 35)
+        self.assertEqual(branch["step"], 36)
+        self.assertEqual(branch["edge"]["axis"], "y")
+        self.assertEqual(branch["edge"]["direction"], 1)
+        self.assertAlmostEqual(branch["edge"]["distance"], 0.01)
+
+    def test_v3_rejects_carry_without_full_post_observation_horizon(self):
+        trace = [
+            {
+                "step_index": step,
+                "target_name": "akita_black_bowl_1",
+                "target_x": 0.0,
+                "target_y": 0.0,
+                "target_z": 0.85 if step >= 45 else 0.8,
+                "gripper": 1.0 if step >= 40 else -1.0,
+                "table_xy": [-0.4, 0.4, -0.4, 0.4],
+                "table_z": 0.8,
+                "drop_line_z": 0.77,
+            }
+            for step in range(101)
+        ]
+        with self.assertRaisesRegex(ValueError, "60 following actions"):
+            select_edge_branch(trace, horizon=60, max_action_step=100)
+
+    def test_v3_two_stage_action_and_strict_crossing(self):
+        baseline = np.array([0.2, -0.3, 0.1, 0, 0, 0, -0.5])
+        edge = {"action_index": 1, "direction": -1, "bound": -0.4}
+        hold = edge_action("F_edge", baseline, edge, release=False)
+        release = edge_action("F_edge", baseline, edge, release=True)
+        self.assertEqual(hold[1], -1.0)
+        self.assertEqual(hold[6], 1.0)
+        self.assertEqual(release[6], -1.0)
+        self.assertFalse(crossed_edge(-0.4, edge))
+        self.assertTrue(crossed_edge(-0.40001, edge))
+        np.testing.assert_array_equal(edge_action("A_edge", baseline, edge, release=False), baseline)
 
 
 if __name__ == "__main__":
