@@ -108,6 +108,24 @@ orders of magnitude below the smallest legal policy margin. The branch
 mechanism remains seeded replay; snapshots are provenance and branch-equality
 evidence, not a standalone simulator checkpoint claim.
 
+### Task-history restoration amendment (2026-09-16)
+
+The first multi-state launch exposed larger A/replay mismatches in states that
+were not first in their task's full70 execution order. Audit of the frozen
+runner showed that full70 created one environment per task and reused it across
+the manifest-ordered train states. A direct target-only reset therefore did not
+reproduce the controller/environment history under which the archive was
+recorded. The corrected runner creates a fresh environment for every arm,
+replays only the earlier train states from that same task without rendering,
+then reconstructs the target branch. Calibration and test are never replayed.
+
+The parallel launch was stopped when the first global A gate failures became
+visible, but three workers had already completed B-E and one had partially
+entered them. Those directories are quarantined as invalid intermediate data:
+their constraint outcomes are not inspected, summarized, or used to alter this
+protocol. All future execution is staged: all eight states must first pass an
+A-only run and checker before any B-E process starts.
+
 ## P3. Pre-registered candidate actions
 
 Runtime inspection of the LIBERO Spatial robosuite `OSC_POSE` action interface

@@ -171,9 +171,6 @@ def make_env(task, resolution=224):
 
 
 def reconstruct_branch(env, initial_state, parent, branch_step):
-    random.seed(7)
-    np.random.seed(7)
-    env.seed(0)
     env.reset()
     obs = env.set_init_state(initial_state)
     monitor = LiberoConstraintMonitor(env)
@@ -190,6 +187,27 @@ def reconstruct_branch(env, initial_state, parent, branch_step):
     state = np.asarray(env.get_sim_state()).copy()
     snapshot = rng_snapshot()
     return obs, state, snapshot, max_abs_error
+
+
+def replay_predecessors(env, initial_states, collection_root, predecessors):
+    """Reproduce the per-task environment history used by the full70 runner."""
+    replayed = []
+    for predecessor in predecessors:
+        parent = load_parent_episode(collection_root, predecessor["state_id"])
+        initial_state = initial_states[predecessor["init_index"]]
+        if initial_state_hash(initial_state) != predecessor["state_hash"]:
+            raise ValueError(f"predecessor state hash mismatch: {predecessor['state_id']}")
+        env.reset()
+        env.set_init_state(initial_state)
+        for step_index in range(parent["meta"]["constraint_step_count"]):
+            action = (
+                np.array([0, 0, 0, 0, 0, 0, -1], dtype=np.float64)
+                if step_index < 10
+                else parent["actions"][step_index]
+            )
+            env.step(action.tolist())
+        replayed.append(predecessor["state_id"])
+    return replayed
 
 
 def save_image_pair(arm_dir, step_index, obs):
@@ -220,7 +238,18 @@ def git_revision(repo_root):
     return head, dirty
 
 
-def run_state(state, *, task_suite, collection_root, output_root, protocol_path, horizon, arms, repo_root):
+def run_state(
+    state,
+    *,
+    task_suite,
+    collection_root,
+    output_root,
+    protocol_path,
+    horizon,
+    arms,
+    repo_root,
+    predecessors,
+):
     if state["split"] != "train":
         raise ValueError(f"Phase 4A forbids non-train state: {state['state_id']} split={state['split']}")
     if state["state_id"] not in PILOT_BRANCH_STEPS:
@@ -249,111 +278,119 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
         raise FileExistsError(f"refusing to overwrite counterfactual state: {state_dir}")
     state_dir.mkdir(parents=True)
     task = task_suite.get_task(state["task_id"])
-    env = make_env(task)
     try:
-        low, high = (np.asarray(value, dtype=np.float64) for value in env.env.action_spec)
-        if not np.array_equal(low, -np.ones(7)) or not np.array_equal(high, np.ones(7)):
-            raise ValueError(f"unexpected action bounds: low={low.tolist()} high={high.tolist()}")
-
         reference_state = None
         reference_state_hash = None
         reference_rng = None
         reference_rng_hash = None
         for arm_id in arms:
-            _, branch_state, snapshot, replay_max_abs_error = reconstruct_branch(env, initial_state, parent, branch_step)
-            branch_hash = state_sha256(branch_state)
-            snapshot_hash = rng_sha256(snapshot)
-            if reference_state is None:
-                reference_state = branch_state.copy()
-                reference_state_hash = branch_hash
-                reference_rng = snapshot
-                reference_rng_hash = snapshot_hash
-                np.save(state_dir / "branch_state.npy", reference_state, allow_pickle=False)
-                write_json(state_dir / "rng_snapshot.json", reference_rng)
-            elif branch_hash != reference_state_hash or snapshot_hash != reference_rng_hash:
-                raise ValueError(
-                    f"branch reconstruction mismatch: state={state['state_id']} arm={arm_id} "
-                    f"state_hash={branch_hash} rng_hash={snapshot_hash}"
+            random.seed(7)
+            np.random.seed(7)
+            env = make_env(task)
+            try:
+                low, high = (np.asarray(value, dtype=np.float64) for value in env.env.action_spec)
+                if not np.array_equal(low, -np.ones(7)) or not np.array_equal(high, np.ones(7)):
+                    raise ValueError(f"unexpected action bounds: low={low.tolist()} high={high.tolist()}")
+                replayed_predecessors = replay_predecessors(env, initial_states, collection_root, predecessors)
+                _, branch_state, snapshot, replay_max_abs_error = reconstruct_branch(
+                    env, initial_state, parent, branch_step
                 )
-
-            # Continue directly from deterministic replay. MuJoCo's flattened
-            # state omits solver warm-start state, so set_state() is not a
-            # lossless branch restoration for future dynamics.
-            restore_rng(reference_rng)
-            monitor = LiberoConstraintMonitor(env)
-            monitor.episode_reset()
-            arm_a_max_abs_error = 0.0
-
-            arm_dir = state_dir / f"arm_{arm_id}"
-            (arm_dir / "images" / "full").mkdir(parents=True)
-            (arm_dir / "images" / "wrist").mkdir(parents=True)
-            for arm_step, step_index in enumerate(required_steps):
-                baseline = parent["actions"][step_index]
-                action = perturb_action(arm_id, parent["actions"], step_index)
-                obs, _, done, _ = env.step(action.tolist())
-                record = monitor.check(step_index)
-                record["step_index"] = int(step_index)
-                record["arm_step"] = int(arm_step)
-                append_jsonl(arm_dir / "constraints.jsonl", record)
-                append_jsonl(
-                    arm_dir / "actions.jsonl",
-                    {
-                        "state_id": state["state_id"],
-                        "parent_state": state["state_id"],
-                        "arm_id": arm_id,
-                        "step_index": int(step_index),
-                        "arm_step": int(arm_step),
-                        "baseline_env_action": baseline.tolist(),
-                        "env_action": action.tolist(),
-                        "done": bool(done),
-                    },
-                )
-                save_image_pair(arm_dir, step_index, obs)
-                if arm_id == "A":
-                    arm_a_max_abs_error = max(
-                        arm_a_max_abs_error,
-                        compare_constraint_record(
-                            record,
-                            parent["constraints"][step_index],
-                            context=f"arm=A state={state['state_id']} step={step_index}",
-                        ),
+                branch_hash = state_sha256(branch_state)
+                snapshot_hash = rng_sha256(snapshot)
+                if reference_state is None:
+                    reference_state = branch_state.copy()
+                    reference_state_hash = branch_hash
+                    reference_rng = snapshot
+                    reference_rng_hash = snapshot_hash
+                    np.save(state_dir / "branch_state.npy", reference_state, allow_pickle=False)
+                    write_json(state_dir / "rng_snapshot.json", reference_rng)
+                elif branch_hash != reference_state_hash or snapshot_hash != reference_rng_hash:
+                    raise ValueError(
+                        f"branch reconstruction mismatch: state={state['state_id']} arm={arm_id} "
+                        f"state_hash={branch_hash} rng_hash={snapshot_hash}"
                     )
 
-            write_json(
-                arm_dir / "meta.json",
-                {
-                    "schema_version": 1,
-                    **state,
-                    "parent_state": state["state_id"],
-                    "arm_id": arm_id,
-                    "branch_step": branch_step,
-                    "horizon": horizon,
-                    "step_index_semantics": "post-action full/wrist images and post-action constraint share one index",
-                    "branch_state_sha256": reference_state_hash,
-                    "rng_snapshot_sha256": reference_rng_hash,
-                    "protocol_sha256": sha256_file(protocol_path),
-                    "guard_head": git_revision(repo_root)[0],
-                    "guard_dirty": git_revision(repo_root)[1],
-                    "parent_collection": Path(collection_root).name,
-                    "parent_collection_guard_head": parent["meta"]["guard_head"],
-                    "parent_manifest_sha256": parent["meta"]["manifest_sha256"],
-                    "parent_actions_sha256": parent["actions_sha256"],
-                    "parent_constraints_sha256": parent["constraints_sha256"],
-                    "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
-                    "parity_atol": PARITY_ATOL,
-                    "replay_max_abs_error": replay_max_abs_error,
-                    "arm_a_parity_passed": arm_id == "A",
-                    "arm_a_max_abs_error": arm_a_max_abs_error if arm_id == "A" else None,
-                },
-            )
-    except Exception:
+                restore_rng(reference_rng)
+                monitor = LiberoConstraintMonitor(env)
+                monitor.episode_reset()
+                arm_a_max_abs_error = 0.0
+
+                arm_dir = state_dir / f"arm_{arm_id}"
+                (arm_dir / "images" / "full").mkdir(parents=True)
+                (arm_dir / "images" / "wrist").mkdir(parents=True)
+                for arm_step, step_index in enumerate(required_steps):
+                    baseline = parent["actions"][step_index]
+                    action = perturb_action(arm_id, parent["actions"], step_index)
+                    obs, _, done, _ = env.step(action.tolist())
+                    record = monitor.check(step_index)
+                    record["step_index"] = int(step_index)
+                    record["arm_step"] = int(arm_step)
+                    append_jsonl(arm_dir / "constraints.jsonl", record)
+                    append_jsonl(
+                        arm_dir / "actions.jsonl",
+                        {
+                            "state_id": state["state_id"],
+                            "parent_state": state["state_id"],
+                            "arm_id": arm_id,
+                            "step_index": int(step_index),
+                            "arm_step": int(arm_step),
+                            "baseline_env_action": baseline.tolist(),
+                            "env_action": action.tolist(),
+                            "done": bool(done),
+                        },
+                    )
+                    save_image_pair(arm_dir, step_index, obs)
+                    if arm_id == "A":
+                        arm_a_max_abs_error = max(
+                            arm_a_max_abs_error,
+                            compare_constraint_record(
+                                record,
+                                parent["constraints"][step_index],
+                                context=f"arm=A state={state['state_id']} step={step_index}",
+                            ),
+                        )
+
+                write_json(
+                    arm_dir / "meta.json",
+                    {
+                        "schema_version": 1,
+                        **state,
+                        "parent_state": state["state_id"],
+                        "arm_id": arm_id,
+                        "branch_step": branch_step,
+                        "horizon": horizon,
+                        "step_index_semantics": "post-action full/wrist images and post-action constraint share one index",
+                        "branch_state_sha256": reference_state_hash,
+                        "rng_snapshot_sha256": reference_rng_hash,
+                        "protocol_sha256": sha256_file(protocol_path),
+                        "guard_head": git_revision(repo_root)[0],
+                        "guard_dirty": git_revision(repo_root)[1],
+                        "parent_collection": Path(collection_root).name,
+                        "parent_collection_guard_head": parent["meta"]["guard_head"],
+                        "parent_manifest_sha256": parent["meta"]["manifest_sha256"],
+                        "parent_actions_sha256": parent["actions_sha256"],
+                        "parent_constraints_sha256": parent["constraints_sha256"],
+                        "predecessor_states": replayed_predecessors,
+                        "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+                        "parity_atol": PARITY_ATOL,
+                        "replay_max_abs_error": replay_max_abs_error,
+                        "arm_a_parity_passed": arm_id == "A",
+                        "arm_a_max_abs_error": arm_a_max_abs_error if arm_id == "A" else None,
+                    },
+                )
+            finally:
+                env.close()
+    except Exception as exc:
         write_json(
             state_dir / "FAILED.json",
-            {"state_id": state["state_id"], "branch_step": branch_step},
+            {
+                "state_id": state["state_id"],
+                "branch_step": branch_step,
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+            },
         )
         raise
-    finally:
-        env.close()
 
 
 def main():
@@ -373,12 +410,15 @@ def main():
     if dirty:
         raise RuntimeError("counterfactual execution requires a clean Guard worktree")
     _, states = load_selected_states(args.manifest, args.state_list)
+    _, train_states = load_selected_states(args.manifest, "train")
     arms = tuple(part.strip().upper() for part in args.arms.split(",") if part.strip())
     if not arms or any(arm not in ARMS for arm in arms) or len(arms) != len(set(arms)):
         raise ValueError(f"invalid arm selection: {arms}")
     args.output_root.mkdir(parents=True, exist_ok=True)
     task_suite = benchmark.get_benchmark_dict()["libero_spatial"]()
     for state in states:
+        same_task = [candidate for candidate in train_states if candidate["task_id"] == state["task_id"]]
+        target_position = [candidate["state_id"] for candidate in same_task].index(state["state_id"])
         run_state(
             state,
             task_suite=task_suite,
@@ -388,6 +428,7 @@ def main():
             horizon=args.horizon,
             arms=arms,
             repo_root=repo_root,
+            predecessors=same_task[:target_position],
         )
         print(f"PASS {state['state_id']} arms={','.join(arms)} guard_head={head}", flush=True)
 

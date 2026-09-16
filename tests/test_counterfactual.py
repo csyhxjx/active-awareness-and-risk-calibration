@@ -41,7 +41,7 @@ class CounterfactualTest(unittest.TestCase):
         self.assertEqual(rng_sha256(snapshot), rng_sha256(restored))
         self.assertEqual(state_sha256(state), state_sha256(state.copy()))
 
-    def test_parity_allows_only_sub_picometer_float_drift(self):
+    def test_parity_enforces_registered_absolute_tolerance(self):
         names = ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite")
         expected = {name: {"violated": False, "margin": 0.1} for name in names}
         actual = {name: dict(value) for name, value in expected.items()}
