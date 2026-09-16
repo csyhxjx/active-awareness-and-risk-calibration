@@ -56,10 +56,11 @@ A carry candidate must satisfy all of the following:
 - policy step `t >= 10`, at or after the first archived open-to-closed command;
 - archived gripper command `> 0`;
 - payload elevation `z_t-z0 >= 0.02 m`;
-- all 60 archived actions `t..t+59` exist.
+- all 60 archived actions `t+1..t+60` exist.
 
 Select the candidate with maximum `z_t`; ties select the earliest step. This is
-the frozen elevated-carry point. If no candidate exists, the state is
+the frozen elevated-carry observation, and the branch begins from its post-action
+state at archived action step `t+1`. If no candidate exists, the state is
 ineligible and the smoke fails rather than shortening the horizon or changing
 states.
 
@@ -80,7 +81,8 @@ crossing is coordinate `> upper_bound`. Equality is not a crossing.
 
 ## V3.3 Arms and two-stage perturbation
 
-The arm horizon is exactly `H=60` transitions. All actions are seven-dimensional
+The arm horizon is exactly `H=60` transitions beginning at the selected
+carry-observation step plus one. All actions are seven-dimensional
 `OSC_POSE` environment actions clipped to `[-1,+1]`. No policy model is loaded.
 
 | Arm | Rule | Purpose |
