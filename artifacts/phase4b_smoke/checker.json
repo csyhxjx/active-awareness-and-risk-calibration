@@ -1,0 +1,223 @@
+{
+  "states": [
+    {
+      "state_id": "task_04_init_035",
+      "branches": {
+        "grip": {
+          "step": 57,
+          "source": "phase4a_gripper_env_policy_argmin"
+        },
+        "drop": {
+          "step": 96,
+          "source": "max_payload_elevation_during_closed_gripper_carry",
+          "target_name": "akita_black_bowl_1",
+          "target_z0": 1.0625599683749698,
+          "target_z": 1.2261174099861805,
+          "target_elevation": 0.16355744161121066,
+          "first_close_step": 61
+        },
+        "workspace": {
+          "step": 10,
+          "source": "minimum_lateral_workspace_margin",
+          "axis": "x",
+          "action_index": 0,
+          "direction": -1,
+          "margin": 0.3233044717874285
+        }
+      },
+      "arms": [
+        {
+          "arm_id": "A_grip",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C04",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C06",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C08",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C10",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_drop",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "D_force",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_work",
+          "branch_type": "workspace",
+          "steps": 30
+        },
+        {
+          "arm_id": "E_push",
+          "branch_type": "workspace",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_07_init_023",
+      "branches": {
+        "grip": {
+          "step": 48,
+          "source": "phase4a_gripper_env_policy_argmin"
+        },
+        "drop": {
+          "step": 95,
+          "source": "max_payload_elevation_during_closed_gripper_carry",
+          "target_name": "akita_black_bowl_1",
+          "target_z0": 0.9254668718784188,
+          "target_z": 1.0807128196741862,
+          "target_elevation": 0.1552459477957674,
+          "first_close_step": 48
+        },
+        "workspace": {
+          "step": 48,
+          "source": "minimum_lateral_workspace_margin",
+          "axis": "x",
+          "action_index": 0,
+          "direction": -1,
+          "margin": 0.27073777153725415
+        }
+      },
+      "arms": [
+        {
+          "arm_id": "A_grip",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C04",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C06",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C08",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C10",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_drop",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "D_force",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_work",
+          "branch_type": "workspace",
+          "steps": 30
+        },
+        {
+          "arm_id": "E_push",
+          "branch_type": "workspace",
+          "steps": 30
+        }
+      ]
+    },
+    {
+      "state_id": "task_08_init_003",
+      "branches": {
+        "grip": {
+          "step": 60,
+          "source": "phase4a_gripper_env_policy_argmin"
+        },
+        "drop": {
+          "step": 76,
+          "source": "max_payload_elevation_during_closed_gripper_carry",
+          "target_name": "akita_black_bowl_1",
+          "target_z0": 0.8984038391239458,
+          "target_z": 0.947764026254797,
+          "target_elevation": 0.04936018713085122,
+          "first_close_step": 59
+        },
+        "workspace": {
+          "step": 10,
+          "source": "minimum_lateral_workspace_margin",
+          "axis": "x",
+          "action_index": 0,
+          "direction": -1,
+          "margin": 0.3133192276586155
+        }
+      },
+      "arms": [
+        {
+          "arm_id": "A_grip",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C04",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C06",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C08",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "C10",
+          "branch_type": "grip",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_drop",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "D_force",
+          "branch_type": "drop",
+          "steps": 30
+        },
+        {
+          "arm_id": "A_work",
+          "branch_type": "workspace",
+          "steps": 30
+        },
+        {
+          "arm_id": "E_push",
+          "branch_type": "workspace",
+          "steps": 30
+        }
+      ]
+    }
+  ]
+}

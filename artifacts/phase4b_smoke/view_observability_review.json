@@ -1,0 +1,29 @@
+{
+  "review_scope": "phase4b_smoke_E_push_workspace_positive_onset_frames",
+  "rating_scale": [
+    "decisive",
+    "partial",
+    "none"
+  ],
+  "records": [
+    {
+      "state_id": "task_04_init_035",
+      "arm_id": "E_push",
+      "constraint": "workspace",
+      "onset_step": 36,
+      "full": "partial",
+      "wrist": "none",
+      "reason": "Full view shows large lateral displacement but no rendered workspace boundary; wrist view is dominated by self-occlusion."
+    },
+    {
+      "state_id": "task_08_init_003",
+      "arm_id": "E_push",
+      "constraint": "workspace",
+      "onset_step": 36,
+      "full": "partial",
+      "wrist": "none",
+      "reason": "Full view shows large lateral displacement but no rendered workspace boundary; wrist view is dominated by self-occlusion."
+    }
+  ],
+  "decision": "No RGB-decisive workspace case was established in the smoke. Formal G4 was not evaluated because mandatory entry gate S2 failed."
+}

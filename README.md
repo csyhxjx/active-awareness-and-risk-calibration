@@ -84,10 +84,15 @@ The completed Phase 4A development pilot is reported in
 failed, while the frozen monitor-sensitivity and provenance gates G5-G6 passed.
 No calibration or test state contributed to that pilot.
 
-The prospective targeted redesign is pre-registered separately in
-`pilot_protocol_v2.md`. It cannot proceed to a full pilot or view-policy
-comparison unless its three-state mechanism smoke passes without changing the
-frozen v1 monitor or using calibration/test states.
+The targeted redesign was pre-registered separately in
+`pilot_protocol_v2.md`, then stopped at its mandatory three-state mechanism
+smoke. Matched nominal controls were clean; pressure produced transient
+`gripper_env` positives and persistent lateral push produced two sustained,
+reproducible `workspace` positives. Forced opening produced zero frozen
+`object_drop` positives, so S2 failed. The full eight-state v2 pilot and all
+view-policy comparisons remain blocked. Canonical results are in
+`artifacts/phase4b_smoke/smoke_stats.md`; no calibration/test state or threshold
+change contributed to them.
 
 Compare two recordings:
 
