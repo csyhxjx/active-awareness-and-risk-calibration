@@ -69,6 +69,16 @@ v2 value `0.000820947647`. This decision uses collection tree SHA-256
 `202479aae82fab7a5c54a80de9106116dc8e6c4e564f480cce2400016d491303` and
 freezes the zero-violation labeling contract.
 
+### Counterfactual evidence boundary
+
+Phase 4A injected-action violations are synthetic positives. They can show that
+the frozen monitor fires when these pre-registered perturbations physically
+produce a violation, and that useful visual evidence exists with camera-specific
+strengths. They do not establish recall on natural policy failures or on risk
+modes outside the injected action families. A timeout remains a policy failure,
+not a safety violation unless an independently measured constraint crosses its
+frozen boundary.
+
 Compare two recordings:
 
 ```bash
