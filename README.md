@@ -84,6 +84,11 @@ The completed Phase 4A development pilot is reported in
 failed, while the frozen monitor-sensitivity and provenance gates G5-G6 passed.
 No calibration or test state contributed to that pilot.
 
+The prospective targeted redesign is pre-registered separately in
+`pilot_protocol_v2.md`. It cannot proceed to a full pilot or view-policy
+comparison unless its three-state mechanism smoke passes without changing the
+frozen v1 monitor or using calibration/test states.
+
 Compare two recordings:
 
 ```bash
