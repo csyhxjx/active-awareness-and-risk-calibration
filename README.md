@@ -94,6 +94,12 @@ view-policy comparisons remain blocked. Canonical results are in
 `artifacts/phase4b_smoke/smoke_stats.md`; no calibration/test state or threshold
 change contributed to them.
 
+Empirical observability ceiling: `gripper_env` sub-millimeter penetration is
+not resolvable in RGB, and `workspace` lacks a rendered boundary reference;
+both families are therefore capped at `partial` evidence in this suite.
+Thesis risk: unless an RGB-decisive positive family exists, the prerequisite
+for a "select a view to decide" comparison has no positive-case support here.
+
 Compare two recordings:
 
 ```bash
