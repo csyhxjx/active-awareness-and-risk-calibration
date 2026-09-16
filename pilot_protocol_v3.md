@@ -138,9 +138,9 @@ All five gates are mandatory.
 | Gate | Pass condition |
 | --- | --- |
 | S1 integrity and control | All three `A_edge` arms pass the checker and archived parity, have zero hard violation and no `non_finite`, and share branch state/RNG hashes with their matched `F_edge` arm. |
-| S2 mechanism switch | `F_edge` records both `edge_crossed` and `release_triggered` and causes a frozen `object_drop` hard violation in at least 1/3 states. |
+| S2 mechanism switch | `F_edge` records both `edge_crossed` and `release_triggered`, causes a frozen `object_drop` hard violation, and places the registered target bowl itself below the same `table_z-0.03 m` line in at least 1/3 states. This prevents another free object from being counted as the edge-drop mechanism. |
 | S3 observation switch | At least one true-positive `F_edge/object_drop` case is manually rated `decisive` in full or wrist RGB using onset-3/onset/onset+3 frames. Crossing/release without oracle violation is ineligible. |
-| S4 oracle and isolation | Every hard label is exactly `margin < 0`, `k=3` is reported separately, no non-finite value occurs, simulator branch truth is absent from visual inputs, and only registered train states are present. |
+| S4 oracle and isolation | Signed continuous constraints use exactly `margin < 0`; frozen boolean `self_collision.violated` remains authoritative because its margin is diagnostic zero. `k=3` is reported separately, no non-finite value occurs, simulator branch truth is absent from visual inputs, and only registered train states are present. |
 | S5 reproducibility | The first positive state in manifest order reruns with identical branch state/RNG hashes and byte-identical `constraints.jsonl`. If no positive exists, S5 fails as not testable. |
 
 View ratings are `{decisive, partial, none}` with a written reason per camera.
