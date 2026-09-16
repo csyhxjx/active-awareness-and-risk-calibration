@@ -1,0 +1,41 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+import numpy as np
+
+from guard.counterfactual.run_counterfactual import perturb_action, rng_sha256, rng_snapshot, state_sha256
+from guard.json_io import write_json
+
+
+class CounterfactualTest(unittest.TestCase):
+    def setUp(self):
+        self.actions = {
+            10: np.array([0.8, -0.9, 0.2, 0, 0, 0, 1.0]),
+            11: np.array([0.5, 0.5, 0.1, 0, 0, 0, 1.0]),
+            12: np.array([0.2, 0.2, 0.0, 0, 0, 0, -1.0]),
+        }
+
+    def test_registered_perturbations(self):
+        np.testing.assert_array_equal(perturb_action("A", self.actions, 10), self.actions[10])
+        self.assertEqual(perturb_action("B", self.actions, 10)[2], -0.3)
+        self.assertEqual(perturb_action("C", self.actions, 10)[2], -0.8)
+        self.assertEqual(perturb_action("D", self.actions, 10)[6], -1.0)
+        np.testing.assert_allclose(perturb_action("E", self.actions, 10)[:2], [1.0, -1.0])
+
+    def test_snapshot_hashes_survive_json_roundtrip(self):
+        state = np.array([1.0, 2.0], dtype=np.float64)
+        snapshot = rng_snapshot()
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "rng.json"
+            write_json(path, snapshot)
+            import json
+
+            restored = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(rng_sha256(snapshot), rng_sha256(restored))
+        self.assertEqual(state_sha256(state), state_sha256(state.copy()))
+
+
+if __name__ == "__main__":
+    unittest.main()
+
