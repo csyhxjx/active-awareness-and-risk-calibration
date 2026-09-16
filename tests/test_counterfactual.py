@@ -12,6 +12,7 @@ from guard.counterfactual.run_counterfactual import (
     state_sha256,
 )
 from guard.counterfactual.make_pilot_stats import build_labels
+from guard.counterfactual.run_counterfactual_v2 import select_branches, v2_action
 from guard.json_io import write_json
 
 
@@ -81,6 +82,36 @@ class CounterfactualTest(unittest.TestCase):
         self.assertEqual(len(labels), 5)
         self.assertTrue(all(label["arm_id"] == "C" for label in labels))
         self.assertTrue(labels[0]["branch"]["sustained_violation"])
+
+    def test_v2_targeted_actions(self):
+        baseline = np.array([0.2, -0.3, 0.1, 0, 0, 0, 1.0])
+        workspace = {"action_index": 1, "direction": -1}
+        self.assertAlmostEqual(v2_action("C04", baseline, workspace)[2], -0.3)
+        self.assertAlmostEqual(v2_action("C10", baseline, workspace)[2], -0.9)
+        self.assertEqual(v2_action("D_force", baseline, workspace)[6], -1.0)
+        self.assertEqual(v2_action("E_push", baseline, workspace)[1], -1.0)
+
+    def test_v2_branch_selection_requires_carry_and_full_horizon(self):
+        trace = []
+        for step in range(101):
+            trace.append(
+                {
+                    "step_index": step,
+                    "target_name": "akita_black_bowl_1",
+                    "target_z": 0.8 + (0.05 if step == 35 else 0.03 if step >= 25 else 0.0),
+                    "gripper": 1.0 if step >= 20 else -1.0,
+                    "lateral_terms": [
+                        {"axis": "x", "action_index": 0, "direction": -1, "margin": 0.2},
+                        {"axis": "x", "action_index": 0, "direction": 1, "margin": 0.1},
+                        {"axis": "y", "action_index": 1, "direction": -1, "margin": 0.15},
+                        {"axis": "y", "action_index": 1, "direction": 1, "margin": 0.3},
+                    ],
+                }
+            )
+        branches = select_branches(trace, "task_07_init_023", horizon=30, max_action_step=100)
+        self.assertEqual(branches["drop"]["step"], 35)
+        self.assertEqual(branches["workspace"]["step"], 10)
+        self.assertEqual(branches["workspace"]["direction"], 1)
 
 
 if __name__ == "__main__":
