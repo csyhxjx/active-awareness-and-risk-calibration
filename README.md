@@ -100,6 +100,16 @@ both families are therefore capped at `partial` evidence in this suite.
 Thesis risk: unless an RGB-decisive positive family exists, the prerequisite
 for a "select a view to decide" comparison has no positive-case support here.
 
+Phase 4C tested the terminal edge-drop hypothesis under the pre-registered v3
+fork. All three nominal controls reproduced the archive exactly. Two perturbed
+arms crossed the selected table edge and triggered forced release, but none of
+the three target bowls crossed the frozen drop boundary (`object_drop=0/3`).
+Consequently S2/S3/S5 failed. This suite has no demonstrated RGB-decisive
+positive family for the proposed view-selection decision; the thesis scope is
+redirected away from that claim, and the no-view/random/action-conditioned
+method comparison will not be run. Canonical evidence is in
+`artifacts/phase4c_v3/smoke_stats.md`.
+
 Compare two recordings:
 
 ```bash

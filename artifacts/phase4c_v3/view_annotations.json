@@ -1,0 +1,44 @@
+[
+  {
+    "state_id": "task_07_init_023",
+    "event": "edge crossing 92 / release 93",
+    "constraint": "object_drop",
+    "s3_eligible": false,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the arm and bowl near the stove edge, but no visible fall below the support surface."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Shows the bowl still adjacent to the gripper after release; it does not establish a drop."
+    }
+  },
+  {
+    "state_id": "task_07_init_021",
+    "event": "edge crossing 86 / release 87",
+    "constraint": "object_drop",
+    "s3_eligible": false,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows edge-operation context without visible downward escape or a fall below the surface."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Shows the bowl close to the gripper after release, not a visually decisive drop."
+    }
+  },
+  {
+    "state_id": "task_04_init_035",
+    "event": "incidental gripper_env onset 106",
+    "constraint": "gripper_env",
+    "s3_eligible": false,
+    "full": {
+      "rating": "partial",
+      "rationale": "Shows the gripper and bowl near the table edge, but cannot resolve sub-millimeter penetration."
+    },
+    "wrist": {
+      "rating": "partial",
+      "rationale": "Provides near-field bowl context while the contact depth remains unobservable."
+    }
+  }
+]

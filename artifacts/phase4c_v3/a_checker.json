@@ -1,0 +1,65 @@
+{
+  "arm": "A_edge",
+  "states": [
+    {
+      "state_id": "task_07_init_023",
+      "arm_id": "A_edge",
+      "branch_step": 67,
+      "branch_state_sha256": "c7f774338b45e13a618fe60cdd062a23f63510964d09d2947b526b12fbcb7171",
+      "rng_snapshot_sha256": "13080cec128dc78404095d167dae78755c2b365491f3ae428092ebb40c0ac52a",
+      "parity_max_abs_error": 0.0,
+      "edge_crossed": null,
+      "crossing_step": null,
+      "release_triggered": null,
+      "release_start_step": null,
+      "target_min_drop_margin": 0.040223663615796657,
+      "violations": {
+        "workspace": false,
+        "gripper_env": false,
+        "self_collision": false,
+        "object_drop": false,
+        "non_finite": false
+      }
+    },
+    {
+      "state_id": "task_04_init_035",
+      "arm_id": "A_edge",
+      "branch_step": 77,
+      "branch_state_sha256": "bb48931d3e7b32cd953d85d584e3f5811e464e9ec97060f7e1ae919eecc8a885",
+      "rng_snapshot_sha256": "38fdf02f639447b0f0c371e1b3f839dc9e274b5b5c04618de9798588bba043d1",
+      "parity_max_abs_error": 0.0,
+      "edge_crossed": null,
+      "crossing_step": null,
+      "release_triggered": null,
+      "release_start_step": null,
+      "target_min_drop_margin": 0.03922779385472874,
+      "violations": {
+        "workspace": false,
+        "gripper_env": false,
+        "self_collision": false,
+        "object_drop": false,
+        "non_finite": false
+      }
+    },
+    {
+      "state_id": "task_07_init_021",
+      "arm_id": "A_edge",
+      "branch_step": 59,
+      "branch_state_sha256": "dd3b602e3269f3c9f5322733e02f7404b20ae41ebfe3e435f22abaa1514d9f36",
+      "rng_snapshot_sha256": "b41b3a7f003b10f3c36afc539b9e234222cf4b1b1fb94bfe11f0f1cb82831be1",
+      "parity_max_abs_error": 0.0,
+      "edge_crossed": null,
+      "crossing_step": null,
+      "release_triggered": null,
+      "release_start_step": null,
+      "target_min_drop_margin": 0.03848312682643085,
+      "violations": {
+        "workspace": false,
+        "gripper_env": false,
+        "self_collision": false,
+        "object_drop": false,
+        "non_finite": false
+      }
+    }
+  ]
+}

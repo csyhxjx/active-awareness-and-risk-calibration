@@ -1,0 +1,12 @@
+{
+  "run_id": "phase4c_v3_phase4c_v3_smoke_eee7daf_v1_k3",
+  "runtime_guard_head": "eee7dafd45428a9ba8dc7049c5954e78554e3773",
+  "labeler_guard_head": "297919da6b50cee140457a5321026768a68954af",
+  "input_sha256": "e15e4f105dba8617d5edb2fc387f99d121d3fa96fc3287e3269aff7345a05c15",
+  "a_checker_sha256": "c15196ec3bcf04597180acceada6ccedb92603da434d93979957477a21b3c730",
+  "checker_sha256": "a35aa4dabcca8060376228b9388645840941d23b064f4afb381424230a6f1804",
+  "protocol_sha256": "52cd170ea0bc7c2fe2d90a0a3bedaf7990261c1bf70a6e52524ec76ae4c9f1d0",
+  "threshold_version": "v1",
+  "decision_margin": 0.0,
+  "sustained_k": 3
+}
