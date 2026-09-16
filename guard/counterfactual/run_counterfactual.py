@@ -21,6 +21,7 @@ from guard.json_io import append_jsonl, canonical_dumps, write_json
 
 ARMS = ("A", "B", "C", "D", "E")
 CONSTRAINTS = ("workspace", "gripper_env", "self_collision", "object_drop", "non_finite")
+PARITY_ATOL = 1e-12
 PILOT_BRANCH_STEPS = {
     "task_07_init_023": 48,
     "task_07_init_021": 45,
@@ -137,6 +138,7 @@ def perturb_action(arm_id, actions, step_index):
 
 
 def compare_constraint_record(actual, expected, *, context):
+    max_abs_error = 0.0
     for name in CONSTRAINTS:
         if bool(actual[name]["violated"]) != bool(expected[name]["violated"]):
             raise ValueError(f"parity violation flag mismatch: {context} constraint={name}")
@@ -144,11 +146,17 @@ def compare_constraint_record(actual, expected, *, context):
         expected_margin = float(expected[name]["margin"])
         if not math.isfinite(actual_margin) or not math.isfinite(expected_margin):
             raise ValueError(f"non-finite parity margin: {context} constraint={name}")
-        if actual_margin != expected_margin:
+        abs_error = abs(actual_margin - expected_margin)
+        max_abs_error = max(max_abs_error, abs_error)
+        if (actual_margin < 0.0) != (expected_margin < 0.0):
+            raise ValueError(f"parity decision-boundary mismatch: {context} constraint={name}")
+        if abs_error > PARITY_ATOL:
             raise ValueError(
                 f"parity margin mismatch: {context} constraint={name} "
-                f"actual={actual_margin!r} expected={expected_margin!r}"
+                f"actual={actual_margin!r} expected={expected_margin!r} "
+                f"abs_error={abs_error!r} atol={PARITY_ATOL!r}"
             )
+    return max_abs_error
 
 
 def make_env(task, resolution=224):
@@ -170,14 +178,18 @@ def reconstruct_branch(env, initial_state, parent, branch_step):
     obs = env.set_init_state(initial_state)
     monitor = LiberoConstraintMonitor(env)
     monitor.episode_reset()
+    max_abs_error = 0.0
     for step_index in range(branch_step):
         action = np.array([0, 0, 0, 0, 0, 0, -1], dtype=np.float64) if step_index < 10 else parent["actions"][step_index]
         obs, _, _, _ = env.step(action.tolist())
         actual = monitor.check(step_index)
-        compare_constraint_record(actual, parent["constraints"][step_index], context=f"replay step={step_index}")
+        max_abs_error = max(
+            max_abs_error,
+            compare_constraint_record(actual, parent["constraints"][step_index], context=f"replay step={step_index}"),
+        )
     state = np.asarray(env.get_sim_state()).copy()
     snapshot = rng_snapshot()
-    return obs, state, snapshot
+    return obs, state, snapshot, max_abs_error
 
 
 def save_image_pair(arm_dir, step_index, obs):
@@ -248,7 +260,7 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
         reference_rng = None
         reference_rng_hash = None
         for arm_id in arms:
-            _, branch_state, snapshot = reconstruct_branch(env, initial_state, parent, branch_step)
+            _, branch_state, snapshot, replay_max_abs_error = reconstruct_branch(env, initial_state, parent, branch_step)
             branch_hash = state_sha256(branch_state)
             snapshot_hash = rng_sha256(snapshot)
             if reference_state is None:
@@ -271,6 +283,7 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
             restore_rng(reference_rng)
             monitor = LiberoConstraintMonitor(env)
             monitor.episode_reset()
+            arm_a_max_abs_error = 0.0
 
             arm_dir = state_dir / f"arm_{arm_id}"
             (arm_dir / "images" / "full").mkdir(parents=True)
@@ -298,10 +311,13 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
                 )
                 save_image_pair(arm_dir, step_index, obs)
                 if arm_id == "A":
-                    compare_constraint_record(
-                        record,
-                        parent["constraints"][step_index],
-                        context=f"arm=A state={state['state_id']} step={step_index}",
+                    arm_a_max_abs_error = max(
+                        arm_a_max_abs_error,
+                        compare_constraint_record(
+                            record,
+                            parent["constraints"][step_index],
+                            context=f"arm=A state={state['state_id']} step={step_index}",
+                        ),
                     )
 
             write_json(
@@ -325,7 +341,10 @@ def run_state(state, *, task_suite, collection_root, output_root, protocol_path,
                     "parent_actions_sha256": parent["actions_sha256"],
                     "parent_constraints_sha256": parent["constraints_sha256"],
                     "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
-                    "arm_a_exact_parity": arm_id == "A",
+                    "parity_atol": PARITY_ATOL,
+                    "replay_max_abs_error": replay_max_abs_error,
+                    "arm_a_parity_passed": arm_id == "A",
+                    "arm_a_max_abs_error": arm_a_max_abs_error if arm_id == "A" else None,
                 },
             )
     except Exception:
@@ -376,4 +395,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

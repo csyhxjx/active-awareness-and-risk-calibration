@@ -54,8 +54,12 @@ def validate_arm(arm_dir, expected_state_hash, expected_rng_hash):
         raise ValueError(f"branch provenance mismatch: {arm_dir}")
     if meta["guard_dirty"]:
         raise ValueError(f"dirty Guard execution: {arm_dir}")
-    if meta["arm_id"] == "A" and not meta["arm_a_exact_parity"]:
+    if meta["replay_max_abs_error"] > meta["parity_atol"]:
+        raise ValueError(f"replay parity error exceeds tolerance: {arm_dir}")
+    if meta["arm_id"] == "A" and not meta["arm_a_parity_passed"]:
         raise ValueError(f"arm A parity not certified: {arm_dir}")
+    if meta["arm_id"] == "A" and meta["arm_a_max_abs_error"] > meta["parity_atol"]:
+        raise ValueError(f"arm A parity error exceeds tolerance: {arm_dir}")
     return {"arm_id": meta["arm_id"], "steps": len(actions)}
 
 
@@ -89,4 +93,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

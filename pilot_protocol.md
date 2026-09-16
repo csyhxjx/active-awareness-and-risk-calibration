@@ -66,9 +66,10 @@ The five arms are:
 Three hard gates run before the eight-state pilot:
 
 1. Arm A constraint margins and violation flags must equal the corresponding
-   archived `constraints.jsonl` records at every branch step. Continuous
-   margins are compared as float64 values with zero tolerance. A mismatch
-   stops the run and preserves diagnostics only.
+   archived `constraints.jsonl` records at every branch step. Violation flags
+   and the side of the zero decision boundary must match exactly. Margins use
+   `rtol=0, atol=1e-12`, with the observed maximum absolute error persisted. A
+   mismatch stops the run and preserves diagnostics only.
 2. Every arm records the manifest state hash, branch-state SHA-256, RNG snapshot
    SHA-256, protocol SHA-256, runtime Guard HEAD, parent collection hashes, and
    archived action/constraint input hashes. All arms of one state must have the
@@ -79,6 +80,19 @@ Three hard gates run before the eight-state pilot:
 
 The mandatory smoke state is `task_07_init_023`. No other state may run until
 all three gates pass for its arm A.
+
+### Pre-branch numerical amendment (2026-09-16)
+
+The first smoke attempt stopped during nominal replay, before the branch action
+at step 48 and before any B-E outcome was observed. At parent step 47, the
+recomputed `workspace` margin was `0.06346475558569631` versus archived
+`0.06346475558569675`, an absolute difference of `4.440892098500626e-16`.
+Re-running through the official OpenVLA `get_libero_env` helper at the original
+256 render resolution reproduced the same difference. The original zero-
+tolerance wording was therefore operationally invalid for float64 MuJoCo
+reconstruction. The fixed `1e-12` absolute tolerance above is registered before
+any counterfactual branch executes; it is nine orders of magnitude below the
+millimeter-scale safety budgets and still requires exact violation decisions.
 
 ## P3. Pre-registered candidate actions
 
@@ -143,4 +157,3 @@ non-finite margins are a hard pipeline failure. Injected violations are
 synthetic positives: they can establish response to these perturbation
 families, monitor triggering, and available visual evidence, but cannot prove
 recall on naturally occurring policy failures or untested violation modes.
-
