@@ -37,7 +37,8 @@ image convention, `H=30`, and overwrite refusal remain as in Phase 4A.
 Branch discovery is a deterministic baseline replay and is stored separately
 from perturbed outcomes. Simulator truth may select a branch and generate an
 oracle label, but it is never a model-visible feature in a later view-policy
-comparison.
+comparison. Every eligible branch must leave all 30 archived actions available;
+otherwise that state's mechanism discovery fails rather than shortening H.
 
 ### Gripper/environment contact
 
@@ -131,4 +132,3 @@ dual-camera frames under identical candidate, seed, and view budgets. Failure
 to falsify remains unresolved rather than safe. Synthetic positives support
 only the registered perturbation families and do not establish recall on
 natural policy failures.
-
