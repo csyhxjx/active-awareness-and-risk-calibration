@@ -150,6 +150,22 @@ def edge_action(arm_id, baseline, edge, release):
     return np.clip(action, -1.0, 1.0)
 
 
+def validate_f_append(output_root, selected):
+    root = Path(output_root)
+    actual_dirs = {path.name for path in root.iterdir() if path.is_dir()} if root.exists() else set()
+    extras = actual_dirs - set(SMOKE_STATES)
+    if extras:
+        raise ValueError(f"unregistered state directories in F root: {sorted(extras)}")
+    completed = tuple(state for state in SMOKE_STATES if state in actual_dirs)
+    if completed != SMOKE_STATES[: len(completed)]:
+        raise ValueError(f"F root is not a registered prefix: {completed}")
+    if len(completed) == len(SMOKE_STATES):
+        raise ValueError("F root already contains all registered states")
+    expected = (SMOKE_STATES[len(completed)],)
+    if tuple(selected) != expected:
+        raise ValueError(f"F_edge must append exactly the next registered state: expected={expected}")
+
+
 def run_state(state, *, arm_id, task_suite, collection_root, output_root, protocol_path, predecessors, repo_root):
     if state["split"] != "train" or state["state_id"] not in SMOKE_STATES:
         raise ValueError(f"v3 smoke permits only registered train states: {state['state_id']}")
@@ -336,8 +352,8 @@ def main():
     selected = tuple(state["state_id"] for state in states)
     if args.arm == "A_edge" and selected != SMOKE_STATES:
         raise ValueError("A_edge gate requires all registered smoke states in order")
-    if args.arm == "F_edge" and selected != SMOKE_STATES[: len(selected)]:
-        raise ValueError("F_edge selection must be a non-empty registered prefix")
+    if args.arm == "F_edge":
+        validate_f_append(args.output_root, selected)
     _, train_states = load_selected_states(args.manifest, "train")
     args.output_root.mkdir(parents=True, exist_ok=True)
     suite = benchmark.get_benchmark_dict()["libero_spatial"]()

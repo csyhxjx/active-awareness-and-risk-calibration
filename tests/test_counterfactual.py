@@ -18,6 +18,7 @@ from guard.counterfactual.run_counterfactual_v3 import (
     crossed_edge,
     edge_action,
     select_edge_branch,
+    validate_f_append,
 )
 from guard.json_io import write_json
 
@@ -188,6 +189,15 @@ class CounterfactualTest(unittest.TestCase):
         self.assertFalse(crossed_edge(-0.4, edge))
         self.assertTrue(crossed_edge(-0.40001, edge))
         np.testing.assert_array_equal(edge_action("A_edge", baseline, edge, release=False), baseline)
+
+    def test_v3_f_runner_appends_one_registered_state_at_a_time(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            validate_f_append(root, ("task_07_init_023",))
+            (root / "task_07_init_023").mkdir()
+            validate_f_append(root, ("task_04_init_035",))
+            with self.assertRaisesRegex(ValueError, "next registered state"):
+                validate_f_append(root, ("task_07_init_021",))
 
 
 if __name__ == "__main__":
