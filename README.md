@@ -110,6 +110,29 @@ redirected away from that claim, and the no-view/random/action-conditioned
 method comparison will not be run. Canonical evidence is in
 `artifacts/phase4c_v3/smoke_stats.md`.
 
+### Phase 5A active-vision development pilot
+
+Phase 5 is a new controlled-occlusion benchmark, not another perturbation of
+the Phase 4 suite. Its development pilot contains 12 layout groups, four
+hidden obstacle states per group, and two fixed-controller candidates per
+scene: 48 scenes and exactly 96 canonical candidate trajectories. All
+pre-registered P0-P5 gates passed. Clear routes completed and matched blocked
+routes collided in 12/12 layouts; free `V0` pixels were identical within every
+four-state group; relevant paid RGB distinguished blocked from clear in 12/12;
+left- and right-unique query layouts numbered 6 each; and 24 paired decision
+examples were retained.
+
+On the crossed-preference fixed-controller audit, direct B=0 execution had 50%
+collision-free completion and 50% collision. Candidate-aware B=1 observation
+had 50% completion, zero collision, and 50% execution coverage; B<=2 fallback
+had 75% completion, zero collision, 75% coverage, and stopped only in the
+double-blocked state. Always-stop remained zero completion despite zero
+collision. These numbers establish a constructed observation/decision
+mechanism only. They are not a learned-selector result and are not an OpenVLA
+improvement. Frozen OpenVLA proposals remain gated behind a separately frozen
+same-budget method comparison. Protocol and evidence are in
+`active_vision_protocol_v1.md` and `artifacts/active_vision_v1/pilot_stats.md`.
+
 Compare two recordings:
 
 ```bash

@@ -1,0 +1,110 @@
+{
+  "gates": {
+    "P0": {
+      "pass": true,
+      "query_invariant": true,
+      "replays_exact": true
+    },
+    "P1": {
+      "pass": true,
+      "passing_layouts": 12,
+      "required": 10
+    },
+    "P2": {
+      "pass": true,
+      "passing_layouts": 12,
+      "required": 12
+    },
+    "P3": {
+      "pass": true,
+      "passing_layouts": 12,
+      "required": 10
+    },
+    "P4": {
+      "pass": true,
+      "left_unique_layouts": 6,
+      "right_unique_layouts": 6,
+      "required_each": 4
+    },
+    "P5": {
+      "pass": true,
+      "paired_examples": 24,
+      "required": 6
+    }
+  },
+  "layouts": [
+    {
+      "layout": "dev_00",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_01",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_02",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_03",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_04",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_05",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_06",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_07",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_08",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_09",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_10",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    },
+    {
+      "layout": "dev_11",
+      "p1": true,
+      "p2": true,
+      "p3": true
+    }
+  ],
+  "all_pass": true
+}

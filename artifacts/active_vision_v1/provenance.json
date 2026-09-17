@@ -1,0 +1,11 @@
+{
+  "pilot_root": "/internsdata/yewenhao/guard_workspace/active_vision_v1/pilot_6d42eb4",
+  "guard_head": "6d42eb4224b43176242745e3c441c70d51fb7668",
+  "canonical_candidate_trajectories": 96,
+  "replay_audits": 12,
+  "summary_sha256": "4c484741af2baa3358480146e445f2755d89859d80e129d30bf25da9b498e1f2",
+  "gates_sha256": "de1acd6c0532891daa2aacb9f4804d70757ad7118862132553f780c06fe6a8ca",
+  "config_sha256": "9a05258081925e30050ef208cce0bed7194deca7bee9ed83291cb9767be6f7b2",
+  "protocol_sha256": "b361409dfd282cd58a4963262aec236c7cec5ee2ad7398897b03390917e3eb6c",
+  "excluded_attempt": "guard_workspace/active_vision_v1/pilot_60ab168 (P0 pre-route failure)"
+}
