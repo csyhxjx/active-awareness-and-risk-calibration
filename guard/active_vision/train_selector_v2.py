@@ -81,6 +81,13 @@ def build_examples(root, summary):
     return examples
 
 
+def prepare_geometry(geometry, mean, scale, candidate_aware):
+    normalized = (geometry - mean) / scale
+    if not candidate_aware:
+        normalized[:17] = 0.0
+    return normalized
+
+
 class SelectorDataset(Dataset):
     def __init__(self, examples, mean, scale, candidate_aware=True):
         self.examples = examples
@@ -94,10 +101,9 @@ class SelectorDataset(Dataset):
     def __getitem__(self, index):
         row = self.examples[index]
         image = np.asarray(Image.open(row["v0_path"]), dtype=np.float32) / 255.0
-        geometry = row["geometry"].copy()
-        if not self.candidate_aware:
-            geometry[:17] = 0.0
-        geometry = (geometry - self.mean) / self.scale
+        geometry = prepare_geometry(
+            row["geometry"].copy(), self.mean, self.scale, self.candidate_aware
+        )
         return (
             torch.from_numpy(image.transpose(2, 0, 1)),
             torch.from_numpy(geometry),

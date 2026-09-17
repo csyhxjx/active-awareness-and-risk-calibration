@@ -11,7 +11,7 @@ from guard.active_vision.runtime import QueryBroker
 from guard.active_vision.build_manifest_v2 import build_manifest
 from guard.active_vision.check_formal_v2 import verifier
 from guard.active_vision.run_formal_v2 import require_open_split
-from guard.active_vision.train_selector_v2 import Selector, geometry_features
+from guard.active_vision.train_selector_v2 import Selector, geometry_features, prepare_geometry
 from guard.active_vision.check_pilot import obstacle_visible
 from guard.active_vision.scene import DEV_LAYOUT, OccludedRouteEnv, _look_at_quat
 
@@ -123,6 +123,16 @@ class ActiveVisionTest(unittest.TestCase):
         model = Selector(len(features))
         result = model(torch.zeros(2, 3, 224, 224), torch.zeros(2, len(features)))
         self.assertEqual(tuple(result.shape), (2,))
+
+    def test_v2_candidate_agnostic_encoder_input_is_zeroed_after_normalization(self):
+        geometry = np.arange(31, dtype=np.float32) + 1.0
+        mean = np.arange(31, dtype=np.float32) + 0.5
+        scale = np.full(31, 0.25, dtype=np.float32)
+        aware = prepare_geometry(geometry.copy(), mean, scale, True)
+        agnostic = prepare_geometry(geometry.copy(), mean, scale, False)
+        np.testing.assert_allclose(aware, 2.0)
+        np.testing.assert_array_equal(agnostic[:17], 0.0)
+        np.testing.assert_allclose(agnostic[17:], 2.0)
 
 if __name__ == "__main__":
     unittest.main()
