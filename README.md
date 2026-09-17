@@ -133,6 +133,12 @@ improvement. Frozen OpenVLA proposals remain gated behind a separately frozen
 same-budget method comparison. Protocol and evidence are in
 `active_vision_protocol_v1.md` and `artifacts/active_vision_v1/pilot_stats.md`.
 
+The formal 5B comparison is pre-registered in
+`active_vision_protocol_v2.md`. It keeps the 12 development layouts out of the
+formal sample, freezes independent 60/20/40 grouped splits, and records both
+the learned-greater-than-geometric and learned-not-greater-than-geometric
+interpretation branches before selector implementation or formal collection.
+
 Compare two recordings:
 
 ```bash
