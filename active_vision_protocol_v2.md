@@ -134,3 +134,28 @@ If M satisfies both confirmatory conditions against B6, the permitted claim is: 
 If M does not satisfy both conditions, including equality, a confidence interval crossing zero, or failure of the collision constraint, no learned-selector advantage is claimed. The permitted conclusion is: action-related view selection is mechanistically valuable in this benchmark, but its value is realizable by the simple geometric rule; the contribution is downgraded from learning-method innovation to mechanism validation. This remains a valid answer to H2. Individual seeds, secondary baselines, B=2, or OpenVLA results cannot overturn this fork.
 
 Neither branch authorizes a whole-task safety statement. Phase 5D may begin only after the Phase 5B/C artifacts, frozen model hashes, and this interpretation fork are reported without modification.
+
+## 9. Prospective clarification A: staged opening and train gate
+
+Date: 2026-09-17. This clarification is additive and precedes all v2 manifest/generator/checker code and every formal rollout. It does not replace the original pre-registration or its recovery bundle.
+
+The canonical manifest fixes all 120 exact public layouts and split assignments before rollout. Manifest visibility does not unseal a split: code, humans, training, selection, and reports may consume only rows whose split is currently opened. In particular, no validation or test environment may be instantiated during the train gate. Test public geometry is fixed but must not be used for feature normalization, debugging, model selection, threshold selection, or code-path decisions.
+
+Execution proceeds through three irreversible stages:
+
+1. **Train gate only:** collect exactly 60 train layouts, 240 scenes, and 480 canonical candidate trajectories. Run the integrity/mechanism checker and stop for a gate decision.
+2. **Training and validation:** only after train PASS, train the three registered seeds and candidate-agnostic controls, then collect/use the 20 validation layouts for checkpoint selection and B3 fixed-view selection. Push the selected checkpoint hashes, frozen normalization statistics, chosen B3 camera, and final analysis implementation before test.
+3. **One frozen test:** only after the preceding freeze, instantiate and collect the 40 test layouts once. No retraining, threshold change, seed replacement, camera change, or sample-size extension follows test inspection.
+
+The train gate is fixed as follows:
+
+| Gate | Requirement |
+| --- | --- |
+| T0 scope | Exactly 60 registered train layouts, 240 scenes, 480 canonical route files/results, four RGB views per scene, and one exact representative replay per layout. No validation/test output path exists. |
+| T1 provenance | All rows use one clean pushed Guard HEAD and one manifest/protocol hash; every query preserves physical/controller/RNG hash; all 60 representative replays are byte-identical. |
+| T2 hard integrity | All required files parse; no duplicate IDs, missing states/routes/views, NaN/Infinity, or hidden/public schema mismatch. `V0` pixels and every public non-visual input are identical across the four states in all 60 layouts. Required pass: 60/60. |
+| T3 physical mechanism | For both routes, clear states complete collision-free and blocked states collide under `route_collision_v1`. Required pass: at least 54/60 layouts. |
+| T4 paid-view mechanism | The frozen RGB verifier produces the oracle-correct clear/blocked result from at least one paid view for each route and no single paid view resolves both routes in every layout. Required per-layout pass: at least 54/60. Across the full train split, at least 20 layouts have a left-candidate view unavailable from the best right/high alternative and at least 20 have the symmetric right-candidate property. |
+| T5 accounting | All 60 layouts, including every T3/T4 failure, remain in the train corpus and report. No regeneration, substitution, exclusion, or tuning from formal outcomes is allowed. |
+
+T0, T1, T2, and T5 are hard 60/60 requirements. T3 and T4 use the pre-registered 54/60 tolerance for sampled geometry. Any hard-gate failure or either mechanism count below 54 stops v2 as a generator failure; validation and test stay sealed. A passing train gate authorizes training and validation only, not test.
