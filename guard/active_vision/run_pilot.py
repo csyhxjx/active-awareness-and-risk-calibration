@@ -84,7 +84,6 @@ def main():
             (state_dir / "images").mkdir(parents=True)
             env = _fresh_env(layout, hidden_state, config["seed"])
             try:
-                env.reset()
                 broker = QueryBroker(env, budget=config["cache_query_budget"])
                 images = {"v0": broker.free_observation()}
                 for camera in CAMERAS[1:]:
