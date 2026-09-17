@@ -1,0 +1,25 @@
+{
+  "version": "active_vision_v1",
+  "seed": 20260917,
+  "image_resolution": 224,
+  "query_budget": 1,
+  "cache_query_budget": 3,
+  "control_hz": 20,
+  "max_steps": 100,
+  "hold_steps": 5,
+  "target_radius": 0.02,
+  "layouts": [
+    {"layout_id": "dev_00", "start": [-0.103, 0.0, 1.01], "target": [0.20, 0.0, 1.01], "lane_y": 0.18, "obstacle_x": 0.065, "occluder_x": 0.30, "mirror": 1, "occluder_yaw": 0.00},
+    {"layout_id": "dev_01", "start": [-0.103, 0.0, 1.01], "target": [0.18, 0.0, 1.01], "lane_y": 0.16, "obstacle_x": 0.045, "occluder_x": 0.28, "mirror": 1, "occluder_yaw": 0.08},
+    {"layout_id": "dev_02", "start": [-0.103, 0.0, 1.01], "target": [0.22, 0.0, 1.01], "lane_y": 0.20, "obstacle_x": 0.085, "occluder_x": 0.32, "mirror": 1, "occluder_yaw": -0.08},
+    {"layout_id": "dev_03", "start": [-0.103, 0.0, 1.01], "target": [0.19, 0.0, 1.01], "lane_y": 0.17, "obstacle_x": 0.055, "occluder_x": 0.29, "mirror": -1, "occluder_yaw": -0.08},
+    {"layout_id": "dev_04", "start": [-0.103, 0.0, 1.01], "target": [0.21, 0.0, 1.01], "lane_y": 0.19, "obstacle_x": 0.075, "occluder_x": 0.31, "mirror": -1, "occluder_yaw": 0.08},
+    {"layout_id": "dev_05", "start": [-0.103, 0.0, 1.01], "target": [0.20, 0.0, 1.01], "lane_y": 0.16, "obstacle_x": 0.085, "occluder_x": 0.30, "mirror": -1, "occluder_yaw": 0.00},
+    {"layout_id": "dev_06", "start": [-0.103, 0.0, 1.01], "target": [0.18, 0.0, 1.01], "lane_y": 0.19, "obstacle_x": 0.055, "occluder_x": 0.28, "mirror": 1, "occluder_yaw": -0.08},
+    {"layout_id": "dev_07", "start": [-0.103, 0.0, 1.01], "target": [0.22, 0.0, 1.01], "lane_y": 0.17, "obstacle_x": 0.075, "occluder_x": 0.32, "mirror": 1, "occluder_yaw": 0.08},
+    {"layout_id": "dev_08", "start": [-0.103, 0.0, 1.01], "target": [0.19, 0.0, 1.01], "lane_y": 0.20, "obstacle_x": 0.045, "occluder_x": 0.29, "mirror": 1, "occluder_yaw": 0.00},
+    {"layout_id": "dev_09", "start": [-0.103, 0.0, 1.01], "target": [0.21, 0.0, 1.01], "lane_y": 0.18, "obstacle_x": 0.085, "occluder_x": 0.31, "mirror": -1, "occluder_yaw": -0.08},
+    {"layout_id": "dev_10", "start": [-0.103, 0.0, 1.01], "target": [0.20, 0.0, 1.01], "lane_y": 0.17, "obstacle_x": 0.045, "occluder_x": 0.30, "mirror": -1, "occluder_yaw": 0.08},
+    {"layout_id": "dev_11", "start": [-0.103, 0.0, 1.01], "target": [0.20, 0.0, 1.01], "lane_y": 0.20, "obstacle_x": 0.075, "occluder_x": 0.30, "mirror": -1, "occluder_yaw": 0.00}
+  ]
+}
