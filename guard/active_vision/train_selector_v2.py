@@ -135,12 +135,12 @@ def loss_value(prediction, target, layout_ids, routes):
     return mse + 0.5 * hinge, mse, hinge
 
 
-def train_one(train_examples, validation_examples, mean, scale, seed, candidate_aware, output):
+def train_one(train_examples, validation_examples, mean, scale, seed, candidate_aware, output, device):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True)
-    model = Selector(len(mean))
+    model = Selector(len(mean)).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
     generator = torch.Generator().manual_seed(seed)
     train_loader = DataLoader(
@@ -161,6 +161,9 @@ def train_one(train_examples, validation_examples, mean, scale, seed, candidate_
         model.train()
         train_losses = []
         for images, geometry, target, layout_ids, routes in train_loader:
+            images = images.to(device)
+            geometry = geometry.to(device)
+            target = target.to(device)
             optimizer.zero_grad()
             prediction = model(images, geometry)
             loss, mse, hinge = loss_value(prediction, target, layout_ids, routes)
@@ -172,6 +175,9 @@ def train_one(train_examples, validation_examples, mean, scale, seed, candidate_
         squared = []
         with torch.no_grad():
             for images, geometry, target, _, _ in validation_loader:
+                images = images.to(device)
+                geometry = geometry.to(device)
+                target = target.to(device)
                 prediction = model(images, geometry)
                 squared.extend(((prediction - target) ** 2).tolist())
         validation_mse = float(np.mean(squared))
@@ -179,7 +185,7 @@ def train_one(train_examples, validation_examples, mean, scale, seed, candidate_
         if validation_mse < best_loss:
             best_loss = validation_mse
             best_epoch = epoch
-            best_state = {key: value.detach().clone() for key, value in model.state_dict().items()}
+            best_state = {key: value.detach().cpu().clone() for key, value in model.state_dict().items()}
             stale = 0
         else:
             stale += 1
@@ -194,7 +200,11 @@ def main():
     parser.add_argument("train_root", type=Path)
     parser.add_argument("validation_root", type=Path)
     parser.add_argument("output_root", type=Path)
+    parser.add_argument("--device", default="cuda")
     args = parser.parse_args()
+    device = torch.device(args.device)
+    if device.type == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("CUDA was requested but is unavailable")
     if args.output_root.exists():
         raise FileExistsError(f"refusing to overwrite training output: {args.output_root}")
     args.output_root.mkdir(parents=True)
@@ -213,7 +223,16 @@ def main():
     for candidate_aware, name in ((True, "candidate_aware"), (False, "candidate_agnostic")):
         for seed in SEEDS:
             checkpoint = args.output_root / f"{name}_seed{seed}.pt"
-            result = train_one(train_examples, validation_examples, mean, scale, seed, candidate_aware, checkpoint)
+            result = train_one(
+                train_examples,
+                validation_examples,
+                mean,
+                scale,
+                seed,
+                candidate_aware,
+                checkpoint,
+                device,
+            )
             result.update({"model": name, "checkpoint": checkpoint.name, "sha256": sha256_file(checkpoint)})
             runs.append(result)
     # B3 uses the same validation verifier/decision contract and ties left, right, high.
@@ -230,6 +249,7 @@ def main():
             "validation_layouts": len(validation_summary["layouts"]),
             "train_examples": len(train_examples),
             "validation_examples": len(validation_examples),
+            "execution_device": str(device),
             "best_fixed_camera": best_fixed,
             "fixed_camera_validation_utility": camera_scores,
             "runs": runs,
