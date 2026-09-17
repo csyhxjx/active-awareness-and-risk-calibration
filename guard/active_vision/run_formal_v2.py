@@ -39,9 +39,28 @@ def layout_from_row(row):
     return Layout(**{key: value for key, value in row.items() if key in LAYOUT_KEYS})
 
 
-def require_open_split(split):
-    if split != "train":
-        raise PermissionError("prospective clarification A opens only the train split")
+def require_open_split(split, train_gates=None):
+    if split == "train":
+        return
+    if split == "validation" and train_gates is not None:
+        gates = json.loads(Path(train_gates).read_text())
+        required = {
+            "T0": ("layouts", 60),
+            "T1": ("query_and_replay_provenance", True),
+            "T2": ("hard_integrity_layouts", 60),
+            "T3": ("physical_layouts", 60),
+            "T4": ("paid_view_layouts", 60),
+            "T5": ("retained_layouts", 60),
+        }
+        registered_pass = all(
+            gates.get("gates", {}).get(name, {}).get("pass") is True
+            and gates["gates"][name].get(field) == value
+            for name, (field, value) in required.items()
+        )
+        if gates.get("split") == "train" and gates.get("all_pass") is True and registered_pass:
+            return
+        raise PermissionError("validation requires a passing train gate")
+    raise PermissionError("test remains sealed until the model and analysis freeze")
 
 
 def main():
@@ -50,16 +69,18 @@ def main():
     parser.add_argument("protocol", type=Path)
     parser.add_argument("output_root", type=Path)
     parser.add_argument("--split", choices=("train", "validation", "test"), default="train")
+    parser.add_argument("--train-gates", type=Path)
     args = parser.parse_args()
-    require_open_split(args.split)
+    require_open_split(args.split, args.train_gates)
     if args.output_root.exists():
         raise FileExistsError(f"refusing to overwrite formal corpus: {args.output_root}")
     manifest_bytes = args.manifest.read_bytes()
     protocol_bytes = args.protocol.read_bytes()
     manifest = json.loads(manifest_bytes)
     rows = [row for row in manifest["layouts"] if row["split"] == args.split]
-    if len(rows) != 60 or len({row["layout_id"] for row in rows}) != 60:
-        raise ValueError("train split must contain exactly 60 unique layouts")
+    expected_layouts = {"train": 60, "validation": 20}[args.split]
+    if len(rows) != expected_layouts or len({row["layout_id"] for row in rows}) != expected_layouts:
+        raise ValueError(f"{args.split} split must contain exactly {expected_layouts} unique layouts")
     head, dirty = git_revision()
     if dirty:
         raise RuntimeError("formal collection requires a clean Guard worktree")
@@ -146,11 +167,17 @@ def main():
                 env.close()
         summary["layouts"].append(layout_summary)
         write_json(args.output_root / "summary.partial.json", summary)
-    if summary["canonical_candidate_trajectories"] != 480 or summary["replay_audits"] != 60:
-        raise RuntimeError("formal train scope does not match 480 trajectories / 60 replays")
+    expected_trajectories = expected_layouts * len(HIDDEN_STATES) * len(ROUTES)
+    if summary["canonical_candidate_trajectories"] != expected_trajectories or summary[
+        "replay_audits"
+    ] != expected_layouts:
+        raise RuntimeError(f"formal {args.split} scope mismatch")
     write_json(args.output_root / "summary.json", summary)
     (args.output_root / "summary.partial.json").unlink()
-    print("collected train: 60 layouts, 240 scenes, 480 canonical trajectories, 60 replays")
+    print(
+        f"collected {args.split}: {expected_layouts} layouts, {expected_layouts * 4} scenes, "
+        f"{expected_trajectories} canonical trajectories, {expected_layouts} replays"
+    )
 
 
 if __name__ == "__main__":

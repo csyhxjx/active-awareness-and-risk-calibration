@@ -86,6 +86,58 @@ def _ribbon_segment(name, start, end, rgba):
     return ribbon
 
 
+def camera_specs(layout):
+    side_angle = np.deg2rad(layout.side_camera_azimuth_deg)
+    high_angle = np.deg2rad(layout.high_camera_azimuth_deg)
+    formal_camera = layout.route_ribbons
+    side_radius = 0.18 if formal_camera else 0.0
+    left_lane = layout.mirror * layout.lane_y
+    right_lane = -left_lane
+    high_radius = 0.78
+    return {
+        "v0": ([0.62, 0.0, 1.22], [0.04, 0.0, 1.0], 45),
+        "v_left": (
+            [
+                layout.obstacle_x + side_radius * np.sin(side_angle),
+                left_lane + layout.mirror * side_radius * np.cos(side_angle),
+                1.62,
+            ],
+            [layout.obstacle_x, left_lane, 0.94],
+            layout.side_camera_fovy,
+        ),
+        "v_right": (
+            [
+                layout.obstacle_x - side_radius * np.sin(side_angle),
+                right_lane - layout.mirror * side_radius * np.cos(side_angle),
+                1.62,
+            ],
+            [layout.obstacle_x, right_lane, 0.94],
+            layout.side_camera_fovy,
+        ),
+        "v_high": (
+            [
+                layout.obstacle_x - high_radius * np.sin(high_angle),
+                high_radius * np.cos(high_angle),
+                1.45,
+            ],
+            [layout.obstacle_x, 0.12, 1.0],
+            layout.high_camera_fovy,
+        ),
+    }
+
+
+def route_waypoints(layout, route):
+    if route not in ROUTES:
+        raise ValueError(f"unknown route: {route}")
+    sign = 1 if route == "left_route" else -1
+    lane = sign * layout.mirror * layout.lane_y
+    return (
+        np.array([-0.02, lane, layout.target[2]]),
+        np.array([0.14, lane, layout.target[2]]),
+        np.array(layout.target),
+    )
+
+
 class OccludedRouteEnv(SingleArmEnv):
     """Panda reach scene whose hidden state only changes two route obstacles."""
 
@@ -136,43 +188,7 @@ class OccludedRouteEnv(SingleArmEnv):
         for light in arena.worldbody.findall("light"):
             light.set("castshadow", "false")
 
-        side_angle = np.deg2rad(self.layout.side_camera_azimuth_deg)
-        high_angle = np.deg2rad(self.layout.high_camera_azimuth_deg)
-        formal_camera = self.layout.route_ribbons
-        side_radius = 0.18 if formal_camera else 0.0
-        left_lane = self.layout.mirror * self.layout.lane_y
-        right_lane = -left_lane
-        high_radius = 0.78
-        camera_poses = {
-            "v0": ([0.62, 0.0, 1.22], [0.04, 0.0, 1.0], 45),
-            "v_left": (
-                [
-                    self.layout.obstacle_x + side_radius * np.sin(side_angle),
-                    left_lane + self.layout.mirror * side_radius * np.cos(side_angle),
-                    1.62,
-                ],
-                [self.layout.obstacle_x, left_lane, 0.94],
-                self.layout.side_camera_fovy,
-            ),
-            "v_right": (
-                [
-                    self.layout.obstacle_x - side_radius * np.sin(side_angle),
-                    right_lane - self.layout.mirror * side_radius * np.cos(side_angle),
-                    1.62,
-                ],
-                [self.layout.obstacle_x, right_lane, 0.94],
-                self.layout.side_camera_fovy,
-            ),
-            "v_high": (
-                [
-                    self.layout.obstacle_x - high_radius * np.sin(high_angle),
-                    high_radius * np.cos(high_angle),
-                    1.45,
-                ],
-                [self.layout.obstacle_x, 0.12, 1.0],
-                self.layout.high_camera_fovy,
-            ),
-        }
+        camera_poses = camera_specs(self.layout)
         for name, (position, target, fovy) in camera_poses.items():
             arena.set_camera(
                 name,
@@ -278,12 +294,4 @@ class OccludedRouteEnv(SingleArmEnv):
         )
 
     def route_waypoints(self, route):
-        if route not in ROUTES:
-            raise ValueError(f"unknown route: {route}")
-        sign = 1 if route == "left_route" else -1
-        lane = sign * self.layout.mirror * self.layout.lane_y
-        return (
-            np.array([-0.02, lane, self.layout.target[2]]),
-            np.array([0.14, lane, self.layout.target[2]]),
-            np.array(self.layout.target),
-        )
+        return route_waypoints(self.layout, route)

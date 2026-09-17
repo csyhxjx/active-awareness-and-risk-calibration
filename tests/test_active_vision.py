@@ -1,14 +1,17 @@
 import json
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import Mock
 
 import numpy as np
+import torch
 
 from guard.active_vision.runtime import QueryBroker
 from guard.active_vision.build_manifest_v2 import build_manifest
 from guard.active_vision.check_formal_v2 import verifier
 from guard.active_vision.run_formal_v2 import require_open_split
+from guard.active_vision.train_selector_v2 import Selector, geometry_features
 from guard.active_vision.check_pilot import obstacle_visible
 from guard.active_vision.scene import DEV_LAYOUT, OccludedRouteEnv, _look_at_quat
 
@@ -76,11 +79,33 @@ class ActiveVisionTest(unittest.TestCase):
         }
         self.assertTrue(formal_geometries.isdisjoint(development_geometries))
 
-    def test_v2_runner_opens_only_train(self):
+    def test_v2_runner_split_opening(self):
         require_open_split("train")
-        for split in ("validation", "test"):
+        with self.assertRaises(PermissionError):
+            require_open_split("validation")
+        with self.assertRaises(PermissionError):
+            require_open_split("test")
+        with tempfile.TemporaryDirectory() as directory:
+            gate = Path(directory) / "gate.json"
+            gate.write_text(
+                json.dumps(
+                    {
+                        "split": "train",
+                        "all_pass": True,
+                        "gates": {
+                            "T0": {"pass": True, "layouts": 60},
+                            "T1": {"pass": True, "query_and_replay_provenance": True},
+                            "T2": {"pass": True, "hard_integrity_layouts": 60},
+                            "T3": {"pass": True, "physical_layouts": 60},
+                            "T4": {"pass": True, "paid_view_layouts": 60},
+                            "T5": {"pass": True, "retained_layouts": 60},
+                        },
+                    }
+                )
+            )
+            require_open_split("validation", gate)
             with self.assertRaises(PermissionError):
-                require_open_split(split)
+                require_open_split("test", gate)
 
     def test_v2_rgb_verifier_has_three_states(self):
         blank = np.full((32, 32, 3), 255, dtype=np.uint8)
@@ -90,6 +115,14 @@ class ActiveVisionTest(unittest.TestCase):
         self.assertEqual(verifier(ribbon, "left_route")["verdict"], "clear")
         ribbon[4:20, 4:20] = [220, 30, 25]
         self.assertEqual(verifier(ribbon, "left_route")["verdict"], "blocked")
+
+    def test_v2_selector_geometry_and_architecture(self):
+        row = build_manifest()["layouts"][0]
+        features = geometry_features(row, "left_route", "v_left")
+        self.assertEqual(features.shape, (31,))
+        model = Selector(len(features))
+        result = model(torch.zeros(2, 3, 224, 224), torch.zeros(2, len(features)))
+        self.assertEqual(tuple(result.shape), (2,))
 
 if __name__ == "__main__":
     unittest.main()
