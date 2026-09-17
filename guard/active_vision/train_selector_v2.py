@@ -3,8 +3,11 @@
 import argparse
 import hashlib
 import json
+import os
 import random
 from pathlib import Path
+
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
 
 import numpy as np
 import torch
@@ -250,6 +253,7 @@ def main():
             "train_examples": len(train_examples),
             "validation_examples": len(validation_examples),
             "execution_device": str(device),
+            "cublas_workspace_config": os.environ["CUBLAS_WORKSPACE_CONFIG"],
             "best_fixed_camera": best_fixed,
             "fixed_camera_validation_utility": camera_scores,
             "runs": runs,
