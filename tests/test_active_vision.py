@@ -6,6 +6,9 @@ from unittest.mock import Mock
 import numpy as np
 
 from guard.active_vision.runtime import QueryBroker
+from guard.active_vision.build_manifest_v2 import build_manifest
+from guard.active_vision.check_formal_v2 import verifier
+from guard.active_vision.run_formal_v2 import require_open_split
 from guard.active_vision.check_pilot import obstacle_visible
 from guard.active_vision.scene import DEV_LAYOUT, OccludedRouteEnv, _look_at_quat
 
@@ -50,6 +53,43 @@ class ActiveVisionTest(unittest.TestCase):
         image[4:20, 4:20] = [220, 30, 25]
         self.assertTrue(obstacle_visible(image, "left_route"))
         self.assertFalse(obstacle_visible(image, "right_route"))
+
+    def test_v2_manifest_scope_balance_and_determinism(self):
+        first = build_manifest()
+        second = build_manifest()
+        self.assertEqual(first, second)
+        counts = {
+            split: sum(row["split"] == split for row in first["layouts"])
+            for split in ("train", "validation", "test")
+        }
+        self.assertEqual(counts, {"train": 60, "validation": 20, "test": 40})
+        self.assertEqual(len({row["layout_id"] for row in first["layouts"]}), 120)
+        for split in counts:
+            rows = [row for row in first["layouts"] if row["split"] == split]
+            self.assertEqual(sum(row["mirror"] for row in rows), 0)
+        root = Path(__file__).resolve().parents[1]
+        development = json.loads((root / "configs/active_vision_v1/pilot.json").read_text())["layouts"]
+        keys = ("target", "lane_y", "obstacle_x", "occluder_x", "mirror", "occluder_yaw")
+        formal_geometries = {tuple(json.dumps(row[key], sort_keys=True) for key in keys) for row in first["layouts"]}
+        development_geometries = {
+            tuple(json.dumps(row[key], sort_keys=True) for key in keys) for row in development
+        }
+        self.assertTrue(formal_geometries.isdisjoint(development_geometries))
+
+    def test_v2_runner_opens_only_train(self):
+        require_open_split("train")
+        for split in ("validation", "test"):
+            with self.assertRaises(PermissionError):
+                require_open_split(split)
+
+    def test_v2_rgb_verifier_has_three_states(self):
+        blank = np.full((32, 32, 3), 255, dtype=np.uint8)
+        self.assertEqual(verifier(blank, "left_route")["verdict"], "unobserved")
+        ribbon = blank.copy()
+        ribbon[4:20, 4:20] = [220, 200, 20]
+        self.assertEqual(verifier(ribbon, "left_route")["verdict"], "clear")
+        ribbon[4:20, 4:20] = [220, 30, 25]
+        self.assertEqual(verifier(ribbon, "left_route")["verdict"], "blocked")
 
 if __name__ == "__main__":
     unittest.main()

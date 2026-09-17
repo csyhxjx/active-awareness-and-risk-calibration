@@ -27,6 +27,12 @@ class Layout:
     occluder_x: float
     mirror: int = 1
     occluder_yaw: float = 0.0
+    divider_y: float = 0.0
+    side_camera_azimuth_deg: float = 0.0
+    side_camera_fovy: float = 20.0
+    high_camera_azimuth_deg: float = 0.0
+    high_camera_fovy: float = 30.0
+    route_ribbons: bool = False
 
 
 DEV_LAYOUT = Layout(
@@ -58,6 +64,26 @@ def _set_static_pose(obj, position, quat=None):
     obj.get_obj().set("pos", array_to_string(position))
     if quat is not None:
         obj.get_obj().set("quat", array_to_string(quat))
+
+
+def _ribbon_segment(name, start, end, rgba):
+    start = np.asarray(start, dtype=np.float64)
+    end = np.asarray(end, dtype=np.float64)
+    delta = end[:2] - start[:2]
+    length = float(np.linalg.norm(delta))
+    yaw = float(np.arctan2(delta[1], delta[0]))
+    ribbon = BoxObject(
+        name=name,
+        size=[length / 2.0, 0.004, 0.0005],
+        rgba=rgba,
+        joints=None,
+        obj_type="visual",
+    )
+    center = (start + end) / 2.0
+    center[2] = 0.826
+    quat = [np.cos(yaw / 2.0), 0.0, 0.0, np.sin(yaw / 2.0)]
+    _set_static_pose(ribbon, center, quat=quat)
+    return ribbon
 
 
 class OccludedRouteEnv(SingleArmEnv):
@@ -110,22 +136,41 @@ class OccludedRouteEnv(SingleArmEnv):
         for light in arena.worldbody.findall("light"):
             light.set("castshadow", "false")
 
+        side_angle = np.deg2rad(self.layout.side_camera_azimuth_deg)
+        high_angle = np.deg2rad(self.layout.high_camera_azimuth_deg)
+        formal_camera = self.layout.route_ribbons
+        side_radius = 0.18 if formal_camera else 0.0
+        left_lane = self.layout.mirror * self.layout.lane_y
+        right_lane = -left_lane
+        high_radius = 0.78
         camera_poses = {
             "v0": ([0.62, 0.0, 1.22], [0.04, 0.0, 1.0], 45),
             "v_left": (
-                [self.layout.obstacle_x, self.layout.mirror * self.layout.lane_y, 1.62],
-                [self.layout.obstacle_x, self.layout.mirror * self.layout.lane_y, 1.0],
-                20,
+                [
+                    self.layout.obstacle_x + side_radius * np.sin(side_angle),
+                    left_lane + self.layout.mirror * side_radius * np.cos(side_angle),
+                    1.62,
+                ],
+                [self.layout.obstacle_x, left_lane, 0.94],
+                self.layout.side_camera_fovy,
             ),
             "v_right": (
-                [self.layout.obstacle_x, -self.layout.mirror * self.layout.lane_y, 1.62],
-                [self.layout.obstacle_x, -self.layout.mirror * self.layout.lane_y, 1.0],
-                20,
+                [
+                    self.layout.obstacle_x - side_radius * np.sin(side_angle),
+                    right_lane - self.layout.mirror * side_radius * np.cos(side_angle),
+                    1.62,
+                ],
+                [self.layout.obstacle_x, right_lane, 0.94],
+                self.layout.side_camera_fovy,
             ),
             "v_high": (
-                [self.layout.obstacle_x, 0.78, 1.45],
+                [
+                    self.layout.obstacle_x - high_radius * np.sin(high_angle),
+                    high_radius * np.cos(high_angle),
+                    1.45,
+                ],
                 [self.layout.obstacle_x, 0.12, 1.0],
-                30,
+                self.layout.high_camera_fovy,
             ),
         }
         for name, (position, target, fovy) in camera_poses.items():
@@ -179,7 +224,7 @@ class OccludedRouteEnv(SingleArmEnv):
             joints=None,
             obj_type="visual",
         )
-        _set_static_pose(self.query_divider, [self.layout.obstacle_x, 0.0, 1.02])
+        _set_static_pose(self.query_divider, [self.layout.obstacle_x, self.layout.divider_y, 1.02])
         self.target_marker = BallObject(
             name="route_target",
             size=[0.018],
@@ -188,6 +233,17 @@ class OccludedRouteEnv(SingleArmEnv):
             obj_type="visual",
         )
         _set_static_pose(self.target_marker, self.layout.target)
+        self.route_ribbon_objects = []
+        if self.layout.route_ribbons:
+            for route, rgba in (
+                ("left_route", [0.9, 0.8, 0.1, 1]),
+                ("right_route", [0.1, 0.8, 0.8, 1]),
+            ):
+                points = (np.asarray(self.layout.start),) + self.route_waypoints(route)
+                for index, (start, end) in enumerate(zip(points[:-1], points[1:])):
+                    self.route_ribbon_objects.append(
+                        _ribbon_segment(f"{route}_ribbon_{index}", start, end, rgba)
+                    )
         self.model = ManipulationTask(
             mujoco_arena=arena,
             mujoco_robots=[robot.robot_model for robot in self.robots],
@@ -197,6 +253,7 @@ class OccludedRouteEnv(SingleArmEnv):
                 self.occluder,
                 self.query_divider,
                 self.target_marker,
+                *self.route_ribbon_objects,
             ],
         )
 
