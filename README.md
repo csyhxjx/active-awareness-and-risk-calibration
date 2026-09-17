@@ -139,6 +139,10 @@ formal sample, freezes independent 60/20/40 grouped splits, and records both
 the learned-greater-than-geometric and learned-not-greater-than-geometric
 interpretation branches before selector implementation or formal collection.
 
+The formal 60-layout train gate passed T0-T5 without exclusions. Its compact
+provenance report is `artifacts/active_vision_v2/train_gate.md`. This opens
+training and validation only; the 40-layout test split remains sealed.
+
 Compare two recordings:
 
 ```bash
