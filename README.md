@@ -141,7 +141,16 @@ interpretation branches before selector implementation or formal collection.
 
 The formal 60-layout train gate passed T0-T5 without exclusions. Its compact
 provenance report is `artifacts/active_vision_v2/train_gate.md`. This opens
-training and validation only; the 40-layout test split remains sealed.
+training and validation only.
+
+The 20-layout validation corpus subsequently passed all scope, provenance,
+paired-isolation, hash, finite-value, and replay checks. The six registered
+candidate-aware / candidate-agnostic checkpoints, train-only normalization,
+the B3 tie-break result (`v_left`), and the complete test checker/evaluator are
+locked in `artifacts/active_vision_v2/freeze/freeze.json`. Excluded runtime and
+preprocessing attempts are retained in that record. Once this freeze commit is
+visible remotely, the 40-layout test may be instantiated exactly once; no
+post-test retraining or selector change is permitted.
 
 Compare two recordings:
 

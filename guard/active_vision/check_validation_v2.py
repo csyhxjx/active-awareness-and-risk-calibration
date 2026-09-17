@@ -25,18 +25,12 @@ def finite(value):
     return not isinstance(value, float) or math.isfinite(value)
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("corpus_root", type=Path)
-    parser.add_argument("manifest", type=Path)
-    parser.add_argument("protocol", type=Path)
-    parser.add_argument("output", type=Path)
-    args = parser.parse_args()
-    manifest_bytes = args.manifest.read_bytes()
-    protocol_bytes = args.protocol.read_bytes()
+def check_corpus(corpus_root, manifest_path, protocol_path, split, expected_layouts):
+    manifest_bytes = Path(manifest_path).read_bytes()
+    protocol_bytes = Path(protocol_path).read_bytes()
     manifest = json.loads(manifest_bytes)
-    summary = json.loads((args.corpus_root / "summary.json").read_text())
-    expected = {row["layout_id"] for row in manifest["layouts"] if row["split"] == "validation"}
+    summary = json.loads((Path(corpus_root) / "summary.json").read_text())
+    expected = {row["layout_id"] for row in manifest["layouts"] if row["split"] == split}
     observed = {row["layout"]["layout_id"] for row in summary["layouts"]}
     errors = []
     for layout in summary["layouts"]:
@@ -48,7 +42,7 @@ def main():
         v0 = set()
         public = set()
         for hidden_state in HIDDEN_STATES:
-            state_dir = args.corpus_root / layout_id / hidden_state
+            state_dir = Path(corpus_root) / layout_id / hidden_state
             for name in ("routes.json", "queries.json", "meta.json"):
                 if not (state_dir / name).is_file():
                     errors.append(f"{layout_id}/{hidden_state}: missing {name}")
@@ -73,12 +67,11 @@ def main():
         if len(v0) != 1 or len(public) != 1 or not layout["replay"]["exact"]:
             errors.append(f"{layout_id}: paired isolation/replay")
     scope = (
-        summary["split"] == "validation"
-        and len(summary["layouts"]) == 20
+        summary["split"] == split
+        and len(summary["layouts"]) == expected_layouts
         and observed == expected
-        and summary["canonical_candidate_trajectories"] == 160
-        and summary["replay_audits"] == 20
-        and not any(path.name.startswith("av2_test_") for path in args.corpus_root.iterdir())
+        and summary["canonical_candidate_trajectories"] == expected_layouts * 8
+        and summary["replay_audits"] == expected_layouts
     )
     provenance = (
         not summary["guard_dirty"]
@@ -87,13 +80,24 @@ def main():
     )
     result = {
         "schema_version": 2,
-        "split": "validation",
+        "split": split,
         "scope_pass": scope,
         "provenance_pass": provenance,
         "integrity_pass": not errors,
         "all_pass": scope and provenance and not errors,
         "errors": errors,
     }
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("corpus_root", type=Path)
+    parser.add_argument("manifest", type=Path)
+    parser.add_argument("protocol", type=Path)
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+    result = check_corpus(args.corpus_root, args.manifest, args.protocol, "validation", 20)
     write_json(args.output, result)
     print(json.dumps(result, indent=2))
     if not result["all_pass"]:

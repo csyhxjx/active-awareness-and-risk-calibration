@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "status": "frozen",
+  "date": "2026-09-17",
+  "train_collection_head": "f2a1e76",
+  "validation_collection_head": "bfd58af",
+  "training_head": "48f844b",
+  "best_fixed_camera": "v_left",
+  "normalization": "artifacts/active_vision_v2/freeze/normalization.json",
+  "aware_checkpoints": [
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1701.pt",
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1702.pt",
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1703.pt"
+  ],
+  "agnostic_checkpoints": [
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1701.pt",
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1702.pt",
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1703.pt"
+  ],
+  "files": {
+    "active_vision_protocol_v2.md": "be64587388fb72830b5fe7db8e28f0f54788b53cd588951c6a29b17ef3e23c4f",
+    "configs/active_vision_v2/manifest.json": "22bcbe02f21fc29a798b787cc958bf7f5bfc87275abb7e9cb25d253fef862bdf",
+    "guard/active_vision/evaluate_formal_v2.py": "871a894eb176b485c39a22c2e3277fe2425422c6d729023df06c91a0866d584b",
+    "guard/active_vision/check_test_v2.py": "ce7cb592e7e6be6ee1c6241d1b56a0755d3359ad272ebc5b1866593969de21eb",
+    "guard/active_vision/check_validation_v2.py": "7084d47de70ef7e108f41ac877a05f34aa0f981d20fff4dc588e863a78ad30c6",
+    "guard/active_vision/run_formal_v2.py": "19552d0529575602ebecab1b9eb5c260bf6b267dc19f68fe44d3c1d17fe974a4",
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1701.pt": "15490e87f67d9042b9c19bd85ec634ae54b12748b5d0dd81e6a09758af8693d5",
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1702.pt": "498279906989a7a2b9adbcaf85f5790a537d1ed4f4ea890a33c43f032b78e606",
+    "artifacts/active_vision_v2/freeze/candidate_aware_seed1703.pt": "291cbf5f4b70575a1578cba51f0e849c54496a375ac0e81d4f81fdf77447e25a",
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1701.pt": "fc7f697ceb657492c84b4fe569ef5850615c10bcc46216473af25ad3f55d2edd",
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1702.pt": "dc8ab4da427571e09120ddb319e0797074e0bfa7725262677eb0cbe197d6b51a",
+    "artifacts/active_vision_v2/freeze/candidate_agnostic_seed1703.pt": "7353a567f0fcf8d707f4cfb6b9d5c917fb292420dc1d8bdf2bd2aeedfa5f0c67",
+    "artifacts/active_vision_v2/freeze/normalization.json": "d1f5e63fb4ad7326ae4d8061afabd02c54fb59c58bb97124a9c953f0003445b4",
+    "artifacts/active_vision_v2/freeze/training_summary.json": "872deaee653f80ffc501bea4a332f95da4c44af87a846575419e1462a4ac9a09",
+    "artifacts/active_vision_v2/freeze/validation_integrity.json": "8846e49469fda9eee59926aa612978f9cf3308fae91376790e0d1d637dd77360"
+  },
+  "excluded_training_attempts": [
+    "guard_workspace/active_vision_v2/excluded_cpu_attempt_bfd58af: interrupted before first checkpoint; CPU throughput only",
+    "guard_workspace/active_vision_v2/excluded_gpu_determinism_67b8b76: deterministic CuBLAS precondition failed before first checkpoint",
+    "guard_workspace/active_vision_v2/excluded_preprocessing_bug_2481acc: B5 zeroing occurred before normalization; entire run excluded"
+  ]
+}

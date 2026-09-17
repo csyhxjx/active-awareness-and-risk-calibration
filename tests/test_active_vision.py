@@ -10,6 +10,7 @@ import torch
 from guard.active_vision.runtime import QueryBroker
 from guard.active_vision.build_manifest_v2 import build_manifest
 from guard.active_vision.check_formal_v2 import verifier
+from guard.active_vision.evaluate_formal_v2 import geometric_coverage, holm_adjust
 from guard.active_vision.run_formal_v2 import require_open_split
 from guard.active_vision.train_selector_v2 import Selector, geometry_features, prepare_geometry
 from guard.active_vision.check_pilot import obstacle_visible
@@ -106,6 +107,10 @@ class ActiveVisionTest(unittest.TestCase):
             require_open_split("validation", gate)
             with self.assertRaises(PermissionError):
                 require_open_split("test", gate)
+            freeze = Path(directory) / "freeze.json"
+            freeze.write_text(json.dumps({"status": "frozen", "best_fixed_camera": "v_left", "files": {}}))
+            with self.assertRaises(PermissionError):
+                require_open_split("test", freeze=freeze)
 
     def test_v2_rgb_verifier_has_three_states(self):
         blank = np.full((32, 32, 3), 255, dtype=np.uint8)
@@ -133,6 +138,16 @@ class ActiveVisionTest(unittest.TestCase):
         np.testing.assert_allclose(aware, 2.0)
         np.testing.assert_array_equal(agnostic[:17], 0.0)
         np.testing.assert_allclose(agnostic[17:], 2.0)
+
+    def test_v2_geometric_coverage_is_public_and_bounded(self):
+        row = build_manifest()["layouts"][0]
+        values = [geometric_coverage(row, "left_route", camera) for camera in ("v_left", "v_right", "v_high")]
+        self.assertTrue(all(0.0 <= value <= 1.0 for value in values))
+        self.assertGreater(max(values), min(values))
+
+    def test_holm_adjustment_is_monotone_in_sorted_order(self):
+        adjusted = holm_adjust({"a": 0.01, "b": 0.03, "c": 0.02})
+        self.assertEqual(adjusted, {"a": 0.03, "c": 0.04, "b": 0.04})
 
 if __name__ == "__main__":
     unittest.main()

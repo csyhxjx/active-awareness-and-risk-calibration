@@ -39,7 +39,26 @@ def layout_from_row(row):
     return Layout(**{key: value for key, value in row.items() if key in LAYOUT_KEYS})
 
 
-def require_open_split(split, train_gates=None):
+def sha256_file(path):
+    return sha256_bytes(Path(path).read_bytes())
+
+
+def valid_freeze(path):
+    freeze_path = Path(path).resolve()
+    freeze = json.loads(freeze_path.read_text())
+    if freeze.get("status") != "frozen" or freeze.get("best_fixed_camera") != "v_left":
+        return False
+    files = freeze.get("files", {})
+    if len([name for name in files if name.endswith(".pt")]) != 6:
+        return False
+    repo_root = freeze_path.parents[3]
+    return all(
+        (repo_root / name).is_file() and sha256_file(repo_root / name) == digest
+        for name, digest in files.items()
+    )
+
+
+def require_open_split(split, train_gates=None, freeze=None):
     if split == "train":
         return
     if split == "validation" and train_gates is not None:
@@ -60,6 +79,8 @@ def require_open_split(split, train_gates=None):
         if gates.get("split") == "train" and gates.get("all_pass") is True and registered_pass:
             return
         raise PermissionError("validation requires a passing train gate")
+    if split == "test" and freeze is not None and valid_freeze(freeze):
+        return
     raise PermissionError("test remains sealed until the model and analysis freeze")
 
 
@@ -70,15 +91,16 @@ def main():
     parser.add_argument("output_root", type=Path)
     parser.add_argument("--split", choices=("train", "validation", "test"), default="train")
     parser.add_argument("--train-gates", type=Path)
+    parser.add_argument("--freeze", type=Path)
     args = parser.parse_args()
-    require_open_split(args.split, args.train_gates)
+    require_open_split(args.split, args.train_gates, args.freeze)
     if args.output_root.exists():
         raise FileExistsError(f"refusing to overwrite formal corpus: {args.output_root}")
     manifest_bytes = args.manifest.read_bytes()
     protocol_bytes = args.protocol.read_bytes()
     manifest = json.loads(manifest_bytes)
     rows = [row for row in manifest["layouts"] if row["split"] == args.split]
-    expected_layouts = {"train": 60, "validation": 20}[args.split]
+    expected_layouts = {"train": 60, "validation": 20, "test": 40}[args.split]
     if len(rows) != expected_layouts or len({row["layout_id"] for row in rows}) != expected_layouts:
         raise ValueError(f"{args.split} split must contain exactly {expected_layouts} unique layouts")
     head, dirty = git_revision()
