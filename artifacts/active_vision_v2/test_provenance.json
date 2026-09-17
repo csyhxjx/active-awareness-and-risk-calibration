@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "test_collection_head": "74fc8011e815b6ef66b7f098d56a2461d83e3e69",
+  "layouts": 40,
+  "scenes": 160,
+  "canonical_candidate_trajectories": 320,
+  "replay_audits": 40,
+  "summary_sha256": "c1e2cb744be94b0f8f4a32d65e6648355032474a69d86f6ac3272611ba892ce5",
+  "test_integrity_sha256": "11b2719b2847ec6814d88eec8db01538ae1661bea5055eecaa911ef42392845b",
+  "formal_results_sha256": "e4d796111480fcc17c3c635c386b82ebceb132ba76c73993ccdb21c5390674cc",
+  "freeze_sha256": "a541a2c6059db3c52cae50ca9fdc671769aef3b3be1a7c2859fc9c04b002e83d",
+  "pretest_bundle": "/internsdata/yewenhao/guard_phase5b_pretest_freeze.bundle",
+  "pretest_bundle_sha256": "6e2dd67c364cb7a27eb0a2c41281e0897ced9e9a8fcbcb29dee9b602e0d9e7c4",
+  "test_roots": [
+    "/internsdata/yewenhao/guard_workspace/active_vision_v2/test_74fc801"
+  ],
+  "post_test_retraining": false,
+  "post_test_selector_change": false
+}

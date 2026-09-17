@@ -152,6 +152,19 @@ preprocessing attempts are retained in that record. Once this freeze commit is
 visible remotely, the 40-layout test may be instantiated exactly once; no
 post-test retraining or selector change is permitted.
 
+That single frozen test is now complete. M and B6 both achieved 50.0%
+collision-free completion (`160/320`), so the paired completion difference is
+zero with 95% layout-cluster bootstrap CI `[0.000, 0.000]`; the registered
+strict-superiority condition fails. M recorded zero collisions while B6
+recorded 25.0%, but collision non-inferiority cannot replace the missing
+positive completion effect. The pre-registered second branch therefore
+applies: Phase 5B validates the action-related observation mechanism but does
+not claim a learned-selector method advantage over the public geometric rule.
+Full metrics and provenance are in
+`artifacts/active_vision_v2/formal_report.md` and
+`artifacts/active_vision_v2/test_provenance.json`. This remains a
+fixed-controller result, not an OpenVLA improvement.
+
 Compare two recordings:
 
 ```bash
