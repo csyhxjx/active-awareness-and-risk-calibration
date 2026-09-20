@@ -1,0 +1,1302 @@
+{
+  "chunk_global": {
+    "max": 0.3460536457099852,
+    "mean": 0.006169293436803896,
+    "min": -0.1702382236218396,
+    "near_zero_fraction_abs_le_0.1": 0.8459821428571429,
+    "near_zero_fraction_abs_le_0.2": 0.9665178571428571,
+    "std": 0.07543115243835714
+  },
+  "chunk_per_dimension": {
+    "0": {
+      "max": 0.06211562323021902,
+      "mean": -0.0832483767942622,
+      "min": -0.1702382236218396,
+      "std": 0.05891522233299362
+    },
+    "1": {
+      "max": 0.11793464945979693,
+      "mean": 0.06482390348663433,
+      "min": -0.015226516801286838,
+      "std": 0.032717657053764504
+    },
+    "2": {
+      "max": 0.3460536457099852,
+      "mean": 0.08858678910353031,
+      "min": -0.11085858734680543,
+      "std": 0.1257733415438453
+    },
+    "3": {
+      "max": -0.005523502028566149,
+      "mean": -0.015376009412251567,
+      "min": -0.030876809959550208,
+      "std": 0.007218941959275837
+    },
+    "4": {
+      "max": 0.017588592366986205,
+      "mean": 0.004491684119102658,
+      "min": -0.012272574261496666,
+      "std": 0.005274383552443725
+    },
+    "5": {
+      "max": -0.002044499749890738,
+      "mean": -0.017819177761772574,
+      "min": -0.034351629460085104,
+      "std": 0.008415737414600158
+    },
+    "6": {
+      "max": 0.02099609375,
+      "mean": 0.0017262413166463375,
+      "min": -0.0025634765625,
+      "std": 0.005209985155352656
+    }
+  },
+  "chunk_shape": [
+    8,
+    7
+  ],
+  "instruction_effect": {
+    "move the robot along the left route": {
+      "count": 32,
+      "mean_chunk_hash": "e7cdcf1ee4a44d0fef6505a00f266be45657b1e29801de55740bd0a81214a6f0"
+    },
+    "move the robot along the right route": {
+      "count": 32,
+      "mean_chunk_hash": "da1f25d6ba05f63c352d910ac233a8bea379afac6ba3c119d9f03f46c10543e6"
+    }
+  },
+  "interpretation": {
+    "audit_scope": "distinguish delta semantic mismatch from task OOD collapse; no relabeling or projection change",
+    "five_d_conclusion_unchanged": "non-stop coverage remains 0/64 under frozen projection",
+    "projection_frozen": true
+  },
+  "per_trial": [
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": -0.0012385911177165432,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07721770298873569,
+      "distance_left": 0.21757187489574759,
+      "distance_right": 0.253891828719205,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_000",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0038356880426697604,
+        0.0223106847466805,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32231794529145064,
+      "chunk_mean": 0.002661508837489537,
+      "chunk_min": -0.13736765289122121,
+      "chunk_std": 0.07339917802561602,
+      "distance_left": 0.21843448269166696,
+      "distance_right": 0.25553495905121537,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_000",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02291127069739998,
+        1.0161158972645725
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": -0.0012385911177165432,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07721770298873569,
+      "distance_left": 0.21757187489574759,
+      "distance_right": 0.253891828719205,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_000",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0038356880426697604,
+        0.0223106847466805,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32231794529145064,
+      "chunk_mean": 0.002661508837489537,
+      "chunk_min": -0.13736765289122121,
+      "chunk_std": 0.07339917802561602,
+      "distance_left": 0.21843448269166696,
+      "distance_right": 0.25553495905121537,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_000",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02291127069739998,
+        1.0161158972645725
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": -0.0012385911177165432,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07721770298873569,
+      "distance_left": 0.21757187489574759,
+      "distance_right": 0.253891828719205,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_000",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0038356880426697604,
+        0.0223106847466805,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32231794529145064,
+      "chunk_mean": 0.002661508837489537,
+      "chunk_min": -0.13736765289122121,
+      "chunk_std": 0.07339917802561602,
+      "distance_left": 0.21843448269166696,
+      "distance_right": 0.25553495905121537,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_000",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02291127069739998,
+        1.0161158972645725
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": -0.0012385911177165432,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07721770298873569,
+      "distance_left": 0.21757187489574759,
+      "distance_right": 0.253891828719205,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_000",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0038356880426697604,
+        0.0223106847466805,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32231794529145064,
+      "chunk_mean": 0.002661508837489537,
+      "chunk_min": -0.13736765289122121,
+      "chunk_std": 0.07339917802561602,
+      "distance_left": 0.21843448269166696,
+      "distance_right": 0.25553495905121537,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_000",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02291127069739998,
+        1.0161158972645725
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": -0.0006825490840490753,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07466207893138693,
+      "distance_left": 0.2501234377913754,
+      "distance_right": 0.21344436941883183,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_001",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02293003900835997,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.32596959150968674,
+      "chunk_mean": 0.0035851236112870452,
+      "chunk_min": -0.1406547099642831,
+      "chunk_std": 0.07283934775701449,
+      "distance_left": 0.25115799436069497,
+      "distance_right": 0.21544854213587813,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_001",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        -0.0008483682864433684,
+        0.022470215389840356,
+        1.0162984795754844
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": -0.0006825490840490753,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07466207893138693,
+      "distance_left": 0.2501234377913754,
+      "distance_right": 0.21344436941883183,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_001",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02293003900835997,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.32596959150968674,
+      "chunk_mean": 0.0035851236112870452,
+      "chunk_min": -0.1406547099642831,
+      "chunk_std": 0.07283934775701449,
+      "distance_left": 0.25115799436069497,
+      "distance_right": 0.21544854213587813,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_001",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        -0.0008483682864433684,
+        0.022470215389840356,
+        1.0162984795754844
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": -0.0006825490840490753,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07466207893138693,
+      "distance_left": 0.2501234377913754,
+      "distance_right": 0.21344436941883183,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_001",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02293003900835997,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.32596959150968674,
+      "chunk_mean": 0.0035851236112870452,
+      "chunk_min": -0.1406547099642831,
+      "chunk_std": 0.07283934775701449,
+      "distance_left": 0.25115799436069497,
+      "distance_right": 0.21544854213587813,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_001",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        -0.0008483682864433684,
+        0.022470215389840356,
+        1.0162984795754844
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": -0.0006825490840490753,
+      "chunk_min": -0.1702382236218396,
+      "chunk_std": 0.07466207893138693,
+      "distance_left": 0.2501234377913754,
+      "distance_right": 0.21344436941883183,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_001",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0016991009451795547,
+        0.02293003900835997,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.32596959150968674,
+      "chunk_mean": 0.0035851236112870452,
+      "chunk_min": -0.1406547099642831,
+      "chunk_std": 0.07283934775701449,
+      "distance_left": 0.25115799436069497,
+      "distance_right": 0.21544854213587813,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_001",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        -0.0008483682864433684,
+        0.022470215389840356,
+        1.0162984795754844
+      ]
+    },
+    {
+      "chunk_max": 0.33692453016439483,
+      "chunk_mean": 0.0021411372714767907,
+      "chunk_min": -0.15708999532959234,
+      "chunk_std": 0.07629187253326787,
+      "distance_left": 0.25208894492412093,
+      "distance_right": 0.2163086324299633,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_002",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0053970401523741225,
+        0.02192358833313084,
+        1.0168462265082197
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.005650049788711723,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.07485069106070666,
+      "distance_left": 0.2535388256768085,
+      "distance_right": 0.2170773859169833,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_002",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0035069823353635734,
+        0.022446755001140396,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.33692453016439483,
+      "chunk_mean": 0.0021411372714767907,
+      "chunk_min": -0.15708999532959234,
+      "chunk_std": 0.07629187253326787,
+      "distance_left": 0.25208894492412093,
+      "distance_right": 0.2163086324299633,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_002",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0053970401523741225,
+        0.02192358833313084,
+        1.0168462265082197
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.005650049788711723,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.07485069106070666,
+      "distance_left": 0.2535388256768085,
+      "distance_right": 0.2170773859169833,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_002",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0035069823353635734,
+        0.022446755001140396,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.33692453016439483,
+      "chunk_mean": 0.0021411372714767907,
+      "chunk_min": -0.15708999532959234,
+      "chunk_std": 0.07629187253326787,
+      "distance_left": 0.25208894492412093,
+      "distance_right": 0.2163086324299633,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_002",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0053970401523741225,
+        0.02192358833313084,
+        1.0168462265082197
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.005650049788711723,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.07485069106070666,
+      "distance_left": 0.2535388256768085,
+      "distance_right": 0.2170773859169833,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_002",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0035069823353635734,
+        0.022446755001140396,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.33692453016439483,
+      "chunk_mean": 0.0021411372714767907,
+      "chunk_min": -0.15708999532959234,
+      "chunk_std": 0.07629187253326787,
+      "distance_left": 0.25208894492412093,
+      "distance_right": 0.2163086324299633,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_002",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0053970401523741225,
+        0.02192358833313084,
+        1.0168462265082197
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.005650049788711723,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.07485069106070666,
+      "distance_left": 0.2535388256768085,
+      "distance_right": 0.2170773859169833,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_002",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0035069823353635734,
+        0.022446755001140396,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.3460536457099852,
+      "chunk_mean": 0.0008177860734048496,
+      "chunk_min": -0.16366410947571597,
+      "chunk_std": 0.07698108477210612,
+      "distance_left": 0.19468397145097877,
+      "distance_right": 0.22993072955228613,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_003",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.005643569432853779,
+        0.022873734075480014,
+        1.0173026822854994
+      ]
+    },
+    {
+      "chunk_max": 0.3350987070552769,
+      "chunk_mean": 0.004426782744314325,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.0742276064909689,
+      "distance_left": 0.19617221957167033,
+      "distance_right": 0.23159022661539191,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_003",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0031782766280573863,
+        0.02315525873987976,
+        1.0167549353527638
+      ]
+    },
+    {
+      "chunk_max": 0.3460536457099852,
+      "chunk_mean": 0.0008177860734048496,
+      "chunk_min": -0.16366410947571597,
+      "chunk_std": 0.07698108477210612,
+      "distance_left": 0.19468397145097877,
+      "distance_right": 0.22993072955228613,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_003",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.005643569432853779,
+        0.022873734075480014,
+        1.0173026822854994
+      ]
+    },
+    {
+      "chunk_max": 0.3350987070552769,
+      "chunk_mean": 0.004426782744314325,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.0742276064909689,
+      "distance_left": 0.19617221957167033,
+      "distance_right": 0.23159022661539191,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_003",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0031782766280573863,
+        0.02315525873987976,
+        1.0167549353527638
+      ]
+    },
+    {
+      "chunk_max": 0.3460536457099852,
+      "chunk_mean": 0.0008177860734048496,
+      "chunk_min": -0.16366410947571597,
+      "chunk_std": 0.07698108477210612,
+      "distance_left": 0.19468397145097877,
+      "distance_right": 0.22993072955228613,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_003",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.005643569432853779,
+        0.022873734075480014,
+        1.0173026822854994
+      ]
+    },
+    {
+      "chunk_max": 0.3350987070552769,
+      "chunk_mean": 0.004426782744314325,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.0742276064909689,
+      "distance_left": 0.19617221957167033,
+      "distance_right": 0.23159022661539191,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_003",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0031782766280573863,
+        0.02315525873987976,
+        1.0167549353527638
+      ]
+    },
+    {
+      "chunk_max": 0.3460536457099852,
+      "chunk_mean": 0.0008177860734048496,
+      "chunk_min": -0.16366410947571597,
+      "chunk_std": 0.07698108477210612,
+      "distance_left": 0.19468397145097877,
+      "distance_right": 0.22993072955228613,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_003",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.005643569432853779,
+        0.022873734075480014,
+        1.0173026822854994
+      ]
+    },
+    {
+      "chunk_max": 0.3350987070552769,
+      "chunk_mean": 0.004426782744314325,
+      "chunk_min": -0.13243706728162852,
+      "chunk_std": 0.0742276064909689,
+      "distance_left": 0.19617221957167033,
+      "distance_right": 0.23159022661539191,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_003",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.0031782766280573863,
+        0.02315525873987976,
+        1.0167549353527638
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008594906353084042,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07599687311007437,
+      "distance_left": 0.19483160208942835,
+      "distance_right": 0.22378083230886375,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_004",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010533066829033256,
+        0.018481949310843838,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.011997838271951278,
+      "chunk_min": -0.1275064816720357,
+      "chunk_std": 0.07593532077272815,
+      "distance_left": 0.19466419267825505,
+      "distance_right": 0.22589361036642758,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_004",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.020030334965042498,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008594906353084042,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07599687311007437,
+      "distance_left": 0.19483160208942835,
+      "distance_right": 0.22378083230886375,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_004",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010533066829033256,
+        0.018481949310843838,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.011997838271951278,
+      "chunk_min": -0.1275064816720357,
+      "chunk_std": 0.07593532077272815,
+      "distance_left": 0.19466419267825505,
+      "distance_right": 0.22589361036642758,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_004",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.020030334965042498,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008594906353084042,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07599687311007437,
+      "distance_left": 0.19483160208942835,
+      "distance_right": 0.22378083230886375,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_004",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010533066829033256,
+        0.018481949310843838,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.011997838271951278,
+      "chunk_min": -0.1275064816720357,
+      "chunk_std": 0.07593532077272815,
+      "distance_left": 0.19466419267825505,
+      "distance_right": 0.22589361036642758,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_004",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.020030334965042498,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008594906353084042,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07599687311007437,
+      "distance_left": 0.19483160208942835,
+      "distance_right": 0.22378083230886375,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_004",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010533066829033256,
+        0.018481949310843838,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.011997838271951278,
+      "chunk_min": -0.1275064816720357,
+      "chunk_std": 0.07593532077272815,
+      "distance_left": 0.19466419267825505,
+      "distance_right": 0.22589361036642758,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_004",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.020030334965042498,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.00809920087447593,
+      "chunk_min": -0.1554464667930614,
+      "chunk_std": 0.07522799143787896,
+      "distance_left": 0.2445690460680512,
+      "distance_right": 0.21060586989395524,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_005",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.011026125389992526,
+        0.020663765459941953,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.31866629907321453,
+      "chunk_mean": 0.011200100445938888,
+      "chunk_min": -0.1357241243546904,
+      "chunk_std": 0.07474498968501585,
+      "distance_left": 0.24686804193493128,
+      "distance_right": 0.21062968313119468,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_005",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.02216053825900064,
+        1.0159333149536607
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.00809920087447593,
+      "chunk_min": -0.1554464667930614,
+      "chunk_std": 0.07522799143787896,
+      "distance_left": 0.2445690460680512,
+      "distance_right": 0.21060586989395524,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_005",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.011026125389992526,
+        0.020663765459941953,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.31866629907321453,
+      "chunk_mean": 0.011200100445938888,
+      "chunk_min": -0.1357241243546904,
+      "chunk_std": 0.07474498968501585,
+      "distance_left": 0.24686804193493128,
+      "distance_right": 0.21062968313119468,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_005",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.02216053825900064,
+        1.0159333149536607
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.00809920087447593,
+      "chunk_min": -0.1554464667930614,
+      "chunk_std": 0.07522799143787896,
+      "distance_left": 0.2445690460680512,
+      "distance_right": 0.21060586989395524,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_005",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.011026125389992526,
+        0.020663765459941953,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.31866629907321453,
+      "chunk_mean": 0.011200100445938888,
+      "chunk_min": -0.1357241243546904,
+      "chunk_std": 0.07474498968501585,
+      "distance_left": 0.24686804193493128,
+      "distance_right": 0.21062968313119468,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_005",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.02216053825900064,
+        1.0159333149536607
+      ]
+    },
+    {
+      "chunk_max": 0.32962123772792284,
+      "chunk_mean": 0.00809920087447593,
+      "chunk_min": -0.1554464667930614,
+      "chunk_std": 0.07522799143787896,
+      "distance_left": 0.2445690460680512,
+      "distance_right": 0.21060586989395524,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_005",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.011026125389992526,
+        0.020663765459941953,
+        1.0164810618863962
+      ]
+    },
+    {
+      "chunk_max": 0.31866629907321453,
+      "chunk_mean": 0.011200100445938888,
+      "chunk_min": -0.1357241243546904,
+      "chunk_std": 0.07474498968501585,
+      "distance_left": 0.24686804193493128,
+      "distance_right": 0.21062968313119468,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_005",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.009053891146155424,
+        0.02216053825900064,
+        1.0159333149536607
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008480525786442834,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07591744368318916,
+      "distance_left": 0.231115190768848,
+      "distance_right": 0.20071413725308868,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_006",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.019091919417043315,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.012160214187935083,
+      "chunk_min": -0.12586295313550477,
+      "chunk_std": 0.07646710696103765,
+      "distance_left": 0.23310412093178617,
+      "distance_right": 0.20065924717583353,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_006",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.008519744371782868,
+        0.02046669819486211,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008480525786442834,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07591744368318916,
+      "distance_left": 0.231115190768848,
+      "distance_right": 0.20071413725308868,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_006",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.019091919417043315,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.012160214187935083,
+      "chunk_min": -0.12586295313550477,
+      "chunk_std": 0.07646710696103765,
+      "distance_left": 0.23310412093178617,
+      "distance_right": 0.20065924717583353,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_006",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.008519744371782868,
+        0.02046669819486211,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008480525786442834,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07591744368318916,
+      "distance_left": 0.231115190768848,
+      "distance_right": 0.20071413725308868,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_006",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.019091919417043315,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.012160214187935083,
+      "chunk_min": -0.12586295313550477,
+      "chunk_std": 0.07646710696103765,
+      "distance_left": 0.23310412093178617,
+      "distance_right": 0.20065924717583353,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_006",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.008519744371782868,
+        0.02046669819486211,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.33327288394615895,
+      "chunk_mean": 0.008480525786442834,
+      "chunk_min": -0.15380293825653046,
+      "chunk_std": 0.07591744368318916,
+      "distance_left": 0.231115190768848,
+      "distance_right": 0.20071413725308868,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_006",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.019091919417043315,
+        1.016663644197308
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.012160214187935083,
+      "chunk_min": -0.12586295313550477,
+      "chunk_std": 0.07646710696103765,
+      "distance_left": 0.23310412093178617,
+      "distance_right": 0.20065924717583353,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_006",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.008519744371782868,
+        0.02046669819486211,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.0089061060422893,
+      "chunk_min": -0.14722882411040672,
+      "chunk_std": 0.07488275352131234,
+      "distance_left": 0.22144190388174276,
+      "distance_right": 0.25263404148189234,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_007",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.012423124646043804,
+        0.018538254243723795,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": 0.011908554901826346,
+      "chunk_min": -0.12421942459897395,
+      "chunk_std": 0.07498956968451523,
+      "distance_left": 0.2214186702977522,
+      "distance_right": 0.2553252773407017,
+      "hidden_state": "00",
+      "layout_id": "av3_smoke_007",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.02026493885204228,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.0089061060422893,
+      "chunk_min": -0.14722882411040672,
+      "chunk_std": 0.07488275352131234,
+      "distance_left": 0.22144190388174276,
+      "distance_right": 0.25263404148189234,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_007",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.012423124646043804,
+        0.018538254243723795,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": 0.011908554901826346,
+      "chunk_min": -0.12421942459897395,
+      "chunk_std": 0.07498956968451523,
+      "distance_left": 0.2214186702977522,
+      "distance_right": 0.2553252773407017,
+      "hidden_state": "10",
+      "layout_id": "av3_smoke_007",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.02026493885204228,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.0089061060422893,
+      "chunk_min": -0.14722882411040672,
+      "chunk_std": 0.07488275352131234,
+      "distance_left": 0.22144190388174276,
+      "distance_right": 0.25263404148189234,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_007",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.012423124646043804,
+        0.018538254243723795,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": 0.011908554901826346,
+      "chunk_min": -0.12421942459897395,
+      "chunk_std": 0.07498956968451523,
+      "distance_left": 0.2214186702977522,
+      "distance_right": 0.2553252773407017,
+      "hidden_state": "01",
+      "layout_id": "av3_smoke_007",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.02026493885204228,
+        1.0163897707309402
+      ]
+    },
+    {
+      "chunk_max": 0.3314470608370408,
+      "chunk_mean": 0.0089061060422893,
+      "chunk_min": -0.14722882411040672,
+      "chunk_std": 0.07488275352131234,
+      "distance_left": 0.22144190388174276,
+      "distance_right": 0.25263404148189234,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_007",
+      "preference": "left_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.012423124646043804,
+        0.018538254243723795,
+        1.016572353041852
+      ]
+    },
+    {
+      "chunk_max": 0.3277954146188047,
+      "chunk_mean": 0.011908554901826346,
+      "chunk_min": -0.12421942459897395,
+      "chunk_std": 0.07498956968451523,
+      "distance_left": 0.2214186702977522,
+      "distance_right": 0.2553252773407017,
+      "hidden_state": "11",
+      "layout_id": "av3_smoke_007",
+      "preference": "right_route",
+      "stop_reason": "proposer_stop",
+      "terminal_position": [
+        0.010040008268073986,
+        0.02026493885204228,
+        1.0163897707309402
+      ]
+    }
+  ],
+  "route_distance": {
+    "left_route": {
+      "max": 0.2535388256768085,
+      "mean": 0.22636153250086616,
+      "min": 0.19466419267825505,
+      "std": 0.021654299671345398
+    },
+    "right_route": {
+      "max": 0.25553495905121537,
+      "mean": 0.22584183579948203,
+      "min": 0.20065924717583353,
+      "std": 0.018486678093189157
+    }
+  },
+  "same_v0_different_hidden_state": [
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "26d9024c0bf9e7953f896ae0655c33c419d2c6555fcf3d66cb2f94f0290a1be5"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "26d9024c0bf9e7953f896ae0655c33c419d2c6555fcf3d66cb2f94f0290a1be5"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "084b1cfa0134766496031c932e66f15f101fd3b0dd2ec6ef78ccb80f64daea62"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "084b1cfa0134766496031c932e66f15f101fd3b0dd2ec6ef78ccb80f64daea62"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "dd3c0e3b7166e6136db8e4b6e54eeb7811efa8acc665914f68d7f6dbf05d0f7a"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "dd3c0e3b7166e6136db8e4b6e54eeb7811efa8acc665914f68d7f6dbf05d0f7a"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "cb27c97f5d2329582bc7f28f9a0a043f83a2b13a3a0d516e165a35c257376c65"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "cb27c97f5d2329582bc7f28f9a0a043f83a2b13a3a0d516e165a35c257376c65"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "4b9c0bb0c7dfd572c8a431e4aba7b87e7c3ef520ebac825e9efd0bb7cc6f3097"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "4b9c0bb0c7dfd572c8a431e4aba7b87e7c3ef520ebac825e9efd0bb7cc6f3097"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "6b861ded385eabf8aeedacb44cd97e49c20828d3da50f6aabbad651f5f9159bd"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "6b861ded385eabf8aeedacb44cd97e49c20828d3da50f6aabbad651f5f9159bd"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "814cff317eb10d684130c6c549d4241fe0f3fcab1c0d2a047afd19e7707a31f8"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "814cff317eb10d684130c6c549d4241fe0f3fcab1c0d2a047afd19e7707a31f8"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the left route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "acc77133f335be2f5e83dacbbfd05e0f900343a6127f872a68c5ee93590e6c4d"
+    },
+    {
+      "count": 4,
+      "instruction": "move the robot along the right route",
+      "unique_chunk_hashes": 1,
+      "v0_sha256": "acc77133f335be2f5e83dacbbfd05e0f900343a6127f872a68c5ee93590e6c4d"
+    }
+  ],
+  "schema_version": 1,
+  "source_trials": 64,
+  "stop_reasons": {
+    "proposer_stop": 64
+  },
+  "terminal_position": {
+    "max": [
+      0.012423124646043804,
+      0.02315525873987976,
+      1.0173026822854994
+    ],
+    "mean": [
+      0.006550078141284105,
+      0.021294996543400765,
+      1.0165495302529883
+    ],
+    "min": [
+      -0.0008483682864433684,
+      0.018481949310843838,
+      1.0159333149536607
+    ],
+    "std": [
+      0.0038980640764769586,
+      0.0015857494955090598,
+      0.0003001869194929017
+    ]
+  }
+}

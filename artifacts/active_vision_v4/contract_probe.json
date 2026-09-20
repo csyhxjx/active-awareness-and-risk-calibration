@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "fixture_only": true,
+  "gpu_training_started": false,
+  "rows": [
+    {
+      "hidden_state": "00",
+      "state_unchanged": true,
+      "v0_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+      "paid_queries": 0,
+      "decisions": [
+        {
+          "instruction": "prefer left route",
+          "decision_hash": "732754d35d00f512f92b05fdf699778952d66dbc365442b7bf9940edcfca513a",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer left route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "instruction": "prefer right route",
+          "decision_hash": "8a76ae6b5934d5f231d4cdfaa68e9dcf2f0a796d7c0cb2a53913e84d6e3f1340",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer right route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "hidden_state": "10",
+      "state_unchanged": true,
+      "v0_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+      "paid_queries": 0,
+      "decisions": [
+        {
+          "instruction": "prefer left route",
+          "decision_hash": "732754d35d00f512f92b05fdf699778952d66dbc365442b7bf9940edcfca513a",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer left route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "instruction": "prefer right route",
+          "decision_hash": "8a76ae6b5934d5f231d4cdfaa68e9dcf2f0a796d7c0cb2a53913e84d6e3f1340",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer right route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "hidden_state": "01",
+      "state_unchanged": true,
+      "v0_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+      "paid_queries": 0,
+      "decisions": [
+        {
+          "instruction": "prefer left route",
+          "decision_hash": "732754d35d00f512f92b05fdf699778952d66dbc365442b7bf9940edcfca513a",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer left route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "instruction": "prefer right route",
+          "decision_hash": "8a76ae6b5934d5f231d4cdfaa68e9dcf2f0a796d7c0cb2a53913e84d6e3f1340",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer right route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "hidden_state": "11",
+      "state_unchanged": true,
+      "v0_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+      "paid_queries": 0,
+      "decisions": [
+        {
+          "instruction": "prefer left route",
+          "decision_hash": "732754d35d00f512f92b05fdf699778952d66dbc365442b7bf9940edcfca513a",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer left route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "instruction": "prefer right route",
+          "decision_hash": "8a76ae6b5934d5f231d4cdfaa68e9dcf2f0a796d7c0cb2a53913e84d6e3f1340",
+          "input": {
+            "v0_rgb_sha256": "4f526014326ae959ce702f24d2876466a27559d7a99750f2c1d2f117bf517fc1",
+            "instruction": "prefer right route",
+            "public_route_metadata": {
+              "left_route": [
+                [
+                  -0.02,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ],
+              "right_route": [
+                [
+                  -0.02,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.14,
+                  -0.175,
+                  1.01
+                ],
+                [
+                  0.21,
+                  0.0,
+                  1.01
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "all_v0_identical": true,
+  "hidden_state_independent": true,
+  "all_queries_state_preserving": true,
+  "no_paid_queries": true,
+  "fresh_process_bytes_equal": true,
+  "tuple_roundtrip_exact": true,
+  "all_pass": true
+}

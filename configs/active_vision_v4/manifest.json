@@ -1,0 +1,224 @@
+{
+  "schema_version": 4,
+  "protocol": "active_vision_v4",
+  "manifest_seed": 55008,
+  "scene_seed": 20260921,
+  "layouts": [
+    {
+      "layout_id": "av4_smoke_000",
+      "split": "train",
+      "family": "F0",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.19968204368561251,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1948727878232396,
+      "obstacle_x": 0.06999804604669427,
+      "occluder_x": 0.31248479250235806,
+      "mirror": 1,
+      "occluder_yaw": -0.09635738610630556,
+      "divider_y": -0.04174154093154776,
+      "side_camera_azimuth_deg": -9.230657431070306,
+      "side_camera_fovy": 23.53590791189172,
+      "high_camera_azimuth_deg": -5.400745309148089,
+      "high_camera_fovy": 31.70448781795596,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_001",
+      "split": "train",
+      "family": "F1",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.21317101421970353,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.17291508546440315,
+      "obstacle_x": 0.052480041466899274,
+      "occluder_x": 0.3170824307161568,
+      "mirror": -1,
+      "occluder_yaw": -0.11735415215969995,
+      "divider_y": 0.03510014490934467,
+      "side_camera_azimuth_deg": 7.532521582455912,
+      "side_camera_fovy": 18.5683026831029,
+      "high_camera_azimuth_deg": 3.340734685202378,
+      "high_camera_fovy": 28.28194950257535,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_002",
+      "split": "train",
+      "family": "F2",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2033730239625258,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1661314697873783,
+      "obstacle_x": 0.05051179774485381,
+      "occluder_x": 0.28954724611366944,
+      "mirror": 1,
+      "occluder_yaw": -0.001846804154294529,
+      "divider_y": -0.04025771774192766,
+      "side_camera_azimuth_deg": -0.9523269312932698,
+      "side_camera_fovy": 19.72724498938149,
+      "high_camera_azimuth_deg": 3.720440502236375,
+      "high_camera_fovy": 26.77800812349551,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_003",
+      "split": "train",
+      "family": "F3",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.18172263556225793,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1987613859496858,
+      "obstacle_x": 0.07235517630262042,
+      "occluder_x": 0.30582811286805905,
+      "mirror": -1,
+      "occluder_yaw": -0.007872225638755505,
+      "divider_y": 0.03144296845812733,
+      "side_camera_azimuth_deg": -1.1231734850454473,
+      "side_camera_fovy": 22.014920030726913,
+      "high_camera_azimuth_deg": -5.134128614709506,
+      "high_camera_fovy": 32.26730382055142,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_004",
+      "split": "train",
+      "family": "F0",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.20343893413589248,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.17787967793105322,
+      "obstacle_x": 0.051552254050332716,
+      "occluder_x": 0.29196137001304256,
+      "mirror": 1,
+      "occluder_yaw": -0.11741176463421708,
+      "divider_y": -0.03929431338452142,
+      "side_camera_azimuth_deg": -9.983592599920359,
+      "side_camera_fovy": 25.641585232068863,
+      "high_camera_azimuth_deg": 2.056755202639115,
+      "high_camera_fovy": 28.96280470327606,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_005",
+      "split": "train",
+      "family": "F1",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2134631556803152,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.16996756486570713,
+      "obstacle_x": 0.08046140823980105,
+      "occluder_x": 0.31750171525568643,
+      "mirror": -1,
+      "occluder_yaw": -0.09473693775157514,
+      "divider_y": 0.04018339839137629,
+      "side_camera_azimuth_deg": 8.65399447723492,
+      "side_camera_fovy": 21.17636157293967,
+      "high_camera_azimuth_deg": 5.505470510094582,
+      "high_camera_fovy": 31.633667914131337,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_006",
+      "split": "train",
+      "family": "F2",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.18390550691660115,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1632090668219537,
+      "obstacle_x": 0.05916538243655901,
+      "occluder_x": 0.2810085223177407,
+      "mirror": 1,
+      "occluder_yaw": 0.011184857945956354,
+      "divider_y": -0.042198101282940645,
+      "side_camera_azimuth_deg": -0.25868839920964826,
+      "side_camera_fovy": 22.060316603687916,
+      "high_camera_azimuth_deg": -3.9760244978463106,
+      "high_camera_fovy": 30.131863691155214,
+      "route_ribbons": true
+    },
+    {
+      "layout_id": "av4_smoke_007",
+      "split": "train",
+      "family": "F3",
+      "manifest_seed": 55008,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.20038485927801283,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1679631332760876,
+      "obstacle_x": 0.07064106908656766,
+      "occluder_x": 0.28483483718766156,
+      "mirror": -1,
+      "occluder_yaw": 0.016225146480789533,
+      "divider_y": 0.039337350059937534,
+      "side_camera_azimuth_deg": 0.2562343555382589,
+      "side_camera_fovy": 22.864531439575238,
+      "high_camera_azimuth_deg": -5.640893743266643,
+      "high_camera_fovy": 33.029951116183,
+      "route_ribbons": true
+    }
+  ]
+}
