@@ -192,6 +192,15 @@ safe-execution retention are co-primary. Phase 5E selector tuning/test reuse,
 post-hoc completion claims, and B=2 as an independent experiment are forbidden;
 OpenVLA B/C remain separate paused protocols.
 
+Phase 6 supersedes Phase 5F as the active design direction without deleting its
+unexecuted preregistration. It begins with an exact four-probability belief over
+`00/10/01/11` to validate Bayes updates and observation-conditioned route
+switching. A later, separately gated task will introduce continuous obstacle
+geometry, at least three routes, complementary unequal-cost views, and equal
+post-observation action rights. The comparison order is MAP single scene,
+exact belief where tractable, ordinary particle filtering, and only then a
+learned particle component. See `belief_active_vision_protocol_v1.md`.
+
 Compare two recordings:
 
 ```bash
