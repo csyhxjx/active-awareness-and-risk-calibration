@@ -2,8 +2,11 @@
 
 import argparse
 import hashlib
+import json
+import os
 import random
 import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -102,8 +105,17 @@ def make_overview(root):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("output_root", type=Path)
+    parser.add_argument("output_root", type=Path, nargs="?")
+    parser.add_argument("--fingerprint-state", choices=STATES)
+    parser.add_argument("--fingerprint-output", type=Path)
     args = parser.parse_args()
+    if args.fingerprint_state:
+        if args.output_root is not None or args.fingerprint_output is None:
+            parser.error("fingerprint mode requires --fingerprint-output and no output_root")
+        write_json(args.fingerprint_output, capture_fingerprint(args.fingerprint_state))
+        return
+    if args.output_root is None:
+        parser.error("output_root is required")
     if args.output_root.exists():
         raise FileExistsError(args.output_root)
     args.output_root.mkdir(parents=True)
@@ -114,7 +126,14 @@ def main():
         state_dir = args.output_root / state
         state_dir.mkdir()
         fingerprint = capture_fingerprint(state, state_dir)
-        replay = capture_fingerprint(state)
+        replay_path = state_dir / "fresh_process_fingerprint.json"
+        subprocess.run(
+            [sys.executable, str(Path(__file__).resolve()), "--fingerprint-state", state,
+             "--fingerprint-output", str(replay_path)],
+            check=True,
+            env=os.environ.copy(),
+        )
+        replay = json.loads(replay_path.read_text())
         routes = [execute_fresh(state, route, fingerprint["state_hash"]) for route in ROUTES]
         write_json(state_dir / "routes.json", routes)
         for route in routes:
@@ -123,7 +142,7 @@ def main():
             "state": state,
             "observations": {camera: observation(state, camera) for camera in PAID_CAMERAS},
             "fingerprint": fingerprint,
-            "replay_exact": canonical_dumps(fingerprint) == canonical_dumps(replay),
+            "fresh_process_replay_exact": canonical_dumps(fingerprint) == canonical_dumps(replay),
             "routes": [compact_route(row) for row in routes],
         })
 

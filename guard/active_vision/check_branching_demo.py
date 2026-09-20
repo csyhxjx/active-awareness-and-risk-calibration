@@ -34,7 +34,7 @@ def check(summary):
     route_map = {}
     for state, row in states.items():
         hashes = {entry["state_hash"] for entry in row["fingerprint"]["ledger"]}
-        if len(hashes) != 1 or not row["replay_exact"]:
+        if len(hashes) != 1 or not row.get("fresh_process_replay_exact"):
             errors.append(f"provenance:{state}")
         for result in row["routes"]:
             route_map[(state, result["route"])] = result
