@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "nominal_hidden_state": "00",
+  "examples": 24,
+  "records": [
+    {
+      "variant": "instruction_only",
+      "seed": 5801,
+      "loss": 0.0005686254007741809,
+      "train_accuracy": 1.0,
+      "checkpoint": "instruction_only_seed5801.pt",
+      "sha256": "2cfb810eec4ba8803da1b9d5968a6079f12a2d409a1f811c5e9b6c42c396c88e"
+    },
+    {
+      "variant": "instruction_only",
+      "seed": 5802,
+      "loss": 0.0006764762219972908,
+      "train_accuracy": 1.0,
+      "checkpoint": "instruction_only_seed5802.pt",
+      "sha256": "87e2842cbd8e539e497b42720f9da2afd18743cdae3fcdfb90113d1b09aff578"
+    },
+    {
+      "variant": "instruction_only",
+      "seed": 5803,
+      "loss": 0.0006857325206510723,
+      "train_accuracy": 1.0,
+      "checkpoint": "instruction_only_seed5803.pt",
+      "sha256": "b3221e7a27ffca299951df3f52396f0ace89398c3b43f8c5661f3ed19caf2ee7"
+    },
+    {
+      "variant": "v0_instruction",
+      "seed": 5801,
+      "loss": 0.0006175307207740843,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_seed5801.pt",
+      "sha256": "e71d184f765825d816b4a461d8bb235270da29e68c34b6e57c981bf1910ff1ec"
+    },
+    {
+      "variant": "v0_instruction",
+      "seed": 5802,
+      "loss": 0.0004857291642110795,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_seed5802.pt",
+      "sha256": "e6558c1aea3c7469823d0971b55b4b9369c506b5bb30f6b6c218408b6e88ac8f"
+    },
+    {
+      "variant": "v0_instruction",
+      "seed": 5803,
+      "loss": 0.0006694369367323816,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_seed5803.pt",
+      "sha256": "d5734fcce6b1494634c479abdc9c672c667e35c64bf58ceea96b215340285552"
+    },
+    {
+      "variant": "v0_instruction_geometry",
+      "seed": 5801,
+      "loss": 0.0008069486357271671,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_geometry_seed5801.pt",
+      "sha256": "dae81fbd4aae64b3ea8f484fb422e7c12174beb96ba8760a7d24b2fc222689b4"
+    },
+    {
+      "variant": "v0_instruction_geometry",
+      "seed": 5802,
+      "loss": 0.0007714529638178647,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_geometry_seed5802.pt",
+      "sha256": "c5b34622b009ab88c16771e5f39253afcdf618c347ee011993300149d39292fa"
+    },
+    {
+      "variant": "v0_instruction_geometry",
+      "seed": 5803,
+      "loss": 0.0007858137250877917,
+      "train_accuracy": 1.0,
+      "checkpoint": "v0_instruction_geometry_seed5803.pt",
+      "sha256": "a3f304634a7066294b4ecb7a3cd33ce54dd0d6e2052a5fb672aca7c8a3ab0896"
+    }
+  ]
+}

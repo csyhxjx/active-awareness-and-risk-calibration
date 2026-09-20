@@ -12,6 +12,7 @@ from guard.active_vision.phase5e import (
     validate_proposer_input,
 )
 from guard.active_vision.build_manifest_v4 import build_manifest
+from guard.active_vision.build_formal_manifest_v4 import build_manifest as build_formal_manifest
 from guard.active_vision.scene import Layout
 from guard.active_vision.train_proposer_v4 import feature
 
@@ -72,6 +73,14 @@ class Phase5EContractTest(unittest.TestCase):
         self.assertEqual(feature("instruction_only", "prefer left route", image, layout).shape, (3,))
         self.assertEqual(feature("v0_instruction", "prefer left route", image, layout).shape, (9,))
         self.assertEqual(feature("v0_instruction_geometry", "prefer left route", image, layout).shape, (27,))
+
+    def test_formal_manifest_grouped_scope(self):
+        rows = build_formal_manifest()["layouts"]
+        self.assertEqual(sum(row["split"] == "train" for row in rows), 60)
+        self.assertEqual(sum(row["split"] == "validation" for row in rows), 20)
+        self.assertEqual(sum(row["split"] == "test" for row in rows), 40)
+        self.assertEqual({row["manifest_seed"] for row in rows if row["split"] == "test"}, {57040})
+        self.assertEqual(len({row["layout_id"] for row in rows}), 120)
 
 
 if __name__ == "__main__":

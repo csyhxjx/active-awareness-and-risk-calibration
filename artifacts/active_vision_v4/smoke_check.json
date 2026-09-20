@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "trials": 64,
+  "valid_non_stop": 64,
+  "coverage": 1.0,
+  "preference_accuracy": 1.0,
+  "proposer_stops": 0,
+  "stop_rate": 0.0,
+  "candidate_recall_failures": 0,
+  "hidden_state_outputs_exact": true,
+  "physical_transfer_passes": 64,
+  "ablations": {
+    "instruction_only": {
+      "accuracy": 1.0,
+      "coverage": 1.0
+    },
+    "v0_instruction": {
+      "accuracy": 1.0,
+      "coverage": 1.0
+    },
+    "v0_instruction_geometry": {
+      "accuracy": 1.0,
+      "coverage": 1.0
+    }
+  },
+  "errors": [],
+  "all_pass": true
+}
