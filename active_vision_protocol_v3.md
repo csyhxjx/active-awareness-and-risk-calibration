@@ -27,7 +27,13 @@ position to the terminal waypoints of `left_route` and `right_route`. If
 nearest route is selected, with exact ties resolved `left_route`, then
 `right_route`, then `stop`. The `0.12 m` radius, row-8 convention, action
 ordering, and table-frame transform are part of the v3 contract and cannot be
-tuned from smoke outcomes.
+tuned from smoke outcomes. **Projection amendment (before implementation):**
+the fixed transform from normalized terminal position `u=(u_x,u_y,u_z)` to
+table coordinates is `p=(0.20*u_x, 0.20*u_y, 1.00+0.05*u_z)` meters. Because
+the two fixed routes share their final task target, the projection target for
+candidate identity is each route's lane waypoint at index 1 (the middle point
+returned by the frozen route-waypoint function), not the common final target.
+This makes route identity testable without changing the executed fixed route.
 
 ## 3. Proposer variants and prediction
 
