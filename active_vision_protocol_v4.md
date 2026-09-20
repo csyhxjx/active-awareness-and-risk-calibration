@@ -16,7 +16,7 @@ Stop samples may come only from public invalid instructions or public no-feasibl
 
 ## 3. Data and splits
 
-Training uses nominal train layouts only. Hidden states, collision outcomes, paid views, oracle margins, and all 5B/5D test data are prohibited. Layout groups, including all four hidden states, remain within one split. The new smoke namespace is 8 new train-only layout groups x 4 hidden states x 2 preferences = 64 trials. A future formal addendum will define new grouped train/validation/sealed-test namespaces and a new test seed; 5B's 40 test layouts remain permanently excluded.
+Training uses nominal train layouts only. Hidden states, collision outcomes, paid views, oracle margins, and all 5B/5D test data are prohibited. Layout groups, including all four hidden states, remain within one split. The smoke namespace seed is `55008` with 8 new train-only layout groups x 4 hidden states x 2 preferences = 64 trials. Subject to smoke PASS, the formal grouped split is fixed at 60/20/40 new train/validation/sealed-test layouts with manifest seeds `55060`/`56020`/`57040` and scene seed `20260921`. A post-smoke addendum may materialize exact rows but cannot change these sizes or seeds. Every layout ID and sampled geometry must be disjoint from 5A, 5B, and 5D; 5B's 40 test layouts remain permanently excluded.
 
 ## 4. Contract probe before GPU training
 
@@ -32,7 +32,7 @@ The fixed ladder is: always-stop; proposer argmax B=0; best-fixed-view B=1; rand
 
 ## 7. Power and freeze
 
-The primary unit is the layout group and all bootstrap resampling is clustered by layout. Before formal data, compute `s_plan` from development-group variance using the preregistered conservative upper bound `s_plan = max(s_dev, 90th percentile of leave-one-group-out s_dev)`; use two-sided alpha 0.05, power 0.80, and the smallest detectable absolute paired completion effect `d_min=0.10`. Required groups are `ceil(((z_(1-alpha/2)+z_power)*s_plan/d_min)^2)` and are capped at 60 formal test groups. If the cap is exceeded, downgrade the claim or stop; do not borrow 5B/5D data. A smoke-only numeric addendum may fill in `s_dev` but may not change the formula, alpha, power, effect, or cap.
+The primary unit is the layout group and all bootstrap resampling is clustered by layout. Before formal data, compute `s_plan = min(1.0, max(0.20, s_dev, 90th percentile of leave-one-group-out s_dev))`; `1.0` is the conservative mathematical SD upper bound for a paired outcome in `[-1,1]`, while the preregistered `0.20` floor prevents a deceptively small development estimate. Use two-sided alpha 0.05, power 0.80, and the smallest detectable absolute paired completion effect `d_min=0.10`. Required groups are `ceil(((z_(1-alpha/2)+z_power)*s_plan/d_min)^2)` and are capped at 60 formal test groups. If the required count exceeds 60, downgrade the claim or stop; do not borrow 5B/5D data. A smoke-only numeric addendum may fill in `s_dev` but may not change the formula, bounds, alpha, power, effect, or cap.
 
 ## 8. B/C boundary
 
