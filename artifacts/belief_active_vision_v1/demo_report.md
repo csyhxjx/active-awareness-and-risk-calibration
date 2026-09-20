@@ -37,15 +37,22 @@ The two policies receive the same free image in hidden state `100`.
 - Fixed: `q_left -> blocked`, `q_front -> unobserved`, stop.
 
 This establishes the requested minimum chain: an observation changes the
-candidate set, a second adaptively selected observation certifies an alternate
-route, and the controller switches route and completes. The matched fixed
-sequence cannot obtain enough evidence under the same budget.
+candidate set, a second observation certifies an alternate route, and the
+controller switches route and completes. The registered `q_left -> q_front`
+control cannot obtain enough evidence under the same budget.
+
+This paired trace is not an adaptive-view advantage result. A post-demo
+exhaustive audit found that the stronger public-layout fixed sequence
+`q_left -> q_right`, with early stopping, exactly reproduces the planner in all
+eight hidden states. The original `q_left -> q_front` control is therefore only
+a weak fixed control. See `adaptivity_audit.md` and the prospective v2
+addendum.
 
 ## Interpretation Lock
 
 Route observations in this demo are generated from simulator truth. The result
-therefore validates belief update, adaptive query selection, route revision,
-broker isolation, and physical execution only. It is an oracle upper bound and
-does not validate RGB recognition, cross-layout generalization, ordinary
-particles, or learned particle updates. The registered 12-layout development
-gate remains unopened.
+therefore validates belief update, query mechanics, route revision, broker
+isolation, and physical execution only. It is an oracle upper bound and does
+not validate adaptive-view superiority, RGB recognition, cross-layout
+generalization, ordinary particles, or learned particle updates. The
+registered 12-layout development gate remains unopened.
