@@ -1,0 +1,742 @@
+{
+  "schema_version": 1,
+  "states": [
+    "001",
+    "110",
+    "010",
+    "101",
+    "011",
+    "100"
+  ],
+  "prior": {
+    "001": 0.16666666666666666,
+    "110": 0.16666666666666666,
+    "010": 0.16666666666666666,
+    "101": 0.16666666666666666,
+    "011": 0.16666666666666666,
+    "100": 0.16666666666666666
+  },
+  "cameras": [
+    "q_branch",
+    "q_a",
+    "q_b",
+    "q_c"
+  ],
+  "observation_table": {
+    "001": {
+      "q_branch": "family_a",
+      "q_a": "family_a:001",
+      "q_b": "not_applicable",
+      "q_c": "not_applicable"
+    },
+    "110": {
+      "q_branch": "family_a",
+      "q_a": "family_a:110",
+      "q_b": "not_applicable",
+      "q_c": "not_applicable"
+    },
+    "010": {
+      "q_branch": "family_b",
+      "q_a": "not_applicable",
+      "q_b": "family_b:010",
+      "q_c": "not_applicable"
+    },
+    "101": {
+      "q_branch": "family_b",
+      "q_a": "not_applicable",
+      "q_b": "family_b:101",
+      "q_c": "not_applicable"
+    },
+    "011": {
+      "q_branch": "family_c",
+      "q_a": "not_applicable",
+      "q_b": "not_applicable",
+      "q_c": "family_c:011"
+    },
+    "100": {
+      "q_branch": "family_c",
+      "q_a": "not_applicable",
+      "q_b": "not_applicable",
+      "q_c": "family_c:100"
+    }
+  },
+  "branch_posteriors": [
+    {
+      "outcome": "family_a",
+      "support": [
+        "001",
+        "110"
+      ],
+      "probabilities": [
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "terminal_before_followup": {
+        "kind": "terminal",
+        "id": "stop",
+        "expected_value": -0.25
+      },
+      "next_query": {
+        "kind": "query",
+        "id": "q_a",
+        "expected_value": 0.95
+      }
+    },
+    {
+      "outcome": "family_b",
+      "support": [
+        "010",
+        "101"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        0.5,
+        0.5,
+        0.0,
+        0.0
+      ],
+      "terminal_before_followup": {
+        "kind": "terminal",
+        "id": "stop",
+        "expected_value": -0.25
+      },
+      "next_query": {
+        "kind": "query",
+        "id": "q_b",
+        "expected_value": 0.95
+      }
+    },
+    {
+      "outcome": "family_c",
+      "support": [
+        "011",
+        "100"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ],
+      "terminal_before_followup": {
+        "kind": "terminal",
+        "id": "stop",
+        "expected_value": -0.25
+      },
+      "next_query": {
+        "kind": "query",
+        "id": "q_c",
+        "expected_value": 0.95
+      }
+    }
+  ],
+  "terminal_posteriors": [
+    {
+      "state": "001",
+      "history": [
+        [
+          "q_branch",
+          "family_a"
+        ],
+        [
+          "q_a",
+          "family_a:001"
+        ]
+      ],
+      "support": [
+        "001"
+      ],
+      "probabilities": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "left_route",
+        "expected_value": 1.0
+      }
+    },
+    {
+      "state": "110",
+      "history": [
+        [
+          "q_branch",
+          "family_a"
+        ],
+        [
+          "q_a",
+          "family_a:110"
+        ]
+      ],
+      "support": [
+        "110"
+      ],
+      "probabilities": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "right_route",
+        "expected_value": 1.0
+      }
+    },
+    {
+      "state": "010",
+      "history": [
+        [
+          "q_branch",
+          "family_b"
+        ],
+        [
+          "q_b",
+          "family_b:010"
+        ]
+      ],
+      "support": [
+        "010"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "left_route",
+        "expected_value": 1.0
+      }
+    },
+    {
+      "state": "101",
+      "history": [
+        [
+          "q_branch",
+          "family_b"
+        ],
+        [
+          "q_b",
+          "family_b:101"
+        ]
+      ],
+      "support": [
+        "101"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "center_route",
+        "expected_value": 1.0
+      }
+    },
+    {
+      "state": "011",
+      "history": [
+        [
+          "q_branch",
+          "family_c"
+        ],
+        [
+          "q_c",
+          "family_c:011"
+        ]
+      ],
+      "support": [
+        "011"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "left_route",
+        "expected_value": 1.0
+      }
+    },
+    {
+      "state": "100",
+      "history": [
+        [
+          "q_branch",
+          "family_c"
+        ],
+        [
+          "q_c",
+          "family_c:100"
+        ]
+      ],
+      "support": [
+        "100"
+      ],
+      "probabilities": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "terminal": {
+        "kind": "terminal",
+        "id": "center_route",
+        "expected_value": 1.0
+      }
+    }
+  ],
+  "adaptive_traces": {
+    "001": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_a"
+      },
+      {
+        "support": [
+          "001",
+          "110"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_a",
+          "expected_value": 0.95
+        },
+        "observation": "family_a:001"
+      },
+      {
+        "support": [
+          "001"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "left_route",
+          "expected_value": 1.0
+        }
+      }
+    ],
+    "110": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_a"
+      },
+      {
+        "support": [
+          "001",
+          "110"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_a",
+          "expected_value": 0.95
+        },
+        "observation": "family_a:110"
+      },
+      {
+        "support": [
+          "110"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "right_route",
+          "expected_value": 1.0
+        }
+      }
+    ],
+    "010": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_b"
+      },
+      {
+        "support": [
+          "010",
+          "101"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_b",
+          "expected_value": 0.95
+        },
+        "observation": "family_b:010"
+      },
+      {
+        "support": [
+          "010"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "left_route",
+          "expected_value": 1.0
+        }
+      }
+    ],
+    "101": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_b"
+      },
+      {
+        "support": [
+          "010",
+          "101"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_b",
+          "expected_value": 0.95
+        },
+        "observation": "family_b:101"
+      },
+      {
+        "support": [
+          "101"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "center_route",
+          "expected_value": 1.0
+        }
+      }
+    ],
+    "011": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_c"
+      },
+      {
+        "support": [
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_c",
+          "expected_value": 0.95
+        },
+        "observation": "family_c:011"
+      },
+      {
+        "support": [
+          "011"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "left_route",
+          "expected_value": 1.0
+        }
+      }
+    ],
+    "100": [
+      {
+        "support": [
+          "001",
+          "110",
+          "010",
+          "101",
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_branch",
+          "expected_value": 0.8999999999999999
+        },
+        "observation": "family_c"
+      },
+      {
+        "support": [
+          "011",
+          "100"
+        ],
+        "decision": {
+          "kind": "query",
+          "id": "q_c",
+          "expected_value": 0.95
+        },
+        "observation": "family_c:100"
+      },
+      {
+        "support": [
+          "100"
+        ],
+        "decision": {
+          "kind": "terminal",
+          "id": "center_route",
+          "expected_value": 1.0
+        }
+      }
+    ]
+  },
+  "fixed_sequences": [
+    {
+      "sequence": [],
+      "completion": 0,
+      "collision": 0,
+      "stop": 6,
+      "mean_queries": 0.0,
+      "mean_utility": -0.25
+    },
+    {
+      "sequence": [
+        "q_branch"
+      ],
+      "completion": 0,
+      "collision": 0,
+      "stop": 6,
+      "mean_queries": 1.0,
+      "mean_utility": -0.3
+    },
+    {
+      "sequence": [
+        "q_a"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.0,
+      "mean_utility": 0.11666666666666663
+    },
+    {
+      "sequence": [
+        "q_b"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.0,
+      "mean_utility": 0.11666666666666663
+    },
+    {
+      "sequence": [
+        "q_c"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.0,
+      "mean_utility": 0.11666666666666665
+    },
+    {
+      "sequence": [
+        "q_branch",
+        "q_a"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 2.0,
+      "mean_utility": 0.0666666666666667
+    },
+    {
+      "sequence": [
+        "q_branch",
+        "q_b"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 2.0,
+      "mean_utility": 0.0666666666666667
+    },
+    {
+      "sequence": [
+        "q_branch",
+        "q_c"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 2.0,
+      "mean_utility": 0.0666666666666667
+    },
+    {
+      "sequence": [
+        "q_a",
+        "q_branch"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.0833333333333333
+    },
+    {
+      "sequence": [
+        "q_a",
+        "q_b"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.49999999999999994
+    },
+    {
+      "sequence": [
+        "q_a",
+        "q_c"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.49999999999999994
+    },
+    {
+      "sequence": [
+        "q_b",
+        "q_branch"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.08333333333333333
+    },
+    {
+      "sequence": [
+        "q_b",
+        "q_a"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.5
+    },
+    {
+      "sequence": [
+        "q_b",
+        "q_c"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.5
+    },
+    {
+      "sequence": [
+        "q_c",
+        "q_branch"
+      ],
+      "completion": 2,
+      "collision": 0,
+      "stop": 4,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.08333333333333333
+    },
+    {
+      "sequence": [
+        "q_c",
+        "q_a"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.5
+    },
+    {
+      "sequence": [
+        "q_c",
+        "q_b"
+      ],
+      "completion": 4,
+      "collision": 0,
+      "stop": 2,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.5
+    }
+  ],
+  "best_fixed_utility": 0.5,
+  "adaptive_utility": 0.8999999999999999
+}
