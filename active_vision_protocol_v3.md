@@ -16,6 +16,19 @@ The proposer runs once before the decision. There is no in-rollout re-proposal i
 
 The mapped candidate is the proposer output for all downstream policies. The nominal B=0 arm executes the mapped route candidate without a paid view; it does not execute the raw chunk. This keeps 5D dynamics comparable to 5B. The raw OpenVLA chunk is still replayed and stored as proposer evidence. A separate diagnostic may execute the raw chunk only after a new protocol; it is excluded from the primary result.
 
+**Projection clarification (additive, before implementation):** the chunk shape is
+exactly `(8, 7)`, with the seven values interpreted as the existing OpenVLA
+action vector `[x, y, z, rx, ry, rz, gripper]` in the public table frame. Every
+value must be finite and within the frozen inclusive action bound `[-1, 1]`;
+otherwise the proposer is invalid. The terminal position is the first three
+values of row 8. Let `d_left` and `d_right` be Euclidean distances from that
+position to the terminal waypoints of `left_route` and `right_route`. If
+`min(d_left, d_right) > 0.12 m`, the mapped candidate is `stop`; otherwise the
+nearest route is selected, with exact ties resolved `left_route`, then
+`right_route`, then `stop`. The `0.12 m` radius, row-8 convention, action
+ordering, and table-frame transform are part of the v3 contract and cannot be
+tuned from smoke outcomes.
+
 ## 3. Proposer variants and prediction
 
 The first proposer is the frozen local OpenVLA checkpoint in greedy, sampling-disabled inference. Because the controlled occlusion task is outside its demonstrated task distribution, the preregistered prediction is that zero-shot non-stop route coverage may be below the 60% smoke threshold; an all-stop proposer therefore fails the coverage gate.
