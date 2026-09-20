@@ -14,6 +14,7 @@ from guard.active_vision.belief_branching import (
     run_adaptive,
     support,
 )
+from guard.active_vision.belief_branch_scene import cue_colors
 
 
 class BranchingBeliefContractTest(unittest.TestCase):
@@ -56,6 +57,16 @@ class BranchingBeliefContractTest(unittest.TestCase):
         self.assertAlmostEqual(best, 0.5)
         self.assertTrue(all(row["completion"] < 6 for row in fixed))
         self.assertEqual(max(row["completion"] for row in fixed), 4)
+
+    def test_physical_cue_colors_follow_observation_partition(self):
+        for camera in CAMERAS:
+            by_observation = {}
+            for state in STATES:
+                outcome = observation(state, camera)
+                color = tuple(cue_colors(state)[camera])
+                by_observation.setdefault(outcome, set()).add(color)
+            self.assertTrue(all(len(colors) == 1 for colors in by_observation.values()))
+            self.assertEqual(len({next(iter(colors)) for colors in by_observation.values()}), len(by_observation))
 
 
 if __name__ == "__main__":
