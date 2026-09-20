@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "review": "manual",
+  "v0": {
+    "rating": "none",
+    "finding": "All six images are visually and byte identical; no family or route-state cue is visible."
+  },
+  "q_branch": {
+    "rating": "decisive",
+    "finding": "Red, green, and blue surfaces visibly separate family_a, family_b, and family_c; pair members are identical."
+  },
+  "q_a": {
+    "rating": "decisive",
+    "finding": "Yellow and purple distinguish the two family_a states; all non-family_a states show the same gray surface."
+  },
+  "q_b": {
+    "rating": "decisive",
+    "finding": "Yellow and purple distinguish the two family_b states; all non-family_b states show the same gray surface."
+  },
+  "q_c": {
+    "rating": "decisive",
+    "finding": "Yellow and purple distinguish the two family_c states; all non-family_c states show the same gray surface."
+  },
+  "claim_limit": "Controlled physical color-cue mechanism fixture; not natural obstacle recognition or learned RGB uncertainty."
+}

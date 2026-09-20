@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "states": 6,
+  "v0_pixel_identical": true,
+  "image_partition": {
+    "q_branch": {
+      "outcomes": 3,
+      "within_outcome_exact": true,
+      "between_outcome_distinct": true
+    },
+    "q_a": {
+      "outcomes": 3,
+      "within_outcome_exact": true,
+      "between_outcome_distinct": true
+    },
+    "q_b": {
+      "outcomes": 3,
+      "within_outcome_exact": true,
+      "between_outcome_distinct": true
+    },
+    "q_c": {
+      "outcomes": 3,
+      "within_outcome_exact": true,
+      "between_outcome_distinct": true
+    }
+  },
+  "physical_routes": 18,
+  "adaptive_success": 6,
+  "fixed_sequence_count": 17,
+  "best_fixed_completion": 4,
+  "best_fixed_utility": 0.5,
+  "adaptive_utility": 0.9,
+  "strict_adaptive_advantage": true,
+  "all_pass": true,
+  "errors": []
+}
