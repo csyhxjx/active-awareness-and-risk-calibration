@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "states": 8,
+  "canonical_routes": 24,
+  "v0_pixel_identical": true,
+  "adaptive_switch_success": true,
+  "fixed_matched_budget_stop": true,
+  "all_pass": true,
+  "errors": []
+}
