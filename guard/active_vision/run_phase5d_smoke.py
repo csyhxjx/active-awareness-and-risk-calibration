@@ -62,10 +62,14 @@ class OpenVLAProposer:
             use_proprio=False,
             center_crop=True,
             seed=54040,
-            unnorm_key="libero_spatial",
+            unnorm_key="libero_spatial_no_noops",
         )
         self._cfg.device = device
         self._model = get_model(self._cfg)
+        available = sorted(getattr(self._model, "norm_stats", {}).keys())
+        if available != ["libero_spatial_no_noops"]:
+            raise RuntimeError(f"unexpected frozen checkpoint norm_stats keys: {available}")
+        self._cfg.unnorm_key = available[0]
         self._processor = get_processor(self._cfg)
         self._action_head = get_action_head(self._cfg, self._model.llm_dim)
 
