@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "split": "validation",
+  "scope_pass": true,
+  "provenance_pass": true,
+  "integrity_pass": true,
+  "all_pass": true,
+  "errors": []
+}

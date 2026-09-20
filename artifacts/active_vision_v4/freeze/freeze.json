@@ -1,0 +1,45 @@
+{
+  "schema_version": 4,
+  "status": "frozen",
+  "date": "2026-09-20",
+  "best_fixed_camera": "v_left",
+  "normalization": "artifacts/active_vision_v4/freeze/normalization.json",
+  "aware_checkpoints": [
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1701.pt",
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1702.pt",
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1703.pt"
+  ],
+  "agnostic_checkpoints": [
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1701.pt",
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1702.pt",
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1703.pt"
+  ],
+  "proposer_checkpoints": [
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5801.pt",
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5802.pt",
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5803.pt"
+  ],
+  "proposer_files": {
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5801.pt": "dae81fbd4aae64b3ea8f484fb422e7c12174beb96ba8760a7d24b2fc222689b4",
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5802.pt": "c5b34622b009ab88c16771e5f39253afcdf618c347ee011993300149d39292fa",
+    "artifacts/active_vision_v4/freeze/v0_instruction_geometry_seed5803.pt": "a3f304634a7066294b4ecb7a3cd33ce54dd0d6e2052a5fb672aca7c8a3ab0896"
+  },
+  "files": {
+    "active_vision_protocol_v4.md": "7d383d1b359512d3f38ae8781572ddd61a696a654f05411a36e49cb140e1ef4c",
+    "active_vision_protocol_v4_addendum.md": "44e59251864d822bf91514c17944d9b7f2ba54c91f5e2cf53914669e7e5b81ef",
+    "configs/active_vision_v4/formal_manifest.json": "a34781be5b8617da18fc89b69bff2bc6fc2296a6e7c86a8ed7617855dc7778d8",
+    "guard/active_vision/run_formal_v2.py": "19552d0529575602ebecab1b9eb5c260bf6b267dc19f68fe44d3c1d17fe974a4",
+    "guard/active_vision/check_test_v2.py": "ce7cb592e7e6be6ee1c6241d1b56a0755d3359ad272ebc5b1866593969de21eb",
+    "guard/active_vision/evaluate_formal_v2.py": "871a894eb176b485c39a22c2e3277fe2425422c6d729023df06c91a0866d584b",
+    "guard/active_vision/evaluate_formal_v4.py": "ab4df3d0c2d04f0dd0204f0aa109a41453ab6a285facf51ffbd1f8c0de5ec6f4",
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1701.pt": "f0f4ebbcf0b08363a5858acf18da5430ebcedfe566085aa2b8b408c7561c7c42",
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1702.pt": "800563590f1b38d49b032636019b799ce908071c8c8e1eb07f9d072bacf3d885",
+    "artifacts/active_vision_v4/freeze/candidate_agnostic_seed1703.pt": "38cecc685a3345e9265b239fe99581693774d225ba5fb71eab8851daac206aff",
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1701.pt": "785534a96784b552dd48f80e400acb7fc752d07db539df4383f272423e57e953",
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1702.pt": "fa726cea4809ff026d43fb8ed9c223cd8515a712cef1c6f158103f256fe286b1",
+    "artifacts/active_vision_v4/freeze/candidate_aware_seed1703.pt": "0c4a225cf2ed64e7764c57e5b0f47011ec0a540eb1f74a97293548f7d3a41562",
+    "artifacts/active_vision_v4/freeze/normalization.json": "daa95f2d8b4230d9ec51d7b94295305882be5c5f475d0590e435e8fa0ea378aa",
+    "artifacts/active_vision_v4/freeze/training_summary.json": "aaf162b01b05c0f79bdae9048b8f432742281b445253dbb06a58b4df01b61b69",
+    "artifacts/active_vision_v4/freeze/validation_integrity.json": "8846e49469fda9eee59926aa612978f9cf3308fae91376790e0d1d637dd77360"
+  }
+}
