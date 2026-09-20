@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "trials": 64,
+  "valid_non_stop_route_mappings": 0,
+  "non_stop_mapping_rate": 0.0,
+  "candidate_recall_failures": 0,
+  "mapped_route_transfer_trials": 0,
+  "route_transfer_pass": false,
+  "all_replays_exact": true,
+  "all_pass": false,
+  "errors": []
+}

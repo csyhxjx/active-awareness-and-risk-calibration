@@ -38,14 +38,30 @@ def check(payload):
     valid_routes = sum(candidate in ("left_route", "right_route") for candidate in mapping)
     coverage = valid_routes / len(trials) if trials else 0.0
     recall_failures = sum(row.get("derived_failures", {}).get("candidate_recall_failure", False) for row in trials)
+    transfer_rows = [
+        row for row in trials
+        if row.get("record", {}).get("mapped_candidate", {}).get("mapped_candidate") in ("left_route", "right_route")
+    ]
+    transfers = [row["record"]["physical_outcome"].get("mapped_route_transfer") for row in transfer_rows]
+    transfer_ok = bool(transfers)
+    for row, transfer in zip(transfer_rows, transfers):
+        if not isinstance(transfer, dict):
+            transfer_ok = False
+            continue
+        route = row["record"]["mapped_candidate"]["mapped_candidate"]
+        blocked = row["hidden_state"][0 if route == "left_route" else 1] == "1"
+        expected = bool(transfer.get("collision")) if blocked else bool(transfer.get("collision_free_success"))
+        transfer_ok &= expected
     result = {
         "schema_version": 1,
         "trials": len(trials),
         "valid_non_stop_route_mappings": valid_routes,
         "non_stop_mapping_rate": coverage,
         "candidate_recall_failures": recall_failures,
+        "mapped_route_transfer_trials": len(transfers),
+        "route_transfer_pass": transfer_ok,
         "all_replays_exact": not any("replay_mismatch" in error for error in errors),
-        "all_pass": not errors and coverage >= 0.60 and recall_failures == 0,
+        "all_pass": not errors and coverage >= 0.60 and recall_failures == 0 and transfer_ok,
         "errors": errors,
     }
     return result

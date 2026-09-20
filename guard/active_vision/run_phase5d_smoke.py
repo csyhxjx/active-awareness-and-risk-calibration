@@ -166,12 +166,19 @@ def run_one(layout, hidden_state, preference, proposer, scene_seed):
         else:
             outcome = {"route": None, "steps": 0, "reached": False, "collision": False, "timeout": False}
         outcome["branch_state_hash"] = branch_hash
+        transfer = None
+        if mapped["valid"] and mapped["mapped_candidate"] in ROUTES:
+            transfer_env = _fresh_env(layout, hidden_state, scene_seed)
+            try:
+                transfer = execute_route(transfer_env, mapped["mapped_candidate"])
+            finally:
+                transfer_env.close()
         return {
             "proposer_output": proposer_output,
             "mapped_candidate": mapped,
             "selector_decision": selector,
             "executed_action": {"route": route, "raw_chunk_executed": False},
-            "physical_outcome": outcome,
+            "physical_outcome": {**outcome, "mapped_route_transfer": transfer},
         }
     finally:
         env.close()

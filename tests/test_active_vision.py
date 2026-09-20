@@ -178,9 +178,9 @@ class ActiveVisionTest(unittest.TestCase):
         }
         self.assertTrue(replay_equal(record, json.loads(json.dumps(record))))
         self.assertTrue(derive_failures(record)["selector_failure"])
-        payload = {"trials": [{"record": record, "replay": record}]}
+        payload = {"trials": [{"layout_id": "x", "hidden_state": "00", "preference": "left_route", "record": record, "replay": record}]}
         result = check_phase5d(payload)
-        self.assertTrue(result["all_pass"])
+        self.assertFalse(result["all_pass"])
         self.assertEqual(result["candidate_recall_failures"], 0)
 
 if __name__ == "__main__":
