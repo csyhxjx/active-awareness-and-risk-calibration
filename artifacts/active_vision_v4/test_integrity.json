@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "split": "test",
+  "scope_pass": true,
+  "provenance_pass": true,
+  "integrity_pass": true,
+  "all_pass": true,
+  "errors": [],
+  "freeze_pass": true
+}
