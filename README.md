@@ -165,6 +165,33 @@ Full metrics and provenance are in
 `artifacts/active_vision_v2/test_provenance.json`. This remains a
 fixed-controller result, not an OpenVLA improvement.
 
+### Phase 5D-5F proposer and risk results
+
+Phase 5D's frozen OpenVLA chunk projection produced zero valid non-stop routes
+in 64 train-only smoke trials. A read-only audit found instruction-sensitive,
+hidden-state-invariant end-effector delta outputs, while the projection treated
+the final row as an absolute table-frame waypoint. This is recorded as an
+OpenVLA integration limitation; the frozen `0/64` result was not repaired or
+relabelled.
+
+Phase 5E tested a separately preregistered route-level proposer on a new
+60/20/40 grouped split. On its single sealed test, the proposer was valid and
+preference-correct in `320/320` trials. Blind B=0 execution had 50% completion
+and 50% collision; candidate-aware geometric B=1 retained 50% completion with
+25% collision; candidate-aware learned B=1 retained 50% completion with zero
+collision. Both completion improvements are exactly zero with layout-clustered
+95% CI `[0,0]`. This result is scoped to single-candidate B=1 verification:
+observation converted unsafe executions into abstentions but did not improve
+task completion. The full baseline ladder and paper wording are in
+`artifacts/active_vision_v4/formal_report.md` and
+`artifacts/active_vision_v4/paper_positioning.md`.
+
+The only opened continuation is the preregistered Phase 5F risk-controlled
+abstention question in `risk_abstention_protocol_v1.md`. Collision risk and
+safe-execution retention are co-primary. Phase 5E selector tuning/test reuse,
+post-hoc completion claims, and B=2 as an independent experiment are forbidden;
+OpenVLA B/C remain separate paused protocols.
+
 Compare two recordings:
 
 ```bash
