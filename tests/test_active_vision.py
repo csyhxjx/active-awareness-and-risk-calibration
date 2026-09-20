@@ -11,10 +11,12 @@ from guard.active_vision.runtime import QueryBroker
 from guard.active_vision.build_manifest_v2 import build_manifest
 from guard.active_vision.check_formal_v2 import verifier
 from guard.active_vision.evaluate_formal_v2 import geometric_coverage, holm_adjust
+from guard.active_vision.check_phase5d import check as check_phase5d
+from guard.active_vision.phase5d import derive_failures, project_chunk, replay_equal
 from guard.active_vision.run_formal_v2 import require_open_split
 from guard.active_vision.train_selector_v2 import Selector, geometry_features, prepare_geometry
 from guard.active_vision.check_pilot import obstacle_visible
-from guard.active_vision.scene import DEV_LAYOUT, OccludedRouteEnv, _look_at_quat
+from guard.active_vision.scene import DEV_LAYOUT, OccludedRouteEnv, _look_at_quat, route_waypoints
 
 
 class ActiveVisionTest(unittest.TestCase):
@@ -148,6 +150,38 @@ class ActiveVisionTest(unittest.TestCase):
     def test_holm_adjustment_is_monotone_in_sorted_order(self):
         adjusted = holm_adjust({"a": 0.01, "b": 0.03, "c": 0.02})
         self.assertEqual(adjusted, {"a": 0.03, "c": 0.04, "b": 0.04})
+
+    def test_phase5d_projection_and_stop_contract(self):
+        row = build_manifest()["layouts"][0]
+        from guard.active_vision.run_formal_v2 import layout_from_row
+        layout = layout_from_row(row)
+        left = np.zeros((8, 7), dtype=np.float64)
+        left[-1, :3] = np.asarray(route_waypoints(layout, "left_route")[1])
+        left[-1, :3] = (left[-1, :3] - np.array([0.0, 0.0, 1.00])) / np.array([0.20, 0.20, 0.05])
+        result = project_chunk(layout, left)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["mapped_candidate"], "left_route")
+        stop = left.copy()
+        stop[-1, :3] = [-1.0, -1.0, -1.0]
+        self.assertEqual(project_chunk(layout, stop)["mapped_candidate"], "stop")
+        invalid = left.copy()
+        invalid[0, 0] = np.nan
+        self.assertFalse(project_chunk(layout, invalid)["valid"])
+
+    def test_phase5d_tuple_failures_and_exact_replay(self):
+        record = {
+            "proposer_output": {"chunk_hash": "x"},
+            "mapped_candidate": {"valid": True, "mapped_candidate": "left_route"},
+            "selector_decision": {"correct": False, "unresolved": False},
+            "executed_action": {"route": "left_route"},
+            "physical_outcome": {"collision": True, "timeout": False},
+        }
+        self.assertTrue(replay_equal(record, json.loads(json.dumps(record))))
+        self.assertTrue(derive_failures(record)["selector_failure"])
+        payload = {"trials": [{"record": record, "replay": record}]}
+        result = check_phase5d(payload)
+        self.assertTrue(result["all_pass"])
+        self.assertEqual(result["candidate_recall_failures"], 0)
 
 if __name__ == "__main__":
     unittest.main()
