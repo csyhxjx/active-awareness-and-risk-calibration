@@ -6,6 +6,7 @@ import json
 import random
 import subprocess
 import sys
+import platform
 from pathlib import Path
 
 import numpy as np
@@ -27,6 +28,15 @@ from guard.json_io import canonical_dumps, write_json
 
 def sha256(value):
     return hashlib.sha256(value).hexdigest()
+
+
+def tree_hash(root):
+    digest = hashlib.sha256()
+    for path in sorted(Path(root).rglob("*")):
+        if path.is_file() and ".cache" not in path.parts:
+            digest.update(str(path.relative_to(root)).encode())
+            digest.update(path.read_bytes())
+    return digest.hexdigest()
 
 
 class FixtureProposer:
@@ -70,6 +80,21 @@ class OpenVLAProposer:
         if available != ["libero_spatial_no_noops"]:
             raise RuntimeError(f"unexpected frozen checkpoint norm_stats keys: {available}")
         self._cfg.unnorm_key = available[0]
+
+        self.metadata = {
+            "checkpoint": str(checkpoint),
+            "checkpoint_tree_sha256": tree_hash(checkpoint),
+            "norm_stats_key": self._cfg.unnorm_key,
+            "transformers_version": __import__("transformers").__version__,
+            "torch_version": __import__("torch").__version__,
+            "python_version": platform.python_version(),
+            "cuda_device": __import__("torch").cuda.get_device_name(0),
+            "cuda_visible_devices": __import__("os").environ.get("CUDA_VISIBLE_DEVICES"),
+            "batch_size": 1,
+            "do_sample": False,
+            "num_actions_chunk": 8,
+            "action_dim": 7,
+        }
         self._processor = get_processor(self._cfg)
         self._action_head = get_action_head(self._cfg, self._model.llm_dim)
 
@@ -185,6 +210,7 @@ def main():
         "manifest_sha256": sha256(args.manifest.read_bytes()),
         "guard_head": subprocess.run(["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip(),
         "proposer": "fixture" if args.fixture else str(args.checkpoint),
+        "proposer_metadata": getattr(proposer, "metadata", {"kind": "fixture"}),
         "trials": records,
     }
     write_json(args.output_root / "smoke.json", payload)
