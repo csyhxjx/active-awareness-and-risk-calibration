@@ -1,0 +1,114 @@
+import tempfile
+import unittest
+from pathlib import Path
+
+import numpy as np
+
+from guard.active_vision.rgb_broker import (
+    OracleObservationSource,
+    PurchasedROI,
+    PurchasedViewBroker,
+    RGBObservationSource,
+)
+from guard.active_vision.rgb_detector import (
+    DETECTOR_VERSION,
+    DetectorConfig,
+    DetectorContractError,
+    RGBDetector,
+    preprocessing_hash,
+)
+from guard.active_vision.rgb_data import load_training_samples
+
+
+COLORS = {
+    "q_branch": {"family_a": (230, 31, 26), "family_b": (26, 191, 51), "family_c": (26, 71, 230)},
+    "q_a": {"family_a:001": (250, 199, 13), "family_a:110": (184, 31, 219), "not_applicable": (107, 107, 107)},
+    "q_b": {"family_b:010": (250, 199, 13), "family_b:101": (184, 31, 219), "not_applicable": (107, 107, 107)},
+    "q_c": {"family_c:011": (250, 199, 13), "family_c:100": (184, 31, 219), "not_applicable": (107, 107, 107)},
+}
+
+
+def image(rgb):
+    return np.full((12, 13, 3), rgb, dtype=np.uint8)
+
+
+def trained_detector():
+    samples = []
+    for camera, classes in COLORS.items():
+        for label, rgb in classes.items():
+            samples.append({"request": {"camera_id": camera, "roi_rgb": image(rgb)}, "target_symbol": label})
+    return RGBDetector.fit(samples, DetectorConfig(abstain_confidence=0.0))
+
+
+class RGBDetectorContractTest(unittest.TestCase):
+    def test_rejects_every_metadata_side_channel(self):
+        detector = trained_detector()
+        for key in ("filename", "layout_id", "hidden_state", "route_result", "collision", "outcome"):
+            request = {"camera_id": "q_branch", "roi_rgb": image((230, 31, 26)), key: "leak"}
+            with self.assertRaises(DetectorContractError):
+                detector.predict(request)
+
+    def test_output_is_only_registered_symbol_or_likelihood(self):
+        detector = trained_detector()
+        result = detector.predict({"camera_id": "q_branch", "roi_rgb": image((230, 31, 26))})
+        self.assertEqual(result["predicted_outcome"], "family_a")
+        self.assertEqual(set(result), {
+            "camera_id", "predicted_outcome", "confidence", "calibrated_probabilities",
+            "model_hash", "detector_version",
+        })
+        self.assertEqual(result["detector_version"], DETECTOR_VERSION)
+        self.assertAlmostEqual(sum(result["calibrated_probabilities"].values()), 1.0)
+
+    def test_model_preprocessing_and_replay_hashes_are_stable(self):
+        detector = trained_detector()
+        request = {"camera_id": "q_a", "roi_rgb": image((250, 199, 13))}
+        self.assertEqual(detector.predict(request), detector.predict(request))
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "model.json"
+            detector.save(path)
+            restored = RGBDetector.load(path)
+            self.assertEqual(detector.model_hash, restored.model_hash)
+            self.assertEqual(detector.config_hash, restored.config_hash)
+            self.assertEqual(preprocessing_hash(), restored.payload()["preprocessing_sha256"])
+            self.assertEqual(detector.predict(request), restored.predict(request))
+
+    def test_oracle_rgb_and_fixed_can_use_the_same_b2_broker_contract(self):
+        detector = trained_detector()
+
+        def supplier(camera):
+            rgb = next(iter(COLORS[camera].values()))
+            return PurchasedROI(camera, image(rgb), "state-hash", "state-hash")
+
+        rgb_broker = PurchasedViewBroker(supplier)
+        rgb = RGBObservationSource(rgb_broker, detector)
+        rgb.query("q_branch")
+        rgb.query("q_a")
+        self.assertEqual(rgb_broker.remaining, 0)
+        with self.assertRaises(RuntimeError):
+            rgb.query("q_b")
+
+        oracle_broker = PurchasedViewBroker(supplier)
+        oracle = OracleObservationSource(oracle_broker, {"q_branch": "family_a", "q_a": "family_a:001"})
+        oracle.query("q_branch")
+        oracle.query("q_a")
+        self.assertEqual(oracle_broker.remaining, 0)
+
+    def test_broker_rejects_state_mutation_and_repeat_purchase(self):
+        good = PurchasedViewBroker(lambda camera: PurchasedROI(camera, image((1, 2, 3)), "x", "x"))
+        good.purchase("q_branch")
+        with self.assertRaises(RuntimeError):
+            good.purchase("q_branch")
+        bad = PurchasedViewBroker(lambda camera: PurchasedROI(camera, image((1, 2, 3)), "x", "y"))
+        with self.assertRaises(RuntimeError):
+            bad.purchase("q_branch")
+
+    def test_training_loader_rejects_non_train_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "index.json"
+            path.write_text('{"split":"validation","records":[]}')
+            with self.assertRaises(DetectorContractError):
+                load_training_samples([path], Path(directory))
+
+
+if __name__ == "__main__":
+    unittest.main()
