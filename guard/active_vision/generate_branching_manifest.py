@@ -2,9 +2,10 @@
 import argparse, json
 from pathlib import Path
 from guard.active_vision.belief_branch_scene import BranchLayout
+from guard.active_vision.belief_branching import CAMERAS, OBSERVATION_TABLE, STATES
 from guard.json_io import write_json
 
-SEED = 66120
+SEED = 66121
 ALL_STATES = ("001","110","010","101","011","100","000","111")
 
 def build():
@@ -20,7 +21,8 @@ def build():
             "cue_shift_y": round(0.012 * ((index % 4) - 1.5), 6),
             "camera_shift_x": round(0.01 * ((index % 5) - 2), 6),
             "camera_shift_y": round(0.01 * ((index % 3) - 1), 6),
-            "color_permutation": list(((index + 0) % 3, (index + 1) % 3, (index + 2) % 3)),
+            "color_permutation": [0, 1, 2],
+            "observation_table": {state: {camera: OBSERVATION_TABLE[(state, camera)] for camera in CAMERAS} for state in STATES},
             "states": list(ALL_STATES),
             "main_states": list(ALL_STATES[:6]), "control_states": list(ALL_STATES[6:]),
         })

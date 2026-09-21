@@ -7,7 +7,7 @@ from guard.active_vision.belief_branch_scene import BranchLayout, BranchingBelie
 from guard.active_vision.belief_branching import STATES, all_fixed_results, observation, run_adaptive
 from guard.active_vision.runtime import execute_route, physical_state, state_hash
 from guard.json_io import canonical_dumps, write_json
-SEED=66120
+SEED=66121
 def sha(b): return hashlib.sha256(b).hexdigest()
 def env(state, layout):
     random.seed(SEED); np.random.seed(SEED); e=BranchingBeliefEnv(layout=layout, hidden_state=state); e.reset(); return e
@@ -28,8 +28,22 @@ def route(state, layout, name, expected):
         if state_hash(physical_state(e)) != expected: raise RuntimeError('branch mismatch')
         return execute_route(e,name,max_steps=100,hold_steps=5)
     finally: e.close()
+def clearance(result, state, layout):
+    margins=[]
+    for record in result['records']:
+        point=np.asarray(record['eef'])
+        for index,lane in enumerate((layout.lane_y,0.0,-layout.lane_y)):
+            if state[index]=='0':
+                center=np.asarray((layout.obstacle_x,lane,layout.target[2]))
+                margins.append(float(np.linalg.norm(point-center)-0.085))
+    return max(0.0,min(margins)) if margins else 0.0
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('manifest',type=Path); p.add_argument('output',type=Path); a=p.parse_args(); a.output.mkdir(parents=True)
+    p=argparse.ArgumentParser(); p.add_argument('manifest',type=Path); p.add_argument('output',type=Path, nargs='?'); p.add_argument('--fingerprint-state'); p.add_argument('--fingerprint-output',type=Path); p.add_argument('--fingerprint-layout'); a=p.parse_args()
+    if a.fingerprint_state:
+        spec=next(item for item in json.loads(a.manifest.read_text())['layouts'] if item['layout_id']==a.fingerprint_layout); layout=BranchLayout(**{k:tuple(v) if k in ('start','target','color_permutation') else v for k,v in spec.items() if k not in ('states','main_states','control_states','observation_table')})
+        write_json(a.fingerprint_output, capture(a.fingerprint_state, layout, a.fingerprint_output.parent)); return
+    if a.output is None: p.error('output required')
+    a.output.mkdir(parents=True)
     manifest=json.loads(a.manifest.read_text()); layouts=[]
     for spec in manifest['layouts']:
         layout=BranchLayout(**{k:tuple(v) if k in ('start','target','color_permutation') else v for k,v in spec.items() if k not in ('states','main_states','control_states')})
@@ -37,8 +51,10 @@ def main():
         for state in ALL_STATES:
             sd=root/state; sd.mkdir(); fp=capture(state,layout,sd); routes=[]
             for name in ('left_route','center_route','right_route'):
-                result=route(state,layout,name,fp['state_hash']); route_map[(state,name)]=result; routes.append({k:v for k,v in result.items() if k!='records'})
-            rows.append({'state':state,'fingerprint':fp,'routes':routes})
+                result=route(state,layout,name,fp['state_hash']); result['clearance_margin']=clearance(result,state,layout); route_map[(state,name)]=result; routes.append({k:v for k,v in result.items() if k!='records'})
+            replay_path=sd/'fresh_process_fingerprint.json'
+            subprocess.run([sys.executable, str(Path(__file__).resolve()), str(a.manifest), '--fingerprint-state', state, '--fingerprint-layout', layout.layout_id, '--fingerprint-output', str(replay_path)], check=True)
+            rows.append({'state':state,'fingerprint':fp,'fresh_process_replay_exact':replay_path.exists() and canonical_dumps(fp)==canonical_dumps(json.loads(replay_path.read_text())),'routes':routes})
         adaptive=[]
         for state in STATES:
             trace=run_adaptive(state); action=trace[-1]['decision']['id']; result=route_map[(state,action)]

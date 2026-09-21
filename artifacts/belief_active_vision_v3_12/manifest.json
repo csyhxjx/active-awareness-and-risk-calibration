@@ -1,0 +1,1027 @@
+{
+  "schema_version": 1,
+  "seed": 66121,
+  "layout_count": 12,
+  "layouts": [
+    {
+      "layout_id": "branch_dev_00",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.16,
+      "obstacle_x": 0.045,
+      "occluder_x": 0.29,
+      "cue_shift_x": -0.012,
+      "cue_shift_y": -0.018,
+      "camera_shift_x": -0.02,
+      "camera_shift_y": -0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_01",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.166,
+      "obstacle_x": 0.053,
+      "occluder_x": 0.298,
+      "cue_shift_x": 0.0,
+      "cue_shift_y": -0.006,
+      "camera_shift_x": -0.01,
+      "camera_shift_y": 0.0,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_02",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.172,
+      "obstacle_x": 0.061,
+      "occluder_x": 0.306,
+      "cue_shift_x": 0.012,
+      "cue_shift_y": 0.006,
+      "camera_shift_x": 0.0,
+      "camera_shift_y": 0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_03",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.178,
+      "obstacle_x": 0.069,
+      "occluder_x": 0.29,
+      "cue_shift_x": -0.012,
+      "cue_shift_y": 0.018,
+      "camera_shift_x": 0.01,
+      "camera_shift_y": -0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_04",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.16,
+      "obstacle_x": 0.077,
+      "occluder_x": 0.298,
+      "cue_shift_x": 0.0,
+      "cue_shift_y": -0.018,
+      "camera_shift_x": 0.02,
+      "camera_shift_y": 0.0,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_05",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.166,
+      "obstacle_x": 0.045,
+      "occluder_x": 0.306,
+      "cue_shift_x": 0.012,
+      "cue_shift_y": -0.006,
+      "camera_shift_x": -0.02,
+      "camera_shift_y": 0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_06",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.172,
+      "obstacle_x": 0.053,
+      "occluder_x": 0.29,
+      "cue_shift_x": -0.012,
+      "cue_shift_y": 0.006,
+      "camera_shift_x": -0.01,
+      "camera_shift_y": -0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_07",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.178,
+      "obstacle_x": 0.061,
+      "occluder_x": 0.298,
+      "cue_shift_x": 0.0,
+      "cue_shift_y": 0.018,
+      "camera_shift_x": 0.0,
+      "camera_shift_y": 0.0,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_08",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.16,
+      "obstacle_x": 0.069,
+      "occluder_x": 0.306,
+      "cue_shift_x": 0.012,
+      "cue_shift_y": -0.018,
+      "camera_shift_x": 0.01,
+      "camera_shift_y": 0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_09",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.166,
+      "obstacle_x": 0.077,
+      "occluder_x": 0.29,
+      "cue_shift_x": -0.012,
+      "cue_shift_y": -0.006,
+      "camera_shift_x": 0.02,
+      "camera_shift_y": -0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_10",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.172,
+      "obstacle_x": 0.045,
+      "occluder_x": 0.298,
+      "cue_shift_x": 0.0,
+      "cue_shift_y": 0.006,
+      "camera_shift_x": -0.02,
+      "camera_shift_y": 0.0,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    },
+    {
+      "layout_id": "branch_dev_11",
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.178,
+      "obstacle_x": 0.053,
+      "occluder_x": 0.306,
+      "cue_shift_x": 0.012,
+      "cue_shift_y": 0.018,
+      "camera_shift_x": -0.01,
+      "camera_shift_y": 0.01,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ],
+      "observation_table": {
+        "001": {
+          "q_branch": "family_a",
+          "q_a": "family_a:001",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "110": {
+          "q_branch": "family_a",
+          "q_a": "family_a:110",
+          "q_b": "not_applicable",
+          "q_c": "not_applicable"
+        },
+        "010": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:010",
+          "q_c": "not_applicable"
+        },
+        "101": {
+          "q_branch": "family_b",
+          "q_a": "not_applicable",
+          "q_b": "family_b:101",
+          "q_c": "not_applicable"
+        },
+        "011": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:011"
+        },
+        "100": {
+          "q_branch": "family_c",
+          "q_a": "not_applicable",
+          "q_b": "not_applicable",
+          "q_c": "family_c:100"
+        }
+      },
+      "states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100",
+        "000",
+        "111"
+      ],
+      "main_states": [
+        "001",
+        "110",
+        "010",
+        "101",
+        "011",
+        "100"
+      ],
+      "control_states": [
+        "000",
+        "111"
+      ]
+    }
+  ]
+}
