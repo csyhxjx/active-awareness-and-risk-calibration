@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "protocol_id": "belief_active_vision_protocol_v4_12layout_addendum",
+  "run_namespace": "belief_active_vision_v4_12/run_d86de16",
+  "run_head": "d86de16bffa3b30f895b6390b434ecbb215d3f21",
+  "seed": 66212,
+  "layouts": 12,
+  "main_scenes": 72,
+  "control_scenes": 24,
+  "route_executions": 288,
+  "hard_gates_pass": true,
+  "adaptive_exact": {
+    "collision_free_completion": 72,
+    "collision_free_completion_rate": 1.0,
+    "collision": 0,
+    "collision_rate": 0.0,
+    "stop": 0,
+    "stop_rate": 0.0,
+    "mean_queries": 2.0,
+    "mean_utility": 0.9
+  },
+  "best_fixed_b2_envelope": {
+    "collision_free_completion": 48,
+    "collision_free_completion_rate": 0.6666666666666666,
+    "collision": 0,
+    "collision_rate": 0.0,
+    "stop": 24,
+    "stop_rate": 0.3333333333333333,
+    "mean_queries": 1.6666666666666667,
+    "mean_utility": 0.5,
+    "tied_sequences": [
+      ["q_b", "q_a"],
+      ["q_b", "q_c"],
+      ["q_c", "q_a"],
+      ["q_c", "q_b"]
+    ]
+  },
+  "adaptive_minus_fixed": {
+    "collision_free_completion_rate": {
+      "estimate": 0.3333333333333334,
+      "layout_bootstrap_95_ci": [0.3333333333333334, 0.3333333333333334]
+    },
+    "collision_rate": {
+      "estimate": 0.0,
+      "layout_bootstrap_95_ci": [0.0, 0.0]
+    },
+    "stop_rate": {
+      "estimate": -0.3333333333333333,
+      "layout_bootstrap_95_ci": [-0.3333333333333333, -0.3333333333333333]
+    },
+    "mean_queries": {
+      "estimate": 0.3333333333333332,
+      "layout_bootstrap_95_ci": [0.3333333333333332, 0.3333333333333332]
+    },
+    "mean_utility": {
+      "estimate": 0.4000000000000001,
+      "layout_bootstrap_95_ci": [0.4000000000000001, 0.4000000000000001]
+    },
+    "bootstrap_seed": 66212,
+    "bootstrap_replicates": 10000,
+    "cluster_unit": "layout"
+  },
+  "controls": {
+    "route_executions": 72,
+    "clear_routes_completed_collision_free": 36,
+    "blocked_routes_with_registered_obstacle_collision": 36
+  },
+  "raw_summary_sha256": "3fc1e2863488172675ae8f7c6327994a2a91e9970e12020bde107b34641d4925",
+  "hard_gate_check_sha256": "b978c118409ef7c1c913885cd3ada748508573b9c2b72558aca21c499ce540be"
+}

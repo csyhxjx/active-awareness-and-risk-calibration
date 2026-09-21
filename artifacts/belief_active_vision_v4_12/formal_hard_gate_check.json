@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "checker_version": "phase6a7-v1",
+  "stage": "formal",
+  "hard_gates": {
+    "roi_contract": true,
+    "hidden_public_isolation": true,
+    "route_physics": true,
+    "clearance": true,
+    "fresh_process_replay": true,
+    "fixed_sequences": true,
+    "provenance": true
+  },
+  "all_hard_gates_pass": true,
+  "scientific_results_authorized": true,
+  "layouts": [
+    {
+      "layout_id": "roi_candidate_000",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_001",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_002",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_003",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_004",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_005",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_006",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_007",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_008",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_009",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_010",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    },
+    {
+      "layout_id": "roi_candidate_011",
+      "hard_pass": true,
+      "errors": [],
+      "adaptive": {
+        "completion": 6,
+        "collision": 0,
+        "stop": 0,
+        "mean_queries": 2.0,
+        "mean_utility": 0.9
+      },
+      "best_fixed": {
+        "sequence": [
+          "q_b",
+          "q_a"
+        ],
+        "completion": 4,
+        "collision": 0,
+        "stop": 2,
+        "mean_queries": 1.6666666666666667,
+        "mean_utility": 0.5
+      }
+    }
+  ],
+  "errors": []
+}
