@@ -23,10 +23,12 @@ or particle result.
    controller trajectory. An EEF point or fixed-radius point surrogate is not a
    valid final measurement. The same collision geometry is used for labels and
    preflight checks.
-3. The route lane spacing, obstacle height, obstacle longitudinal half-size,
-   and obstacle lateral half-width range are explicit constants in the scene
-   manifest and cannot be changed during generation. The calibration report
-   records these values and the controller version.
+3. The calibration fixture freezes these scene constants: route centerlines
+   `y={+0.270, 0.000, -0.270} m`, target/start route height `z=1.010 m`,
+   obstacle center height `z=0.960 m`, longitudinal half-size `0.035 m`, and
+   lateral half-width range `[0.025, 0.055] m`. They cannot be changed during
+   generation. The calibration report records these values and the controller
+   version. A later scene change requires another amendment.
 4. Absent obstacles contribute no route-obstacle clearance term, but static
    environment, robot self-collision, and table contacts remain hard failures.
 5. A candidate world is eligible only after the official controller preflight
