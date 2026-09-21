@@ -16,6 +16,7 @@ from guard.active_vision.scene import _look_at_quat, _set_static_pose
 
 
 CAMERAS = ("v0",) + PAID_CAMERAS
+ALL_STATES = STATES + ("000", "111")
 FAMILY_COLORS = {
     "family_a": [0.90, 0.12, 0.10, 1.0],
     "family_b": [0.10, 0.75, 0.20, 1.0],
@@ -34,6 +35,11 @@ class BranchLayout:
     lane_y: float = 0.18
     obstacle_x: float = 0.065
     occluder_x: float = 0.30
+    cue_shift_x: float = 0.0
+    cue_shift_y: float = 0.0
+    camera_shift_x: float = 0.0
+    camera_shift_y: float = 0.0
+    color_permutation: tuple = (0, 1, 2)
 
 
 DEMO_LAYOUT = BranchLayout()
@@ -45,18 +51,28 @@ CUE_POSITIONS = {
 }
 
 
-def camera_specs():
+def cue_positions(layout):
+    dx, dy = layout.cue_shift_x, layout.cue_shift_y
+    return {name: (position[0] + dx, position[1] + dy, position[2]) for name, position in {
+        "q_branch": (0.12, 0.0, 1.17), "q_a": (-0.25, 0.28, 1.08),
+        "q_b": (0.12, 0.25, 1.17), "q_c": (-0.25, -0.28, 1.08),
+    }.items()}
+
+
+def camera_specs(layout):
+    positions = cue_positions(layout)
+    dx, dy = layout.camera_shift_x, layout.camera_shift_y
     return {
-        "v0": ([0.62, 0.0, 1.22], [0.04, 0.0, 1.0], 45),
-        "q_branch": ([0.12, 0.0, 1.50], CUE_POSITIONS["q_branch"], 15),
-        "q_a": ([-0.25, 0.58, 1.08], CUE_POSITIONS["q_a"], 15),
-        "q_b": ([0.12, 0.25, 1.50], CUE_POSITIONS["q_b"], 15),
-        "q_c": ([-0.25, -0.58, 1.08], CUE_POSITIONS["q_c"], 15),
+        "v0": ([0.62 + dx, 0.0 + dy, 1.22], [0.04, 0.0, 1.0], 45),
+        "q_branch": ([0.12 + dx, 0.0 + dy, 1.50], positions["q_branch"], 15),
+        "q_a": ([-0.25 + dx, 0.58 + dy, 1.08], positions["q_a"], 15),
+        "q_b": ([0.12 + dx, 0.25 + dy, 1.50], positions["q_b"], 15),
+        "q_c": ([-0.25 + dx, -0.58 + dy, 1.08], positions["q_c"], 15),
     }
 
 
-def cue_colors(state):
-    family = STATE_FAMILY[state]
+def cue_colors(state, permutation=(0, 1, 2)):
+    family = STATE_FAMILY.get(state, "family_a" if state == "000" else "family_c")
     colors = {"q_branch": FAMILY_COLORS[family]}
     family_states = {
         "family_a": ("001", "110"),
@@ -68,12 +84,17 @@ def cue_colors(state):
             colors[camera] = INACTIVE_COLOR
         else:
             colors[camera] = FIRST_COLOR if state == family_states[candidate][0] else SECOND_COLOR
+    if permutation != (0, 1, 2):
+        specialist = ("q_a", "q_b", "q_c")
+        values = [colors[name] for name in specialist]
+        for name, value in zip(specialist, [values[index] for index in permutation]):
+            colors[name] = value
     return colors
 
 
 class BranchingBeliefEnv(SingleArmEnv):
     def __init__(self, layout=DEMO_LAYOUT, hidden_state="001", **kwargs):
-        if hidden_state not in STATES:
+        if hidden_state not in ALL_STATES:
             raise ValueError(hidden_state)
         self.layout = layout
         self.hidden_state = hidden_state
@@ -114,7 +135,7 @@ class BranchingBeliefEnv(SingleArmEnv):
         arena.set_origin([0, 0, 0])
         for light in arena.worldbody.findall("light"):
             light.set("castshadow", "false")
-        for name, (position, target, fovy) in camera_specs().items():
+        for name, (position, target, fovy) in camera_specs(self.layout).items():
             arena.set_camera(name, pos=position, quat=_look_at_quat(position, target), camera_attribs={"fovy": str(fovy)})
 
         route_colors = ([0.9, 0.12, 0.1, 1], [0.2, 0.8, 0.2, 1], [0.1, 0.3, 0.9, 1])
@@ -130,11 +151,12 @@ class BranchingBeliefEnv(SingleArmEnv):
         self.occluder = BoxObject(name="branch_occluder", size=[0.025, 0.38, 0.25], rgba=[0.16, 0.17, 0.19, 1], joints=None, obj_type="all")
         _set_static_pose(self.occluder, [self.layout.occluder_x, 0.0, 1.03])
 
-        colors = cue_colors(self.hidden_state)
+        colors = cue_colors(self.hidden_state, self.layout.color_permutation)
+        positions = cue_positions(self.layout)
         self.cues = []
         for camera in PAID_CAMERAS:
             cue = BoxObject(name=f"branch_cue_{camera}", size=[0.045, 0.045, 0.045], rgba=colors[camera], joints=None, obj_type="visual")
-            _set_static_pose(cue, CUE_POSITIONS[camera])
+            _set_static_pose(cue, positions[camera])
             self.cues.append(cue)
 
         self.target_marker = BallObject(name="branch_target", size=[0.018], rgba=[0.1, 0.8, 0.25, 1], joints=None, obj_type="visual")
