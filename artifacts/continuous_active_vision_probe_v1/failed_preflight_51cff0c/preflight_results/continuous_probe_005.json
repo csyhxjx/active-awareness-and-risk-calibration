@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "preflight_version": "phase6c-preflight-v1",
+  "git_head": "51cff0c00f758fbb99a059489f760054227b2f1b",
+  "manifest_sha256": "8606ecae0285d373eab2eef74e049c52fba3730ab1ef45253c57b4327d897e47",
+  "generator_seed": 66421,
+  "world_id": "continuous_probe_005",
+  "world_index": 5,
+  "routes": [
+    {
+      "route": "left_route",
+      "steps": 100,
+      "reached": false,
+      "collision": true,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_left_g0",
+          "geom2": "gripper0_finger1_collision",
+          "penetration": 0.0010886836345508077
+        }
+      ],
+      "minimum_clearance_m": -0.023441331593218387,
+      "clearance_margin_m": -0.027441331593218387,
+      "collision_free_success": false,
+      "feasible": false,
+      "trajectory_sha256": "84e3a47372b14a45b243c429a544fdbdc7f264948d3504bdd8165bc09bde02d8",
+      "branch_state_hash": "5619e6ac654b4a661126852ce8ead3ed2f002f88c7a51688d603153985b00040",
+      "observed_stratum": "blocked",
+      "expected_stratum": "blocked",
+      "stratum_match": true
+    },
+    {
+      "route": "center_route",
+      "steps": 45,
+      "reached": true,
+      "collision": false,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [],
+      "minimum_clearance_m": 0.012111569736287742,
+      "clearance_margin_m": 0.008111569736287742,
+      "collision_free_success": true,
+      "feasible": true,
+      "trajectory_sha256": "f000de91f45f31f58ccb57469b1e51f733ea6a5cf58aeed4e290e82c43357eec",
+      "branch_state_hash": "5619e6ac654b4a661126852ce8ead3ed2f002f88c7a51688d603153985b00040",
+      "observed_stratum": "safe",
+      "expected_stratum": "safe",
+      "stratum_match": true
+    },
+    {
+      "route": "right_route",
+      "steps": 91,
+      "reached": true,
+      "collision": false,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [],
+      "minimum_clearance_m": 0.0029018171707026613,
+      "clearance_margin_m": -0.0010981828292973388,
+      "collision_free_success": true,
+      "feasible": false,
+      "trajectory_sha256": "03f2c4bd0a2e5da38e7fed520287197a31de0e66d9ed03e4bc7969f13ed98854",
+      "branch_state_hash": "5619e6ac654b4a661126852ce8ead3ed2f002f88c7a51688d603153985b00040",
+      "observed_stratum": "boundary",
+      "expected_stratum": "boundary",
+      "stratum_match": true
+    }
+  ],
+  "all_match": true
+}
