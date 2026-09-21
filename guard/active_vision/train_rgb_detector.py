@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 from guard.active_vision.rgb_data import load_training_samples
-from guard.active_vision.rgb_detector import DetectorConfig, RGBDetector, preprocessing_hash, sha256_canonical
+from guard.active_vision.rgb_detector import DetectorConfig, RGBDetector, preprocessing_hash
 from guard.active_vision.phase6a7 import sha256_file
 from guard.json_io import write_json
 

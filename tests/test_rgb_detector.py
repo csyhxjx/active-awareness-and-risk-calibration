@@ -109,6 +109,20 @@ class RGBDetectorContractTest(unittest.TestCase):
             with self.assertRaises(DetectorContractError):
                 load_training_samples([path], Path(directory))
 
+    def test_training_loader_resolves_paths_relative_to_each_shard_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            shard = Path(directory) / "shard_0"
+            (shard / "images").mkdir(parents=True)
+            Image = __import__("PIL.Image", fromlist=["Image"])
+            Image.fromarray(image((1, 2, 3))).save(shard / "images" / "roi.png")
+            index = shard / "index.json"
+            index.write_text(
+                '{"split":"train","records":[{"roi_path":"images/roi.png",'
+                '"camera_id":"q_branch","target_symbol":"family_a"}]}'
+            )
+            samples = load_training_samples([index], Path(directory) / "unused")
+            self.assertEqual(samples[0]["request"]["roi_rgb"].shape, (12, 13, 3))
+
 
 if __name__ == "__main__":
     unittest.main()

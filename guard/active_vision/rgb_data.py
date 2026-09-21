@@ -36,7 +36,10 @@ def load_training_samples(index_paths: list[Path], root: Path) -> list[dict]:
         if payload.get("split") != "train":
             raise DetectorContractError("training loader accepts train split only")
         for record in payload["records"]:
-            roi = np.asarray(Image.open(root / record["roi_path"]).convert("RGB"), dtype=np.uint8)
+            image_path = root / record["roi_path"]
+            if not image_path.exists():
+                image_path = index_path.parent / record["roi_path"]
+            roi = np.asarray(Image.open(image_path).convert("RGB"), dtype=np.uint8)
             samples.append({
                 "request": {"camera_id": record["camera_id"], "roi_rgb": roi},
                 "target_symbol": record["target_symbol"],
