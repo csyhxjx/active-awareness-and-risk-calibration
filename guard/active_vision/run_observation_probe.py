@@ -42,8 +42,8 @@ def main():
                 for record in result['records']:
                     point=np.asarray(record['eef'])
                     for index,lane in enumerate((e.layout.lane_y,0.0,-e.layout.lane_y)):
-                        if state[index]=='0': clearances.append(float(np.linalg.norm(point-np.asarray((e.layout.obstacle_x,lane,e.layout.target[2])))-0.085))
-                result={k:v for k,v in result.items() if k!='records'}; result['trajectory_hash']=trajectory_hash; result['minimum_clearance_m']=max(0.0,min(clearances)) if clearances else 0.0; routes.append(result)
+                        if state[index]=='1': clearances.append(float(np.linalg.norm(point-np.asarray((e.layout.obstacle_x,lane,e.layout.target[2])))-0.085))
+                result={k:v for k,v in result.items() if k!='records'}; result['trajectory_hash']=trajectory_hash; result['minimum_clearance_m']=min(clearances) if clearances else None; routes.append(result)
             finally: e.close()
         rows.append({'state':state,'observation_table':{camera:observation(state,camera) for camera in PAID},'fingerprint':fp,'fresh_process_replay_exact':canonical_dumps(fp)==canonical_dumps(replay),'routes':routes})
     write_json(a.output/'summary.json',{'schema_version':1,'seed':SEED,'roi':[64,64,160,160],'states':rows,'clearance_threshold_m':0.004,'checker_version':'roi-probe-v1'})
