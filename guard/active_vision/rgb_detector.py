@@ -182,6 +182,13 @@ class RGBDetector:
         config = DetectorConfig(**(asdict(self.config) | {"abstain_confidence": float(threshold)}))
         return RGBDetector(self.classes_by_camera, {key: value.tolist() for key, value in self.centroids.items()}, config)
 
+    def with_calibration(self, temperature: float, threshold: float = 0.0) -> "RGBDetector":
+        config = DetectorConfig(**(asdict(self.config) | {
+            "distance_temperature": float(temperature),
+            "abstain_confidence": float(threshold),
+        }))
+        return RGBDetector(self.classes_by_camera, {key: value.tolist() for key, value in self.centroids.items()}, config)
+
     def save(self, path: Path) -> None:
         write_json(path, self.payload())
 

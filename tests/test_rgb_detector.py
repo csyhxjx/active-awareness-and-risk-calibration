@@ -1,5 +1,8 @@
 import tempfile
 import unittest
+import json
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -72,6 +75,30 @@ class RGBDetectorContractTest(unittest.TestCase):
             self.assertEqual(detector.config_hash, restored.config_hash)
             self.assertEqual(preprocessing_hash(), restored.payload()["preprocessing_sha256"])
             self.assertEqual(detector.predict(request), restored.predict(request))
+
+    def test_validation_calibration_returns_new_hashed_model(self):
+        detector = trained_detector()
+        calibrated = detector.with_calibration(0.005, 0.8)
+        self.assertNotEqual(detector.model_hash, calibrated.model_hash)
+        self.assertEqual(calibrated.config.distance_temperature, 0.005)
+        self.assertEqual(calibrated.config.abstain_confidence, 0.8)
+
+    def test_fresh_process_replay_is_exact(self):
+        detector = trained_detector()
+        with tempfile.TemporaryDirectory() as directory:
+            model = Path(directory) / "model.json"
+            roi = Path(directory) / "roi.png"
+            detector.save(model)
+            Image = __import__("PIL.Image", fromlist=["Image"])
+            pixels = image((230, 31, 26))
+            Image.fromarray(pixels).save(roi)
+            expected = detector.predict({"camera_id": "q_branch", "roi_rgb": pixels})
+            result = subprocess.run(
+                [sys.executable, "-m", "guard.active_vision.replay_rgb_detector", "--model", str(model),
+                 "--camera", "q_branch", "--roi", str(roi)],
+                check=True, capture_output=True, text=True,
+            )
+            self.assertEqual(expected, json.loads(result.stdout))
 
     def test_oracle_rgb_and_fixed_can_use_the_same_b2_broker_contract(self):
         detector = trained_detector()

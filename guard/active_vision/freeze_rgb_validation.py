@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import subprocess
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -12,11 +14,12 @@ from guard.active_vision.belief_branching import CAMERAS, PRIOR, plan, posterior
 from guard.active_vision.phase6a7 import run_adaptive_from_observations, sha256_file
 from guard.active_vision.rgb_data import load_labeled_samples
 from guard.active_vision.rgb_detector import RGBDetector, preprocessing_hash, sha256_canonical
-from guard.json_io import write_json
+from guard.json_io import canonical_dumps, write_json
 
 
 FREEZER_VERSION = "phase6b-validation-freezer-v1"
 THRESHOLD_CANDIDATES = (0.0, 0.50, 0.60, 0.70, 0.80, 0.90, 0.95)
+TEMPERATURE_CANDIDATES = (0.001, 0.002, 0.005, 0.010, 0.020, 0.040, 0.080, 0.160)
 
 
 def git_head() -> str:
@@ -68,9 +71,17 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
     manifest = json.loads(manifest_path.read_text())
     samples = load_labeled_samples(index_paths, data_root, "validation")
     base = RGBDetector.load(train_model)
+    temperature_rows = []
+    for temperature in TEMPERATURE_CANDIDATES:
+        detector = base.with_calibration(temperature)
+        rows = [(sample["target_symbol"], detector.predict(sample["request"])) for sample in samples]
+        nll = -sum(math.log(max(prediction["calibrated_probabilities"].get(target, 1e-300), 1e-300)) for target, prediction in rows) / len(rows)
+        temperature_rows.append((nll, temperature))
+    selected_nll, selected_temperature = min(temperature_rows)
+    calibrated_base = base.with_calibration(selected_temperature)
     candidates = []
     for threshold in THRESHOLD_CANDIDATES:
-        detector = base.with_abstain_confidence(threshold)
+        detector = calibrated_base.with_abstain_confidence(threshold)
         rows = [(sample["target_symbol"], detector.predict(sample["request"])) for sample in samples]
         accuracy = sum(target == prediction["predicted_outcome"] for target, prediction in rows) / len(rows)
         candidates.append((accuracy, threshold, detector, rows))
@@ -108,6 +119,23 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
 
     output_model.parent.mkdir(parents=True, exist_ok=True)
     detector.save(output_model)
+    first_index = json.loads(index_paths[0].read_text())
+    first_record = first_index["records"][0]
+    replay_roi = data_root / first_record["roi_path"]
+    if not replay_roi.exists():
+        replay_roi = index_paths[0].parent / first_record["roi_path"]
+    replay_request = samples[0]["request"]
+    replay_expected = detector.predict(replay_request)
+    replay_process = subprocess.run(
+        [sys.executable, "-m", "guard.active_vision.replay_rgb_detector", "--model", str(output_model),
+         "--camera", first_record["camera_id"], "--roi", str(replay_roi)],
+        check=True, capture_output=True, text=True,
+    )
+    replay_actual = json.loads(replay_process.stdout)
+    replay_exact = canonical_dumps(replay_expected, sort_keys=True) == canonical_dumps(replay_actual, sort_keys=True)
+    if not replay_exact:
+        raise RuntimeError("fresh-process detector replay mismatch")
+    source_root = Path(__file__).resolve().parent
     record = {
         "schema_version": 1,
         "stage": "validation_frozen",
@@ -118,6 +146,10 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
         "validation_index_sha256": {str(path): sha256_file(path) for path in index_paths},
         "validation_sample_count": len(samples),
         "checkpoint_selection": "single train checkpoint",
+        "temperature_candidates": list(TEMPERATURE_CANDIDATES),
+        "temperature_selection": "minimum validation negative log likelihood",
+        "selected_distance_temperature": selected_temperature,
+        "validation_negative_log_likelihood": selected_nll,
         "threshold_candidates": list(THRESHOLD_CANDIDATES),
         "threshold_selection": "max ROI accuracy, then highest threshold",
         "selected_abstain_confidence": threshold,
@@ -132,6 +164,12 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
         "config_sha256": detector.config_hash,
         "model_content_hash": detector.model_hash,
         "model_sha256": sha256_file(output_model),
+        "fresh_process_replay_exact": replay_exact,
+        "fresh_process_replay": replay_actual,
+        "evaluator_source_sha256": {
+            name: sha256_file(source_root / name)
+            for name in ("rgb_detector.py", "rgb_broker.py", "freeze_rgb_validation.py", "replay_rgb_detector.py")
+        },
         "evaluator_inputs_sha256": sha256_canonical({
             "model_content_hash": detector.model_hash,
             "preprocessing_sha256": preprocessing_hash(),
