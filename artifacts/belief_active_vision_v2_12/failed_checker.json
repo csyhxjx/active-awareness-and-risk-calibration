@@ -1,0 +1,15 @@
+{
+  "run_root": "/internsdata/yewenhao/guard_workspace/belief_active_vision_v2_12/run_0ca1175",
+  "manifest_sha256": "6939da1491a186106f71d1cf9e3f509038a1bfbb0176215097939b804ed9fa11",
+  "status": "FAIL",
+  "layouts": 12,
+  "symbolic_majority_gain": true,
+  "physical_layouts_with_gain": 11,
+  "failed_layouts": ["branch_dev_04"],
+  "failure_classes": {
+    "image_contract": "Color permutation changes specialist cue colors, so the frozen observation table no longer maps each outcome to one exact RGB group across layouts.",
+    "physical_geometry": "branch_dev_04 left_route collides in states 010 and 011 despite the left obstacle bit being clear; adaptive completion is 4/6."
+  },
+  "fresh_process_replay": "not recorded by the first 12-layout runner; this is an additional provenance gap, not a pass.",
+  "decision": "Stop expansion. Do not start RGB, particle, or learned-particle stages. A new amendment must freeze layout-specific observation partitions and repair route-clearance generation before any rerun."
+}

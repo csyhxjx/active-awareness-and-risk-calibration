@@ -1,7 +1,8 @@
 import argparse,json
 from pathlib import Path
 from guard.active_vision.belief_branching import STATES
-from guard.active_vision.belief_scene import ALL_STATES
+from guard.active_vision.belief_branch_scene import ALL_STATES
+from guard.active_vision.belief_branching import CAMERAS, observation, STATES
 from guard.json_io import write_json
 
 def check(root):
@@ -11,6 +12,13 @@ def check(root):
         if set(rows)!=set(ALL_STATES): errors.append(summary['layout_id']+':scope')
         v0={r['fingerprint']['ledger'][0]['image_sha256'] for r in rows.values()}
         if len(v0)!=1: errors.append(summary['layout_id']+':v0')
+        for camera in CAMERAS:
+            groups={}
+            for state in STATES:
+                ledger={x['camera']:x for x in rows[state]['fingerprint']['ledger']}
+                groups.setdefault(observation(state,camera),set()).add(ledger[camera]['image_sha256'])
+            if not all(len(values)==1 for values in groups.values()): errors.append(summary['layout_id']+':image_within')
+            if len({next(iter(values)) for values in groups.values()}) != len(groups): errors.append(summary['layout_id']+':image_between')
         route_count=0
         for state,row in rows.items():
             if len({x['state_hash'] for x in row['fingerprint']['ledger']}) != 1: errors.append(summary['layout_id']+':query')
@@ -22,7 +30,7 @@ def check(root):
         best=max(x['completion'] for x in summary['fixed'])
         fixed_utility=max(x['mean_utility'] for x in summary['fixed'])
         if adaptive != 6: errors.append(summary['layout_id']+':adaptive')
-        layout_results.append({'layout_id':summary['layout_id'],'v0':len(v0)==1,'routes':route_count,'adaptive_main_completion':adaptive,'best_fixed_completion':best,'best_fixed_utility':fixed_utility,'strict_gain':adaptive>best})
+        layout_results.append({'layout_id':summary['layout_id'],'v0':len(v0)==1,'routes':route_count,'adaptive_main_completion':adaptive,'best_fixed_completion':best,'best_fixed_utility':fixed_utility,'strict_gain':adaptive>best,'fresh_process_replay_recorded':False})
     majority=sum(x['strict_gain'] for x in layout_results) > 6
     result={'schema_version':1,'layouts':layout_results,'majority_strict_gain':majority,'all_pass':not errors and majority,'errors':errors}
     return result
