@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "stage": "train_only",
+  "trainer_version": "phase6b-rgb-trainer-v1",
+  "git_head": "395e8bfdce72eca9a2cb157ebb0fdbcfa69b204f",
+  "train_index_sha256": {
+    "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/train/shard_0/index.json": "1ebb58303e9d4f86c2cfe9bfa9f2adce8a25b4cc2b71c2cf409f3e93ba32c45b",
+    "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/train/shard_1/index.json": "0825abc0eb80485368bb6e6c77436d143227db92e718219d56fd1a4ef44fb70f",
+    "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/train/shard_2/index.json": "078e44b2163ae0faef9bb05df685692ffa9b0a4ef5f8068d15a01ff6815ca25f"
+  },
+  "train_sample_count": 768,
+  "architecture": "camera_conditioned_nearest_centroid",
+  "optimizer": "closed_form_class_mean",
+  "epochs": 1,
+  "seed": 66301,
+  "output_classes": {
+    "q_a": [
+      "family_a:001",
+      "family_a:110",
+      "not_applicable"
+    ],
+    "q_b": [
+      "family_b:010",
+      "family_b:101",
+      "not_applicable"
+    ],
+    "q_branch": [
+      "family_a",
+      "family_b",
+      "family_c"
+    ],
+    "q_c": [
+      "family_c:011",
+      "family_c:100",
+      "not_applicable"
+    ]
+  },
+  "abstain_rule": "predicted_outcome=unobserved iff max_probability < abstain_confidence",
+  "abstain_confidence": 0.0,
+  "checkpoint_rule": "validation_max_accuracy_then_min_nll_then_earliest_epoch",
+  "preprocessing_sha256": "77b94908bc552a8d3db360fddacb90d0bb649e7be88a76a3111160ff91bca7e8",
+  "config_sha256": "d6202a57317c4f08cb9aae7fe0de193218bb50d9ade0fdc129b630b67ab035b7",
+  "model_sha256": "bd4a8442ad8e8441c3a4c6ba8f1bf576bcef9630ef0e06d0f97adc5e9992497a",
+  "model_content_hash": "8cb5ca15d4ed85270288f35fe40537458ff76f59941979888ac4dcdfb9bdd49f",
+  "validation_opened": false,
+  "sealed_test_opened": false
+}

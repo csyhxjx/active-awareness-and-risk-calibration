@@ -18,6 +18,7 @@ from guard.active_vision.rgb_detector import (
     preprocessing_hash,
 )
 from guard.active_vision.rgb_data import load_training_samples
+from guard.active_vision.freeze_rgb_validation import run_noisy_adaptive
 
 
 COLORS = {
@@ -122,6 +123,14 @@ class RGBDetectorContractTest(unittest.TestCase):
             )
             samples = load_training_samples([index], Path(directory) / "unused")
             self.assertEqual(samples[0]["request"]["roi_rgb"].shape, (12, 13, 3))
+
+    def test_unobserved_consumes_budget_without_becoming_clear(self):
+        trace = run_noisy_adaptive({
+            "q_branch": "unobserved", "q_a": "unobserved",
+            "q_b": "unobserved", "q_c": "unobserved",
+        })
+        self.assertEqual(trace[-1]["decision"]["id"], "stop")
+        self.assertEqual(sum(row["decision"]["kind"] == "query" for row in trace), 2)
 
 
 if __name__ == "__main__":

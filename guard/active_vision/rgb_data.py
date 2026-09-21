@@ -28,13 +28,13 @@ def layout_from_rgb_spec(spec: dict) -> BranchLayout:
     )
 
 
-def load_training_samples(index_paths: list[Path], root: Path) -> list[dict]:
+def load_labeled_samples(index_paths: list[Path], root: Path, required_split: str) -> list[dict]:
     """Load pixels while stripping all storage/provenance metadata from model input."""
     samples = []
     for index_path in index_paths:
         payload = json.loads(index_path.read_text())
-        if payload.get("split") != "train":
-            raise DetectorContractError("training loader accepts train split only")
+        if payload.get("split") != required_split:
+            raise DetectorContractError(f"loader requires {required_split} split")
         for record in payload["records"]:
             image_path = root / record["roi_path"]
             if not image_path.exists():
@@ -45,3 +45,7 @@ def load_training_samples(index_paths: list[Path], root: Path) -> list[dict]:
                 "target_symbol": record["target_symbol"],
             })
     return samples
+
+
+def load_training_samples(index_paths: list[Path], root: Path) -> list[dict]:
+    return load_labeled_samples(index_paths, root, "train")

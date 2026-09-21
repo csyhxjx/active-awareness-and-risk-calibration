@@ -178,6 +178,10 @@ class RGBDetector:
             raise DetectorContractError("non-finite detector output")
         return output
 
+    def with_abstain_confidence(self, threshold: float) -> "RGBDetector":
+        config = DetectorConfig(**(asdict(self.config) | {"abstain_confidence": float(threshold)}))
+        return RGBDetector(self.classes_by_camera, {key: value.tolist() for key, value in self.centroids.items()}, config)
+
     def save(self, path: Path) -> None:
         write_json(path, self.payload())
 

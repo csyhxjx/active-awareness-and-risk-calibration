@@ -33,9 +33,11 @@ def fresh_env(spec: dict, state: str, seed: int) -> BranchingBeliefEnv:
     return env
 
 
-def collect(manifest_path: Path, output: Path, shard_index: int, shard_count: int, max_groups: int | None) -> dict:
+def collect(manifest_path: Path, output: Path, shard_index: int, shard_count: int, max_groups: int | None, *, split: str = "train") -> dict:
+    if split not in {"train", "validation"}:
+        raise ValueError("collector only authorizes train or validation; sealed_test requires the frozen evaluator")
     manifest = json.loads(manifest_path.read_text())
-    groups = [row for row in manifest["groups"] if row["split"] == "train"]
+    groups = [row for row in manifest["groups"] if row["split"] == split]
     groups = [row for index, row in enumerate(groups) if index % shard_count == shard_index]
     if max_groups is not None:
         groups = groups[:max_groups]
@@ -87,7 +89,7 @@ def collect(manifest_path: Path, output: Path, shard_index: int, shard_count: in
         "git_head": git_head(),
         "manifest_sha256": sha256_file(manifest_path),
         "protocol_sha256": manifest["protocol_sha256"],
-        "split": "train",
+        "split": split,
         "seed": manifest["seed"],
         "shard_index": shard_index,
         "shard_count": shard_count,
