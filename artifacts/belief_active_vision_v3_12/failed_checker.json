@@ -1,0 +1,15 @@
+{
+  "run_namespace": "belief_active_vision_v3_12/run_91d0c98b",
+  "manifest_sha256": "577e7867be0e0c620fba3da48db7671293ffa0a35afb892e68417a97af1adf56",
+  "status": "FAIL",
+  "layouts": 12,
+  "scenes": 96,
+  "routes": 288,
+  "failure_classes": {
+    "image_contract": "Even with globally fixed colors, hidden obstacles outside the declared family remain visible from some cameras; same observation outcomes do not have identical image hashes.",
+    "physical_geometry": "branch_dev_04 clear left routes collide in states 010 and 011, inherited from the prior geometry family.",
+    "provenance": "The runner's formal summary records fresh_process_replay_recorded=false; the replay field was not promoted into the checker result. This root is provisional and cannot be promoted."
+  },
+  "symbolic_result": "11/12 layouts show adaptive completion 6/6 versus best fixed 4/6, but this is not interpretable because hard infrastructure gates fail.",
+  "decision": "Stop. Preserve this root separately from the a4fa29e failure root. Do not run RGB, particles, or learned updates. A further amendment must define image masking/occlusion so each view exposes only its contracted observation, add a real physical preflight rejection loop, and correctly enforce fresh-process replay before rerun."
+}
