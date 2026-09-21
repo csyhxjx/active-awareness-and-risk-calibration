@@ -46,7 +46,7 @@ def main():
     a.output.mkdir(parents=True)
     manifest=json.loads(a.manifest.read_text()); layouts=[]
     for spec in manifest['layouts']:
-        layout=BranchLayout(**{k:tuple(v) if k in ('start','target','color_permutation') else v for k,v in spec.items() if k not in ('states','main_states','control_states')})
+        layout=BranchLayout(**{k:tuple(v) if k in ('start','target','color_permutation') else v for k,v in spec.items() if k not in ('states','main_states','control_states','observation_table')})
         root=a.output/layout.layout_id; root.mkdir(); rows=[]; route_map={}
         for state in ALL_STATES:
             sd=root/state; sd.mkdir(); fp=capture(state,layout,sd); routes=[]
