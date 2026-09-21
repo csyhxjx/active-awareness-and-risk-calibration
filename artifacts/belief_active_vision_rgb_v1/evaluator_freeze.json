@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "stage": "sealed_evaluator_frozen",
+  "git_head": "68ff74ded38c7763781ff5f68b5e7892b115ba07",
+  "manifest_path": "artifacts/belief_active_vision_rgb_v1/manifest.json",
+  "manifest_sha256": "6232c0de12adc4793b6bfcc06886a9cc53e43e9ef60bd3ff9d4e1fcfe0eae1e7",
+  "validation_freeze_sha256": "e22d73a232c97ca81db8c4f33b8dbcfeeed84deb0c6189744151c8c5c16a9fe3",
+  "frozen_model_path": "artifacts/belief_active_vision_rgb_v1/frozen_detector.json",
+  "model_sha256": "f5ab87ff0446319bba30c0f8163304b7231ceb9175b6400d08976bf980860a99",
+  "model_content_hash": "b9c2590e6355f4c01c8bab78bcadad26931d4f9de7b95edac5a8e114422f1fd9",
+  "config_sha256": "a9f7b9fb56ab2f64e4cc727f9f995a516026cc78e45fa0d2783ca9955b9b44f3",
+  "preprocessing_sha256": "77b94908bc552a8d3db360fddacb90d0bb649e7be88a76a3111160ff91bca7e8",
+  "selected_abstain_confidence": 0.95,
+  "selected_distance_temperature": 0.001,
+  "selected_fixed_b2_sequence": [
+    "q_a",
+    "q_b"
+  ],
+  "budget": 2,
+  "test_split": "sealed_test",
+  "test_seed": 66301,
+  "methods": [
+    "oracle_roi_adaptive",
+    "rgb_detector_adaptive",
+    "best_fixed_b2_rgb"
+  ],
+  "noisy_baseline": "omitted: validation confusion matrix has no off-diagonal mass",
+  "source_sha256": {
+    "rgb_detector.py": "7017c4caf601e7d5bd3b671e9c049e8807d2546b10d9c42bdc54239287fb5238",
+    "rgb_broker.py": "40d69389de9821eea9749353eeb2a5764a84e4d02ad352f97a8cfa3b42e8d000",
+    "run_rgb_sealed_test.py": "8698992cd694a4440c92f6ffcbd07e73439c58ff0fd088877d07f83632983ae2",
+    "freeze_rgb_evaluator.py": "e5f2842221b12f3eead572763229df22a06edf576717bc30884e346287a0d798",
+    "preflight_phase6a7.py": "f99bec1c3eab5d3dfd1f3b6f8bc1fcf9a00d8671f31375eb2315579087d4bccd"
+  },
+  "evaluator_contract_sha256": "371c5923c66822c7f7474c6e8e865f18c194645407709681797b375e9b4c03fc",
+  "sealed_test_authorized": true,
+  "sealed_test_opened": false
+}
