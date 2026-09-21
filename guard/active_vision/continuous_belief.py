@@ -19,7 +19,7 @@ QUERY_COST = 0.05
 STOP_UTILITY = -0.25
 COLLISION_UTILITY = -4.0
 SUCCESS_UTILITY = 1.0
-ROBOT_ENVELOPE_M = 0.025
+ROBOT_ENVELOPE_M = 0.060
 BRANCH_QUANTIZATION_M = 0.008
 SPECIALIST_SIGMA_M = 0.0015
 
@@ -110,8 +110,8 @@ def validate_observation(observation: dict) -> tuple[str, np.ndarray, np.ndarray
     mask = np.asarray(observation["mask"], dtype=bool)
     if values.shape != (3,) or mask.shape != (3,) or not np.isfinite(values).all():
         raise ContinuousContractError("observation values/mask must be finite length three")
-    _, expected = predicted_observation(np.zeros((1, STATE_DIM)), camera)
-    if not np.array_equal(mask, expected[0]):
+    _, allowed = predicted_observation(np.zeros((1, STATE_DIM)), camera)
+    if np.any(mask & ~allowed[0]):
         raise ContinuousContractError("observation mask violates camera contract")
     return camera, values, mask
 
