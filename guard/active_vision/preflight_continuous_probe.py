@@ -55,19 +55,37 @@ def run_world(world: dict, seed: int) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--world-id", required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--world-id")
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text())
-    world = next(row for row in manifest["worlds"] if row["world_id"] == args.world_id)
-    result = run_world(world, manifest["generator_seed"])
-    payload = {
-        "schema_version": 1, "preflight_version": PREFLIGHT_VERSION, "git_head": git_head(),
-        "manifest_sha256": sha256_file(args.manifest), "generator_seed": manifest["generator_seed"],
-        **result,
-    }
-    write_json(args.output, payload)
-    print(json.dumps({"world_id": result["world_id"], "all_match": result["all_match"]}))
+    if args.world_id:
+        if args.output is None or args.output_dir is not None:
+            raise ValueError("single world requires --output only")
+        worlds = [next(row for row in manifest["worlds"] if row["world_id"] == args.world_id)]
+        outputs = [args.output]
+    else:
+        if args.output_dir is None or args.output is not None:
+            raise ValueError("sharded mode requires --output-dir only")
+        if not 0 <= args.shard_index < args.shard_count:
+            raise ValueError("invalid shard")
+        args.output_dir.mkdir(parents=True, exist_ok=False)
+        worlds = [row for index, row in enumerate(manifest["worlds"]) if index % args.shard_count == args.shard_index]
+        outputs = [args.output_dir / f"{row['world_id']}.json" for row in worlds]
+    summaries = []
+    for world, output in zip(worlds, outputs):
+        result = run_world(world, manifest["generator_seed"])
+        payload = {
+            "schema_version": 1, "preflight_version": PREFLIGHT_VERSION, "git_head": git_head(),
+            "manifest_sha256": sha256_file(args.manifest), "generator_seed": manifest["generator_seed"],
+            **result,
+        }
+        write_json(output, payload)
+        summaries.append({"world_id": result["world_id"], "all_match": result["all_match"]})
+    print(json.dumps(summaries, indent=2))
 
 
 if __name__ == "__main__":
