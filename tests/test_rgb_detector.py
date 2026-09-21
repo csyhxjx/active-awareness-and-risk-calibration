@@ -22,6 +22,7 @@ from guard.active_vision.rgb_detector import (
 )
 from guard.active_vision.rgb_data import load_training_samples
 from guard.active_vision.freeze_rgb_validation import run_noisy_adaptive
+from guard.active_vision.run_rgb_sealed_test import adaptive_with_source, fixed_with_source
 
 
 COLORS = {
@@ -158,6 +159,22 @@ class RGBDetectorContractTest(unittest.TestCase):
         })
         self.assertEqual(trace[-1]["decision"]["id"], "stop")
         self.assertEqual(sum(row["decision"]["kind"] == "query" for row in trace), 2)
+
+    def test_sealed_policy_uses_broker_budget_for_oracle_and_rgb(self):
+        detector = trained_detector()
+        table = {"q_branch": "family_a", "q_a": "family_a:001", "q_b": "not_applicable", "q_c": "not_applicable"}
+
+        def supplier(camera):
+            rgb = next(iter(COLORS[camera].values()))
+            return PurchasedROI(camera, image(rgb), "same", "same")
+
+        oracle_broker = PurchasedViewBroker(supplier)
+        oracle_trace = adaptive_with_source(OracleObservationSource(oracle_broker, table))
+        self.assertLessEqual(len(oracle_broker.ledger), 2)
+        self.assertEqual(oracle_trace[-1]["decision"]["id"], "left_route")
+        fixed_broker = PurchasedViewBroker(supplier)
+        fixed_with_source(RGBObservationSource(fixed_broker, detector), ("q_a", "q_b"))
+        self.assertLessEqual(len(fixed_broker.ledger), 2)
 
 
 if __name__ == "__main__":
