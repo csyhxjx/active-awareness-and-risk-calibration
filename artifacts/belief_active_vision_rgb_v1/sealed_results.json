@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "checker_version": "phase6b-sealed-checker-v1",
+  "all_hard_gates_pass": true,
+  "errors": [],
+  "physical_errors": [],
+  "scope": {
+    "layout_groups": 12,
+    "scenes": 96,
+    "candidate_routes": 288
+  },
+  "detector_layer": {
+    "roi_samples": 384,
+    "roi_accuracy": 1.0,
+    "expected_calibration_error_10bin": 3.865408781944524e-08,
+    "observation_confusion_matrix": {
+      "family_a": {
+        "family_a": 36
+      },
+      "family_a:001": {
+        "family_a:001": 12
+      },
+      "family_a:110": {
+        "family_a:110": 24
+      },
+      "family_b": {
+        "family_b": 24
+      },
+      "family_b:010": {
+        "family_b:010": 12
+      },
+      "family_b:101": {
+        "family_b:101": 12
+      },
+      "family_c": {
+        "family_c": 36
+      },
+      "family_c:011": {
+        "family_c:011": 12
+      },
+      "family_c:100": {
+        "family_c:100": 24
+      },
+      "not_applicable": {
+        "not_applicable": 192
+      }
+    },
+    "hidden_state_confusion_matrix": {
+      "000": {
+        "110": 12
+      },
+      "001": {
+        "001": 12
+      },
+      "010": {
+        "010": 12
+      },
+      "011": {
+        "011": 12
+      },
+      "100": {
+        "100": 12
+      },
+      "101": {
+        "101": 12
+      },
+      "110": {
+        "110": 12
+      },
+      "111": {
+        "100": 12
+      }
+    },
+    "control_alias_note": "000 aliases 110 and 111 aliases 100 under the registered observation table"
+  },
+  "planner_layer": {
+    "main_trials": 72,
+    "adaptive_decision_errors": 0,
+    "adaptive_decision_error_rate": 0.0
+  },
+  "task_layer": {
+    "best_fixed_b2_rgb:control": {
+      "n": 24,
+      "completion": 0.5,
+      "collision": 0.0,
+      "stop": 0.5,
+      "mean_queries": 1.5,
+      "mean_utility": 0.30000000000000004
+    },
+    "best_fixed_b2_rgb:main": {
+      "n": 72,
+      "completion": 0.6666666666666666,
+      "collision": 0.0,
+      "stop": 0.3333333333333333,
+      "mean_queries": 1.6666666666666667,
+      "mean_utility": 0.4999999999999995
+    },
+    "oracle_roi_adaptive:control": {
+      "n": 24,
+      "completion": 0.5,
+      "collision": 0.5,
+      "stop": 0.0,
+      "mean_queries": 2.0,
+      "mean_utility": -1.6000000000000005
+    },
+    "oracle_roi_adaptive:main": {
+      "n": 72,
+      "completion": 1.0,
+      "collision": 0.0,
+      "stop": 0.0,
+      "mean_queries": 2.0,
+      "mean_utility": 0.899999999999999
+    },
+    "rgb_detector_adaptive:control": {
+      "n": 24,
+      "completion": 0.5,
+      "collision": 0.5,
+      "stop": 0.0,
+      "mean_queries": 2.0,
+      "mean_utility": -1.6000000000000005
+    },
+    "rgb_detector_adaptive:main": {
+      "n": 72,
+      "completion": 1.0,
+      "collision": 0.0,
+      "stop": 0.0,
+      "mean_queries": 2.0,
+      "mean_utility": 0.899999999999999
+    }
+  },
+  "hashes": {
+    "manifest_sha256": "6232c0de12adc4793b6bfcc06886a9cc53e43e9ef60bd3ff9d4e1fcfe0eae1e7",
+    "evaluator_freeze_sha256": "7e0a0fd927e7ef950dd03e1b24cdef524ab8fd0831064bd6fb56358e411d738e",
+    "checker_source_sha256": "798a162f89d6cd3efc26ff497a056f5c552590de7e6ff31d11bb2dfffa6ac49d",
+    "runner_git_heads": [
+      "71c1664c5540b4a47a943bd17db4edf6c050de3b"
+    ],
+    "result_sha256": {
+      "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/sealed_test/shard_0/results.json": "5b80f660dc4764ed0d011ca81cf17d8a526e7c7b7d38238d247aa65edbd16b57",
+      "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/sealed_test/shard_1/results.json": "6ac00ce1c13c320868ea48eca13a7921ae192b4d81d1c57617cadd963e513188",
+      "/internsdata/yewenhao/guard_workspace/belief_active_vision_rgb_v1/sealed_test/shard_2/results.json": "80ab3560cd9f718e21512736687d25ee638bfbe307191c5730f80f3b3340ec72"
+    }
+  }
+}
