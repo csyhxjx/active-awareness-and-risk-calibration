@@ -10,8 +10,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-from guard.active_vision.belief_branching import CAMERAS, PRIOR, plan, posterior, support
-from guard.active_vision.phase6a7 import run_adaptive_from_observations, sha256_file
+from guard.active_vision.belief_branching import CAMERAS, PRIOR, ROUTE_INDEX, ROUTES, plan, posterior, support, terminal_decision
+from guard.active_vision.phase6a7 import FIXED_SEQUENCES, run_adaptive_from_observations, sha256_file
 from guard.active_vision.rgb_data import load_labeled_samples
 from guard.active_vision.rgb_detector import RGBDetector, preprocessing_hash, sha256_canonical
 from guard.json_io import canonical_dumps, write_json
@@ -51,6 +51,36 @@ def run_noisy_adaptive(observations: dict[str, str]) -> list[dict]:
             row["update"] = "contradiction_stop"
             trace.append({"support": support(belief), "decision": {"kind": "terminal", "id": "stop", "reason": "contradiction"}})
             return trace
+
+
+def run_noisy_fixed(observations: dict[str, str], sequence: tuple[str, ...]) -> list[dict]:
+    belief = PRIOR
+    trace = []
+    for camera in sequence:
+        decision = terminal_decision(belief)
+        if decision["id"] != "stop":
+            break
+        outcome = observations[camera]
+        row = {"support": support(belief), "camera": camera, "observation": outcome}
+        trace.append(row)
+        if outcome == "unobserved":
+            row["update"] = "no_evidence"
+            continue
+        try:
+            belief = posterior(belief, camera, outcome)
+        except ValueError:
+            row["update"] = "contradiction_stop"
+            return trace + [{"support": support(belief), "decision": {"kind": "terminal", "id": "stop", "reason": "contradiction"}}]
+    return trace + [{"support": support(belief), "decision": terminal_decision(belief)}]
+
+
+def decision_outcome(state: str, trace: list[dict]) -> dict:
+    action = trace[-1]["decision"]["id"]
+    collision = action in ROUTES and state[ROUTE_INDEX[action]] == "1"
+    completion = action in ROUTES and not collision
+    queries = sum(("camera" in row) or row.get("decision", {}).get("kind") == "query" for row in trace[:-1])
+    utility = (1.0 if completion else -4.0 if collision else -0.25) - 0.05 * queries
+    return {"action": action, "completion": completion, "collision": collision, "stop": action == "stop", "queries": queries, "utility": utility}
 
 
 def expected_calibration_error(rows: list[tuple[str, dict]], bins: int = 10) -> float:
@@ -117,6 +147,25 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
             "rgb_queries": sum(row["decision"]["kind"] == "query" for row in rgb_trace),
         })
 
+    fixed_candidates = []
+    for sequence_index, sequence in enumerate(FIXED_SEQUENCES):
+        outcomes = []
+        for (layout_id, state), observations in sorted(scene_predictions.items()):
+            if state in main_states:
+                outcomes.append(decision_outcome(state, run_noisy_fixed(observations, sequence)))
+        fixed_candidates.append({
+            "sequence": list(sequence),
+            "sequence_index": sequence_index,
+            "completion": sum(row["completion"] for row in outcomes),
+            "collision": sum(row["collision"] for row in outcomes),
+            "stop": sum(row["stop"] for row in outcomes),
+            "mean_queries": sum(row["queries"] for row in outcomes) / len(outcomes),
+            "mean_utility": sum(row["utility"] for row in outcomes) / len(outcomes),
+        })
+    selected_fixed = max(fixed_candidates, key=lambda row: (
+        row["mean_utility"], row["completion"], -row["collision"], -row["mean_queries"], -row["sequence_index"]
+    ))
+
     output_model.parent.mkdir(parents=True, exist_ok=True)
     detector.save(output_model)
     first_index = json.loads(index_paths[0].read_text())
@@ -158,6 +207,10 @@ def freeze(index_paths: list[Path], data_root: Path, train_model: Path, manifest
         "observation_confusion_matrix": {key: dict(value) for key, value in sorted(confusion.items())},
         "adaptive_decision_error_rate": sum(row["error"] for row in decision_rows) / len(decision_rows),
         "adaptive_decision_rows": decision_rows,
+        "fixed_sequence_selection_rule": "max mean utility, completion, min collision, min queries, earliest frozen sequence index",
+        "fixed_sequence_candidates": fixed_candidates,
+        "selected_fixed_b2_sequence": selected_fixed["sequence"],
+        "selected_fixed_validation_metrics": selected_fixed,
         "unobserved_update_rule": "belief unchanged; budget consumed",
         "contradiction_rule": "stop",
         "preprocessing_sha256": preprocessing_hash(),
