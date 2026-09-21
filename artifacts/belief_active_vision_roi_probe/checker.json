@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "states": 6,
+  "roi_contract": true,
+  "replay": true,
+  "routes": true,
+  "all_pass": true,
+  "errors": []
+}
