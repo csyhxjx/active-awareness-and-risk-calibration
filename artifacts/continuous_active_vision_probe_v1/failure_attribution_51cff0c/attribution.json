@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "source": "immutable seed-66421 C0 archive; read-only attribution",
+  "world_count": 24,
+  "route_count": 72,
+  "physical_margin_minus_analytic_margin": {
+    "overall": {
+      "count": 72,
+      "mean_m": -0.004917423367700853,
+      "sd_m": 0.008682970267747888,
+      "min_m": -0.034976687610979676,
+      "max_m": 0.0019017831442665473
+    },
+    "by_route": {
+      "center_route": {
+        "count": 24,
+        "mean_m": 0.0001645173996024527,
+        "sd_m": 0.00026623599334988973,
+        "min_m": -2.4007360779898512e-08,
+        "max_m": 0.000996490049358978
+      },
+      "left_route": {
+        "count": 24,
+        "mean_m": -0.008412064464854986,
+        "sd_m": 0.009688666330459238,
+        "min_m": -0.02647652890642356,
+        "max_m": 0.0019017831442665473
+      },
+      "right_route": {
+        "count": 24,
+        "mean_m": -0.006504723037850026,
+        "sd_m": 0.009575104309692837,
+        "min_m": -0.034976687610979676,
+        "max_m": 0.0019017708907433373
+      }
+    },
+    "by_expected_stratum": {
+      "blocked": {
+        "count": 24,
+        "mean_m": -0.004494036800830477,
+        "sd_m": 0.006407822055521588,
+        "min_m": -0.017782573529085976,
+        "max_m": 0.000996490049358978
+      },
+      "boundary": {
+        "count": 24,
+        "mean_m": -0.003945772755142522,
+        "sd_m": 0.008131190729399185,
+        "min_m": -0.02647652890642356,
+        "max_m": 0.0019017831442665473
+      },
+      "safe": {
+        "count": 24,
+        "mean_m": -0.006312460547129562,
+        "sd_m": 0.010767357243483919,
+        "min_m": -0.034976687610979676,
+        "max_m": 0.0019017831442665473
+      }
+    }
+  },
+  "collision_classes": {
+    "first_contact:route_obstacle": 31,
+    "route_obstacle": 31
+  },
+  "mismatch_count": 17,
+  "mismatches_by_route": {
+    "left_route": 8,
+    "center_route": 0,
+    "right_route": 9
+  },
+  "mismatches_by_expected_stratum": {
+    "safe": 8,
+    "boundary": 9,
+    "blocked": 0
+  },
+  "mismatch_rows": [
+    {
+      "world_id": "continuous_probe_001",
+      "route": "left_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.002430485851093383,
+      "physical_margin_m": -0.028907014757516943,
+      "margin_delta_m": -0.02647652890642356,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_left_g0",
+          "geom2": "gripper0_finger1_collision",
+          "penetration": 0.0011160787558567606
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_002",
+      "route": "right_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.0020305701180840206,
+      "physical_margin_m": -0.004760276870264726,
+      "margin_delta_m": -0.002729706752180705,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_right_g0",
+          "geom2": "gripper0_finger2_collision",
+          "penetration": 0.0013069789124257323
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_003",
+      "route": "left_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008057269271025253,
+      "physical_margin_m": -0.011382525723750089,
+      "margin_delta_m": -0.019439794994775342,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_004",
+      "route": "right_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008104842035846122,
+      "physical_margin_m": -0.014409076951029772,
+      "margin_delta_m": -0.022513918986875894,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_007",
+      "route": "left_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.00011067878523347494,
+      "physical_margin_m": -0.020704978620405098,
+      "margin_delta_m": -0.020594299835171623,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_left_g0",
+          "geom2": "gripper0_finger1_collision",
+          "penetration": 7.191197444455423e-05
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_008",
+      "route": "right_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.00076597333340905,
+      "physical_margin_m": -0.011897691804674492,
+      "margin_delta_m": -0.011131718471265442,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_right_g0",
+          "geom2": "gripper0_finger2_collision",
+          "penetration": 0.0012781902189265815
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_009",
+      "route": "left_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008175120878546663,
+      "physical_margin_m": -0.01104711441773169,
+      "margin_delta_m": -0.019222235296278353,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_010",
+      "route": "right_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008240110334054866,
+      "physical_margin_m": -0.006232941626948745,
+      "margin_delta_m": -0.01447305196100361,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_011",
+      "route": "right_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "gap",
+      "analytic_margin_m": 0.0020670798278135706,
+      "physical_margin_m": 0.00396885071855688,
+      "margin_delta_m": 0.0019017708907433095,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_013",
+      "route": "left_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.00018637971800463185,
+      "physical_margin_m": -0.017861091747654535,
+      "margin_delta_m": -0.018047471465659166,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_left_g0",
+          "geom2": "gripper0_finger1_collision",
+          "penetration": 0.0002020600455435436
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_014",
+      "route": "right_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.0017250601070952672,
+      "physical_margin_m": -0.005757980143649633,
+      "margin_delta_m": -0.0074830402507449,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_015",
+      "route": "left_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "boundary",
+      "analytic_margin_m": 0.008336251230093478,
+      "physical_margin_m": -0.0016620101914535008,
+      "margin_delta_m": -0.00999826142154698,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_016",
+      "route": "right_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.00826474127166255,
+      "physical_margin_m": -0.026711946339317127,
+      "margin_delta_m": -0.034976687610979676,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_019",
+      "route": "left_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.0016362563788934505,
+      "physical_margin_m": -0.018866681930905013,
+      "margin_delta_m": -0.017230425552011562,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_left_g0",
+          "geom2": "gripper0_finger1_collision",
+          "penetration": 0.0011908149387794855
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_020",
+      "route": "right_route",
+      "expected_stratum": "boundary",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": -0.0008397471497580654,
+      "physical_margin_m": -0.0034727722802549814,
+      "margin_delta_m": -0.002633025130496916,
+      "collision_classes": {
+        "route_obstacle": true,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": [
+        {
+          "class": "route_obstacle",
+          "geom1": "continuous_obstacle_right_g0",
+          "geom2": "gripper0_finger2_collision",
+          "penetration": 0.0011573297373484498
+        }
+      ]
+    },
+    {
+      "world_id": "continuous_probe_021",
+      "route": "left_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008043379761725967,
+      "physical_margin_m": -0.013484519453224566,
+      "margin_delta_m": -0.021527899214950533,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    },
+    {
+      "world_id": "continuous_probe_022",
+      "route": "right_route",
+      "expected_stratum": "safe",
+      "observed_stratum": "blocked",
+      "analytic_margin_m": 0.008156501352579618,
+      "physical_margin_m": -0.013468170590141462,
+      "margin_delta_m": -0.02162467194272108,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "first_contacts": []
+    }
+  ],
+  "limitations": [
+    "The archived preflight summaries contain trajectory hashes and first contacts, not stepwise records; route-convergence attribution is therefore limited to route-level and contact-level evidence.",
+    "No adaptive, fixed, MAP, PF, QMC, or observation result is included or inferred.",
+    "A positive analytic/physical discrepancy is diagnostic evidence about the approximation and/or controller sweep, not a relabeling permission."
+  ]
+}
