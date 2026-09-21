@@ -1,0 +1,1075 @@
+{
+  "schema_version": 1,
+  "protocol_id": "belief_active_vision_protocol_v4_12layout_addendum",
+  "protocol_sha256": "5fa73b593c8b744969f03ceb560d4fc90c19db8a93bd1b14303cf236bca6e058",
+  "generator_head": "7d47038a816d12791bf893f915483f63264f2ba4",
+  "seed": 66212,
+  "selection_rule": "first 12 candidates passing frozen physical preflight in candidate_index order",
+  "selection_inputs": [
+    "public layout geometry",
+    "official-controller physical preflight"
+  ],
+  "policy_result_filtering": false,
+  "requested_layouts": 12,
+  "states_per_layout": 8,
+  "routes_per_scene": 3,
+  "roi": [
+    64,
+    64,
+    160,
+    160
+  ],
+  "clearance_threshold_m": 0.004,
+  "color_semantics": "global_fixed_phase6a6",
+  "observation_table": {
+    "001": {
+      "q_branch": "family_a",
+      "q_a": "family_a:001",
+      "q_b": "not_applicable",
+      "q_c": "not_applicable"
+    },
+    "110": {
+      "q_branch": "family_a",
+      "q_a": "family_a:110",
+      "q_b": "not_applicable",
+      "q_c": "not_applicable"
+    },
+    "010": {
+      "q_branch": "family_b",
+      "q_a": "not_applicable",
+      "q_b": "family_b:010",
+      "q_c": "not_applicable"
+    },
+    "101": {
+      "q_branch": "family_b",
+      "q_a": "not_applicable",
+      "q_b": "family_b:101",
+      "q_c": "not_applicable"
+    },
+    "011": {
+      "q_branch": "family_c",
+      "q_a": "not_applicable",
+      "q_b": "not_applicable",
+      "q_c": "family_c:011"
+    },
+    "100": {
+      "q_branch": "family_c",
+      "q_a": "not_applicable",
+      "q_b": "not_applicable",
+      "q_c": "family_c:100"
+    },
+    "000": {
+      "q_branch": "family_a",
+      "q_a": "family_a:110",
+      "q_b": "not_applicable",
+      "q_c": "not_applicable"
+    },
+    "111": {
+      "q_branch": "family_c",
+      "q_a": "not_applicable",
+      "q_b": "not_applicable",
+      "q_c": "family_c:100"
+    }
+  },
+  "fixed_sequences": [
+    [],
+    [
+      "q_branch"
+    ],
+    [
+      "q_a"
+    ],
+    [
+      "q_b"
+    ],
+    [
+      "q_c"
+    ],
+    [
+      "q_branch",
+      "q_a"
+    ],
+    [
+      "q_branch",
+      "q_b"
+    ],
+    [
+      "q_branch",
+      "q_c"
+    ],
+    [
+      "q_a",
+      "q_branch"
+    ],
+    [
+      "q_a",
+      "q_b"
+    ],
+    [
+      "q_a",
+      "q_c"
+    ],
+    [
+      "q_b",
+      "q_branch"
+    ],
+    [
+      "q_b",
+      "q_a"
+    ],
+    [
+      "q_b",
+      "q_c"
+    ],
+    [
+      "q_c",
+      "q_branch"
+    ],
+    [
+      "q_c",
+      "q_a"
+    ],
+    [
+      "q_c",
+      "q_b"
+    ]
+  ],
+  "candidates": [
+    {
+      "layout_id": "roi_candidate_000",
+      "candidate_index": 0,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.182465,
+      "obstacle_x": 0.069051,
+      "occluder_x": 0.305292,
+      "cue_shift_x": 0.00342,
+      "cue_shift_y": -0.001361,
+      "camera_shift_x": -0.002742,
+      "camera_shift_y": -5.1e-05,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_001",
+      "candidate_index": 1,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183264,
+      "obstacle_x": 0.06006,
+      "occluder_x": 0.300472,
+      "cue_shift_x": 0.00072,
+      "cue_shift_y": 0.00394,
+      "camera_shift_x": -0.001175,
+      "camera_shift_y": -0.003634,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_002",
+      "candidate_index": 2,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.189785,
+      "obstacle_x": 0.066023,
+      "occluder_x": 0.304673,
+      "cue_shift_x": -0.004748,
+      "cue_shift_y": 0.001048,
+      "camera_shift_x": -0.001529,
+      "camera_shift_y": 0.003525,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_003",
+      "candidate_index": 3,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.18008,
+      "obstacle_x": 0.067723,
+      "occluder_x": 0.298901,
+      "cue_shift_x": 0.005901,
+      "cue_shift_y": 0.001314,
+      "camera_shift_x": -0.000354,
+      "camera_shift_y": 0.002211,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_004",
+      "candidate_index": 4,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.184182,
+      "obstacle_x": 0.068339,
+      "occluder_x": 0.304374,
+      "cue_shift_x": -0.001516,
+      "cue_shift_y": -0.001648,
+      "camera_shift_x": -0.003649,
+      "camera_shift_y": 0.001937,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_005",
+      "candidate_index": 5,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.187811,
+      "obstacle_x": 0.067972,
+      "occluder_x": 0.298504,
+      "cue_shift_x": -0.001379,
+      "cue_shift_y": -0.003569,
+      "camera_shift_x": 0.003154,
+      "camera_shift_y": 0.000999,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_006",
+      "candidate_index": 6,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.188432,
+      "obstacle_x": 0.069955,
+      "occluder_x": 0.304453,
+      "cue_shift_x": 0.000687,
+      "cue_shift_y": 0.00263,
+      "camera_shift_x": 0.001343,
+      "camera_shift_y": 0.002214,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_007",
+      "candidate_index": 7,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183023,
+      "obstacle_x": 0.06029,
+      "occluder_x": 0.301047,
+      "cue_shift_x": -0.001008,
+      "cue_shift_y": -0.00409,
+      "camera_shift_x": -0.000654,
+      "camera_shift_y": -0.000179,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_008",
+      "candidate_index": 8,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.185461,
+      "obstacle_x": 0.061846,
+      "occluder_x": 0.302798,
+      "cue_shift_x": 0.004722,
+      "cue_shift_y": -0.004415,
+      "camera_shift_x": -0.003488,
+      "camera_shift_y": -0.003092,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_009",
+      "candidate_index": 9,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.181737,
+      "obstacle_x": 0.06553,
+      "occluder_x": 0.301259,
+      "cue_shift_x": -0.001839,
+      "cue_shift_y": 0.001588,
+      "camera_shift_x": -0.002593,
+      "camera_shift_y": 0.000196,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_010",
+      "candidate_index": 10,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.186688,
+      "obstacle_x": 0.061169,
+      "occluder_x": 0.30079,
+      "cue_shift_x": -0.000704,
+      "cue_shift_y": 0.003214,
+      "camera_shift_x": -0.001216,
+      "camera_shift_y": 0.00196,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_011",
+      "candidate_index": 11,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.181476,
+      "obstacle_x": 0.069498,
+      "occluder_x": 0.299585,
+      "cue_shift_x": 0.005202,
+      "cue_shift_y": -0.001634,
+      "camera_shift_x": -0.000601,
+      "camera_shift_y": 0.001437,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_012",
+      "candidate_index": 12,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183676,
+      "obstacle_x": 0.062591,
+      "occluder_x": 0.296071,
+      "cue_shift_x": -0.001948,
+      "cue_shift_y": 0.003716,
+      "camera_shift_x": 0.002405,
+      "camera_shift_y": -0.001705,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_013",
+      "candidate_index": 13,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.179024,
+      "obstacle_x": 0.064439,
+      "occluder_x": 0.305258,
+      "cue_shift_x": -0.003212,
+      "cue_shift_y": 0.004819,
+      "camera_shift_x": -0.000203,
+      "camera_shift_y": -0.002453,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_014",
+      "candidate_index": 14,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.180003,
+      "obstacle_x": 0.061989,
+      "occluder_x": 0.300235,
+      "cue_shift_x": -0.000454,
+      "cue_shift_y": -0.005796,
+      "camera_shift_x": 0.001381,
+      "camera_shift_y": -8.4e-05,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_015",
+      "candidate_index": 15,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.187135,
+      "obstacle_x": 0.061683,
+      "occluder_x": 0.297663,
+      "cue_shift_x": 0.003145,
+      "cue_shift_y": -0.005554,
+      "camera_shift_x": 0.00059,
+      "camera_shift_y": 0.001999,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_016",
+      "candidate_index": 16,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.181668,
+      "obstacle_x": 0.06822,
+      "occluder_x": 0.299688,
+      "cue_shift_x": -0.000347,
+      "cue_shift_y": 0.001348,
+      "camera_shift_x": 0.003447,
+      "camera_shift_y": 0.003954,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_017",
+      "candidate_index": 17,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.18412,
+      "obstacle_x": 0.059083,
+      "occluder_x": 0.303979,
+      "cue_shift_x": -0.000718,
+      "cue_shift_y": -0.00178,
+      "camera_shift_x": 0.000955,
+      "camera_shift_y": 0.002274,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_018",
+      "candidate_index": 18,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183807,
+      "obstacle_x": 0.05804,
+      "occluder_x": 0.301115,
+      "cue_shift_x": 0.004116,
+      "cue_shift_y": 0.004604,
+      "camera_shift_x": 0.00058,
+      "camera_shift_y": -0.002191,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_019",
+      "candidate_index": 19,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.189689,
+      "obstacle_x": 0.066742,
+      "occluder_x": 0.30444,
+      "cue_shift_x": -0.003682,
+      "cue_shift_y": -0.002312,
+      "camera_shift_x": 0.001515,
+      "camera_shift_y": 0.002912,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_020",
+      "candidate_index": 20,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183095,
+      "obstacle_x": 0.061312,
+      "occluder_x": 0.302099,
+      "cue_shift_x": -0.003437,
+      "cue_shift_y": -0.004124,
+      "camera_shift_x": -0.002278,
+      "camera_shift_y": -0.000783,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_021",
+      "candidate_index": 21,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.188355,
+      "obstacle_x": 0.059918,
+      "occluder_x": 0.29912,
+      "cue_shift_x": 0.001369,
+      "cue_shift_y": 0.004231,
+      "camera_shift_x": 0.00113,
+      "camera_shift_y": 0.000639,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_022",
+      "candidate_index": 22,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.188964,
+      "obstacle_x": 0.060005,
+      "occluder_x": 0.301384,
+      "cue_shift_x": 0.002304,
+      "cue_shift_y": -0.004908,
+      "camera_shift_x": -0.000516,
+      "camera_shift_y": -3.8e-05,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_023",
+      "candidate_index": 23,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.182238,
+      "obstacle_x": 0.062445,
+      "occluder_x": 0.301963,
+      "cue_shift_x": 0.004421,
+      "cue_shift_y": -0.004723,
+      "camera_shift_x": 0.00278,
+      "camera_shift_y": 0.00068,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_024",
+      "candidate_index": 24,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.184595,
+      "obstacle_x": 0.065494,
+      "occluder_x": 0.303422,
+      "cue_shift_x": -0.004098,
+      "cue_shift_y": -0.00211,
+      "camera_shift_x": -0.003374,
+      "camera_shift_y": 0.000917,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_025",
+      "candidate_index": 25,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.186584,
+      "obstacle_x": 0.063127,
+      "occluder_x": 0.304712,
+      "cue_shift_x": -0.005696,
+      "cue_shift_y": -0.001567,
+      "camera_shift_x": -8.9e-05,
+      "camera_shift_y": 0.003028,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_026",
+      "candidate_index": 26,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.181602,
+      "obstacle_x": 0.066732,
+      "occluder_x": 0.30567,
+      "cue_shift_x": -0.004433,
+      "cue_shift_y": 0.002186,
+      "camera_shift_x": -0.001532,
+      "camera_shift_y": -0.001259,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_027",
+      "candidate_index": 27,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.189171,
+      "obstacle_x": 0.06488,
+      "occluder_x": 0.304362,
+      "cue_shift_x": 0.0031,
+      "cue_shift_y": 0.004895,
+      "camera_shift_x": -0.002821,
+      "camera_shift_y": -0.001429,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_028",
+      "candidate_index": 28,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.1879,
+      "obstacle_x": 0.058474,
+      "occluder_x": 0.301989,
+      "cue_shift_x": 0.002568,
+      "cue_shift_y": -0.004009,
+      "camera_shift_x": 0.003618,
+      "camera_shift_y": 0.001106,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_029",
+      "candidate_index": 29,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.186293,
+      "obstacle_x": 0.063928,
+      "occluder_x": 0.299339,
+      "cue_shift_x": 0.003526,
+      "cue_shift_y": -0.002222,
+      "camera_shift_x": 8.1e-05,
+      "camera_shift_y": 0.003149,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_030",
+      "candidate_index": 30,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.183231,
+      "obstacle_x": 0.066357,
+      "occluder_x": 0.29621,
+      "cue_shift_x": -0.001858,
+      "cue_shift_y": -0.00318,
+      "camera_shift_x": 0.003924,
+      "camera_shift_y": -0.002625,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_031",
+      "candidate_index": 31,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.186025,
+      "obstacle_x": 0.065377,
+      "occluder_x": 0.302765,
+      "cue_shift_x": 0.00385,
+      "cue_shift_y": -0.004597,
+      "camera_shift_x": -0.002227,
+      "camera_shift_y": -0.001294,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_032",
+      "candidate_index": 32,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.185126,
+      "obstacle_x": 0.062351,
+      "occluder_x": 0.304401,
+      "cue_shift_x": -0.001025,
+      "cue_shift_y": -0.003162,
+      "camera_shift_x": -0.003044,
+      "camera_shift_y": 0.001377,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_033",
+      "candidate_index": 33,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.188937,
+      "obstacle_x": 0.069227,
+      "occluder_x": 0.302462,
+      "cue_shift_x": -0.001858,
+      "cue_shift_y": 0.004254,
+      "camera_shift_x": 0.002141,
+      "camera_shift_y": -0.001495,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_034",
+      "candidate_index": 34,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.182879,
+      "obstacle_x": 0.06361,
+      "occluder_x": 0.29701,
+      "cue_shift_x": 0.001836,
+      "cue_shift_y": -0.000671,
+      "camera_shift_x": 0.000693,
+      "camera_shift_y": -0.002643,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "layout_id": "roi_candidate_035",
+      "candidate_index": 35,
+      "start": [
+        -0.103,
+        0.0,
+        1.01
+      ],
+      "target": [
+        0.2,
+        0.0,
+        1.01
+      ],
+      "lane_y": 0.180105,
+      "obstacle_x": 0.069804,
+      "occluder_x": 0.300972,
+      "cue_shift_x": 0.002384,
+      "cue_shift_y": 0.004273,
+      "camera_shift_x": 0.001883,
+      "camera_shift_y": -0.001153,
+      "color_permutation": [
+        0,
+        1,
+        2
+      ]
+    }
+  ]
+}

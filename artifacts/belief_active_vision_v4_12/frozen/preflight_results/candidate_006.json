@@ -1,0 +1,666 @@
+{
+  "schema_version": 1,
+  "candidate_index": 6,
+  "layout_id": "roi_candidate_006",
+  "spec": {
+    "layout_id": "roi_candidate_006",
+    "candidate_index": 6,
+    "start": [
+      -0.103,
+      0.0,
+      1.01
+    ],
+    "target": [
+      0.2,
+      0.0,
+      1.01
+    ],
+    "lane_y": 0.188432,
+    "obstacle_x": 0.069955,
+    "occluder_x": 0.304453,
+    "cue_shift_x": 0.000687,
+    "cue_shift_y": 0.00263,
+    "camera_shift_x": 0.001343,
+    "camera_shift_y": 0.002214,
+    "color_permutation": [
+      0,
+      1,
+      2
+    ]
+  },
+  "seed": 66212,
+  "checker_version": "phase6a7-v1",
+  "preflight_head": "7d47038a816d12791bf893f915483f63264f2ba4",
+  "accepted": true,
+  "errors": [],
+  "states": [
+    {
+      "state": "001",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547672336338836,
+          "trajectory_sha256": "215d8dc844e2016edca5ac8c3b6502f6fef79e15a35b6d44c1488656189434f2",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.1496640128172287,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 45,
+          "trajectory_length_m": 0.2957463068023728,
+          "trajectory_sha256": "d824e1692df600ffbfa938ba41d13d5a59d5e39046aeb77c892678906ccb441e",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.10347720285885433,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23316077245231495,
+          "trajectory_sha256": "69f29838e03551a57cf2e4517e3a15a8f53321a17291d51add355fed0774729e",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_right_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007555185108428822
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026483036568697507,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "110",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23318358676052342,
+          "trajectory_sha256": "c94680387b17728c386b83b38741c4a8ca71e76a5ef04ea6919565ab9096d7ae",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_left_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007395804548937193
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026515777175191012,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 100,
+          "trajectory_length_m": 0.11531513395127438,
+          "trajectory_sha256": "f5be3e625bf756808ddf6ca92c3331670770d9080af78a22dad752cab31a43da",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_center_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.00030042104288303484
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.027623043421372645,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547673536318589,
+          "trajectory_sha256": "255c275960087b781c3996eb6f3b1977c0f20a298f5f5c050ddd173955deebc3",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.04633190667808319,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "010",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547672336338836,
+          "trajectory_sha256": "215d8dc844e2016edca5ac8c3b6502f6fef79e15a35b6d44c1488656189434f2",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.04633206107446235,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 100,
+          "trajectory_length_m": 0.11531513395127438,
+          "trajectory_sha256": "f5be3e625bf756808ddf6ca92c3331670770d9080af78a22dad752cab31a43da",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_center_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.00030042104288303484
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.027623043421372645,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547673536318589,
+          "trajectory_sha256": "255c275960087b781c3996eb6f3b1977c0f20a298f5f5c050ddd173955deebc3",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.04633190667808319,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "101",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23318358676052342,
+          "trajectory_sha256": "c94680387b17728c386b83b38741c4a8ca71e76a5ef04ea6919565ab9096d7ae",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_left_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007395804548937193
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026515777175191012,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 45,
+          "trajectory_length_m": 0.2957463068023728,
+          "trajectory_sha256": "d824e1692df600ffbfa938ba41d13d5a59d5e39046aeb77c892678906ccb441e",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.10347720285885433,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23316077245231495,
+          "trajectory_sha256": "69f29838e03551a57cf2e4517e3a15a8f53321a17291d51add355fed0774729e",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_right_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007555185108428822
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026483036568697507,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "011",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547672336338836,
+          "trajectory_sha256": "215d8dc844e2016edca5ac8c3b6502f6fef79e15a35b6d44c1488656189434f2",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.04633206107446235,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 100,
+          "trajectory_length_m": 0.11531513395127438,
+          "trajectory_sha256": "f5be3e625bf756808ddf6ca92c3331670770d9080af78a22dad752cab31a43da",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_center_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.00030042104288303484
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.027623043421372645,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23316077245231495,
+          "trajectory_sha256": "69f29838e03551a57cf2e4517e3a15a8f53321a17291d51add355fed0774729e",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_right_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007555185108428822
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026483036568697507,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "100",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23318358676052342,
+          "trajectory_sha256": "c94680387b17728c386b83b38741c4a8ca71e76a5ef04ea6919565ab9096d7ae",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_left_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007395804548937193
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026515777175191012,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 45,
+          "trajectory_length_m": 0.2957463068023728,
+          "trajectory_sha256": "d824e1692df600ffbfa938ba41d13d5a59d5e39046aeb77c892678906ccb441e",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.10347723508815347,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547673536318589,
+          "trajectory_sha256": "255c275960087b781c3996eb6f3b1977c0f20a298f5f5c050ddd173955deebc3",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": 0.1496640943725029,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "000",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547672336338836,
+          "trajectory_sha256": "215d8dc844e2016edca5ac8c3b6502f6fef79e15a35b6d44c1488656189434f2",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": null,
+          "nearest_active_obstacle": null,
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 45,
+          "trajectory_length_m": 0.2957463068023728,
+          "trajectory_sha256": "d824e1692df600ffbfa938ba41d13d5a59d5e39046aeb77c892678906ccb441e",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": null,
+          "nearest_active_obstacle": null,
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 71,
+          "trajectory_length_m": 0.5547673536318589,
+          "trajectory_sha256": "255c275960087b781c3996eb6f3b1977c0f20a298f5f5c050ddd173955deebc3",
+          "reached": true,
+          "collision": false,
+          "collision_classes": {
+            "route_obstacle": false,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [],
+          "collision_free_success": true,
+          "minimum_clearance_m": null,
+          "nearest_active_obstacle": null,
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": true,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "state": "111",
+      "routes": [
+        {
+          "route": "left_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23318358676052342,
+          "trajectory_sha256": "c94680387b17728c386b83b38741c4a8ca71e76a5ef04ea6919565ab9096d7ae",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_left_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007395804548937193
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026515777175191012,
+          "nearest_active_obstacle": "branch_obstacle_left_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "center_route",
+          "steps": 100,
+          "trajectory_length_m": 0.11531513395127438,
+          "trajectory_sha256": "f5be3e625bf756808ddf6ca92c3331670770d9080af78a22dad752cab31a43da",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_center_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.00030042104288303484
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.027623043421372645,
+          "nearest_active_obstacle": "branch_obstacle_center_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        },
+        {
+          "route": "right_route",
+          "steps": 100,
+          "trajectory_length_m": 0.23316077245231495,
+          "trajectory_sha256": "69f29838e03551a57cf2e4517e3a15a8f53321a17291d51add355fed0774729e",
+          "reached": false,
+          "collision": true,
+          "collision_classes": {
+            "route_obstacle": true,
+            "static_environment": false,
+            "self_collision": false
+          },
+          "first_contacts": [
+            {
+              "class": "route_obstacle",
+              "geom1": "branch_obstacle_right_g0",
+              "geom2": "gripper0_hand_collision",
+              "penetration": 0.0007555185108428822
+            }
+          ],
+          "collision_free_success": false,
+          "minimum_clearance_m": -0.026483036568697507,
+          "nearest_active_obstacle": "branch_obstacle_right_g0",
+          "clearance_metric": "eef_center_to_obstacle_bounding_sphere_r0.085m",
+          "expected_clear": false,
+          "branch_state_hash": "88bdf1ccb24d82e6d75fd9d3c28725b00612bf80792b7d8f18316c3201b714f5",
+          "errors": []
+        }
+      ]
+    }
+  ]
+}

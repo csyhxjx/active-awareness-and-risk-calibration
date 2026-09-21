@@ -64,6 +64,11 @@ class Phase6A7FixtureTest(unittest.TestCase):
         source = Path("guard/active_vision/run_phase6a7.py").read_text()
         self.assertIn('"-m",\n            "guard.active_vision.run_phase6a7"', source)
 
+    def test_preflight_has_explicit_admitted_output(self):
+        source = Path("guard/active_vision/preflight_phase6a7.py").read_text()
+        self.assertIn('parser.add_argument("--admitted-output", type=Path)', source)
+        self.assertIn('"preflight_results_dir": "preflight_results"', source)
+
 
 if __name__ == "__main__":
     unittest.main()

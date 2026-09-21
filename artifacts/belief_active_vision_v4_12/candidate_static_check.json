@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "checker_version": "phase6a7-v1",
+  "stage": "candidate",
+  "candidate_count": 36,
+  "requested_layouts": 12,
+  "all_pass": true,
+  "errors": []
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -193,6 +194,7 @@ def assemble(candidate_plan: Path, results_dir: Path, output_dir: Path) -> None:
     by_index = {row["candidate_index"]: (row, path) for row, path in zip(results, result_paths)}
     ledger = []
     accepted = []
+    accepted_paths = []
     rejection_count = 0
     for spec in plan["candidates"]:
         index = spec["candidate_index"]
@@ -221,6 +223,7 @@ def assemble(candidate_plan: Path, results_dir: Path, output_dir: Path) -> None:
                 "preflight_result_sha256": result_hash,
             })
             accepted.append(admitted)
+            accepted_paths.append(path)
             if len(accepted) == plan["requested_layouts"]:
                 break
         else:
@@ -228,6 +231,10 @@ def assemble(candidate_plan: Path, results_dir: Path, output_dir: Path) -> None:
     if len(accepted) != plan["requested_layouts"]:
         raise RuntimeError(f"only {len(accepted)} candidates passed preflight")
     output_dir.mkdir(parents=True, exist_ok=False)
+    archived_results = output_dir / "preflight_results"
+    archived_results.mkdir()
+    for path in accepted_paths:
+        shutil.copyfile(path, archived_results / path.name)
     write_json(output_dir / "preflight_ledger.json", {
         "schema_version": 1,
         "candidate_plan_sha256": sha256_bytes(plan_bytes),
@@ -245,6 +252,7 @@ def assemble(candidate_plan: Path, results_dir: Path, output_dir: Path) -> None:
         "route_count": len(accepted) * len(ALL_STATES) * len(ROUTES),
         "preflight_head": git_head(),
         "preflight_ledger_sha256": sha256_file(output_dir / "preflight_ledger.json"),
+        "preflight_results_dir": "preflight_results",
         "layouts": accepted,
     })
 
@@ -259,9 +267,14 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--candidate-index", type=int)
     parser.add_argument("--assemble", action="store_true")
+    parser.add_argument("--admitted-output", type=Path)
     args = parser.parse_args()
     if args.assemble:
-        assemble(args.candidate_plan, args.output, args.output.parent / "admitted")
+        assemble(
+            args.candidate_plan,
+            args.output,
+            args.admitted_output if args.admitted_output is not None else args.output.parent / "admitted",
+        )
         return
     if args.candidate_index is None:
         parser.error("--candidate-index is required unless --assemble is used")
@@ -274,4 +287,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

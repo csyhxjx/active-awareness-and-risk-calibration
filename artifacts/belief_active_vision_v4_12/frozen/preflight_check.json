@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "checker_version": "phase6a7-v1",
+  "stage": "preflight",
+  "routes": 288,
+  "all_pass": true,
+  "errors": []
+}
