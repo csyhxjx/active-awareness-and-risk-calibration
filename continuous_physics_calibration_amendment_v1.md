@@ -5,6 +5,11 @@ does not modify or reinterpret the seed-66421 manifest, its 72 preflight
 trajectories, or the archived C0 failure. It opens a new calibration namespace
 only after this file is committed and pushed.
 
+The calibration fixture seed is `66530`; a future admitted probe must use
+probe seed `66531`, PF seed `66532`, and namespace
+`continuous_active_vision_probe_v2`. These identifiers are frozen before any
+new candidate is generated and are disjoint from `66421`.
+
 ## Purpose and claim boundary
 
 The seed-66421 root is permanently retained as a physical-consistency failure.
