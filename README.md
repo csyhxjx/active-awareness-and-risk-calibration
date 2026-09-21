@@ -201,6 +201,23 @@ post-observation action rights. The comparison order is MAP single scene,
 exact belief where tractable, ordinary particle filtering, and only then a
 learned particle component. See `belief_active_vision_protocol_v1.md`.
 
+Phase 6A7 now provides the first cross-layout mechanism result. It is a
+controlled exact-belief, cue-ROI experiment: adaptive and the public-layout
+fixed envelope use the same B=2 budget, routes, stopping rule, updater, and
+controller; the fixed envelope is exhaustive over all 17 ordered sequences;
+and `000/111` are physical controls excluded from the main gain denominator.
+Adaptive completes 72/72 main scenes versus 48/72 for the fixed envelope, with
+zero collisions for both. This is not a natural-obstacle RGB result and does
+not show that an RGB detector understands hidden geometry. The formal report,
+hashes, and hard-gate record are in
+`artifacts/belief_active_vision_v4_12/formal_report.md`.
+
+The next stage is separately preregistered in
+`belief_active_vision_rgb_protocol_v1.md`: new seed and grouped train,
+validation, and sealed-test layouts, with oracle ROI, RGB detector, fixed B=2,
+and optional noisy-observation baselines. Continuous geometry and particle
+methods remain closed until the RGB stage is frozen and complete.
+
 Compare two recordings:
 
 ```bash
