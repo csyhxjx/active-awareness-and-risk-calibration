@@ -1,0 +1,2682 @@
+{
+  "schema_version": 1,
+  "namespace": "continuous_geometry_diagnostic_v1",
+  "git_head": "d883bd24b12f39004933ac5ef8e331bd23112a2c",
+  "case_index": 53,
+  "route": "right_route",
+  "width_m": 0.025,
+  "offset_m": 0.075,
+  "state": [
+    0.0,
+    2.0,
+    0.0,
+    0.025,
+    2.0,
+    0.0,
+    0.025,
+    0.07,
+    0.075,
+    0.025
+  ],
+  "physical_stratum": "blocked",
+  "path_difference_from_empty": {
+    "matched_steps": 91,
+    "max_eef_difference_m": 0.04181822618781402,
+    "difference_at_minimum_step_m": 0.0093583164703696
+  },
+  "result": {
+    "route": "right_route",
+    "steps": 93,
+    "reached": true,
+    "collision": true,
+    "collision_classes": {
+      "route_obstacle": true,
+      "static_environment": false,
+      "self_collision": false
+    },
+    "minimum_pair": {
+      "step": 40,
+      "distance_m": -0.015578165310042469,
+      "robot_geom": "gripper0_finger2_collision",
+      "robot_component": "gripper",
+      "obstacle_geom": "continuous_obstacle_right_g0",
+      "obstacle_route": "right_route"
+    },
+    "first_contact": {
+      "step": 40,
+      "distance_m": -0.015578165310042469,
+      "robot_geom": "gripper0_finger2_collision",
+      "robot_component": "gripper",
+      "obstacle_geom": "continuous_obstacle_right_g0",
+      "obstacle_route": "right_route"
+    },
+    "physical_clearance_m": -0.015578165310042469,
+    "physical_margin_m": -0.01957816531004247,
+    "analytic_minimum_clearance_m": -0.011054397447561218,
+    "records_sha256": "0b2217b9d06f494358cd64662e9de8d8da8e2b448550f6ba9e7f35610f51ad9d",
+    "records": [
+      {
+        "step": 0,
+        "qpos": [
+          -0.001757760728748197,
+          0.20478799508943285,
+          -0.005487124576329499,
+          -2.6083037709046963,
+          0.00044743616483656503,
+          2.945011608568907,
+          0.7819839359414628,
+          0.021080902692176603,
+          -0.021164042395029094
+        ],
+        "eef": [
+          -0.09921851777637371,
+          -0.0033643388034037343,
+          1.0106499392704542
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2992381369025837,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.15396741363234162,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 1,
+        "qpos": [
+          -0.005350112865539916,
+          0.22016973419187824,
+          -0.012833711159949465,
+          -2.5901684893809764,
+          0.0052272705364519775,
+          2.9472890514420897,
+          0.7708234026501942,
+          0.02300435790777553,
+          -0.023136798285048304
+        ],
+        "eef": [
+          -0.0929623228014744,
+          -0.009028254592597176,
+          1.0095387244636091
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2931017651556273,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.14563622948365507,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 2,
+        "qpos": [
+          -0.010146175968658373,
+          0.2366869250809209,
+          -0.01921186473804231,
+          -2.5688640478067652,
+          0.01476054850516926,
+          2.9457192826278633,
+          0.7529409837340876,
+          0.02626105318053526,
+          -0.026416210572332594
+        ],
+        "eef": [
+          -0.08613818516234181,
+          -0.015178719204793573,
+          1.0083832309873357
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2865450548635186,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.13658099829712425,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 3,
+        "qpos": [
+          -0.015987751870909266,
+          0.25303303112639314,
+          -0.024817646645822727,
+          -2.5454910223511495,
+          0.02793403358400158,
+          2.940354759963496,
+          0.7298239645110307,
+          0.030269204822450532,
+          -0.03045277700285914
+        ],
+        "eef": [
+          -0.07904886430379335,
+          -0.021752684504002338,
+          1.0074677705908086
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.27990687761851857,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.12704119867225763,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 4,
+        "qpos": [
+          -0.022701102687709914,
+          0.2690585304773992,
+          -0.03006763365407476,
+          -2.52034158615285,
+          0.04349416955082321,
+          2.9316320739087276,
+          0.7029002760084441,
+          0.033904734422296925,
+          -0.03411447217964809
+        ],
+        "eef": [
+          -0.07175796804445647,
+          -0.028796626114898947,
+          1.0068429369784782
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2732976507732457,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.11701880277958282,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 5,
+        "qpos": [
+          -0.030078245361333116,
+          0.2845641303120549,
+          -0.035346418511085276,
+          -2.494001977446111,
+          0.06028994550362884,
+          2.9200000626162153,
+          0.6735184010704606,
+          0.036070894481827404,
+          -0.03629350361766564
+        ],
+        "eef": [
+          -0.06445353942536505,
+          -0.03633067496030434,
+          1.0064920821351042
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2669604801191017,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.10660880817291879,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 6,
+        "qpos": [
+          -0.03789949964345335,
+          0.29875192794670596,
+          -0.04098564826296432,
+          -2.4678659019042732,
+          0.0773527019488395,
+          2.905833252646949,
+          0.642877260526971,
+          0.03729366234070994,
+          -0.0375258100525111
+        ],
+        "eef": [
+          -0.057603379237049585,
+          -0.0443316558761932,
+          1.0064245529748155
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2614145759679484,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0961022695573013,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 7,
+        "qpos": [
+          -0.04594851653077537,
+          0.31124108095129915,
+          -0.04718454098858575,
+          -2.4429059954028385,
+          0.09395438370221841,
+          2.8900530474782826,
+          0.611968708050456,
+          0.03798129824158398,
+          -0.03822285035094682
+        ],
+        "eef": [
+          -0.05146981589132843,
+          -0.05273988999290497,
+          1.0066515412909414
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2569625974273466,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.08569475783004776,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 8,
+        "qpos": [
+          -0.054034729677377116,
+          0.32223712190105464,
+          -0.05397835002889251,
+          -2.4194659158755485,
+          0.1096534449387792,
+          2.8737497310214963,
+          0.5815600281594061,
+          0.0383680415267837,
+          -0.03861750801884069
+        ],
+        "eef": [
+          -0.0460703508336862,
+          -0.061463929393363835,
+          1.0071063761218209
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2536470091190397,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.07547132688146846,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 9,
+        "qpos": [
+          -0.06201591308806259,
+          0.3320449970592496,
+          -0.061293032293647874,
+          -2.3976914966866936,
+          0.12426861416758361,
+          2.8578038288695407,
+          0.552164168529462,
+          0.038586182804651294,
+          -0.03884059141407244
+        ],
+        "eef": [
+          -0.04137365036772799,
+          -0.07039775524041625,
+          1.007696497093834
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.25144062750552165,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.06551311338517576,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 10,
+        "qpos": [
+          -0.06980510880739726,
+          0.34093176803007563,
+          -0.0690007135752857,
+          -2.3776279428216887,
+          0.13781362891007531,
+          2.842826355495997,
+          0.5240416563452215,
+          0.03871007494027796,
+          -0.03896595909912801
+        ],
+        "eef": [
+          -0.03733340974305801,
+          -0.0794409403993483,
+          1.0083388944597225
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2502813809763224,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.055901101982731405,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 11,
+        "qpos": [
+          -0.07736542563187764,
+          0.34910486923706446,
+          -0.07696185355476123,
+          -2.359247656446887,
+          0.15042514814364782,
+          2.829181009447151,
+          0.49723892723453317,
+          0.03878137870410834,
+          -0.039038437455506204
+        ],
+        "eef": [
+          -0.03389695502414433,
+          -0.0885116901680364,
+          1.0089704374408632
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2500863148295649,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.046710519869734804,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 12,
+        "qpos": [
+          -0.08469849909801008,
+          0.3567225090755421,
+          -0.08505037617057673,
+          -2.3424646929060615,
+          0.16230036480893958,
+          2.817031062486484,
+          0.4716484134023989,
+          0.03883265737903125,
+          -0.03909024694225646
+        ],
+        "eef": [
+          -0.031009129359599243,
+          -0.09755164564395521,
+          1.0095476092171123
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.25076232985188246,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.03801004646316286,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 13,
+        "qpos": [
+          -0.09183148714550565,
+          0.3639087006573046,
+          -0.09316495302154144,
+          -2.3271474419935414,
+          0.17365043976115824,
+          2.8063897320958837,
+          0.4470726117066523,
+          0.03887780484149235,
+          -0.03913497969365161
+        ],
+        "eef": [
+          -0.028614677957316238,
+          -0.10652488157761478,
+          1.010043088933286
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.25221463722256177,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.029866111022725836,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 14,
+        "qpos": [
+          -0.09880545343419554,
+          0.37076513125723,
+          -0.10123133333657962,
+          -2.3131310098703084,
+          0.1846698381987177,
+          2.7971654068442757,
+          0.42327975420471864,
+          0.038920818234284706,
+          -0.03917710432815121
+        ],
+        "eef": [
+          -0.026659680883341454,
+          -0.11541390367818427,
+          1.0104420549186424
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.25435246315482474,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.02235021650420871,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 15,
+        "qpos": [
+          -0.10566633874066073,
+          0.3773787658232883,
+          -0.10919965994584493,
+          -2.3002288793780656,
+          0.1955191818625022,
+          2.7891986273454163,
+          0.4000449166534848,
+          0.0389620924952303,
+          -0.039217314162575415
+        ],
+        "eef": [
+          -0.025092326965117713,
+          -0.12421459915079892,
+          1.0107390448778961
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2570921400745201,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.015547274543855225,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 16,
+        "qpos": [
+          -0.11245872694536395,
+          0.3838261258973215,
+          -0.11704011772097105,
+          -2.2882433660173684,
+          0.20631788559062636,
+          2.782290978051969,
+          0.3771760936923159,
+          0.039001679748560315,
+          -0.039255721094005
+        ],
+        "eef": [
+          -0.023863318001689622,
+          -0.13293160792921607,
+          1.0109354690882528
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.26035835426539994,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.009562604155403748,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 17,
+        "qpos": [
+          -0.11922200725840033,
+          0.3901754405790223,
+          -0.12473839589590878,
+          -2.276974634972843,
+          0.21714340126366458,
+          2.776226657156846,
+          0.35452740306733593,
+          0.03903962855772164,
+          -0.039292425970385556
+        ],
+        "eef": [
+          -0.022926169913770972,
+          -0.14157457703502144,
+          1.0110376096874294
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.26408429474115297,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.004524769132612919,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 18,
+        "qpos": [
+          -0.12598838181740468,
+          0.39648755549907655,
+          -0.13229161536763084,
+          -2.2662279797301483,
+          0.22803458496063833,
+          2.7707886035669986,
+          0.3320025243215957,
+          0.039075988436868624,
+          -0.039327522208942735
+        ],
+        "eef": [
+          -0.022237325847412885,
+          -0.15015542757589978,
+          1.0110551278396371
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.26821110104741835,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0005798524664618193,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 19,
+        "qpos": [
+          -0.1327822010934661,
+          0.40281626565777423,
+          -0.13970490713729794,
+          -2.2558196447466283,
+          0.23899747056772366,
+          2.7657703046973623,
+          0.30955160715234514,
+          0.039110810575003416,
+          -0.03936109543737587
+        ],
+        "eef": [
+          -0.02175625212692696,
+          -0.15868650885737745,
+          1.0109998841552346
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.27268707930345293,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0021271459375857282,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 20,
+        "qpos": [
+          -0.13962019217720384,
+          0.40920854089614195,
+          -0.14698867002957433,
+          -2.2455812207808066,
+          0.2500121114166865,
+          2.760983443638961,
+          0.2871644749258317,
+          0.03914414786554499,
+          -0.03939322374029767
+        ],
+        "eef": [
+          -0.021445696083929877,
+          -0.1671794138295458,
+          1.010884863859105
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.27746699931079355,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0034838756393864648,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 21,
+        "qpos": [
+          -0.14651224346292718,
+          0.415704806117252,
+          -0.1541563998595655,
+          -2.2353624819088584,
+          0.2610396517884838,
+          2.7562624046658257,
+          0.2648621939123404,
+          0.03917605453704377,
+          -0.03942397828366361
+        ],
+        "eef": [
+          -0.02127191175663474,
+          -0.1756443082952493,
+          1.0107233046968678
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2825114247931171,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003728088243365263,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 22,
+        "qpos": [
+          -0.15346250030655953,
+          0.4223393386264752,
+          -0.16122296510706274,
+          -2.225032806153023,
+          0.2720290736324895,
+          2.751466419081369,
+          0.24268837184440248,
+          0.03920658562926139,
+          -0.039453424077772636
+        ],
+        "eef": [
+          -0.021204785411879378,
+          -0.18408962395196676,
+          1.0105280382429298
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2877860760361386,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003795214588120613,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 23,
+        "qpos": [
+          -0.16047060106546707,
+          0.42914078568855285,
+          -0.16820323764002537,
+          -2.2144814221549365,
+          0.28292325786338507,
+          2.7464799350980833,
+          0.2207010107905091,
+          0.039235796437327525,
+          -0.0394816207592818
+        ],
+        "eef": [
+          -0.021217854529169973,
+          -0.19252199206904871,
+          1.010311017172276
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2932612373369609,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0037821454708300284,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 24,
+        "qpos": [
+          -0.1675329369453172,
+          0.4361327704533912,
+          -0.17511102397751452,
+          -2.2036167472291672,
+          0.2936641439753365,
+          2.7412116939877835,
+          0.19896536678561114,
+          0.039263741981210146,
+          -0.03950862333708959
+        ],
+        "eef": [
+          -0.021288230725632736,
+          -0.20094632982261468,
+          1.0100829976716192
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.2989112166103397,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003711769274367255,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 25,
+        "qpos": [
+          -0.17464385697080217,
+          0.44333454082686136,
+          -0.18195827127840467,
+          -2.1923650933003267,
+          0.3041968801976156,
+          2.7355929158461207,
+          0.17754802141042497,
+          0.03929047652623217,
+          -0.03953448287769535
+        ],
+        "eef": [
+          -0.021396454428655273,
+          -0.20936601926068193,
+          1.0098533414494113
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.304713868347626,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003603545571344721,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 26,
+        "qpos": [
+          -0.18179676235328512,
+          0.4507616169023694,
+          -0.188754525675881,
+          -2.180668965451859,
+          0.31447294015486926,
+          2.7295749455534946,
+          0.1565122198532787,
+          0.039316053168089574,
+          -0.03955924711745399
+        ],
+        "eef": [
+          -0.021526295429840615,
+          -0.21778313742849692,
+          1.0096299155434643
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.310650175402451,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003473704570159386,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 27,
+        "qpos": [
+          -0.1889328852288466,
+          0.458315297910851,
+          -0.19537165549296973,
+          -2.1686044617343603,
+          0.32445157075334163,
+          2.7230430284171443,
+          0.13599338171410322,
+          0.039340952411174225,
+          -0.039582532661488014
+        ],
+        "eef": [
+          -0.021664800228586724,
+          -0.22607668916584991,
+          1.0094217723994487
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.3166169411003297,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.003010301490848369,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 28,
+        "qpos": [
+          -0.19581192737331116,
+          0.4655328507638843,
+          -0.20132292172466326,
+          -2.1566839874154766,
+          0.33399546360200566,
+          2.71575644285894,
+          0.11648089547458892,
+          0.03936646174821303,
+          -0.03960314693027637
+        ],
+        "eef": [
+          -0.021802790340419313,
+          -0.2337643554744733,
+          1.0092495936877233
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.32224651247581476,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.001553319409180319,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 29,
+        "qpos": [
+          -0.20218858309348695,
+          0.472084022537556,
+          -0.2064607094987808,
+          -2.1454158931164833,
+          0.34264583597754145,
+          2.708050665246779,
+          0.09875772941525963,
+          0.03939195550116634,
+          -0.03962180589768052
+        ],
+        "eef": [
+          -0.02193103772061391,
+          -0.24058324903035733,
+          1.0091400557751042
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.3273139543646458,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0005377006219402999,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 30,
+        "qpos": [
+          -0.20791751687347548,
+          0.47788364292795205,
+          -0.21085621256590895,
+          -2.1350714072040846,
+          0.35001401449200903,
+          2.7004481727628127,
+          0.08339396859687218,
+          0.039417167757568476,
+          -0.03963885958650633
+        ],
+        "eef": [
+          -0.022032881616395664,
+          -0.246524736070488,
+          1.0090991575307868
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.3317738047686382,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0028992146936577395,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 31,
+        "qpos": [
+          -0.21291780276051153,
+          0.48291827193716835,
+          -0.21457016149267444,
+          -2.125802884962011,
+          0.3559082411999578,
+          2.6933495731957646,
+          0.07068192187449615,
+          0.039441957508760214,
+          -0.039654529144810075
+        ],
+        "eef": [
+          -0.022089448686216408,
+          -0.251613487488575,
+          1.0091212569737946
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.3356096579260152,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.005258085648342625,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 32,
+        "qpos": [
+          -0.2171637926016502,
+          0.4872076457569504,
+          -0.21764911149016594,
+          -2.117679636544721,
+          0.3603019096016741,
+          2.687014793317296,
+          0.06067257474478215,
+          0.03946618841577824,
+          -0.0396690276336666
+        ],
+        "eef": [
+          -0.022086380610390716,
+          -0.2558896614665647,
+          1.0091962043385523
+        ],
+        "waypoint_index": 0,
+        "target_distance_m": 0.3388252136213623,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0074308731322605265,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 33,
+        "qpos": [
+          -0.22042743665402256,
+          0.49739901110396023,
+          -0.21745239959883106,
+          -2.102486682903363,
+          0.3642095144289377,
+          2.6858963533085296,
+          0.0545337474053399,
+          0.039490236112620265,
+          -0.039682053955710346
+        ],
+        "eef": [
+          -0.018667615075443768,
+          -0.2592451868665053,
+          1.0088816667729246
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3391531268696169,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.006486070722166434,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 34,
+        "qpos": [
+          -0.22280434600244822,
+          0.5127496994091582,
+          -0.21515942244221772,
+          -2.0811742280265713,
+          0.36666987249628175,
+          2.685072024003562,
+          0.053489042457616785,
+          0.03951331287456615,
+          -0.039694467173739006
+        ],
+        "eef": [
+          -0.012736969078929744,
+          -0.26158269770796455,
+          1.0076961366313233
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3371762647925969,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0033082851253661283,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 35,
+        "qpos": [
+          -0.22452830455307485,
+          0.5289536533038054,
+          -0.21274925942777972,
+          -2.057718283927097,
+          0.3668124248800457,
+          2.6812881313463337,
+          0.05641079701083036,
+          0.039534817476400926,
+          -0.03970693327730972
+        ],
+        "eef": [
+          -0.0062940918761528655,
+          -0.2633159245704477,
+          1.0064127703939205
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.33452264002850846,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.00015460464439331217,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 36,
+        "qpos": [
+          -0.2257130719397274,
+          0.5450289679078154,
+          -0.21060966413513246,
+          -2.0327974478015447,
+          0.3647505193839586,
+          2.6745076297092614,
+          0.06247436683733917,
+          0.03955511019806845,
+          -0.03971915608204896
+        ],
+        "eef": [
+          0.0004214304580431958,
+          -0.264672650600636,
+          1.0053977570876387
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3315183223235247,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0035082025135113465,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 37,
+        "qpos": [
+          -0.2264589545228571,
+          0.5608411765135788,
+          -0.20874054377289425,
+          -2.0065806990865704,
+          0.36068288164699464,
+          2.665154406404941,
+          0.07105303834319303,
+          0.03957442720264127,
+          -0.039730961450489946
+        ],
+        "eef": [
+          0.007379573677231917,
+          -0.265747027632324,
+          1.004732942387938
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3282557740970734,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.00656145129736329,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 38,
+        "qpos": [
+          -0.2268652384032712,
+          0.5764852660434796,
+          -0.20703440857316738,
+          -1.9791311915565906,
+          0.3549887866279033,
+          2.6537098004017086,
+          0.08160182386906123,
+          0.03959287564676422,
+          -0.0397423017443947
+        ],
+        "eef": [
+          0.014580466946331347,
+          -0.2665779286423818,
+          1.00439860245687
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3247700277604747,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.009142741258059583,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 39,
+        "qpos": [
+          -0.2270313800405219,
+          0.5921115397103243,
+          -0.2053753975101674,
+          -1.9504983996554255,
+          0.34811702108383874,
+          2.6406370738946228,
+          0.09361209752781173,
+          0.03961050241124189,
+          -0.039753187089552555
+        ],
+        "eef": [
+          0.022017646074523244,
+          -0.2671924834669141,
+          1.0043397399374612
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.32109434762083,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.011054397447561218,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 40,
+        "qpos": [
+          -0.22955492900273072,
+          0.5893464745958491,
+          -0.21321563087678164,
+          -1.9318968751169314,
+          0.3371678115049938,
+          2.608047006325669,
+          0.08989267161678803,
+          0.03957474926454437,
+          -0.04079310649752209
+        ],
+        "eef": [
+          0.02363228005185378,
+          -0.2719924518885592,
+          1.0101449184297904
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3241689181976107,
+        "nearest": {
+          "distance_m": -0.015578165310042469,
+          "robot_geom": "gripper0_finger2_collision",
+          "robot_component": "gripper",
+          "obstacle_geom": "continuous_obstacle_right_g0",
+          "obstacle_route": "right_route"
+        },
+        "analytic_eef_clearance_m": -0.006779326289461311,
+        "collision_classes": {
+          "route_obstacle": true,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 41,
+        "qpos": [
+          -0.23312359418391954,
+          0.5850909163689703,
+          -0.22078908394736446,
+          -1.9110167049715125,
+          0.3292216695011177,
+          2.5640706158894533,
+          0.07858971811651007,
+          0.03959237337602618,
+          -0.0406217714483922
+        ],
+        "eef": [
+          0.02409069869587848,
+          -0.276360278203125,
+          1.017134493085981
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.32767359772402593,
+        "nearest": {
+          "distance_m": -0.009064802580686537,
+          "robot_geom": "gripper0_finger2_collision",
+          "robot_component": "gripper",
+          "obstacle_geom": "continuous_obstacle_right_g0",
+          "obstacle_route": "right_route"
+        },
+        "analytic_eef_clearance_m": -0.0025936082471842564,
+        "collision_classes": {
+          "route_obstacle": true,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 42,
+        "qpos": [
+          -0.2370055083368637,
+          0.5876911669637055,
+          -0.22756935906254736,
+          -1.8828570387147034,
+          0.32406759545868435,
+          2.5112663683938226,
+          0.0677602494832413,
+          0.039611773027407475,
+          -0.04065336014269088
+        ],
+        "eef": [
+          0.024653519472197842,
+          -0.27984869226802317,
+          1.0220451748598236
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3304644686422632,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0007364439649270582,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 43,
+        "qpos": [
+          -0.24085256069685804,
+          0.5982916948545591,
+          -0.23453019882664675,
+          -1.8447249395282523,
+          0.32062696542423247,
+          2.447955905962616,
+          0.06002351701233687,
+          0.039628560993470896,
+          -0.04056388225779838
+        ],
+        "eef": [
+          0.02578854167992145,
+          -0.28278157940390086,
+          1.0251355095361865
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.33248178522904553,
+        "nearest": {
+          "distance_m": 0.00023790228731804253,
+          "robot_geom": "gripper0_finger2_collision",
+          "robot_component": "gripper",
+          "obstacle_geom": "continuous_obstacle_right_g0",
+          "obstacle_route": "right_route"
+        },
+        "analytic_eef_clearance_m": 0.0034538890822717883,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 44,
+        "qpos": [
+          -0.24395807656014853,
+          0.6198978174409129,
+          -0.23923666073993313,
+          -1.7888947216340583,
+          0.32100316421999076,
+          2.394405865052251,
+          0.06447773191777928,
+          0.03964391478417318,
+          -0.04016862603149727
+        ],
+        "eef": [
+          0.03376774337388265,
+          -0.28666370933487584,
+          1.0294440940765088
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3319447517089216,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.00682303922180047,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 45,
+        "qpos": [
+          -0.2456860620434405,
+          0.6473479503988958,
+          -0.24018902457140334,
+          -1.7320454057605552,
+          0.32165579148917783,
+          2.363140357637507,
+          0.07906592721535775,
+          0.03966260137255871,
+          -0.04005834354876705
+        ],
+        "eef": [
+          0.045599815981790415,
+          -0.2899476764319417,
+          1.0322993304259904
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.32925116860929504,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.010327502891083806,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 46,
+        "qpos": [
+          -0.24613993154294747,
+          0.674851830224963,
+          -0.23818727307480547,
+          -1.682482845040102,
+          0.3208093713301019,
+          2.347143635976028,
+          0.09789550941577792,
+          0.03968256616184208,
+          -0.040026277124943214
+        ],
+        "eef": [
+          0.057657189065266325,
+          -0.2915158226660265,
+          1.033150938767418
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3252367086527354,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.011978821151702304,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 47,
+        "qpos": [
+          -0.24569959361114335,
+          0.7007375956495545,
+          -0.2341314670443214,
+          -1.6399259643552913,
+          0.3181069841073281,
+          2.3403050757634336,
+          0.11817690901338258,
+          0.039701254264333956,
+          -0.04001098990322397
+        ],
+        "eef": [
+          0.0691527639296122,
+          -0.2915195303050857,
+          1.0326806357909968
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3203420780610025,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.011930767973197767,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 48,
+        "qpos": [
+          -0.24471859114149805,
+          0.7248826455593654,
+          -0.22869694145896372,
+          -1.602916630551833,
+          0.31371388700153485,
+          2.339458947974988,
+          0.13860854229977398,
+          0.039718226900350685,
+          -0.04000370027957088
+        ],
+        "eef": [
+          0.07999279787456093,
+          -0.29040530279363075,
+          1.0313670372993442
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3149500257748647,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.01069261506999207,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 49,
+        "qpos": [
+          -0.24348163700554215,
+          0.747604081320228,
+          -0.222408649550404,
+          -1.569910374878569,
+          0.3079995216269727,
+          2.3422405888457383,
+          0.15853432450561938,
+          0.0397336195265516,
+          -0.040000040176135586
+        ],
+        "eef": [
+          0.0901909964400894,
+          -0.28854814867406503,
+          1.0295019680516713
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.30935154456368763,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.008695825222352432,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 50,
+        "qpos": [
+          -0.24222918966237705,
+          0.7687907398141923,
+          -0.21583520848854768,
+          -1.54017115215945,
+          0.30127027117852145,
+          2.3463452970319545,
+          0.1775145550685441,
+          0.03974756934434047,
+          -0.03999752005457502
+        ],
+        "eef": [
+          0.09954441015615198,
+          -0.28627606759588825,
+          1.0273271044607994
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.3038840913210767,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.006316909993954192,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 51,
+        "qpos": [
+          -0.2411572157558261,
+          0.7876873701190704,
+          -0.2095721928182149,
+          -1.513845470486148,
+          0.2938384600631214,
+          2.3495555222693825,
+          0.19505789751507732,
+          0.039760148722582225,
+          -0.0399958790641467
+        ],
+        "eef": [
+          0.10765372862899553,
+          -0.2838896083407059,
+          1.0251600952404238
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.29891632950989033,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.003944897842213788,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 52,
+        "qpos": [
+          -0.24038896419308994,
+          0.8039381593039662,
+          -0.20387216682878595,
+          -1.4908808845702588,
+          0.28621738104058575,
+          2.351241218033954,
+          0.2107078610897813,
+          0.03977155944964524,
+          -0.039994935072878456
+        ],
+        "eef": [
+          0.11445932685231192,
+          -0.28161830699342477,
+          1.0232626184254248
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.2946217484231279,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0023401525602465,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 53,
+        "qpos": [
+          -0.2401313641560394,
+          0.8164562159841148,
+          -0.19922674317739106,
+          -1.4701194295855098,
+          0.2789192825402004,
+          2.3503864260848446,
+          0.22389640923534235,
+          0.03978127191049114,
+          -0.039698453480904
+        ],
+        "eef": [
+          0.12035280386459649,
+          -0.2799661420093243,
+          1.0228653298965629
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.29135928548299944,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0019002970428027566,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 54,
+        "qpos": [
+          -0.24019761714368593,
+          0.8278376669162372,
+          -0.19481963217163153,
+          -1.4524382572453003,
+          0.2723445364948285,
+          2.3489568650936725,
+          0.23498769889680035,
+          0.03979151765887005,
+          -0.039701849823574706
+        ],
+        "eef": [
+          0.12505891696297278,
+          -0.2783600577994011,
+          1.021946480857526
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.2885189874336311,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0017110727185719252,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 55,
+        "qpos": [
+          -0.2405007937089858,
+          0.8378385782314889,
+          -0.19072627141354453,
+          -1.4375274807235985,
+          0.2666165633331032,
+          2.347735040068539,
+          0.24416227059736312,
+          0.03980077381091147,
+          -0.039714248307235134
+        ],
+        "eef": [
+          0.12889888083252551,
+          -0.27689951425891507,
+          1.0208185169540696
+        ],
+        "waypoint_index": 1,
+        "target_distance_m": 0.2860869630947485,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.001714756970660862,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 56,
+        "qpos": [
+          -0.23946289882486818,
+          0.8491706781623111,
+          -0.18263841722717025,
+          -1.421221871017384,
+          0.26243401889663964,
+          2.3501951100296514,
+          0.25387545591965377,
+          0.039818917828231194,
+          -0.03971689523871011
+        ],
+        "eef": [
+          0.1346793310387225,
+          -0.2725050272963212,
+          1.0194526309929515
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2803839009786519,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0003128558625232966,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 57,
+        "qpos": [
+          -0.2367213655446107,
+          0.8623816638235771,
+          -0.17241894121870371,
+          -1.403142490207104,
+          0.2563103299262845,
+          2.3541776668187344,
+          0.2677933528961938,
+          0.03983244017036716,
+          -0.039723265224457696
+        ],
+        "eef": [
+          0.14182370022478955,
+          -0.26569866973118306,
+          1.0174943952687776
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2720963632849585,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0013113868502167558,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 58,
+        "qpos": [
+          -0.23288289748786473,
+          0.876200382049908,
+          -0.16233088475196242,
+          -1.3840776770714156,
+          0.24743057180181027,
+          2.3572011631541048,
+          0.28542542066510235,
+          0.03984461676775376,
+          -0.039730126195130874
+        ],
+        "eef": [
+          0.14905335376620296,
+          -0.2582335360124124,
+          1.015427958085691
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2632671316608391,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.001669036918094155,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 59,
+        "qpos": [
+          -0.2282138257757905,
+          0.8899417765602958,
+          -0.1526796106722933,
+          -1.3642737773901428,
+          0.23641270559381627,
+          2.3580425255002937,
+          0.30568845462102906,
+          0.03985634761441482,
+          -0.03973661616786955
+        ],
+        "eef": [
+          0.15610205802309784,
+          -0.25035199563255306,
+          1.013547484488802
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.25419625424700426,
+        "nearest": null,
+        "analytic_eef_clearance_m": -0.0005637823118380333,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 60,
+        "qpos": [
+          -0.22293670173730193,
+          0.9026821875882778,
+          -0.14362232887575127,
+          -1.3445980475238815,
+          0.2239514819260327,
+          2.355810366026591,
+          0.32748201848586195,
+          0.03986760228898165,
+          -0.03974280091391621
+        ],
+        "eef": [
+          0.162642210855242,
+          -0.24219053074168786,
+          1.0120673172492074
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.24506352521608255,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0017660434776096967,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 61,
+        "qpos": [
+          -0.2172292619250042,
+          0.9138914553955716,
+          -0.13515023599618656,
+          -1.3256750697195105,
+          0.2107830622033082,
+          2.3506054854394014,
+          0.3498220278061941,
+          0.039878363235865896,
+          -0.039748731655822364
+        ],
+        "eef": [
+          0.16855138055850036,
+          -0.2338543547857073,
+          1.0111244280479155
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.23596215640532417,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.00504399370748683,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 62,
+        "qpos": [
+          -0.21122212215151018,
+          0.9235202035792736,
+          -0.12716235768230993,
+          -1.3078324902228213,
+          0.197540177178598,
+          2.34323118864302,
+          0.3719767337008503,
+          0.03988862936489027,
+          -0.039754441724434264
+        ],
+        "eef": [
+          0.1738706234290757,
+          -0.22541806679480048,
+          1.010701109154076
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2269284925070808,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.009083414936600143,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 63,
+        "qpos": [
+          -0.20500667552547247,
+          0.9316449018519508,
+          -0.11956859830284927,
+          -1.291360834508855,
+          0.18467593015210595,
+          2.3345659635125386,
+          0.3934569401019381,
+          0.03989840423965126,
+          -0.03975995837641092
+        ],
+        "eef": [
+          0.17864730702259776,
+          -0.21693626792256057,
+          1.010705008954641
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2179857308981079,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.013647307022597754,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 64,
+        "qpos": [
+          -0.19864088114936856,
+          0.9383585466407831,
+          -0.11230871232855048,
+          -1.276531567345937,
+          0.1724691023936976,
+          2.3253951666107757,
+          0.41397804074999545,
+          0.03990769760867286,
+          -0.03976530132523655
+        ],
+        "eef": [
+          0.18291856143508983,
+          -0.2084496680811991,
+          1.0110262165197927
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.20915088521676015,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.017918561435089825,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 65,
+        "qpos": [
+          -0.1921559179517806,
+          0.9437416146954626,
+          -0.10534710746039044,
+          -1.2635847007649896,
+          0.16105612280324597,
+          2.316373552943378,
+          0.43341738263872,
+          0.03991652860720672,
+          -0.03977047959812853
+        ],
+        "eef": [
+          0.1867150382950157,
+          -0.1999866283554289,
+          1.0115615756385765
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.2004334808532505,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.0217150382950157,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 66,
+        "qpos": [
+          -0.18556353276779788,
+          0.9478586779493527,
+          -0.0986632409275337,
+          -1.252718265465009,
+          0.15046891644079988,
+          2.3080244152823597,
+          0.4517714249417138,
+          0.039924924530057825,
+          -0.039775492818520004
+        ],
+        "eef": [
+          0.19006442040840762,
+          -0.1915639047401614,
+          1.012222763730388
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.19183426706331597,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.025064420408407617,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 67,
+        "qpos": [
+          -0.17886314244801854,
+          0.9507628313813485,
+          -0.0922433640447327,
+          -1.244082501675748,
+          0.1406700248225561,
+          2.3007505527835064,
+          0.46911624385914014,
+          0.03993291765562458,
+          -0.03978033443964366
+        ],
+        "eef": [
+          0.19299294347812807,
+          -0.18318799257870427,
+          1.0129376276476691
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.18334549114257614,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.027992943478128057,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 68,
+        "qpos": [
+          -0.17204793464965784,
+          0.9525018681459952,
+          -0.08607503999466415,
+          -1.2377775325115645,
+          0.13158138109016645,
+          2.2948490144638884,
+          0.48557430997241147,
+          0.039940541606466096,
+          -0.039784995443621095
+        ],
+        "eef": [
+          0.19552572955499395,
+          -0.17485719017808016,
+          1.0136489900151973
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.1749524826377704,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.03052572955499394,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 69,
+        "qpos": [
+          -0.16510954462178304,
+          0.953124169748521,
+          -0.08014424437897728,
+          -1.2338532510554385,
+          0.12310573313264517,
+          2.290526184454901,
+          0.5012890290539901,
+          0.03994782845141922,
+          -0.03978946729805276
+        ],
+        "eef": [
+          0.19768662842579532,
+          -0.1665639961950771,
+          1.0143125765491399
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.16663587498796947,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.03275029493801565,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 70,
+        "qpos": [
+          -0.15804137220450737,
+          0.9527232155112703,
+          -0.07443566255383181,
+          -1.2322748603028746,
+          0.11514278177846997,
+          2.2879067420922854,
+          0.5164071242852125,
+          0.03995480476336499,
+          -0.03979374595379252
+        ],
+        "eef": [
+          0.19950008270870867,
+          -0.15829795529017318,
+          1.0148812319035247
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.15837398457841423,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.03522186451831094,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 71,
+        "qpos": [
+          -0.15084203837418408,
+          0.9513984777242238,
+          -0.06893303046518605,
+          -1.2328686734530263,
+          0.10759491927163703,
+          2.286962184088929,
+          0.5310704729277955,
+          0.03996149011343967,
+          -0.03979783340184991
+        ],
+        "eef": [
+          0.20100404139079284,
+          -0.15004890321131553,
+          1.0153488595304851
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.1501475665880404,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.038055199894939384,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 72,
+        "qpos": [
+          -0.1435158747367868,
+          0.9492389014901609,
+          -0.06362174208266365,
+          -1.2354109332478387,
+          0.10037138290047383,
+          2.2874262334688544,
+          0.5454097211928876,
+          0.039967914904941226,
+          -0.039801719878347866
+        ],
+        "eef": [
+          0.20220921004519246,
+          -0.14180294016163125,
+          1.01572054783214
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.14193547518153013,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.04121612866109281,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 73,
+        "qpos": [
+          -0.1360694625912134,
+          0.9463484509937081,
+          -0.05848053774361864,
+          -1.2397259094324833,
+          0.0933961655825633,
+          2.2892721297929075,
+          0.5595332656133474,
+          0.03997407776749226,
+          -0.039805426516415145
+        ],
+        "eef": [
+          0.20314629676971627,
+          -0.1335539091075695,
+          1.0159929033565547
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.1337253181410202,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.04469485713705579,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 74,
+        "qpos": [
+          -0.12851105892088507,
+          0.9428245036555218,
+          -0.053483165170012004,
+          -1.2456772519473733,
+          0.08660398095293347,
+          2.2925041072229915,
+          0.5735292714170018,
+          0.0399800007568073,
+          -0.03980895018034407
+        ],
+        "eef": [
+          0.20384021082660356,
+          -0.12529375033102533,
+          1.0161530174619813
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.12550350877602393,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.04848057907161141,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 75,
+        "qpos": [
+          -0.12085151242965109,
+          0.938760896046578,
+          -0.048605679998195775,
+          -1.253107049080902,
+          0.0799392133406269,
+          2.297050016438341,
+          0.5874699669405592,
+          0.03998569535803463,
+          -0.03981229749478751
+        ],
+        "eef": [
+          0.2043072227620122,
+          -0.11701464234434364,
+          1.0161931405785818
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.11725755276792336,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.05255830763920419,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 76,
+        "qpos": [
+          -0.11310364361557265,
+          0.9342567499821507,
+          -0.043826871897416506,
+          -1.2618276526075338,
+          0.07335514685404747,
+          2.3027957730326114,
+          0.6014145052708818,
+          0.03999116941509109,
+          -0.039815477952539216
+        ],
+        "eef": [
+          0.20456337847608858,
+          -0.10871116401487942,
+          1.0161116726303163
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.10897841138008114,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.056915301607547805,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 77,
+        "qpos": [
+          -0.10528138810659267,
+          0.9294176579221907,
+          -0.03912816788564332,
+          -1.2716246183414133,
+          0.06681284991982324,
+          2.3095949844879753,
+          0.6154110785139728,
+          0.03999642895254167,
+          -0.0398185021248987
+        ],
+        "eef": [
+          0.20462588788455227,
+          -0.1003802145710165,
+          1.01591171265413
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.10066049206391135,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.06154107149421993,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 78,
+        "qpos": [
+          -0.09739901727566144,
+          0.9243542428588472,
+          -0.03449360019576204,
+          -1.282261732565742,
+          0.06027994958595284,
+          2.3172745750340726,
+          0.6294984730544582,
+          0.04000109596489878,
+          -0.03982138106776776
+        ],
+        "eef": [
+          0.2045135563614321,
+          -0.09202078121974636,
+          1.015600198569699
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.09230145497954138,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.06642668413463426,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 79,
+        "qpos": [
+          -0.08947047364210632,
+          0.9191796166045985,
+          -0.029909702122440776,
+          -1.2934870074088494,
+          0.05372962870362225,
+          2.325639980396806,
+          0.643707149851462,
+          0.040002749181181,
+          -0.039824125886611286
+        ],
+        "eef": [
+          0.20424696754438562,
+          -0.08363365026019579,
+          1.0151873943786125
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.08390192637601995,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.07156407919388375,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 80,
+        "qpos": [
+          -0.08150880128497279,
+          0.9140063433729324,
+          -0.02536525996808444,
+          -1.305039478760855,
+          0.04713990474476129,
+          2.334480739218014,
+          0.6580600227945921,
+          0.04000353325748372,
+          -0.03982674743744213
+        ],
+        "eef": [
+          0.20384844533608276,
+          -0.0752210034968992,
+          1.014686433350844
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.07546504194749541,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.07694551224299151,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 81,
+        "qpos": [
+          -0.07352577162206578,
+          0.9089432580702961,
+          -0.0208511138061335,
+          -1.316656507099379,
+          0.040493187784592405,
+          2.343576782401317,
+          0.6725729049041254,
+          0.04000392843882473,
+          -0.03982925574470059
+        ],
+        "eef": [
+          0.20334180381412603,
+          -0.06678612609018288,
+          1.0141128386352185
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.06699604266302046,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.08256301815298273,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 82,
+        "qpos": [
+          -0.06553159998144716,
+          0.9040924144488001,
+          -0.0163597873024403,
+          -1.3280812530586488,
+          0.03377610050987486,
+          2.352705319306552,
+          0.6872548203551807,
+          0.04000412625839239,
+          -0.039831659892379724
+        ],
+        "eef": [
+          0.20275191567743808,
+          -0.058332991642561026,
+          1.013483969557326
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.05850170081068752,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.08840807853384974,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 83,
+        "qpos": [
+          -0.05753479627408543,
+          0.8995464063601057,
+          -0.011885128631856347,
+          -1.3390699365213035,
+          0.026979411698847863,
+          2.361648074032479,
+          0.7021082712594023,
+          0.04000422296214035,
+          -0.039833967806973354
+        ],
+        "eef": [
+          0.202104107447421,
+          -0.049865895540486906,
+          1.0128183818028498
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.049989779777387285,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.09447139132360236,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 84,
+        "qpos": [
+          -0.04967493654482853,
+          0.8954236045111064,
+          -0.0077131677088613255,
+          -1.3493617768305217,
+          0.020082717246186207,
+          2.3702521575404703,
+          0.7169751343386537,
+          0.040003838556797455,
+          -0.03983716574099868
+        ],
+        "eef": [
+          0.20142276060841172,
+          -0.04166659577896098,
+          1.0121308733174723
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.04174530000672282,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.10052043920419501,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 85,
+        "qpos": [
+          -0.04223260672269432,
+          0.8918359012602342,
+          -0.0042448324883549845,
+          -1.3587095196815433,
+          0.013290424108728095,
+          2.3783437669721565,
+          0.7313144436039277,
+          0.04000294008117203,
+          -0.0398418310548059
+        ],
+        "eef": [
+          0.20073101039951796,
+          -0.03420000819272855,
+          1.0114301235691106
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.034237701295645254,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.1061507271334303,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 86,
+        "qpos": [
+          -0.035427027204401884,
+          0.8888236596425966,
+          -0.0015493631839402686,
+          -1.3669401038657878,
+          0.007044333333226702,
+          2.3856736176192874,
+          0.7444457362346991,
+          0.04000200900264533,
+          -0.03984737866266789
+        ],
+        "eef": [
+          0.20005411913867538,
+          -0.027667894250806385,
+          1.010733342887986
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.027677664152640044,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.11115406478441911,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 87,
+        "qpos": [
+          -0.029365265541046667,
+          0.8863747035018403,
+          0.0004772980694646011,
+          -1.3739480314895964,
+          0.0017017139857691465,
+          2.392020271358984,
+          0.7559011568486133,
+          0.040001191971304376,
+          -0.03985347574944779
+        ],
+        "eef": [
+          0.1994192305339569,
+          -0.02206616200013764,
+          1.0100694648974995
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.022073912746973314,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.11549761115181603,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 88,
+        "qpos": [
+          -0.024086748552083172,
+          0.8844581532585459,
+          0.0019432521393874208,
+          -1.3796794264005654,
+          -0.0025514988694215392,
+          2.3972415252089925,
+          0.7654509197029198,
+          0.04000051871639852,
+          -0.039859893350159874
+        ],
+        "eef": [
+          0.19885143065784033,
+          -0.0173477527971647,
+          1.0094674480691648
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.017393888300328973,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.11919486491693604,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 89,
+        "qpos": [
+          -0.01958166677354585,
+          0.883035164779909,
+          0.002943539024560487,
+          -1.38412713603349,
+          -0.005670931088811022,
+          2.401271447411821,
+          0.7730566585783156,
+          0.03999987728361531,
+          -0.03986643384987544
+        ],
+        "eef": [
+          0.19837073348580303,
+          -0.013445560942903253,
+          1.0089501011002846
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.013584546593215122,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.12228380690604165,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 90,
+        "qpos": [
+          -0.015805260882816054,
+          0.8820629206342507,
+          0.003560561502150332,
+          -1.3873250845723106,
+          -0.00771397919700968,
+          2.4041082801403473,
+          0.7788191562975457,
+          0.039999109477045255,
+          -0.03987293208241657
+        ],
+        "eef": [
+          0.197990609992331,
+          -0.010279447053312189,
+          1.0085323394811379
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.01057632768608251,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.12481858288695302,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 91,
+        "qpos": [
+          -0.012690053010235935,
+          0.8814965068389833,
+          0.0038659358542565856,
+          -1.3893414946837164,
+          -0.008804143462090795,
+          2.40580127614976,
+          0.7829310744145768,
+          0.03999826760646829,
+          -0.03987926021471583
+        ],
+        "eef": [
+          0.19771774150447988,
+          -0.007761658787035132,
+          1.0082213702756944
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.00828345185673926,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.12686320919117805,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      },
+      {
+        "step": 92,
+        "qpos": [
+          -0.010158877525333123,
+          0.8812899944485004,
+          0.0039317677147223335,
+          -1.3902716302138547,
+          -0.009107290170518138,
+          2.4064382375799425,
+          0.7856390008148392,
+          0.03999747159772523,
+          -0.03988530767491104
+        ],
+        "eef": [
+          0.19755262382845662,
+          -0.005798568093096282,
+          1.0080177086637885
+        ],
+        "waypoint_index": 2,
+        "target_distance_m": 0.006598675700239551,
+        "nearest": null,
+        "analytic_eef_clearance_m": 0.12848898752396476,
+        "collision_classes": {
+          "route_obstacle": false,
+          "static_environment": false,
+          "self_collision": false
+        }
+      }
+    ]
+  }
+}

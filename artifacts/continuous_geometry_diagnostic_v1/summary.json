@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "case_count": 72,
+  "grid": {
+    "routes": [
+      "left_route",
+      "center_route",
+      "right_route"
+    ],
+    "widths_m": [
+      0.025,
+      0.04,
+      0.055
+    ],
+    "offset_magnitudes": [
+      0.065,
+      0.075,
+      0.085,
+      0.095
+    ],
+    "obstacle_x_m": 0.07
+  },
+  "strata_by_route": {
+    "left_route": {
+      "blocked": 20,
+      "safe": 4
+    },
+    "center_route": {
+      "blocked": 22,
+      "safe": 2
+    },
+    "right_route": {
+      "blocked": 21,
+      "safe": 3
+    }
+  },
+  "components_by_route": {
+    "left_route": {
+      "gripper": 20,
+      "none": 4
+    },
+    "center_route": {
+      "gripper": 22,
+      "none": 2
+    },
+    "right_route": {
+      "gripper": 21,
+      "none": 3
+    }
+  },
+  "contacts_by_route": {
+    "left_route": {
+      "route_obstacle": 20
+    },
+    "center_route": {
+      "route_obstacle": 22
+    },
+    "right_route": {
+      "route_obstacle": 21
+    }
+  },
+  "route_summary": {
+    "center_route": {
+      "strata": {
+        "blocked": 22,
+        "safe": 2
+      },
+      "collision_classes": {
+        "route_obstacle": 22
+      },
+      "minimum_pair_components": {
+        "gripper": 22,
+        "none": 2
+      },
+      "physical_minus_analytic_clearance_m": {
+        "count": 22,
+        "finite_count": 22,
+        "mean": 0.01294192803103753,
+        "min": -0.012026590804219639,
+        "max": 0.03854010906379123
+      },
+      "path_difference_max_eef_m": {
+        "count": 24,
+        "finite_count": 24,
+        "mean": 0.03944360627311101,
+        "min": 0.0,
+        "max": 0.04807294757389871
+      },
+      "first_contact_steps": {
+        "count": 22,
+        "finite_count": 22,
+        "mean": 19.59090909090909,
+        "min": 18.0,
+        "max": 21.0
+      }
+    },
+    "left_route": {
+      "strata": {
+        "blocked": 20,
+        "safe": 4
+      },
+      "collision_classes": {
+        "route_obstacle": 20
+      },
+      "minimum_pair_components": {
+        "gripper": 20,
+        "none": 4
+      },
+      "physical_minus_analytic_clearance_m": {
+        "count": 20,
+        "finite_count": 20,
+        "mean": 0.02153507369842765,
+        "min": -0.0051645565303283444,
+        "max": 0.041593175227349094
+      },
+      "path_difference_max_eef_m": {
+        "count": 24,
+        "finite_count": 24,
+        "mean": 0.1778024740493566,
+        "min": 0.0,
+        "max": 0.3430588041481895
+      },
+      "first_contact_steps": {
+        "count": 20,
+        "finite_count": 20,
+        "mean": 41.4,
+        "min": 40.0,
+        "max": 49.0
+      }
+    },
+    "right_route": {
+      "strata": {
+        "blocked": 21,
+        "safe": 3
+      },
+      "collision_classes": {
+        "route_obstacle": 21
+      },
+      "minimum_pair_components": {
+        "gripper": 21,
+        "none": 3
+      },
+      "physical_minus_analytic_clearance_m": {
+        "count": 21,
+        "finite_count": 21,
+        "mean": 0.023573811547080988,
+        "min": -0.006223176891867015,
+        "max": 0.04251938629897342
+      },
+      "path_difference_max_eef_m": {
+        "count": 24,
+        "finite_count": 24,
+        "mean": 0.17788653174629399,
+        "min": 0.0,
+        "max": 0.34501983338113634
+      },
+      "first_contact_steps": {
+        "count": 21,
+        "finite_count": 21,
+        "mean": 41.476190476190474,
+        "min": 40.0,
+        "max": 44.0
+      }
+    }
+  },
+  "positive_offset_summary": {
+    "center_route/negative": {
+      "strata": {
+        "blocked": 11,
+        "safe": 1
+      }
+    },
+    "center_route/positive": {
+      "strata": {
+        "blocked": 11,
+        "safe": 1
+      }
+    },
+    "left_route/negative": {
+      "strata": {
+        "blocked": 9,
+        "safe": 3
+      }
+    },
+    "left_route/positive": {
+      "strata": {
+        "blocked": 11,
+        "safe": 1
+      }
+    },
+    "right_route/negative": {
+      "strata": {
+        "blocked": 11,
+        "safe": 1
+      }
+    },
+    "right_route/positive": {
+      "strata": {
+        "blocked": 10,
+        "safe": 2
+      }
+    }
+  },
+  "boundary_present": false,
+  "all_three_strata_each_route": false,
+  "interpretation": [
+    "All measured nearest robot-obstacle pairs are gripper components; no wrist or arm pair is the global minimum in this fixed grid.",
+    "The 9 cases without a proximity pair only establish a distance greater than the registered proximity radius; they are not silently assigned an exact minimum.",
+    "The empty-scene sweep is a comparator only. It is not promoted to physical truth because obstacle-induced controller deviations are recorded.",
+    "This conditional diagnostic scan is not a prior draw or method comparison."
+  ]
+}

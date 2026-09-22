@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "git_head": "d883bd24b12f39004933ac5ef8e331bd23112a2c",
+  "routes": {
+    "left_route": {
+      "route": "left_route",
+      "steps": 91,
+      "reached": true,
+      "collision": false,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "minimum_pair": null,
+      "first_contact": null,
+      "physical_clearance_m": Infinity,
+      "physical_margin_m": Infinity,
+      "analytic_minimum_clearance_m": 1.7034951011584,
+      "records_sha256": "66c6a07a5e431d59952ffa898cb3eb724d1b555810d674b6f6e75a932ce91f53"
+    },
+    "center_route": {
+      "route": "center_route",
+      "steps": 45,
+      "reached": true,
+      "collision": false,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "minimum_pair": null,
+      "first_contact": null,
+      "physical_clearance_m": Infinity,
+      "physical_margin_m": Infinity,
+      "analytic_minimum_clearance_m": 1.709943611131814,
+      "records_sha256": "8e87bdf1308139d5226941f2fce304c3597653964dc099333096b26d4d5cb7d7"
+    },
+    "right_route": {
+      "route": "right_route",
+      "steps": 91,
+      "reached": true,
+      "collision": false,
+      "collision_classes": {
+        "route_obstacle": false,
+        "static_environment": false,
+        "self_collision": false
+      },
+      "minimum_pair": null,
+      "first_contact": null,
+      "physical_clearance_m": Infinity,
+      "physical_margin_m": Infinity,
+      "analytic_minimum_clearance_m": 1.7034948809997736,
+      "records_sha256": "2e28fcf191a047e011e8ba4d3bf109046d5881eac1ea1024e27c6568cf7241c0"
+    }
+  }
+}
