@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -73,12 +74,13 @@ def measure(model, data, robot_ids, obstacle_ids, body_ids, manifest, request):
                     distance = float(mujoco.mj_geomDistance(model, data, robot_id, obstacle_id, 0.25, fromto))
                     if not np.isfinite(distance):
                         raise RuntimeError("non-finite mj_geomDistance")
+                    censored = distance >= 0.25
                     candidate = {
                         "step": step, "sample": sample, "fraction": fraction,
                         "distance_m": distance,
                         "robot_geom": model.geom(robot_id).name,
                         "obstacle_geom": model.geom(obstacle_id).name,
-                        "fromto": fromto.tolist(),
+                        "fromto": None if censored else fromto.tolist(),
                     }
                     if step_min is None or distance < step_min["distance_m"]:
                         step_min = candidate
@@ -89,7 +91,11 @@ def measure(model, data, robot_ids, obstacle_ids, body_ids, manifest, request):
         "schema_version": 2, "backend": "mujoco_native_ccd", "mujoco_version": mujoco.__version__,
         "native_ccd": not bool(model.opt.disableflags & int(mujoco.mjtDisableBit.mjDSBL_NATIVECCD)),
         "route": route, "width_m": width, "offset_m": offset, "intervals": intervals,
-        "minimum": minimum, "minimum_clearance_m": None if minimum is None else minimum["distance_m"],
+        "minimum": minimum,
+        "right_censored": minimum is not None and minimum["distance_m"] >= 0.25,
+        "minimum_clearance_m": None if minimum is None or minimum["distance_m"] >= 0.25 else minimum["distance_m"],
+        "clearance_lower_bound_m": 0.25 if minimum is not None and minimum["distance_m"] >= 0.25 else None,
+        "qpos_sha256": hashlib.sha256(json.dumps(request["qpos"], sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest(),
         "steps": steps,
     }
 
