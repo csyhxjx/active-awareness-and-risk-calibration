@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-22",
+  "status": "measurement_only",
+  "probe_or_method_run": false,
+  "fixture": {
+    "cases": 9,
+    "intervals": 16,
+    "fresh_worker_process": true,
+    "wall_seconds": 2.431270617991686,
+    "peak_child_rss_kib": 359348,
+    "json_results": 9,
+    "stdout_sha256": "554aeff65be3e15ed2c9935c372aaf8d9e306b4845abdcf30f62a687fa3da5ca"
+  },
+  "linear_planning_bounds": {
+    "pf_states": 2048,
+    "pf_routes": 3,
+    "pf_geometry_evaluations": 6144,
+    "pf_wall_seconds": 1661.9937023781458,
+    "qmc_states": 262144,
+    "qmc_routes": 3,
+    "qmc_geometry_evaluations": 786432,
+    "qmc_wall_seconds": 213095.1401173083
+  },
+  "gate": "FAIL_pending_exact_result_preserving_batch_cache",
+  "approximation": {
+    "introduced": false,
+    "future_max_absolute_error_m": 0.001,
+    "future_wrong_side_decisions": 0
+  }
+}

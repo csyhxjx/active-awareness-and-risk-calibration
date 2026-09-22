@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "namespace": "continuous_active_vision_probe_v2",
+  "generator_seed": 66701,
+  "pf_seed": 66702,
+  "qmc_seed": 66703,
+  "bootstrap_seed": 66704,
+  "sample_size": {
+    "retained_worlds": 24,
+    "worlds_per_route": 8,
+    "routes": 3,
+    "counterfactual_route_trajectories": 72
+  },
+  "latent_support": {
+    "active_obstacle_count": 1,
+    "active_target_route": "left_route|center_route|right_route",
+    "obstacle_x_m": 0.07,
+    "half_width_m": [0.025, 0.04, 0.055],
+    "signed_offset_magnitude_m": [0.04, 0.13],
+    "offset_grid_step_m": 0.002,
+    "other_obstacle_x_m": 2.0,
+    "unsupported_extensions": ["longitudinal_variation", "multiple_active_obstacles", "new_controller", "new_route_spline"]
+  },
+  "strata": {
+    "safe": "clearance >= 0.012 and no collision",
+    "boundary": "abs(clearance - 0.004) <= 0.003 and no collision",
+    "blocked": "clearance <= 0 or collision",
+    "gap": "rejected for retained quota",
+    "quota": {"safe": 8, "boundary": 8, "blocked": 8},
+    "max_attempts_per_world": 100,
+    "selection": "first admissible deterministic candidate index"
+  },
+  "observation": {
+    "free_view": "v0",
+    "paid_views": ["q_branch", "q_a", "q_b", "q_c"],
+    "budget": 2,
+    "query_cost": 0.05,
+    "inputs": "registered metric-depth rays, validity masks, censor flags, public calibration only",
+    "forbidden": ["rgb", "segmentation", "latent_state", "clearance", "collision", "route_outcome", "metadata_side_channels"],
+    "state_preserving": true
+  },
+  "methods": {
+    "common_risk_kernel": "exact_mujoco_3_13_native_ccd_16_interval",
+    "map": {"multistart": 16, "likelihood_evaluations": 512},
+    "ordinary_pf": {"particles": 2048, "ess_resample_below": 1024, "liu_west_a": 0.98},
+    "reference_qmc": {"counts": [131072, 262144], "nested_prefix": true},
+    "best_fixed_b2": {"sequences": 17, "selection": "public_layout_prior_likelihood_only"},
+    "learned_particles": false
+  },
+  "metrics": ["collision_free_completion", "collision_rate", "stop_rate", "route_switch_success", "paid_queries", "utility", "latency", "risk_calibration", "qmc_convergence"],
+  "utility": {"completion": 1.0, "collision": -4.0, "stop": -0.25, "query": -0.05},
+  "risk_threshold": 0.05,
+  "gates": ["physical_truth", "observation_isolation", "fresh_process_replay", "qmc_stability", "common_kernel_cost", "method_comparison"],
+  "stop_rules": {
+    "any_infrastructure_gate_fail": "stop and archive; no method claim",
+    "missing_stratum": "stop; new protocol required",
+    "common_kernel_cost_fail": "stop before runner; implement exact batch/cache or new amendment",
+    "reference_minus_fixed_lower_ci_not_positive": "close continuous mechanism claim",
+    "pf_collision_upper_delta_gt_0_02": "close PF adequacy claim",
+    "all_methods_collision_rate_gt_0_05": "diagnose physical/controller generation and stop"
+  },
+  "status": "frozen_prospective_config_only; no probe authorized"
+}
