@@ -26,6 +26,15 @@ def digest(value: object) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 
+def validate_pair_row(row: dict) -> None:
+    """Reject the old invalid convention that encoded missing contact as +0.25."""
+    if row.get("distance_m") is None:
+        if row.get("sign") != "unknown" or row.get("reason") != "no_contact_record":
+            raise ValueError("missing contact must be unknown/no_contact_record")
+    elif row.get("sign") not in {"negative", "zero", "positive"}:
+        raise ValueError("finite pair distance requires a valid sign")
+
+
 def load(path: Path):
     manifest = json.loads((path / "export_manifest.json").read_text())
     model = mujoco.MjModel.from_xml_path(str(path / "scene.xml"))
@@ -39,6 +48,11 @@ def load(path: Path):
 def geom_fingerprint(model, geom_id: int) -> dict:
     mesh_id = int(model.geom_dataid[geom_id]) if int(model.geom_type[geom_id]) == int(mujoco.mjtGeom.mjGEOM_MESH) else -1
     mesh_name = model.mesh(mesh_id).name if mesh_id >= 0 else None
+    mesh_data_sha256 = None
+    if mesh_id >= 0 and hasattr(model, "mesh_vertadr"):
+        start = int(model.mesh_vertadr[mesh_id])
+        count = int(model.mesh_vertnum[mesh_id])
+        mesh_data_sha256 = hashlib.sha256(np.asarray(model.mesh_vert[start:start + count], dtype=np.float64).tobytes()).hexdigest()
     body_id = int(model.geom_bodyid[geom_id])
     return {
         "name": model.geom(geom_id).name,
@@ -51,6 +65,9 @@ def geom_fingerprint(model, geom_id: int) -> dict:
         "mesh_name": mesh_name,
         "contype": int(model.geom_contype[geom_id]),
         "conaffinity": int(model.geom_conaffinity[geom_id]),
+        "margin_m": float(model.geom_margin[geom_id]),
+        "gap_m": float(model.geom_gap[geom_id]),
+        "mesh_data_sha256": mesh_data_sha256,
     }
 
 
@@ -95,6 +112,7 @@ def pair_rows(model, data, robot_ids: list[int], obstacle_ids: list[int], qposes
             for robot_id in robot_ids:
                 for obstacle_id in obstacle_ids:
                     exact_api = hasattr(mujoco, "mj_geomDistance")
+                    missing_reason = None
                     if exact_api:
                         distance = float(mujoco.mj_geomDistance(model, data, robot_id, obstacle_id, 0.25, fromto))
                     else:
@@ -108,16 +126,17 @@ def pair_rows(model, data, robot_ids: list[int], obstacle_ids: list[int], qposes
                             if pair == {robot_id, obstacle_id}:
                                 distance = float(contact.dist)
                                 break
-                        if distance is None:
-                            distance = 0.25
+                        missing_reason = "no_contact_record" if distance is None else None
                     rows.append({
                         "step": step, "sample": sample, "fraction": fraction,
                         "qpos_sha256": digest(pose.tolist()),
                         "robot_geom": model.geom(robot_id).name,
                         "obstacle_geom": model.geom(obstacle_id).name,
                         "distance_m": distance,
-                        "negative": distance < 0.0,
-                        "right_censored": not exact_api and distance == 0.25,
+                        "sign": "unknown" if distance is None else ("negative" if distance < 0.0 else ("zero" if distance == 0.0 else "positive")),
+                        "reason": missing_reason,
+                        "negative": None if distance is None else distance < 0.0,
+                        "right_censored": False if exact_api else distance is None,
                         "robot_world_pos": data.geom_xpos[robot_id].tolist(),
                         "robot_world_xmat": data.geom_xmat[robot_id].tolist(),
                         "obstacle_world_pos": data.geom_xpos[obstacle_id].tolist(),
@@ -162,6 +181,7 @@ def main() -> None:
         "width_m": WIDTH,
         "intervals": INTERVALS,
         "qpos_sha256": nominal["qpos_sha256"],
+        "qpos_recomputed_sha256": digest(qposes.tolist()),
         "robot_geometry": model_fingerprint,
         "samples": all_rows,
     }

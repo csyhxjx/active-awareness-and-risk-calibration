@@ -1,11 +1,21 @@
 import unittest
 
+from guard.active_vision.attribute_sign_disagreement import validate_pair_row
+
 from guard.active_vision.nominal_acceptance_contract import (
     ROUTES, LIMIT, digest, expected_grid, validate_output, validate_result,
 )
 
 
 class NominalAcceptanceContractTest(unittest.TestCase):
+    def test_missing_pair_cannot_be_positive_or_comparable(self):
+        row = {"distance_m": None, "sign": "unknown", "reason": "no_contact_record"}
+        validate_pair_row(row)
+        with self.assertRaises(ValueError):
+            validate_pair_row({"distance_m": None, "sign": "positive", "reason": "no_contact_record"})
+        with self.assertRaises(ValueError):
+            validate_pair_row({"distance_m": 0.25, "sign": "unknown", "reason": "no_contact_record"})
+
     def test_frozen_grid_is_exactly_828_and_unique(self):
         grid = expected_grid()
         self.assertEqual(len(grid), 828)

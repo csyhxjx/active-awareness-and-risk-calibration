@@ -28,7 +28,7 @@ def main() -> None:
     run(args.new_python, script, args.export, "left_route", "mujoco_3.13.0", new_path)
     old = json.loads(old_path.read_text())
     new = json.loads(new_path.read_text())
-    if old["export_xml_sha256"] != new["export_xml_sha256"] or old["qpos_sha256"] != new["qpos_sha256"]:
+    if old["export_xml_sha256"] != new["export_xml_sha256"] or old["qpos_recomputed_sha256"] != new["qpos_recomputed_sha256"]:
         raise RuntimeError("inputs are not aligned")
     geometry_deltas = []
     for left, right in zip(old["robot_geometry"], new["robot_geometry"]):
@@ -41,6 +41,8 @@ def main() -> None:
                 obstacle_deltas.extend(abs(float(a) - float(b)) for a, b in zip(left[field], right[field]))
     geometry_status = "PASS" if max(geometry_deltas, default=0.0) <= 1e-7 else "FAIL"
     pair_disagreements = []
+    valid_comparisons = 0
+    unknown_comparisons = 0
     world_pose_deltas = []
     first = None
     for old_sample, new_sample in zip(old["samples"], new["samples"]):
@@ -48,13 +50,17 @@ def main() -> None:
             raise RuntimeError("offset order mismatch")
         old_rows = old_sample["rows"]
         new_rows = new_sample["rows"]
-        if len(old_rows) != len(new_rows):
+        old_by_key = {(old_sample["offset_m"], r["step"], r["sample"], r["robot_geom"], r["obstacle_geom"]): r for r in old_rows}
+        new_by_key = {(new_sample["offset_m"], r["step"], r["sample"], r["robot_geom"], r["obstacle_geom"]): r for r in new_rows}
+        if set(old_by_key) != set(new_by_key):
             raise RuntimeError("sample count mismatch")
-        for left, right in zip(old_rows, new_rows):
-            key = (old_sample["offset_m"], left["step"], left["sample"], left["robot_geom"], left["obstacle_geom"])
-            if key != (old_sample["offset_m"], right["step"], right["sample"], right["robot_geom"], right["obstacle_geom"]):
-                raise RuntimeError("pair/sample identity mismatch")
-            if left["negative"] != right["negative"]:
+        for key in sorted(old_by_key):
+            left, right = old_by_key[key], new_by_key[key]
+            if left["distance_m"] is None or right["distance_m"] is None:
+                unknown_comparisons += 1
+            else:
+                valid_comparisons += 1
+            if left["distance_m"] is not None and right["distance_m"] is not None and left["sign"] != right["sign"]:
                 record = {
                     "offset_m": old_sample["offset_m"], "step": left["step"], "sample": left["sample"],
                     "fraction": left["fraction"], "robot_geom": left["robot_geom"], "obstacle_geom": left["obstacle_geom"],
@@ -86,9 +92,13 @@ def main() -> None:
         "new_engine_pair_distance_api": "mj_geomDistance_native_ccd",
         "export_xml_sha256": old["export_xml_sha256"],
         "qpos_sha256": old["qpos_sha256"],
+        "qpos_recomputed_sha256": old["qpos_recomputed_sha256"],
         "engines": {"old": old["mujoco_version"], "new": new["mujoco_version"]},
         "pair_count_per_offset": len(old["samples"][0]["rows"]),
         "offsets_m": [sample["offset_m"] for sample in old["samples"]],
+        "pair_set_complete": True,
+        "pair_comparable_count": valid_comparisons,
+        "pair_unknown_count": unknown_comparisons,
         "pair_sign_disagreement_count": len(pair_disagreements),
         "first_sign_disagreement": first,
         "all_sign_disagreements": pair_disagreements,
