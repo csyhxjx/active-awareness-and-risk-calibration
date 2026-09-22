@@ -5,6 +5,8 @@ from pathlib import Path
 
 from guard.active_vision.generate_continuous_probe import audit, build
 from guard.active_vision.check_continuous_preflight import check
+from guard.active_vision.continuous_geometry_diagnostic import classify_physical, robot_component
+from guard.active_vision.run_continuous_geometry_scan import cases
 from guard.active_vision.run_continuous_probe import require_preflight
 
 
@@ -41,6 +43,21 @@ class ContinuousProbeManifestTest(unittest.TestCase):
                 if gate != "C0_physical_truth"
             ))
             self.assertFalse(result["all_pass"])
+
+    def test_geometry_diagnostic_grid_is_frozen(self):
+        rows = cases()
+        self.assertEqual(len(rows), 72)
+        self.assertEqual(len({row["case_index"] for row in rows}), 72)
+        self.assertEqual({row["route"] for row in rows}, {"left_route", "center_route", "right_route"})
+
+    def test_geometry_component_and_stratum_rules(self):
+        self.assertEqual(robot_component("gripper0_finger1_collision"), "gripper")
+        self.assertEqual(robot_component("robot0_link7_collision"), "wrist")
+        self.assertEqual(robot_component("robot0_link3_collision"), "arm")
+        base = {"collision": False, "reached": True}
+        self.assertEqual(classify_physical(base | {"physical_margin_m": 0.01}), "safe")
+        self.assertEqual(classify_physical(base | {"physical_margin_m": 0.0}), "boundary")
+        self.assertEqual(classify_physical(base | {"physical_margin_m": -0.005}), "blocked")
 
 
 if __name__ == "__main__":
